@@ -1,4 +1,9 @@
 #!/bin/bash 
+
+echo "Creating persistent Ghost data directory"
+if [ ! -d "$OPENSHIFT_DATA_DIR/content/data" ]; then
+	mkdir -p $OPENSHIFT_DATA_DIR/content/data
+fi
 echo "Symlinking data directory"
 ln -sf $OPENSHIFT_DATA_DIR/content/data $OPENSHIFT_REPO_DIR/content/data
 
