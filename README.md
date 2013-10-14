@@ -5,6 +5,21 @@ Ghost is a free, open, simple blogging platform that's available to anyone who w
 
 Visit the project's website at [http://ghost.org](http://ghost.org)!
 
+## Running Ghost on OpenShift
+
+This is a basic quickstart to get Ghost running on OpenShift.  
+
+The easiest way is to use the following command:
+
+	rhc app create ghost nodejs-0.10 --from-code https://github.com/developercorey/openshift-ghost-quickstart.git
+
+'ghost' will be the name of your application.  
+
+Note these OpenShift specific changes:
+
+1. The content/data and content/images directories have been removed.  They are created on the server and symlinked to your $OPENSHIFT\_DATA\_DIR so that posts and uploaded images will persist across 'git pushes'
+2. Even though the node.js cartridge itself is scalable, this application will not play nice with scaling right now because it is using sqlite3 as the database (which is a file store), and the images are stored on disk, and since OpenShift does not currently support shared physical disk storage across scaled gears, this cartridge will not scale.  We are working on a solution for this.
+3. This quickstart currently is not setup for using MySQL, but it may be updated in the future, or another quickstart provided.  That will eliminate one of the scaling concerns.
 
 ## Getting Started
 
