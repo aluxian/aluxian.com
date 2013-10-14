@@ -1,0 +1,4 @@
+#!/bin/bash 
+echo "Symlinking data directory"
+ln -sf $OPENSHIFT_DATA_DIR/content/data $OPENSHIFT_REPO_DIR/content/data
+
