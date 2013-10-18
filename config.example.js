@@ -28,7 +28,7 @@ config = {
         database: {
             client: 'sqlite3',
             connection: {
-                filename: path.join(__dirname, 'content/data/ghost-dev.db')
+                filename: path.join(__dirname, '/content/data/ghost-dev.db')
             },
             debug: false
         },
@@ -36,7 +36,7 @@ config = {
             // Host to be passed to node's `net.Server#listen()`
             host: '127.0.0.1',
             // Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
-            port: '22368'
+            port: '2368'
         }
     },
 
@@ -55,9 +55,9 @@ config = {
         },
         server: {
             // Host to be passed to node's `net.Server#listen()`
-            host: process.env.OPENSHIFT_NODEJS_IP,
+            host: '127.0.0.1',
             // Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
-            port: '8080'
+            port: '2368'
         }
     },
 

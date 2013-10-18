@@ -1,3 +1,4 @@
+#### OpenShift Quickstart has been updated to v0.3.3
 
 # [Ghost](https://github.com/TryGhost/Ghost) [![Build Status](https://magnum.travis-ci.com/TryGhost/Ghost.png?token=hMRLUurj2P3wzBdscyQs&branch=master)](https://magnum.travis-ci.com/TryGhost/Ghost)
 
@@ -20,6 +21,7 @@ Note these OpenShift specific changes:
 1. The content/data and content/images directories have been removed.  They are created on the server and symlinked to your $OPENSHIFT\_DATA\_DIR so that posts and uploaded images will persist across 'git pushes'
 2. Even though the node.js cartridge itself is scalable, this application will not play nice with scaling right now because it is using sqlite3 as the database (which is a file store), and the images are stored on disk, and since OpenShift does not currently support shared physical disk storage across scaled gears, this cartridge will not scale.  We are working on a solution for this.
 3. This quickstart currently is not setup for using MySQL, but it may be updated in the future, or another quickstart provided.  That will eliminate one of the scaling concerns.
+
 
 ## Getting Started
 
