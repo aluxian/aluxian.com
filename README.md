@@ -12,7 +12,7 @@ This is a basic quickstart to get Ghost running on OpenShift.
 
 The easiest way is to use the following command:
 
-	rhc app create ghost nodejs-0.10 --env NODEJS_ENV=production --from-code https://github.com/developercorey/openshift-ghost-quickstart.git
+	rhc app create ghost nodejs-0.10 --env NODE_ENV=production --from-code https://github.com/developercorey/openshift-ghost-quickstart.git
 
 'ghost' will be the name of your application.  
 
