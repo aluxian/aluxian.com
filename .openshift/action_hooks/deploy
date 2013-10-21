@@ -13,6 +13,4 @@ ln -sf $OPENSHIFT_DATA_DIR/content/data $OPENSHIFT_REPO_DIR/content/data
 echo "Symlinking images directory"
 ln -sf $OPENSHIFT_DATA_DIR/content/images $OPENSHIFT_REPO_DIR/content/images
 
-echo "Exporting Node Environment (production)"
-export NODE_ENV=production
 
