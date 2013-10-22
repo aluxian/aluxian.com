@@ -10,7 +10,7 @@ Visit the project's website at [http://ghost.org](http://ghost.org)!
 
 This is a basic quickstart to get Ghost running on OpenShift.  
 
-The easiest way is to use the following command:
+The easiest way is to use the following command, make sure that you run 'gem update rhc' first so that you have the newest version:
 
 	rhc app create ghost nodejs-0.10 --env NODE_ENV=production --from-code https://github.com/developercorey/openshift-ghost-quickstart.git
 
