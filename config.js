@@ -57,7 +57,7 @@ config = {
             // Host to be passed to node's `net.Server#listen()`
             host: process.env.OPENSHIFT_NODEJS_IP,
             // Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
-            port: '8080'
+            port: process.env.OPENSHIFT_NODEJS_PORT
         }
     },
 
