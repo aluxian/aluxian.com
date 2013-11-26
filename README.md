@@ -19,7 +19,7 @@ Where $appname is the name of your application.  This was due to the pre_start_n
 
 The easiest way is to use the following command, make sure that you run 'gem update rhc' first so that you have the newest version:
 
-	rhc app create ghost nodejs-0.10 --env NODE_ENV=production --from-code https://github.com/developercorey/openshift-ghost-quickstart.git
+	rhc app create ghost nodejs-0.10 --env NODE_ENV=production --from-code https://github.com/openshift-quickstart/openshift-ghost-quickstart.git
 
 'ghost' will be the name of your application.  
 
