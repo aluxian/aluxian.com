@@ -4,6 +4,7 @@
     "private": true,
     "scripts": {
         "test": "grunt validate --verbose"
+        "start": "node index"
     },
     "engines": {
         "node": ">=0.10.* <0.11.4"
