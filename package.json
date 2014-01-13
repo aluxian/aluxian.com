@@ -3,7 +3,7 @@
     "version": "0.3.3",
     "private": true,
     "scripts": {
-        "test": "grunt validate --verbose"
+        "test": "grunt validate --verbose",
         "start": "node index"
     },
     "engines": {
