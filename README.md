@@ -28,6 +28,7 @@ Note these OpenShift specific changes:
 1. The content/data and content/images directories have been removed.  They are created on the server and symlinked to your $OPENSHIFT\_DATA\_DIR so that posts and uploaded images will persist across 'git pushes'
 2. Even though the node.js cartridge itself is scalable, this application will not play nice with scaling right now because it is using sqlite3 as the database (which is a file store), and the images are stored on disk, and since OpenShift does not currently support shared physical disk storage across scaled gears, this cartridge will not scale.  We are working on a solution for this.
 3. This quickstart currently is not setup for using MySQL, but it may be updated in the future, or another quickstart provided.  That will eliminate one of the scaling concerns.
+4. If you use a custom domain, modify the production url field in config.js file.
 
 
 ## Getting Started
@@ -44,8 +45,9 @@ There are two main ways to get started with Ghost:
 1.  Once you've downloaded one of the releases, unzip it, and place the directory wherever you would like to run the code
 2.  Fire up a terminal (or node command prompt in Windows) and change directory to the root of the Ghost application (where config.example.js and index.js are)
 4.  run `npm install --production` to install the node dependencies
-4.  To start ghost, run `npm start`
-5.  Visit `http://localhost:2368/` in your web browser
+4.  Make a local data directory , run `mkdir content/data`. This file is in .gitignore and will not push to openshift.
+5.  To start ghost, run `npm start`
+6.  Visit `http://localhost:2368/` in your web browser
 
 
 ### Updating with the latest changes
