@@ -1,4 +1,4 @@
-#### OpenShift Quickstart has been updated to v0.3.3
+#### OpenShift Quickstart has been updated to v0.4
 
 # [Ghost](https://github.com/TryGhost/Ghost) [![Build Status](https://magnum.travis-ci.com/TryGhost/Ghost.png?token=hMRLUurj2P3wzBdscyQs&branch=master)](https://magnum.travis-ci.com/TryGhost/Ghost)
 
@@ -7,6 +7,9 @@ Ghost is a free, open, simple blogging platform that's available to anyone who w
 Visit the project's website at [http://ghost.org](http://ghost.org)!
 
 ## Running Ghost on OpenShift
+
+### Signup Error  
+When you create a new user on Ghost on OpenShift, it will give a 503 error, but it does actually create the user, and you can then just go to the signin page and log in.  I am investigating the issue.
 
 This is a basic quickstart to get Ghost running on OpenShift.  
 
