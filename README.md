@@ -1,4 +1,4 @@
-#### OpenShift Quickstart has been updated to v0.3.3
+#### OpenShift Quickstart has been updated to v0.4
 
 # [Ghost](https://github.com/TryGhost/Ghost) [![Build Status](https://magnum.travis-ci.com/TryGhost/Ghost.png?token=hMRLUurj2P3wzBdscyQs&branch=master)](https://magnum.travis-ci.com/TryGhost/Ghost)
 
