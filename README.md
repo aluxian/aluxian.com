@@ -8,6 +8,9 @@ Visit the project's website at [http://ghost.org](http://ghost.org)!
 
 ## Running Ghost on OpenShift
 
+### Signup Error  
+When you create a new user on Ghost on OpenShift, it will give a 503 error, but it does actually create the user, and you can then just go to the signin page and log in.  I am investigating the issue.
+
 This is a basic quickstart to get Ghost running on OpenShift.  
 
 If you have already created an application with this, and are having issues with it not working when you do a restart, 
