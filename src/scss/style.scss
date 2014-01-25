@@ -3,40 +3,40 @@
 @import "_mixins";
 
 body {
-	margin: 0 auto;
-	width: 95%;
+    margin: 0 auto;
+    width: 95%;
 }
 
 .header {
-	display: block;
-	padding: 0 0 50px 0;
-	nav {
-		ul {
-			float: right;
-			list-style-type: none;
-			margin: 0;
-			li {
-				float: left;
-				margin-left: 20px;
-			}
-		}
-	}
+    display: block;
+    padding: 0 0 50px 0;
+    nav {
+        ul {
+            float: right;
+            list-style-type: none;
+            margin: 0;
+            li {
+                float: left;
+                margin-left: 20px;
+            }
+        }
+    }
 }
 
 .main {
-	
+    
 }
 
 .footer {
-	padding: 25px 0;
-	nav {
-		ul {
-			list-style-type: none;
-			margin: 0;
-			li {
-				float: left;
-				margin-right: 20px;
-			}
-		}
-	}
+    padding: 25px 0;
+    nav {
+        ul {
+            list-style-type: none;
+            margin: 0;
+            li {
+                float: left;
+                margin-right: 20px;
+            }
+        }
+    }
 }
