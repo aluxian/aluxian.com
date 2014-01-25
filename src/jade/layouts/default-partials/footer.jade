@@ -1,0 +1,11 @@
+// Footer
+footer.footer
+    p © 2015 Mysite. All rights reserved.
+    nav
+        ul
+            - each page,i in FooterNavigation
+                li(class="#{page.link}")
+                        a(href='#{page.link}.html') #{page.title}
+
+script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
+script(src='js/main.js')
