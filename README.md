@@ -2,7 +2,7 @@
 GulpJadeSass is an automated build environment that uses the (streaming) build system gulp.js, the Jade template language and the Sass CSS extension language.
 
 ##Overview
-Out of the box, GulpJadeSass will build a three page front end skeleton and continue to watch for changes to the .jade, .scss and .js files. Editing and saving those files will cause Gulp to render the canged .jade files into .html, or uglify all .js files (except for vendor specific files) or compile scss into css; exporting everything to the dist directory respectively. Additionally GulpJadeSass will move any static files like images and vendor specific libraries to the dist directory untouched.
+Out of the box, GulpJadeSass will build a three page front end skeleton and continue to watch for changes to the .jade, .scss and .js files. Editing and saving those files will cause Gulp to render the canged .jade files into .html, or uglify all .js files (except for vendor specific files) or compile scss into css.
 
 ###Requires
 http://nodejs.org/
@@ -37,7 +37,7 @@ GulpJadeSass was created to give developers an automated work-flow, particularly
 
 1. Start by opening a terminal and running the `gulp` command inside your project directory.
 2. Open your favorite web browser and navigate to http://localhost:8888
-3. Open your favorite text editor and edit files in the src directory. Clicking save on any .jade, .js or .scss file will auto compile and export to the dist directory--and--will auto refresh your browser so you can see the changes live.
+3. Open your favorite text editor and edit files in the src directory. Clicking save on any .jade, .js or .scss file will auto compile and export to the dist directory--and--will auto refresh your browser so you can see the changes live. Static files such as images and vendor specific scripts should be placed in the src directory in the img and js/vendor directories respectively. These files will only be moved to the dist directory when GuplJadeSass first starts.
 4. When you are finished editing and ready to export your project for production, simply run `gulp --out` and your finished files will be exported to the dist directory.
 
 Note - the only difference between `gulp` and `gulp --out` is that `gulp --out` will *not* inject the JavaScript snippet into your compiled .html files required by GulpJadeSass to auto refresh your browser.
@@ -53,3 +53,6 @@ SASS http://sass-lang.com/
 JADE http://jade-lang.com/
 
 Gulp Plug-ins - http://gratimax.github.io/search-gulp-plugins/
+
+###ToDo###
+Watch static directories.
