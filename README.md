@@ -1,8 +1,8 @@
 #GulpJadeSass
 GulpJadeSass is an automated build environment that uses gulp.js, the Jade template language and Sass CSS extension language.
 
-## Overview
-Out of the box, GulpJadeSass will build a three page front end skeleton and continue to watch for changes to the .jade, .scss and .js files. Editing and saving those files will cause Gulp to (re)render .jade files into .html, or uglify all .js files (except for vendor specific files) or compile scss into css; exporting everything to the dist directory respectively. Additionally GulpJadeSass will move any static files like images and vendor specific libraries to the dist directory untouched.
+##Overview
+Out of the box, GulpJadeSass will build a three page front end skeleton and continue to watch for changes to the .jade, .scss and .js files. Editing and saving those files will cause Gulp to render the canged .jade files into .html, or uglify all .js files (except for vendor specific files) or compile scss into css; exporting everything to the dist directory respectively. Additionally GulpJadeSass will move any static files like images and vendor specific libraries to the dist directory untouched.
 
 ###Requires
 http://nodejs.org/
@@ -20,7 +20,7 @@ GulpJadeSass comes with a few goodies to get you going.
 2. Linked to the jQuery CDN in the _footer.jade file.
 3. Out of the box, working, three page site.
 
-## Environment structure
+##Environment structure
 **dist**            Export directory.
 
 **node_modules**    Application modules required by NodeJadeSass.
@@ -29,7 +29,7 @@ GulpJadeSass comes with a few goodies to get you going.
 
 **gulpfile.js**     The Gulp configuration file.
 
-## Work-flow
+##Work-flow
 GulpJadeSass is somewhat opinionated in this regard, but is highly customizable if you prefer something else.
 
 GulpJadeSass was created to give developers an automated work-flow, particularly, taking care of mundane tasks like JavaScript uglification, .jade to .html conversion, converting SCSS to CSS and compressing the CSS output and even refreshing your browser for you.
