@@ -12,6 +12,7 @@ To export your project for delivery, simply run `gulp --out`. This will build yo
 
 **Goodies**
 GulpJadeSass comes with a few goodies to get you going.
+
 1. Modernizr.js.
 2. Linked to the jQuery CDN.
 3. Out of the box, working, three page front end.
@@ -35,7 +36,7 @@ GulpJadeSass is somewhat opinionated in this regard, but is highly customizable 
 Note - the only difference between `gulp` and `gulp --out` is that `gulp --out` will *not* inject the JavaScript snipet into your compiled .html files required by GulpJadeSass to auto refresh your browser.
 
 ##Extending##
-If you like GulpJadeSass, great, if not, great too. You can simply add or remove modules from the project by installing or removing node_modules. To add a module just run the command `npm install <module>` and then edit your gruntfile.js. To remove a module run `npm remove <module` and again, edit your gruntfile.js.
+If you like GulpJadeSass, great, if not, great too. You can simply add or remove modules from the project by installing or removing node_modules. To add a module just run the command `npm install <module>` and then edit your gulpfile.js. To remove a module run `npm remove <module` and again, edit your gulpfile.js.
 
 ##More information##
 Gulp http://gulpjs.com/
