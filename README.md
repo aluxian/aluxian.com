@@ -1,5 +1,5 @@
 #GulpJadeSass
-GulpJadeSass is an automated build environment that uses gulp.js, the Jade template language and Sass CSS extension language.
+GulpJadeSass is an automated build environment that uses the (streaming) build system gulp.js, the Jade template language and the Sass CSS extension language.
 
 ##Overview
 Out of the box, GulpJadeSass will build a three page front end skeleton and continue to watch for changes to the .jade, .scss and .js files. Editing and saving those files will cause Gulp to render the canged .jade files into .html, or uglify all .js files (except for vendor specific files) or compile scss into css; exporting everything to the dist directory respectively. Additionally GulpJadeSass will move any static files like images and vendor specific libraries to the dist directory untouched.
