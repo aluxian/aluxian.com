@@ -16,8 +16,8 @@ To export your project for production, simply run `gulp --out`. This will build 
 **Goodies**
 GulpJadeSass comes with a few goodies to get you going.
 
-1. Modernizr.js in the _html-header.jade file.
-2. Linked to the jQuery CDN in the _footer.jade file.
+1. Modernizr.js in the html-head.jade file.
+2. Linked to the jQuery CDN in the footer.jade file.
 3. Out of the box, working, three page site.
 
 ##Environment structure
