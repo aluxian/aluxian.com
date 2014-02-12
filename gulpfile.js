@@ -79,6 +79,7 @@ staticServer = function(port) {
         app: app
     };
 };
+// call static server and specify port
 staticServer(8888);
 
 
