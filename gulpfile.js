@@ -7,7 +7,7 @@ var app,
     gulp        = require('gulp'),
     gulpif      = require('gulp-if'),
     gulputil    = require('gulp-util'),
-    isdev       = gulp.env.out !== true,
+    isdev       = gulputil.env.type === 'out',
     jade        = require('gulp-jade'),
     livereload  = require('gulp-livereload'),
     lr          = require('tiny-lr'),
@@ -91,17 +91,17 @@ gulp.task('default', function() {
             return console.log(err)
         };
         // run all tasks on first run
-        gulp.run('clean', 'sass', 'jade', 'assets', 'uglify');
+        gulp.start('clean', 'sass', 'jade', 'assets', 'uglify');
 
         // then start watching src files
         gulp.watch('src/scss/*.scss', function(event){
-            gulp.run('sass');
+            gulp.start('sass');
         });
         gulp.watch('src/js/*.js', function(event){
-            gulp.run('uglify');
+            gulp.start('uglify');
         });
         gulp.watch('src/jade/**/*.jade', function(event){
-            gulp.run('jade');
+            gulp.start('jade');
         });
     });
 });
