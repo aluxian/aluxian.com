@@ -32,14 +32,14 @@ gulp.task('assets', function() {
 
 // clear all .html, .css and .js files before build
 gulp.task('clean', function() {
-    gulp.src(['dist/*.html','dist/js/*.js','dist/css/*.css'], {'read': false})
+    return gulp.src(['dist/*.html','dist/js/*.js','dist/css/*.css'], {'read': false})
         .pipe(clean());
 });
 
 
 // jade to html
 gulp.task('jade', function() {
-    gulp.src('src/jade/*.jade')
+    return gulp.src('src/jade/*.jade')
         .pipe(jade({'pretty':true}))
         .pipe(livereload(server))
         .pipe(gulpif(isdev, embedlr()))
@@ -49,7 +49,7 @@ gulp.task('jade', function() {
 
 // compile scss as compressed css
 gulp.task('sass', function() {
-    gulp.src('src/scss/*.scss')
+    return gulp.src('src/scss/*.scss')
         .pipe(changed('dist/css'))
         .pipe(rename('style.css'))
         .pipe(sass({'outputStyle':'compressed'}))
@@ -60,7 +60,7 @@ gulp.task('sass', function() {
 
 // compress javascript
 gulp.task('uglify', function() {
-    gulp.src('src/js/*.js')
+    return gulp.src('src/js/*.js')
         .pipe(changed('dist/js'))
         .pipe(uglify())
         .pipe(livereload(server))
@@ -91,7 +91,8 @@ gulp.task('default', function() {
         };
         // run all tasks on first run
         gulp.run('clean', 'sass', 'jade', 'assets', 'uglify');
-        // start watching src files
+
+        // then start watching src files
         gulp.watch('src/scss/*.scss', function(event){
             gulp.run('sass');
         });
@@ -101,6 +102,5 @@ gulp.task('default', function() {
         gulp.watch('src/jade/**/*.jade', function(event){
             gulp.run('jade');
         });
-
     });
 });
