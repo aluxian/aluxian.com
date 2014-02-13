@@ -37,10 +37,10 @@ GulpJadeSass was created to give developers an automated work-flow, particularly
 
 1. Start by opening a terminal and running the `gulp` command inside your project directory.
 2. Open your favorite web browser and navigate to http://localhost:8888
-3. Open your favorite text editor and edit files in the src directory. Clicking save on any .jade, .js or .scss file will auto compile and export to the dist directory--and--will auto refresh your browser so you can see the changes live. Static files such as images and vendor specific scripts should be placed in the src directory in the img and js/vendor directories respectively. These files will only be moved to the dist directory when GuplJadeSass first starts.
+3. Open your favorite text editor and edit files in the src directory. Saving any .jade, .js or .scss file will auto compile and export to the dist directory--and--will auto refresh your browser so you can see the changes live. Static files such as images and vendor specific scripts should be placed in the src/img and src/js/vendor directories respectively. These files will only be moved to the dist directory when GuplJadeSass first starts.
 4. When you are finished editing and ready to export your project for production, simply run `gulp --type out` and your finished files will be exported to the dist directory.
 
-Note - the only difference between `gulp` and `gulp --type out` is that `gulp --type out` will *not* inject the JavaScript snippet into your compiled .html files required by GulpJadeSass to auto refresh your browser.
+Note - the only difference between `gulp` and `gulp --type out` is that `gulp --type out` will *not* inject the JavaScript snippet into your compiled .html files required by GulpJadeSass to auto refresh your browser. Run `gulp --type out` only when you are ready to export for produciton.
 
 ##Extending##
 If you like GulpJadeSass, great, if not, great too. You can simply add or remove modules from the project by installing or removing node_modules. To add a module just run the command `npm install <module>` and then edit your gulpfile.js. To remove a module run `npm remove <module` and again, edit your gulpfile.js.
