@@ -7,14 +7,14 @@ var app,
     gulp        = require('gulp'),
     gulpif      = require('gulp-if'),
     gulputil    = require('gulp-util'),
-    isdev       = gulputil.env.type === 'out',
+    isdev       = gulputil.env.type !== 'out',
     jade        = require('gulp-jade'),
     livereload  = require('gulp-livereload'),
     lr          = require('tiny-lr'),
     path        = require('path'),
     rename      = require('gulp-rename'),
     sass        = require('gulp-sass'),
-    server      = lr(),
+    lrserver    = lr(),
     staticServer,
     uglify      = require('gulp-uglify');
 
@@ -41,7 +41,7 @@ gulp.task('clean', function() {
 gulp.task('jade', function() {
     return gulp.src('src/jade/*.jade')
         .pipe(jade({'pretty':true}))
-        .pipe(livereload(server))
+        .pipe(livereload(lrserver))
         .pipe(gulpif(isdev, embedlr()))
         .pipe(gulp.dest('dist'));
 });
@@ -53,7 +53,7 @@ gulp.task('sass', function() {
         .pipe(changed('dist/css'))
         .pipe(rename('style.css'))
         .pipe(sass({'outputStyle':'compressed'}))
-        .pipe(livereload(server))
+        .pipe(livereload(lrserver))
         .pipe(gulp.dest('dist/css'));
 });
 
@@ -63,7 +63,7 @@ gulp.task('uglify', function() {
     return gulp.src('src/js/*.js')
         .pipe(changed('dist/js'))
         .pipe(uglify())
-        .pipe(livereload(server))
+        .pipe(livereload(lrserver))
         .pipe(gulp.dest('dist/js'));
 });
 
@@ -73,7 +73,7 @@ staticServer = function(port) {
     app = express();
     app.use(express.static(path.resolve('dist')));
     app.listen(port, function() {
-        gulputil.log('Listening on', port);
+        gulputil.log('Viewable at http://localhost, port:',port);
     });
     return {
         app: app
@@ -85,14 +85,16 @@ staticServer(8888);
 
 // run the default task
 gulp.task('default', function() {
-    // livereload server, listening on port 35729
-    server.listen(35729, function (err) {
+    // run all tasks on first run
+    gulp.start('clean', 'sass', 'jade', 'assets', 'uglify');
+
+    // start livereload server, listening on port 35729
+    lrserver.listen(35729, function (err) {
+
         if (err) {
             return console.log(err)
         };
-        // run all tasks on first run
-        gulp.start('clean', 'sass', 'jade', 'assets', 'uglify');
-
+        gulputil.log('Livereload server at http://localhost, port: 35729');
         // then start watching src files
         gulp.watch('src/scss/*.scss', function(event){
             gulp.start('sass');
