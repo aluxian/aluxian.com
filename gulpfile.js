@@ -11,10 +11,11 @@ var app,
     jade        = require('gulp-jade'),
     livereload  = require('gulp-livereload'),
     lr          = require('tiny-lr'),
+    lrport      = 35729,
+    lrserver    = lr(),
     path        = require('path'),
     rename      = require('gulp-rename'),
     sass        = require('gulp-sass'),
-    lrserver    = lr(),
     staticServer,
     uglify      = require('gulp-uglify');
 
@@ -73,7 +74,7 @@ staticServer = function(port) {
     app = express();
     app.use(express.static(path.resolve('dist')));
     app.listen(port, function() {
-        gulputil.log('Viewable at http://localhost, port:',port);
+        gulputil.log('Static server listening at http://localhost:'+port);
     });
     return {
         app: app
@@ -89,12 +90,12 @@ gulp.task('default', function() {
     gulp.start('clean', 'sass', 'jade', 'assets', 'uglify');
 
     // start livereload server, listening on port 35729
-    lrserver.listen(35729, function (err) {
+    lrserver.listen(lrport, function (err) {
 
         if (err) {
             return console.log(err)
         };
-        gulputil.log('Livereload server at http://localhost, port: 35729');
+        gulputil.log('Livereload server listening at http://localhost:'+lrport);
         // then start watching src files
         gulp.watch('src/scss/*.scss', function(event){
             gulp.start('sass');
