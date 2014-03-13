@@ -7,6 +7,9 @@ Out of the box, GulpJadeSass will build a three page front end skeleton and cont
 ###Requires
 http://nodejs.org/
 
+http://gulpjs.com/
+
+
 **Quick Start**
 
 To set up a development environment, simply cd into your working directory and run the `gulp` command. This will build a 3 page front end skeleton, inject the JavaScript code into the rendered html templates required to auto-refresh your browser and gulp will watch for any changes to any .jade, .js or .scss files. If any changes are made, gulp will render those files and export them to the dist directory and refresh your browser for you.
@@ -18,16 +21,16 @@ GulpJadeSass comes with a few goodies to get you going.
 
 1. Modernizr.js in the html-head.jade file.
 2. Linked to the jQuery CDN in the footer.jade file.
-3. Out of the box, working, three page site.
+3. Out of the box, working, three page site. (If all you need is a working front end prototype, you can simply use the included dist directory)
 
 ##Environment structure
-**dist**            Export directory.
+**dist:**            Export directory. You should not "work" in this directory. This folder represents the finished product where GJS exports your files.
 
-**node_modules**    Application modules required by NodeJadeSass.
+**node_modules:**    This is where NPM installs modules required by NodeJadeSass. Do not manually modify anything in this directory. If you would like to customize this environment, simply use NPM to install additional--or delete--modules.
 
-**src**             Your work files and templates. Gulp watched this folder for changed .jade, .js and .scss files.
+**src:**             Your work files and templates. Gulp watches this folder for changes to any .jade, .js and .scss files. This folder is where you do all your work.
 
-**gulpfile.js**     The Gulp configuration file.
+**gulpfile.js:**     The Gulp configuration file. If you add or delete modules, be sure to update this file.
 
 ##Work-flow
 GulpJadeSass is somewhat opinionated in this regard, but is highly customizable if you prefer something else.
@@ -43,7 +46,7 @@ GulpJadeSass was created to give developers an automated work-flow, particularly
 Note - the only difference between `gulp` and `gulp --type out` is that `gulp --type out` will *not* inject the JavaScript snippet into your compiled .html files required by GulpJadeSass to auto refresh your browser. Run `gulp --type out` only when you are ready to export for produciton.
 
 ##Extending##
-If you like GulpJadeSass, great, if not, great too. You can simply add or remove modules from the project by installing or removing node_modules. To add a module just run the command `npm install <module>` and then edit your gulpfile.js. To remove a module run `npm remove <module` and again, edit your gulpfile.js.
+If you like GulpJadeSass, great, if not, great too. You can simply add or remove modules from the project by installing or removing node_modules. To add a module just run the command `npm install <module-name>` and then edit your gulpfile.js. To remove a module run `npm remove <module-name>` and again, edit your gulpfile.js.
 
 ##More information##
 Gulp http://gulpjs.com/
