@@ -26,9 +26,11 @@ GulpJadeSass comes with a few goodies to get you going.
 ##Environment structure
 **dist:**            Export directory. You should not "work" in this directory. This folder represents the finished product where GJS exports your files.
 
-**node_modules:**    This is where NPM installs modules required by NodeJadeSass. Do not manually modify anything in this directory. If you would like to customize this environment, simply use NPM to install additional--or delete--modules.
+**node_modules:**    This is where NPM installs modules required by GulpJadeSass. Do not manually modify anything in this directory. If you would like to customize this environment, simply use NPM to install additional--or delete--modules.
 
 **src:**             Your work files and templates. Gulp watches this folder for changes to any .jade, .js and .scss files. This folder is where you do all your work.
+
+**README.md**       You're looking at it!
 
 **gulpfile.js:**     The Gulp configuration file. If you add or delete modules, be sure to update this file.
 
