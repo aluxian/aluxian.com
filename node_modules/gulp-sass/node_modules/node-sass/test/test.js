@@ -1,5 +1,5 @@
 /*jshint multistr:true */
-var sass = require('../sass');
+var sass = process.env.NODESASS_COVERAGE ? require('../sass-coverage') : require('../sass');
 var assert = require('assert');
 var path = require('path');
 var badSampleFilename = 'sample.scss';
@@ -125,6 +125,21 @@ describe("compile file with include paths", function(){
       includePaths: [path.resolve(__dirname, "lib"), path.resolve(__dirname, "functions")],
       success: function (css) {
         done(assert.equal(css, "body {\n  background: red;\n  color: #0000fe; }\n"));
+      },
+      error: function (error) {
+        done(error);
+      }
+    });
+  });
+});
+
+describe("compile file with image path", function(){
+  it("should compile with render", function(done) {
+    sass.render({
+      file: path.resolve(__dirname, "image_path.scss"),
+      imagePath: '/path/to/images',
+      success: function (css) {
+        done(assert.equal(css, "body {\n  background-image: url(\"/path/to/images/image.png\"); }\n"));
       },
       error: function (error) {
         done(error);

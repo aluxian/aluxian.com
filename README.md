@@ -56,3 +56,7 @@ Gulp Plug-ins - http://gratimax.github.io/search-gulp-plugins/
 
 ###ToDo###
 Watch static directories.
+
+
+###Thank You###
+A huge shout out to my friend and fellow developer, Francisco Arenas! Thanks for turning me on to Jade and all your work getting the templates set up. https://github.com/dospuntocero
