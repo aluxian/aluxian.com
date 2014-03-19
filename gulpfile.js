@@ -25,7 +25,7 @@ gulp.task('assets', function() {
     return es.concat(
         gulp.src('src/js/vendor/*.js')
             .pipe(gulp.dest('dist/js/vendor')),
-        gulp.src('src/img/*')
+        gulp.src('src/img/**')
             .pipe(gulp.dest('dist/img'))
     );
 });
@@ -52,7 +52,6 @@ gulp.task('jade', function() {
 gulp.task('sass', function() {
     return gulp.src('src/scss/*.scss')
         .pipe(changed('dist/css'))
-        .pipe(rename('style.css'))
         .pipe(sass({'outputStyle':'compressed'}))
         .pipe(livereload(lrserver))
         .pipe(gulp.dest('dist/css'));
