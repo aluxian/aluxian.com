@@ -18,7 +18,7 @@ run this command, then issue a restart and it should be fixed.
 
 	rhc set-env NODE_ENV=production --app $appname
 	
-Where $appname is the name of your application.  This was due to the pre_start_nodejs-0.10 script not running on a restart.
+Where $appname is the name of your application.  This was due to the pre_start_nodejs script not running on a restart.
 
 The easiest way is to use the following command, make sure that you run 'gem update rhc' first so that you have the newest version:
 
