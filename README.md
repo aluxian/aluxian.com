@@ -37,7 +37,7 @@ GulpJadeSass comes with a few goodies to get you going.
 ##Work-flow
 GulpJadeSass is somewhat opinionated in this regard, but is highly customizable if you prefer something else.
 
-GulpJadeSass was created to give developers an automated work-flow, particularly, taking care of mundane tasks like JavaScript uglification, .jade to .html conversion, converting SCSS to CSS and compressing the CSS output and even refreshing your browser for you.
+GulpJadeSass was created to give developers an automated work-flow, particularly, taking care of mundane tasks like JavaScript uglification, .jade to .html conversion, converting SCSS to CSS and compressing the CSS and JS output and even refreshing your browser for you.
 
 
 1. Start by opening a terminal and running the `gulp` command inside your project directory.
