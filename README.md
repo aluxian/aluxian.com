@@ -43,7 +43,7 @@ GulpJadeSass was created to give developers an automated work-flow, particularly
 1. Start by opening a terminal and running the `gulp` command inside your project directory.
 2. Open your favorite web browser and navigate to http://localhost:8888
 3. Open your favorite text editor and edit files in the src directory. Saving any .jade, .js or .scss file will auto compile and export to the dist directory--and--will auto refresh your browser so you can see the changes live. Static files such as images and vendor specific scripts should be placed in the src/img and src/js/vendor directories respectively. These files will only be moved to the dist directory when GuplJadeSass first starts.
-4. When you are finished editing and ready to export your project for production, simply run `gulp --live` and your finished files will be exported to the dist directory.
+4. When you are finished editing and ready to export your project for production, simply exit GJS by pressing `Ctrl-c` to stop GJS (if it's already running), then run `gulp --live` and your finished files will be exported to the dist directory.
 
 Note - the only difference between `gulp` and `gulp --live` is that `gulp --live` will *not* inject the JavaScript snippet into your compiled .html files required by GulpJadeSass to auto refresh your browser. Run `gulp --live` only when you are ready to export for produciton.
 
