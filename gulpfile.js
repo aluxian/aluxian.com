@@ -7,8 +7,8 @@ var app,
     gulp        = require('gulp'),
     gulpif      = require('gulp-if'),
     gulputil    = require('gulp-util'),
-    isdev       = gulputil.env.type !== 'out',
     jade        = require('gulp-jade'),
+    live        = true,
     livereload  = require('gulp-livereload'),
     lr          = require('tiny-lr'),
     lrport      = 35729,
@@ -18,6 +18,13 @@ var app,
     sass        = require('gulp-sass'),
     staticServer,
     uglify      = require('gulp-uglify');
+
+// check to see if --live was set
+process.argv.forEach(function(val, index, array) {
+    if(val === '--live') {
+        live = false;
+    }
+});
 
 
 // move static assets
@@ -43,7 +50,7 @@ gulp.task('jade', function() {
     return gulp.src('src/jade/*.jade')
         .pipe(jade({'pretty':true}))
         .pipe(livereload(lrserver))
-        .pipe(gulpif(isdev, embedlr()))
+        .pipe(gulpif(live, embedlr()))
         .pipe(gulp.dest('dist'));
 });
 
