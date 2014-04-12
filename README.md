@@ -14,7 +14,7 @@ http://gulpjs.com/
 
 To set up a development environment, simply cd into your working directory and run the `gulp` command. This will build a 3 page front end skeleton, inject the JavaScript code into the rendered html templates required to auto-refresh your browser and gulp will watch for any changes to any .jade, .js or .scss files. If any changes are made, gulp will render those files and export them to the dist directory and refresh your browser for you.
 
-To export your project for production, simply run `gulp --type out`. This will build your project, but not inject the JavaScript code necessary for auto-browser refreshing.
+To export your project for production, simply run `gulp --live`. This will build your project, but not inject the JavaScript code necessary for auto-browser refreshing.
 
 **Goodies**
 GulpJadeSass comes with a few goodies to get you going.
@@ -43,9 +43,9 @@ GulpJadeSass was created to give developers an automated work-flow, particularly
 1. Start by opening a terminal and running the `gulp` command inside your project directory.
 2. Open your favorite web browser and navigate to http://localhost:8888
 3. Open your favorite text editor and edit files in the src directory. Saving any .jade, .js or .scss file will auto compile and export to the dist directory--and--will auto refresh your browser so you can see the changes live. Static files such as images and vendor specific scripts should be placed in the src/img and src/js/vendor directories respectively. These files will only be moved to the dist directory when GuplJadeSass first starts.
-4. When you are finished editing and ready to export your project for production, simply run `gulp --type out` and your finished files will be exported to the dist directory.
+4. When you are finished editing and ready to export your project for production, simply run `gulp --live` and your finished files will be exported to the dist directory.
 
-Note - the only difference between `gulp` and `gulp --type out` is that `gulp --type out` will *not* inject the JavaScript snippet into your compiled .html files required by GulpJadeSass to auto refresh your browser. Run `gulp --type out` only when you are ready to export for produciton.
+Note - the only difference between `gulp` and `gulp --live` is that `gulp --live` will *not* inject the JavaScript snippet into your compiled .html files required by GulpJadeSass to auto refresh your browser. Run `gulp --live` only when you are ready to export for produciton.
 
 ##Extending##
 If you like GulpJadeSass, great, if not, great too. You can simply add or remove modules from the project by installing or removing node_modules. To add a module just run the command `npm install <module-name>` and then edit your gulpfile.js. To remove a module run `npm remove <module-name>` and again, edit your gulpfile.js.
