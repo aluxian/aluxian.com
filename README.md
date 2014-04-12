@@ -68,7 +68,6 @@ A huge shout out to my friend and fellow developer, Francisco Arenas! Thanks for
 
 
 ##Troubleshooting##
----
 1. *I added an image to src/img... __or__ ...I added a JavaScript library to src/js/vendor, and I don't see my changes.*
 
 __Stop GJS by pressing `Ctrl-c` and restart GJS by running `gulp`. By default, GJS only exports assets in src/img and src/js/vendor when GJS first runs.__
