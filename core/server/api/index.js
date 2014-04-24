@@ -1,10 +1,9 @@
 // # Ghost Data API
 // Provides access to the data model
 
-var _             = require('underscore'),
+var _             = require('lodash'),
     when          = require('when'),
     config        = require('../config'),
-    errors        = require('../errorHandling'),
     db            = require('./db'),
     settings      = require('./settings'),
     notifications = require('./notifications'),
@@ -17,6 +16,7 @@ var _             = require('underscore'),
 // ## Request Handlers
 
 function cacheInvalidationHeader(req, result) {
+    //TODO: don't set x-cache-invalidate header for drafts
     var parsedUrl = req._parsedUrl.pathname.replace(/\/$/, '').split('/'),
         method = req.method,
         endpoint = parsedUrl[4],
@@ -26,11 +26,11 @@ function cacheInvalidationHeader(req, result) {
 
     if (method === 'POST' || method === 'PUT' || method === 'DELETE') {
         if (endpoint === 'settings' || endpoint === 'users' || endpoint === 'db') {
-            cacheInvalidate = "/*";
+            cacheInvalidate = '/*';
         } else if (endpoint === 'posts') {
-            cacheInvalidate = "/, /page/*, /rss/, /rss/*";
+            cacheInvalidate = '/, /page/*, /rss/, /rss/*, /tag/*';
             if (id && jsonResult.slug) {
-                return config.paths.urlForPost(settings, jsonResult).then(function (postUrl) {
+                return config.urlForPost(settings, jsonResult).then(function (postUrl) {
                     return cacheInvalidate + ', ' + postUrl;
                 });
             }
@@ -60,7 +60,7 @@ requestHandler = function (apiMethod) {
                 }
             });
         }, function (error) {
-            var errorCode = error.errorCode || 500,
+            var errorCode = error.code || 500,
                 errorMsg = {error: _.isString(error) ? error : (_.isObject(error) ? error.message : 'Unknown API Error')};
             res.json(errorCode, errorMsg);
         });

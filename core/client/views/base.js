@@ -215,7 +215,7 @@
                     },
                     url: Ghost.paths.apiRoot + '/notifications/' + $(self).find('.close').data('id')
                 }).done(function (result) {
-                    /*jslint unparam:true*/
+                    /*jshint unused:false*/
                     bbSelf.$el.slideUp(250, function () {
                         $(this).show().css({height: "auto"});
                         $(self).remove();
@@ -249,7 +249,7 @@
                 },
                 url: Ghost.paths.apiRoot + '/notifications/' + $(self).data('id')
             }).done(function (result) {
-                /*jslint unparam:true*/
+                /*jshint unused:false*/
                 var height = bbSelf.$('.js-notification').outerHeight(true),
                     $parent = $(self).parent();
                 bbSelf.$el.css({height: height});
@@ -316,7 +316,7 @@
         },
         afterRender: function () {
             this.$el.fadeIn(50);
-            $(".modal-background").fadeIn(10, function () {
+            $(".modal-background").show(10, function () {
                 $(this).addClass("in");
             });
             if (this.model.options.confirm) {
