@@ -1,6 +1,5 @@
 var cp         = require('child_process'),
-    url        = require('url'),
-    _          = require('underscore'),
+    _          = require('lodash'),
     when       = require('when'),
     nodefn     = require('when/node/function'),
     nodemailer = require('nodemailer'),
@@ -16,7 +15,7 @@ function GhostMailer(opts) {
 // *This promise should always resolve to avoid halting Ghost::init*.
 GhostMailer.prototype.init = function () {
     var self = this;
-    if (config().mail && config().mail.transport && config().mail.options) {
+    if (config().mail && config().mail.transport) {
         this.createTransport();
         return when.resolve();
     }
@@ -53,7 +52,7 @@ GhostMailer.prototype.detectSendmail = function () {
 };
 
 GhostMailer.prototype.createTransport = function () {
-    this.transport = nodemailer.createTransport(config().mail.transport, _.clone(config().mail.options));
+    this.transport = nodemailer.createTransport(config().mail.transport, _.clone(config().mail.options) || {});
 };
 
 GhostMailer.prototype.usingSendmail = function () {
@@ -82,6 +81,22 @@ GhostMailer.prototype.emailDisabled = function () {
     this.transport = null;
 };
 
+GhostMailer.prototype.fromAddress = function () {
+    var from = config().mail && config().mail.fromaddress,
+        domain;
+
+    if (!from) {
+        // Extract the domain name from url set in config.js
+        domain = config().url.match(new RegExp("^https?://([^/:?#]+)(?:[/:?#]|$)", "i"));
+        domain = domain && domain[1];
+
+        // Default to ghost@[blog.url]
+        from = 'ghost@' + domain;
+    }
+
+    return from;
+};
+
 // Sends an e-mail message enforcing `to` (blog owner) and `from` fields
 GhostMailer.prototype.send = function (message) {
     var self = this;
@@ -94,11 +109,10 @@ GhostMailer.prototype.send = function (message) {
     }
 
     return api.settings.read('email').then(function (email) {
-        var from = (config().mail && config().mail.fromaddress) || email.value,
-            to = message.to || email.value;
+        var to = message.to || email.value;
 
         message = _.extend(message, {
-            from: from,
+            from: self.fromAddress(),
             to: to,
             generateTextFromHTML: true
         });

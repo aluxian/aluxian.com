@@ -1,44 +1,40 @@
-/*global window, document, setTimeout, Ghost, $, _, Backbone, JST, shortcut, NProgress */
+/*global Ghost, _, Backbone, NProgress */
 
 (function () {
     "use strict";
     NProgress.configure({ showSpinner: false });
 
-    Ghost.ProgressModel = Backbone.Model.extend({
-
-        // Adds in a call to start a loading bar
-        // This is sets up a success function which completes the loading bar
-        fetch : function (options) {
-            options = options || {};
-
+    // Adds in a call to start a loading bar
+    // This is sets up a success function which completes the loading bar
+    function wrapSync(method, model, options) {
+        if (options !== undefined && _.isObject(options)) {
             NProgress.start();
+
+            /*jshint validthis:true */
+            var self = this,
+                oldSuccess = options.success;
+            /*jshint validthis:false */
 
             options.success = function () {
                 NProgress.done();
+                return oldSuccess.apply(self, arguments);
             };
-
-            return Backbone.Model.prototype.fetch.call(this, options);
         }
+
+        /*jshint validthis:true */
+        return Backbone.sync.call(this, method, model, options);
+    }
+
+    Ghost.ProgressModel = Backbone.Model.extend({
+        sync: wrapSync
     });
 
     Ghost.ProgressCollection = Backbone.Collection.extend({
-
-        // Adds in a call to start a loading bar
-        // This is sets up a success function which completes the loading bar
-        fetch : function (options) {
-            options = options || {};
-
-            NProgress.start();
-
-            options.success = function () {
-                NProgress.done();
-            };
-
-            return Backbone.Collection.prototype.fetch.call(this, options);
-        }
+        sync: wrapSync
     });
 }());
-/*global window, document, Ghost, $, _, Backbone */
+
+/*global Ghost, _, Backbone */
 (function () {
     'use strict';
 
@@ -56,7 +52,6 @@
                 resp.draft = resp.status === 'draft';
             }
             if (resp.tags) {
-                // TODO: parse tags into it's own collection on the model (this.tags)
                 return resp;
             }
             return resp;
@@ -109,18 +104,18 @@
 
 }());
 
-/*global window, document, Ghost, $, _, Backbone */
+/*global Ghost */
 (function () {
     'use strict';
     //id:0 is used to issue PUT requests
     Ghost.Models.Settings = Ghost.ProgressModel.extend({
-        url: Ghost.paths.apiRoot + '/settings/?type=blog,theme',
+        url: Ghost.paths.apiRoot + '/settings/?type=blog,theme,app',
         id: '0'
     });
 
 }());
 
-/*global window, document, Ghost, $, _, Backbone */
+/*global Ghost */
 (function () {
     'use strict';
 
@@ -129,7 +124,7 @@
     });
 }());
 
-/*global window, document, Ghost, $, _, Backbone */
+/*global Ghost, Backbone */
 (function () {
     'use strict';
 
@@ -178,7 +173,7 @@
 
 }());
 
-/*global window, document, Ghost, $, _, Backbone */
+/*global Ghost */
 (function () {
     'use strict';
 
@@ -192,7 +187,7 @@
 
 }());
 
-/*global window, document, Ghost, $, _, Backbone */
+/*global Ghost */
 (function () {
     'use strict';
 

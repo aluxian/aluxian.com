@@ -1,30 +1,24 @@
-var Tag,
-    Tags,
-    Posts          = require('./post').Posts,
-    ghostBookshelf = require('./base');
+var Posts          = require('./post').Posts,
+    ghostBookshelf = require('./base'),
+
+    Tag,
+    Tags;
 
 Tag = ghostBookshelf.Model.extend({
 
     tableName: 'tags',
 
-    permittedAttributes: [
-        'id', 'uuid', 'name', 'slug', 'description', 'parent_id', 'meta_title', 'meta_description', 'created_at',
-        'created_by', 'updated_at', 'updated_by'
-    ],
+    saving: function (newPage, attr, options) {
+         /*jshint unused:false*/
 
-    validate: function () {
-
-        return true;
-    },
-
-    creating: function () {
         var self = this;
 
-        ghostBookshelf.Model.prototype.creating.call(this);
+        ghostBookshelf.Model.prototype.saving.apply(this, arguments);
 
-        if (!this.get('slug')) {
-            // Generating a slug requires a db call to look for conflicting slugs
-            return ghostBookshelf.Model.generateSlug(Tag, this.get('name'))
+        if (this.hasChanged('slug') || !this.get('slug')) {
+            // Pass the new slug through the generator to strip illegal characters, detect duplicates
+            return ghostBookshelf.Model.generateSlug(Tag, this.get('slug') || this.get('name'),
+                {transacting: options.transacting})
                 .then(function (slug) {
                     self.set({slug: slug});
                 });

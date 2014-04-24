@@ -2,46 +2,22 @@ var dataExport       = require('../data/export'),
     dataImport       = require('../data/import'),
     dataProvider     = require('../models'),
     fs               = require('fs-extra'),
-    path             = require('path'),
     when             = require('when'),
     nodefn           = require('when/node/function'),
-    _                = require('underscore'),
-    schema           = require('../data/schema').tables,
-    configPaths      = require('../config/paths'),
+    _                = require('lodash'),
+    validation       = require('../data/validation'),
+    errors           = require('../../server/errorHandling'),
     api              = {},
-
     db;
 
 api.notifications    = require('./notifications');
 api.settings         = require('./settings');
 
 db = {
-    'exportContent': function (req, res) {
-        /*jslint unparam:true*/
-        return dataExport().then(function (exportedData) {
-            // Save the exported data to the file system for download
-            var fileName = path.join(configPaths().exportPath, 'exported-' + (new Date().getTime()) + '.json');
-
-            return nodefn.call(fs.writeFile, fileName, JSON.stringify(exportedData)).then(function () {
-                return when(fileName);
-            });
-        }).then(function (exportedFilePath) {
-            // Send the exported data file
-            res.download(exportedFilePath, 'GhostData.json');
-        }).otherwise(function (error) {
-            // Notify of an error if it occurs
-            return api.notifications.browse().then(function (notifications) {
-                var notification = {
-                    type: 'error',
-                    message: error.message || error,
-                    status: 'persistent',
-                    id: 'per-' + (notifications.length + 1)
-                };
-
-                return api.notifications.add(notification).then(function () {
-                    res.redirect(configPaths().debugPath);
-                });
-            });
+    'exportContent': function () {
+        // Export data, otherwise send error 500
+        return dataExport().otherwise(function (error) {
+            return when.reject({errorCode: 500, message: error.message || error});
         });
     },
     'importContent': function (options) {
@@ -56,55 +32,40 @@ db = {
              * - If there is no path
              * - If the name doesn't have json in it
              */
-            return when.reject({errorCode: 500, message: 'Please select a .json file to import.'});
+            return when.reject({code: 500, message: 'Please select a .json file to import.'});
         }
 
         return api.settings.read({ key: 'databaseVersion' }).then(function (setting) {
             return when(setting.value);
         }, function () {
-            return when('001');
+            return when('002');
         }).then(function (version) {
             databaseVersion = version;
             // Read the file contents
             return nodefn.call(fs.readFile, options.importfile.path);
         }).then(function (fileContents) {
             var importData,
-                error = '',
-                tableKeys = _.keys(schema);
+                error = '';
 
             // Parse the json data
             try {
                 importData = JSON.parse(fileContents);
             } catch (e) {
-                return when.reject(new Error("Failed to parse the import file"));
+                errors.logError(e, "API DB import content", "check that the import file is valid JSON.");
+                return when.reject(new Error("Failed to parse the import JSON file"));
             }
 
             if (!importData.meta || !importData.meta.version) {
                 return when.reject(new Error("Import data does not specify version"));
             }
 
-            _.each(tableKeys, function (constkey) {
-                _.each(importData.data[constkey], function (elem) {
-                    var prop;
-                    for (prop in elem) {
-                        if (elem.hasOwnProperty(prop)) {
-                            if (schema[constkey].hasOwnProperty(prop)) {
-                                if (!_.isNull(elem[prop])) {
-                                    if (elem[prop].length > schema[constkey][prop].maxlength) {
-                                        error += error !== "" ? "<br>" : "";
-                                        error += "Property '" + prop + "' exceeds maximum length of " + schema[constkey][prop].maxlength + " (element:" + constkey + " / id:" + elem.id + ")";
-                                    }
-                                } else {
-                                    if (!schema[constkey][prop].nullable) {
-                                        error += error !== "" ? "<br>" : "";
-                                        error += "Property '" + prop + "' is not nullable (element:" + constkey + " / id:" + elem.id + ")";
-                                    }
-                                }
-                            } else {
-                                error += error !== "" ? "<br>" : "";
-                                error += "Property '" + prop + "' is not allowed (element:" + constkey + " / id:" + elem.id + ")";
-                            }
-                        }
+            _.each(_.keys(importData.data), function (tableName) {
+                _.each(importData.data[tableName], function (importValues) {
+                    try {
+                        validation.validateSchema(tableName, importValues);
+                    } catch (err) {
+                        error += error !== "" ? "<br>" : "";
+                        error += err.message;
                     }
                 });
             });
@@ -120,7 +81,10 @@ db = {
         }).then(function () {
             return when.resolve({message: 'Posts, tags and other data successfully imported'});
         }).otherwise(function importFailure(error) {
-            return when.reject({errorCode: 500, message: error.message || error});
+            return when.reject({code: 500, message: error.message || error});
+        }).finally(function () {
+            // Unlink the file after import
+            return nodefn.call(fs.unlink, options.importfile.path);
         });
     },
     'deleteAllContent': function () {
@@ -128,7 +92,7 @@ db = {
             .then(function () {
                 return when.resolve({message: 'Successfully deleted all content from your blog.'});
             }, function (error) {
-                return when.reject({errorCode: 500, message: error.message || error});
+                return when.reject({code: 500, message: error.message || error});
             });
     }
 };
