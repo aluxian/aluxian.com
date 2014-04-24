@@ -6,7 +6,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<form id=\"forgotten\" method=\"post\" novalidate=\"novalidate\">\n    <div class=\"email-wrap\">\n        <input class=\"email\" type=\"email\" placeholder=\"Email Address\" name=\"email\" autocapitalize=\"off\" autocorrect=\"off\">\n    </div>\n    <button class=\"button-save\" type=\"submit\">Send new password</button>\n</form>\n";
+  return "<form id=\"forgotten\" class=\"forgotten-form\" method=\"post\" novalidate=\"novalidate\">\n    <div class=\"email-wrap\">\n        <input class=\"email\" type=\"email\" placeholder=\"Email Address\" name=\"email\" autocapitalize=\"off\" autocorrect=\"off\">\n    </div>\n    <button class=\"button-save\" type=\"submit\">Send new password</button>\n</form>\n";
   });
 
 this["JST"]["list-item"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -86,9 +86,9 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<form id=\"login\" method=\"post\" novalidate=\"novalidate\">\n    <div class=\"email-wrap\">\n        <input class=\"email\" type=\"email\" placeholder=\"Email Address\" name=\"email\" autocapitalize=\"off\" autocorrect=\"off\">\n    </div>\n    <div class=\"password-wrap\">\n        <input class=\"password\" type=\"password\" placeholder=\"Password\" name=\"password\">\n    </div>\n    <button class=\"button-save\" type=\"submit\">Log in</button>\n    <section class=\"meta\">\n        <a class=\"forgotten-password\" href=\"";
-  if (stack1 = helpers.adminUrl) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = (depth0 && depth0.adminUrl); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += "<form id=\"login\" class=\"login-form\" method=\"post\" novalidate=\"novalidate\">\n    <div class=\"email-wrap\">\n        <input class=\"email\" type=\"email\" placeholder=\"Email Address\" name=\"email\" autocapitalize=\"off\" autocorrect=\"off\">\n    </div>\n    <div class=\"password-wrap\">\n        <input class=\"password\" type=\"password\" placeholder=\"Password\" name=\"password\">\n    </div>\n    <button class=\"button-save\" type=\"submit\">Log in</button>\n    <section class=\"meta\">\n        <a class=\"forgotten-password\" href=\"";
+  if (stack1 = helpers.admin_url) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.admin_url); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
   buffer += escapeExpression(stack1)
     + "/forgotten/\">Forgotten password?</a>\n    </section>\n</form>\n";
   return buffer;
@@ -224,7 +224,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<section class=\"markdown-help-container\">\n    <table class=\"modal-markdown-help-table\">\n        <thead>\n            <tr>\n                <th>Result</th>\n                <th>Markdown</th>\n                <th>Shortcut</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr>\n                <td><strong>Bold</strong></td>\n                <td>**text**</td>\n                <td>Ctrl / Cmd + B</td>\n            </tr>\n            <tr>\n                <td><em>Emphasize</em></td>\n                <td>*text*</td>\n                <td>Ctrl / Cmd + I</td>\n            </tr>\n            <tr>\n                <td><code>Inline Code</code></td>\n                <td>`code`</td>\n                <td>Cmd + K / Ctrl + Shift + K</td>\n            </tr>\n            <tr>\n                <td>Strike-through</td>\n                <td>~~text~~</td>\n                <td>Ctrl + Alt + U</td>\n            </tr>\n            <tr>\n                <td><a href=\"#\">Link</a></td>\n                <td>[title](http://)</td>\n                <td>Ctrl + Shift + L</td>\n            </tr>\n            <tr>\n                <td>Image</td>\n                <td>![alt](http://)</td>\n                <td>Ctrl + Shift + I</td>\n            </tr>\n            <tr>\n                <td>List</td>\n                <td>* item</td>\n                <td>Ctrl + L</td>\n            </tr>\n            <tr>\n                <td>Blockquote</td>\n                <td>> quote</td>\n                <td>Ctrl + Q</td>\n            </tr>\n            <tr>\n                <td>H1</td>\n                <td># Heading</td>\n                <td>Ctrl + Alt + 1</td>\n            </tr>\n            <tr>\n                <td>H2</td>\n                <td>## Heading</td>\n                <td>Ctrl + Alt + 2</td>\n            </tr>\n            <tr>\n                <td>H3</td>\n                <td>### Heading</td>\n                <td>Ctrl + Alt + 3</td>\n            </tr>\n            <tr>\n                <td>H4</td>\n                <td>#### Heading</td>\n                <td>Ctrl + Alt + 4</td>\n            </tr>\n            <tr>\n                <td>H5</td>\n                <td>##### Heading</td>\n                <td>Ctrl + Alt + 5</td>\n            </tr>\n            <tr>\n                <td>H6</td>\n                <td>###### Heading</td>\n                <td>Ctrl + Alt + 6</td>\n            </tr>\n            <tr>\n                <td>Select Word</td>\n                <td></td>\n                <td>Ctrl + Alt + W</td>\n            </tr>\n            <tr>\n                <td>New Paragraph</td>\n                <td></td>\n                <td>Ctrl / Cmd + Enter</td>\n            </tr>\n            <tr>\n                <td>Uppercase</td>\n                <td></td>\n                <td>Ctrl + U</td>\n            </tr>\n            <tr>\n                <td>Lowercase</td>\n                <td></td>\n                <td>Ctrl + Shift + U</td>\n            </tr>\n            <tr>\n                <td>Titlecase</td>\n                <td></td>\n                <td>Ctrl + Alt + Shift + U</td>\n            </tr>\n            <tr>\n                <td>Insert Current Date</td>\n                <td></td>\n                <td>Ctrl + Shift + 1</td>\n            </tr>\n        </tbody>\n    </table>\n    For further Markdown syntax reference: <a href=\"http://daringfireball.net/projects/markdown/syntax\" target=\"_blank\">Markdown Documentation</a>\n</section>\n";
+  return "<section class=\"markdown-help-container\">\n    <table class=\"modal-markdown-help-table\">\n        <thead>\n            <tr>\n                <th>Result</th>\n                <th>Markdown</th>\n                <th>Shortcut</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr>\n                <td><strong>Bold</strong></td>\n                <td>**text**</td>\n                <td>Ctrl / Cmd + B</td>\n            </tr>\n            <tr>\n                <td><em>Emphasize</em></td>\n                <td>*text*</td>\n                <td>Ctrl / Cmd + I</td>\n            </tr>\n            <tr>\n                <td>Strike-through</td>\n                <td>~~text~~</td>\n                <td>Ctrl + Alt + U</td>\n            </tr>\n            <tr>\n                <td><a href=\"#\">Link</a></td>\n                <td>[title](http://)</td>\n                <td>Ctrl + Shift + L</td>\n            </tr>\n            <tr>\n                <td>Image</td>\n                <td>![alt](http://)</td>\n                <td>Ctrl + Shift + I</td>\n            </tr>\n            <tr>\n                <td>List</td>\n                <td>* item</td>\n                <td>Ctrl + L</td>\n            </tr>\n            <tr>\n                <td>Blockquote</td>\n                <td>> quote</td>\n                <td>Ctrl + Q</td>\n            </tr>\n            <tr>\n                <td>H1</td>\n                <td># Heading</td>\n                <td>Ctrl + Alt + 1</td>\n            </tr>\n            <tr>\n                <td>H2</td>\n                <td>## Heading</td>\n                <td>Ctrl + Alt + 2</td>\n            </tr>\n            <tr>\n                <td>H3</td>\n                <td>### Heading</td>\n                <td>Ctrl + Alt + 3</td>\n            </tr>\n            <tr>\n                <td><code>Inline Code</code></td>\n                <td>`code`</td>\n                <td>Cmd + K / Ctrl + Shift + K</td>\n            </tr>\n        </tbody>\n    </table>\n    For further Markdown syntax reference: <a href=\"http://daringfireball.net/projects/markdown/syntax\" target=\"_blank\">Markdown Documentation</a>\n</section>\n";
   });
 
 this["JST"]["modals/uploadImage"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -346,8 +346,8 @@ function program17(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n    <div class=\"no-posts-box\">\n        <div class=\"no-posts\">\n            <h3>You Haven't Written Any Posts Yet!</h3>\n            <form action=\"";
-  if (stack1 = helpers.adminUrl) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = (depth0 && depth0.adminUrl); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  if (stack1 = helpers.admin_url) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.admin_url); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
   buffer += escapeExpression(stack1)
     + "/editor/\"><button class=\"button-add large\" title=\"New Post\">Write a new Post</button></form>\n        </div>\n    </div>\n";
   return buffer;
@@ -386,7 +386,66 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<form id=\"reset\" method=\"post\" novalidate=\"novalidate\">\n    <div class=\"password-wrap\">\n        <input class=\"password\" type=\"password\" placeholder=\"Password\" name=\"newpassword\" />\n    </div>\n    <div class=\"password-wrap\">\n        <input class=\"password\" type=\"password\" placeholder=\"Confirm Password\" name=\"ne2password\" />\n    </div>\n    <button class=\"button-save\" type=\"submit\">Reset Password</button>\n</form>\n";
+  return "<form id=\"reset\" class=\"reset-form\" method=\"post\" novalidate=\"novalidate\">\n    <div class=\"password-wrap\">\n        <input class=\"password\" type=\"password\" placeholder=\"Password\" name=\"newpassword\" />\n    </div>\n    <div class=\"password-wrap\">\n        <input class=\"password\" type=\"password\" placeholder=\"Confirm Password\" name=\"ne2password\" />\n    </div>\n    <button class=\"button-save\" type=\"submit\">Reset Password</button>\n</form>\n";
+  });
+
+this["JST"]["settings/apps"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n        <li>\n            ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0['package']), {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n            <button data-app=\"";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.name); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" class=\"";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.active), {hash:{},inverse:self.program(8, program8, data),fn:self.program(6, program6, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</button>\n        </li>\n        ";
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += escapeExpression(((stack1 = ((stack1 = (depth0 && depth0['package'])),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + " - "
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0['package'])),stack1 == null || stack1 === false ? stack1 : stack1.version)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1));
+  return buffer;
+  }
+
+function program4(depth0,data) {
+  
+  var buffer = "", stack1;
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.name); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " - package.json missing :(";
+  return buffer;
+  }
+
+function program6(depth0,data) {
+  
+  
+  return "button-delete js-button-deactivate js-button-active\">Deactivate";
+  }
+
+function program8(depth0,data) {
+  
+  
+  return "button-add js-button-activate\">Activate";
+  }
+
+  buffer += "<header>\n    <button class=\"button-back\">Back</button>\n    <h2 class=\"title\">Apps</h2>\n</header>\n\n<section class=\"content\">\n    <ul class=\"js-apps\">\n        ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.availableApps), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n    </ul>\n</section>";
+  return buffer;
   });
 
 this["JST"]["settings/general"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -439,10 +498,12 @@ function program9(depth0,data) {
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.active), {hash:{},inverse:self.noop,fn:self.program(10, program10, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += ">";
-  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = (depth0 && depth0.name); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "</option>\n                    ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0['package']), {hash:{},inverse:self.program(14, program14, data),fn:self.program(12, program12, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</option>\n                        ";
+  stack1 = helpers.unless.call(depth0, (depth0 && depth0['package']), {hash:{},inverse:self.noop,fn:self.program(16, program16, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n                    ";
   return buffer;
   }
 function program10(depth0,data) {
@@ -451,15 +512,43 @@ function program10(depth0,data) {
   return "selected";
   }
 
+function program12(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += escapeExpression(((stack1 = ((stack1 = (depth0 && depth0['package'])),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + " - "
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0['package'])),stack1 == null || stack1 === false ? stack1 : stack1.version)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1));
+  return buffer;
+  }
+
+function program14(depth0,data) {
+  
+  var stack1;
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.name); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  return escapeExpression(stack1);
+  }
+
+function program16(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "<script>console.log('Hi! The theme named \"";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.name); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" does not have a package.json file or it\\'s malformed. This will be required in the future. For more info, see http://docs.ghost.org/themes/.');</script>";
+  return buffer;
+  }
+
   buffer += "<header>\n    <button class=\"button-back\">Back</button>\n    <h2 class=\"title\">General</h2>\n    <section class=\"page-actions\">\n        <button class=\"button-save\">Save</button>\n    </section>\n</header>\n\n<section class=\"content\">\n    <form id=\"settings-general\" novalidate=\"novalidate\">\n        <fieldset>\n\n            <div class=\"form-group\">\n                <label for=\"blog-title\">Blog Title</label>\n                <input id=\"blog-title\" name=\"general[title]\" type=\"text\" value=\"";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = (depth0 && depth0.title); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\" />\n                <p>The name of your blog</p>\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"blog-description\">Blog Description</label>\n                <textarea id=\"blog-description\">";
+    + "\" />\n                <p>The name of your blog</p>\n            </div>\n\n            <div class=\"form-group description-container\">\n                <label for=\"blog-description\">Blog Description</label>\n                <textarea id=\"blog-description\">";
   if (stack1 = helpers.description) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = (depth0 && depth0.description); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</textarea>\n                <p>Describe what your blog is about</p>\n            </div>\n        </fieldset>\n            <div class=\"form-group\">\n                <label for=\"blog-logo\">Blog Logo</label>\n                ";
+    + "</textarea>\n                <p>\n                    Describe what your blog is about\n                    <span class=\"word-count\">0</span>\n                </p>\n\n            </div>\n        </fieldset>\n            <div class=\"form-group\">\n                <label for=\"blog-logo\">Blog Logo</label>\n                ";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.logo), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n                <p>Display a sexy logo for your publication</p>\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"blog-cover\">Blog Cover</label>\n                ";
@@ -486,7 +575,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<header>\n    <h1 class=\"title\">Settings</h1>\n</header>\n<nav class=\"settings-menu\">\n    <ul>\n        <li class=\"general\"><a href=\"#general\">General</a></li>\n        <li class=\"users\"><a href=\"#user\">User</a></li>\n    </ul>\n</nav>";
+  return "<header>\n    <h1 class=\"title\">Settings</h1>\n</header>\n<nav class=\"settings-menu\">\n    <ul>\n        <li class=\"general\"><a href=\"#general\">General</a></li>\n        <li class=\"users\"><a href=\"#user\">User</a></li>\n        <li class=\"apps\"><a href=\"#apps\">Apps</a></li>\n    </ul>\n</nav>";
   });
 
 this["JST"]["settings/user-profile"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -558,7 +647,7 @@ function program7(depth0,data) {
   if (stack1 = helpers.bio) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = (depth0 && depth0.bio); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</textarea>\n                <p class=\"bio-desc\">Write about you, in 200 characters or less.</p>\n                <span class=\"word-count\">0</span>\n            </div>\n\n            <hr />\n\n        </fieldset>\n\n        <fieldset>\n\n            <div class=\"form-group\">\n                <label for=\"user-password-old\">Old Password</label>\n                <input type=\"password\" id=\"user-password-old\" />\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"user-password-new\">New Password</label>\n                <input type=\"password\" id=\"user-password-new\" />\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"user-new-password-verification\">Verify Password</label>\n                <input type=\"password\" id=\"user-new-password-verification\" />\n            </div>\n            <div class=\"form-group\">\n                <button type=\"button\" class=\"button-delete button-change-password\">Change Password</button>\n            </div>\n\n        </fieldset>\n\n    </form>\n</section>\n";
+    + "</textarea>\n                <p>\n                    Write about you, in 200 characters or less.\n                    <span class=\"word-count\">0</span>\n                </p>\n            </div>\n\n            <hr />\n\n        </fieldset>\n\n        <fieldset>\n\n            <div class=\"form-group\">\n                <label for=\"user-password-old\">Old Password</label>\n                <input type=\"password\" id=\"user-password-old\" />\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"user-password-new\">New Password</label>\n                <input type=\"password\" id=\"user-password-new\" />\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"user-new-password-verification\">Verify Password</label>\n                <input type=\"password\" id=\"user-new-password-verification\" />\n            </div>\n            <div class=\"form-group\">\n                <button type=\"button\" class=\"button-delete button-change-password\">Change Password</button>\n            </div>\n\n        </fieldset>\n\n    </form>\n</section>\n";
   return buffer;
   });
 
@@ -568,5 +657,5 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<form id=\"signup\" method=\"post\" novalidate=\"novalidate\">\n    <div class=\"name-wrap\">\n        <input class=\"name\" type=\"text\" placeholder=\"Full Name\" name=\"name\" autocorrect=\"off\" />\n    </div>\n    <div class=\"email-wrap\">\n        <input class=\"email\" type=\"email\" placeholder=\"Email Address\" name=\"email\" autocapitalize=\"off\" autocorrect=\"off\" />\n    </div>\n    <div class=\"password-wrap\">\n        <input class=\"password\" type=\"password\" placeholder=\"Password\" name=\"password\" />\n    </div>\n    <button class=\"button-save\" type=\"submit\">Sign Up</button>\n</form>\n";
+  return "<form id=\"signup\" class=\"signup-form\" method=\"post\" novalidate=\"novalidate\">\n    <div class=\"name-wrap\">\n        <input class=\"name\" type=\"text\" placeholder=\"Full Name\" name=\"name\" autocorrect=\"off\" />\n    </div>\n    <div class=\"email-wrap\">\n        <input class=\"email\" type=\"email\" placeholder=\"Email Address\" name=\"email\" autocapitalize=\"off\" autocorrect=\"off\" />\n    </div>\n    <div class=\"password-wrap\">\n        <input class=\"password\" type=\"password\" placeholder=\"Password\" name=\"password\" />\n    </div>\n    <button class=\"button-save\" type=\"submit\">Sign Up</button>\n</form>\n";
   });
