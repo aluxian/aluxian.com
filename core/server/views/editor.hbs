@@ -1,4 +1,15 @@
 {{!< default}}
+<style>
+    /* Additional styling for touch editor, will be moved in future */
+    .touch-editor #entry-markdown {
+        padding: 15px;
+        margin-bottom: 40px;
+        font-family: monospace;
+        font-size: 1.4em;
+        line-height: 1.3em;
+        color: #242628;
+    }
+</style>
 <section class="entry-container">
     <header>
         <section class="box entry-title">
@@ -13,7 +24,7 @@
             <small>Markdown</small>
             <a class="markdown-help" href="#"><span class="hidden">What is Markdown?</span></a>
         </header>
-        <section id="entry-markdown-content" class="entry-markdown-content" data-filestorage={{fileStorage}}>
+        <section id="entry-markdown-content" class="entry-markdown-content" data-filestorage={{file_storage}}>
             <textarea id="entry-markdown"></textarea>
         </section>
     </section>{{!.entry-markdown}}
