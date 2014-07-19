@@ -2,7 +2,7 @@
 GulpJadeSass is an automated build environment that uses the (streaming) build system gulp.js, the Jade template language and the Sass CSS extension language.
 
 ##Overview
-Out of the box, GulpJadeSass will build a three page front end skeleton and continue to watch for changes to the .jade, .scss and .js files. Editing and saving those files will cause Gulp to render the canged .jade files into .html, or uglify all .js files (except for vendor specific files) or compile scss into css.
+Out of the box, GulpJadeSass will build a single page scroller front end skeleton and continue to watch for changes to the .jade, .scss and .js files. Editing and saving those files will cause Gulp to render the canged .jade files into .html, or uglify all .js files (except for vendor specific files) or compile scss into css.
 
 ###Requires
 http://nodejs.org/
@@ -12,7 +12,7 @@ http://gulpjs.com/
 
 **Quick Start**
 
-To set up a development environment, simply cd into your working directory and run the `gulp` command. This will build a 3 page front end skeleton, inject the JavaScript code into the rendered html templates required to auto-refresh your browser and gulp will watch for any changes to any .jade, .js or .scss files. If any changes are made, gulp will render those files and export them to the dist directory and refresh your browser for you.
+To set up a development environment, simply cd into your working directory and run the `gulp` command. This will build a single page scroller front end skeleton, inject the JavaScript code into the rendered html templates required to auto-refresh your browser and gulp will watch for any changes to any .jade, .js or .scss files. If any changes are made, gulp will render those files and export them to the dist directory and refresh your browser for you.
 
 To export your project for production, simply run `gulp --live`. This will build your project, but not inject the JavaScript code necessary for auto-browser refreshing.
 
