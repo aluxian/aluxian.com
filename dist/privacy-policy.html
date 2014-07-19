@@ -3,7 +3,7 @@
   <head>
     <title>Welcome to the privacy policy page</title>
     <meta charset="UTF-8">
-    <meta name="keywords" content="add, some, keywords">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="This is the page description.">
     <meta name="revisit-after" content="3 days">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,13 +11,14 @@
     <link href="css/style.css" rel="stylesheet">
     <script src="js/vendor/modernizr-2.7.1.min.js"></script>
   </head>
-  <body>
+  <body><a id="GoTop"></a>
     <header class="header"><img src="img/logo.gif">
-      <nav>
+      <nav class="nav">
         <ul>
-          <li class="index"><a href="index.html">HOME</a></li>
-          <li class="about-us"><a href="about-us.html">ABOUT US</a></li>
-          <li class="contact"><a href="contact.html">CONTACT</a></li>
+          <li class="section1"><a href="#section1">SECTION 1</a></li>
+          <li class="section2"><a href="#section2">SECTION 2</a></li>
+          <li class="section3"><a href="#section3">SECTION 3</a></li>
+          <li class="section4"><a href="#section4">SECTION 4</a></li>
         </ul>
       </nav>
     </header>
@@ -27,9 +28,9 @@
       </div>
     </section>
     <!-- Footer-->
-    <footer class="footer">
-      <p>&copy; 2015 Mysite. All rights reserved.</p>
-      <nav>
+    <footer class="footer"><a href="#GoTop" class="goTop">Go Top</a>
+      <p>&copy; 2014 Mysite. All rights reserved.</p>
+      <nav class="nav">
         <ul>
           <li class="privacy-policy"><a href="privacy-policy.html">PRIVACY POLICY</a></li>
         </ul>
@@ -37,7 +38,5 @@
     </footer>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script src="js/main.js"></script>
-  
-<script type="text/javascript">document.write('<script src="' + (location.protocol || 'http:') + '//' + (location.hostname || 'localhost') + ':35729/livereload.js?snipver=1" type="text/javascript"><\/script>')</script>
-</body>
+  </body>
 </html>
