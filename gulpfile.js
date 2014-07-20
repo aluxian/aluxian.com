@@ -1,12 +1,13 @@
 var app,
     changed     = require('gulp-changed'),
-    clean       = require('gulp-clean'),
+    del         = require('del'),
     es          = require('event-stream'),
     embedlr     = require('gulp-embedlr'),
     express     = require('express'),
     gulp        = require('gulp'),
     gulpif      = require('gulp-if'),
     gulputil    = require('gulp-util'),
+    ignore      = require('gulp-ignore'),
     jade        = require('gulp-jade'),
     live        = true,
     livereload  = require('gulp-livereload'),
@@ -22,107 +23,108 @@ var app,
 
 
 // check to see if --live was set
-process.argv.forEach(function(val, index, array) {
-    if(val === '--live') {
+process.argv.forEach(function (val) {
+    if (val === '--live') {
         live = false;
     }
 });
 
 
 
-// start livereload server, listening on port 35729
-lrserver.listen(lrport, function (err) {
-
-    if (err) {
-        return console.log(err)
-    };
-    gulputil.log('Livereload server listening at http://localhost:'+lrport);
-    // then start watching src files
-    gulp.watch('src/scss/*.scss', function(event){
-        gulp.start('sass');
-    });
-    gulp.watch('src/js/*.js', function(event){
-        gulp.start('uglify');
-    });
-    gulp.watch('src/jade/**/*.jade', function(event){
-        gulp.start('jade');
-    });
-});
-
-
-
-// start static server listening on port 8888
-staticServer = function(port) {
-    app = express();
-    app.use(express.static(path.resolve('dist')));
-    app.listen(port, function() {
-        gulputil.log('Static server listening at http://localhost:'+port);
-    });
-    return {
-        app: app
-    };
-};
-// call static server and specify port
-staticServer(8888);
-
-
-
-// clear all .html, .css and .js files before build
-gulp.task('clean', function() {
-    return gulp.src(['dist/*.html','dist/js/*.js','dist/css/*.css'], {'read': false})
-        .pipe(clean());
+// clear dist
+gulp.task('clean', function (cb) {
+    del(['./dist/**/*.*'], cb);
 });
 
 
 
 // compile scss as compressed css
-gulp.task('sass', function() {
-    return gulp.src('src/scss/*.scss')
-        .pipe(changed('dist/css'))
-        .pipe(sass({'outputStyle':'compressed'}))
+gulp.task('sass', function () {
+    return gulp.src('./src/scss/*.scss')
+        .pipe(changed('./dist/css'))
+        .pipe(sass({'outputStyle': 'compressed'}))
         .pipe(livereload(lrserver))
-        .pipe(gulp.dest('dist/css'));
+        .pipe(gulp.dest('./dist/css'));
 });
 
 
 
 // jade to html
-gulp.task('jade', function() {
-    return gulp.src('src/jade/*.jade')
-        .pipe(jade({'pretty':true}))
+gulp.task('jade', function () {
+    return gulp.src('./src/jade/*.jade')
+        .pipe(jade({'pretty': true}))
         .pipe(livereload(lrserver))
         .pipe(gulpif(live, embedlr()))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('./dist'));
 });
 
 
 
 // move static assets
-gulp.task('assets', function() {
+gulp.task('assets', function () {
     return es.concat(
-        gulp.src('src/js/vendor/*.js')
-            .pipe(gulp.dest('dist/js/vendor')),
-        gulp.src('src/img/**')
-            .pipe(gulp.dest('dist/img'))
+        gulp.src('./src/js/vendor/*.js')
+            .pipe(gulp.dest('./dist/js/vendor')),
+        gulp.src('./src/img/**')
+            .pipe(gulp.dest('./dist/img'))
     );
 });
 
 
 
 // compress javascript
-gulp.task('uglify', function() {
-    return gulp.src('src/js/*.js')
-        .pipe(changed('dist/js'))
+gulp.task('uglify', function () {
+    return gulp.src('./src/js/*.js')
+        .pipe(changed('./dist/js'))
         .pipe(uglify())
         .pipe(livereload(lrserver))
-        .pipe(gulp.dest('dist/js'));
+        .pipe(gulp.dest('./dist/js'));
+
 });
 
 
 
-// run the default task
-gulp.task('default', function() {
-
-    // run all tasks on first run
-    gulp.start('clean', 'sass', 'jade', 'assets', 'uglify');
+// start static server listening on port 8888
+gulp.task('static', function (next) {
+    staticServer = function (port) {
+        app = express();
+        app.use(express.static(path.resolve('./dist')));
+        app.listen(port, function () {
+            gulputil.log('Static server is listening at ' + gulputil.colors.cyan('http://localhost:' + port + '/'));
+        });
+        return {
+            app: app
+        };
+    };
+    // init server
+    staticServer(8888);
+    next();
 });
+
+
+
+// start livereload server, listening on port 35729
+gulp.task('reload', function () {
+    lrserver.listen(lrport, function (err) {
+        if (err) {
+            return gulputil.log(err);
+        }
+        gulputil.log('Livereload server listening at ' +  gulputil.colors.cyan('http://localhost:' + lrport));
+    });
+});
+
+
+
+gulp.task('watch', ['static'], function () {
+    livereload.listen();
+    gulp.watch('./src/scss/*.scss', ['sass']);
+    gulp.watch('./src/jade/**/*.jade', ['jade']);
+    gulp.watch('./src/js/*.js', ['uglify']);
+});
+
+
+
+// run the default task on first run
+gulp.task('default', ['clean', 'sass', 'jade', 'assets', 'uglify', 'static', 'reload', 'watch']);
+
+gulputil.log("Everything works. Excelsior!");
