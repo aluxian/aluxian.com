@@ -33,7 +33,6 @@
     "gulp-ignore": "^1.1.0",
     "gulp-jade": "^0.6.1",
     "gulp-livereload": "^2.1.0",
-    "gulp-rename": "^.2.0",
     "gulp-sass": "^0.7.2",
     "gulp-uglify": "^0.3.1",
     "gulp-util": "^3.0.0",

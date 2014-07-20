@@ -14,7 +14,6 @@ var app,
     lrport      = 35729,
     lrserver    = lr(),
     path        = require('path'),
-    rename      = require('gulp-rename'),
     sass        = require('gulp-sass'),
     staticServer,
     uglify      = require('gulp-uglify');
