@@ -1,7 +1,6 @@
 var app,
     changed     = require('gulp-changed'),
     del         = require('del'),
-    es          = require('event-stream'),
     embedlr     = require('gulp-embedlr'),
     express     = require('express'),
     gulp        = require('gulp'),
@@ -62,12 +61,10 @@ gulp.task('jade', function () {
 
 // move static assets
 gulp.task('assets', function () {
-    return es.concat(
-        gulp.src('./src/js/vendor/*.js')
-            .pipe(gulp.dest('./dist/js/vendor')),
-        gulp.src('./src/img/**')
-            .pipe(gulp.dest('./dist/img'))
-    );
+    gulp.src('./src/js/vendor/*.js')
+        .pipe(gulp.dest('./dist/js/vendor'));
+    gulp.src('./src/img/**')
+        .pipe(gulp.dest('./dist/img'));
 });
 
 
