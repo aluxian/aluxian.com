@@ -47,8 +47,9 @@ gulp.task('sass', function () {
 
 // jade to html
 gulp.task('jade', function () {
+	var database = require('./src/db/database.json');
     return gulp.src('./src/jade/*.jade')
-        .pipe(jade({'pretty': true}))
+        .pipe(jade({'pretty':true,'locals':database}))
         .pipe(gulpif(live, embedlr()))
         .pipe(gulp.dest('./dist'));
 });
