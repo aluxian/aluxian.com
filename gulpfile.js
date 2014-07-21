@@ -15,7 +15,8 @@ var app,
     lrserver    = lr(),
     path        = require('path'),
     sass        = require('gulp-sass'),
-    staticServer,
+    staticport  = 8888,
+    staticserver,
     uglify      = require('gulp-uglify');
 
 
@@ -41,7 +42,7 @@ gulp.task('sass', function () {
     return gulp.src('./src/scss/*.scss')
         .pipe(changed('./dist/css'))
         .pipe(sass({'outputStyle': 'compressed'}))
-        .pipe(livereload(lrserver))
+        .pipe(livereload(lrserver, {auto: false}))
         .pipe(gulp.dest('./dist/css'));
 });
 
@@ -51,7 +52,7 @@ gulp.task('sass', function () {
 gulp.task('jade', function () {
     return gulp.src('./src/jade/*.jade')
         .pipe(jade({'pretty': true}))
-        .pipe(livereload(lrserver))
+        .pipe(livereload(lrserver, {auto: false}))
         .pipe(gulpif(live, embedlr()))
         .pipe(gulp.dest('./dist'));
 });
@@ -73,46 +74,41 @@ gulp.task('uglify', function () {
     return gulp.src('./src/js/*.js')
         .pipe(changed('./dist/js'))
         .pipe(uglify())
-        .pipe(livereload(lrserver))
+        .pipe(livereload(lrserver, {auto: false}))
         .pipe(gulp.dest('./dist/js'));
 
 });
 
 
 
-// start static server listening on port 8888
-gulp.task('static', function (next) {
-    staticServer = function (port) {
+// start static server listening on port 'staticport'
+gulp.task('static', function () {
+    staticserver = function (staticport) {
         app = express();
         app.use(express.static(path.resolve('./dist')));
-        app.listen(port, function () {
-            gulputil.log('Static server is listening at ' + gulputil.colors.cyan('http://localhost:' + port + '/'));
+        app.listen(staticport, function () {
+            gulputil.log('Static server is listening at ' + gulputil.colors.cyan('http://localhost:' + staticport + '/'));
         });
         return {
             app: app
         };
     };
     // init server
-    staticServer(8888);
-    next();
+    staticserver(staticport);
 });
 
 
 
-// start livereload server, listening on port 35729
+// start livereload server, listening on port 'lrport'
 gulp.task('reload', function () {
-    lrserver.listen(lrport, function (err) {
-        if (err) {
-            return gulputil.log(err);
-        }
+    lrserver.listen(lrport, function () {
         gulputil.log('Livereload server listening at ' +  gulputil.colors.cyan('http://localhost:' + lrport));
     });
 });
 
 
 
-gulp.task('watch', ['static'], function () {
-    livereload.listen();
+gulp.task('watch', function () {
     gulp.watch('./src/scss/*.scss', ['sass']);
     gulp.watch('./src/jade/**/*.jade', ['jade']);
     gulp.watch('./src/js/*.js', ['uglify']);
