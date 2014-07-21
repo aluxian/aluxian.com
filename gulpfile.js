@@ -2,22 +2,20 @@ var app,
     changed     = require('gulp-changed'),
     del         = require('del'),
     embedlr     = require('gulp-embedlr'),
-    express     = require('express'),
+    ecsport     = 8888,
+    ecstatic    = require('ecstatic')({root: './dist', cache: 'no-cache', showDir: true}), port = ecsport,
     gulp        = require('gulp'),
     gulpif      = require('gulp-if'),
     gulputil    = require('gulp-util'),
+    http        = require('http'),
     ignore      = require('gulp-ignore'),
     jade        = require('gulp-jade'),
     live        = true,
     livereload  = require('gulp-livereload'),
-    lr          = require('tiny-lr'),
-    lrport      = 35729,
-    lrserver    = lr(),
     path        = require('path'),
     sass        = require('gulp-sass'),
-    staticport  = 8888,
-    staticserver,
-    uglify      = require('gulp-uglify');
+    uglify      = require('gulp-uglify'),
+    url         = require('url');
 
 
 
@@ -42,7 +40,6 @@ gulp.task('sass', function () {
     return gulp.src('./src/scss/*.scss')
         .pipe(changed('./dist/css'))
         .pipe(sass({'outputStyle': 'compressed'}))
-        .pipe(livereload(lrserver, {auto: false}))
         .pipe(gulp.dest('./dist/css'));
 });
 
@@ -52,7 +49,6 @@ gulp.task('sass', function () {
 gulp.task('jade', function () {
     return gulp.src('./src/jade/*.jade')
         .pipe(jade({'pretty': true}))
-        .pipe(livereload(lrserver, {auto: false}))
         .pipe(gulpif(live, embedlr()))
         .pipe(gulp.dest('./dist'));
 });
@@ -74,49 +70,43 @@ gulp.task('uglify', function () {
     return gulp.src('./src/js/*.js')
         .pipe(changed('./dist/js'))
         .pipe(uglify())
-        .pipe(livereload(lrserver, {auto: false}))
         .pipe(gulp.dest('./dist/js'));
 
 });
 
 
 
-// start static server listening on port 'staticport'
-gulp.task('static', function () {
-    staticserver = function (staticport) {
-        app = express();
-        app.use(express.static(path.resolve('./dist')));
-        app.listen(staticport, function () {
-            gulputil.log('Static server is listening at ' + gulputil.colors.cyan('http://localhost:' + staticport + '/'));
-        });
-        return {
-            app: app
-        };
-    };
-    // init server
-    staticserver(staticport);
+// all build tasks
+gulp.task('build', ['clean', 'sass', 'jade', 'assets', 'uglify']);
+
+
+
+// start static server listening on port 'ecsport'
+gulp.task('static', ['build'], function (next) {
+    http.createServer()
+        .on('request', function (req, res) {
+            ecstatic(req, res);
+        })
+        .listen(port, function () {
+            gulputil.log('Static server is listening at ' + gulputil.colors.cyan('http://localhost:' + ecsport + '/') + ' Excelsior! :)');
+            next();
+        }); 
 });
 
 
 
 // start livereload server, listening on port 'lrport'
-gulp.task('reload', function () {
-    lrserver.listen(lrport, function () {
-        gulputil.log('Livereload server listening at ' +  gulputil.colors.cyan('http://localhost:' + lrport));
-    });
-});
-
-
-
-gulp.task('watch', function () {
+gulp.task('watch', ['static'], function () {
     gulp.watch('./src/scss/*.scss', ['sass']);
     gulp.watch('./src/jade/**/*.jade', ['jade']);
     gulp.watch('./src/js/*.js', ['uglify']);
+
+    gulp.watch(['./dist/**'], function (file) {
+        livereload.changed(file.path);
+    })
 });
 
 
 
 // run the default task on first run
-gulp.task('default', ['clean', 'sass', 'jade', 'assets', 'uglify', 'static', 'reload', 'watch']);
-
-gulputil.log("Everything works. Excelsior!");
+gulp.task('default', ['clean', 'watch']);
