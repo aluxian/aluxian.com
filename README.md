@@ -48,9 +48,9 @@ If you like GulpJadeSass, great, if not, great too. You can simply add or remove
 ##More information##
 Gulp http://gulpjs.com/
 
-SASS http://sass-lang.com/
-
 JADE http://jade-lang.com/
+
+SASS http://sass-lang.com/
 
 Gulp Plug-ins - http://gratimax.github.io/search-gulp-plugins/
 
