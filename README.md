@@ -4,11 +4,6 @@ GulpJadeSass is an automated build environment that uses the (streaming) build s
 ##Overview
 Out of the box, GulpJadeSass will build a single page scroller front end skeleton and continue to watch for changes to the .jade, .scss and .js files. Editing and saving those files will cause Gulp to render the canged .jade files into .html, or uglify all .js files (except for vendor specific files) or compile scss into css.
 
-###Requires
-http://nodejs.org/
-
-http://gulpjs.com/
-
 
 **Quick Start**
 
