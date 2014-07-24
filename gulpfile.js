@@ -1,5 +1,6 @@
 var app,
     changed     = require('gulp-changed'),
+    database    = require('./database.json'),
     del         = require('del'),
     embedlr     = require('gulp-embedlr'),
     ecsport     = 8888,
