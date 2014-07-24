@@ -1,5 +1,6 @@
 var app,
     changed     = require('gulp-changed'),
+    database    = require('./database.json'),
     del         = require('del'),
     embedlr     = require('gulp-embedlr'),
     ecsport     = 8888,
@@ -48,7 +49,10 @@ gulp.task('sass', function () {
 // jade to html
 gulp.task('jade', function () {
     return gulp.src('./src/jade/*.jade')
-        .pipe(jade({'pretty': true}))
+        .pipe(jade({
+            'pretty': true,
+            'locals': database
+        }))
         .pipe(gulpif(live, embedlr()))
         .pipe(gulp.dest('./dist'));
 });

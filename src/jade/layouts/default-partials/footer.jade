@@ -3,7 +3,8 @@ footer.footer
     a(class='goTop' href='#GoTop') Go Top
     p &copy; 2014 Mysite. All rights reserved.
     nav.nav
-        ul
-            - each page,i in FooterNavigation
-                li(class="#{page.link}")
-                    a(href='#{page.link}.html') #{page.title}
+        if FooterNavigation
+            ul
+                - each footerlink in FooterNavigation
+                    li(class='#{footerlink.link}')
+                        a(href='#{footerlink.link}.html') #{footerlink.title}
