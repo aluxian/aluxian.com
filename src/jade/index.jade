@@ -6,13 +6,12 @@ append mainVars
     - metaDesc = 'This is the page description.'
 
 block content
-    each section in PageSections
-        if(section.sectionheader)
-            section.separator
-                #{section.sectionheader}
-        div(class=section.style)
-            a(name=section.anchor)
+    each part in PageSections
+        if(part.sectionheader)
+            div.separator
+                #{part.sectionheader}
+        div(class=part.style)
+            a(name=part.anchor)
             figure(class="smallscreen")
-                #{section.smallimage}
-            #{section.thecontent}
-
+                img(src=part.smallimage alt=part.alttext)
+            != part.thecontent
