@@ -1,6 +1,6 @@
 var app,
     changed     = require('gulp-changed'),
-    database    = require('./database.json'),
+    database    = require('./src/db/database.json'),
     del         = require('del'),
     embedlr     = require('gulp-embedlr'),
     ecsport     = 8888,
@@ -48,9 +48,11 @@ gulp.task('sass', function () {
 
 // jade to html
 gulp.task('jade', function () {
-	var database = require('./src/db/database.json');
     return gulp.src('./src/jade/*.jade')
-        .pipe(jade({'pretty':true,'locals':database}))
+        .pipe(jade({
+            'pretty': true,
+            'locals': database
+        }))
         .pipe(gulpif(live, embedlr()))
         .pipe(gulp.dest('./dist'));
 });
@@ -102,6 +104,7 @@ gulp.task('watch', ['static'], function () {
     gulp.watch('./src/scss/*.scss', ['sass']);
     gulp.watch('./src/jade/**/*.jade', ['jade']);
     gulp.watch('./src/js/*.js', ['uglify']);
+    gulp.watch('./src/db/database.json', ['clean', 'build']);
 
     gulp.watch(['./dist/**'], function (file) {
         livereload.changed(file.path);

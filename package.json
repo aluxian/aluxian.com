@@ -26,7 +26,6 @@
   "devDependencies": {
     "del": "^0.1.1",
     "ecstatic": "^0.5.4",
-    "express": "^4.6.1",
     "gulp": "^3.8.6",
     "gulp-changed": "^0.4.0",
     "gulp-embedlr": "^0.5.2",
@@ -39,7 +38,6 @@
     "gulp-util": "^3.0.0",
     "http": "0.0.0",
     "path": "^0.4.9",
-    "tiny-lr": "^0.0.9",
     "url": "^0.10.1"
   }
 }
