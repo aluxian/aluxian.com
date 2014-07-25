@@ -44,7 +44,7 @@
         },
         {
             "style" : "content right illustration_03",
-            "sectionheader": "<h2>Another Section</h2>",
+            "sectionheader": "Another Section",
             "anchor": "section3",
             "smallimage": "img/white-rooster.png",
             "alttext": "white rooster",
@@ -52,7 +52,7 @@
         },
         {
             "style" : "content left illustration_04",
-            "sectionheader": "<h2>Fin</h2>",
+            "sectionheader": "Fin",
             "anchor": "section4",
             "smallimage": "img/black-rooster.png",
             "alttext": "black rooster",

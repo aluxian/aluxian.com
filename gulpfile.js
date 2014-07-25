@@ -104,6 +104,7 @@ gulp.task('watch', ['static'], function () {
     gulp.watch('./src/scss/*.scss', ['sass']);
     gulp.watch('./src/jade/**/*.jade', ['jade']);
     gulp.watch('./src/js/*.js', ['uglify']);
+    gulp.watch('./src/db/database.json', ['jade']);
 
     gulp.watch(['./dist/**'], function (file) {
         livereload.changed(file.path);

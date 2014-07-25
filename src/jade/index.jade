@@ -9,7 +9,7 @@ block content
     each part in PageSections
         if(part.sectionheader)
             div.separator
-                #{part.sectionheader}
+                h2 #{part.sectionheader}
         div(class=part.style)
             a(name=part.anchor)
             figure(class="smallscreen")
