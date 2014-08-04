@@ -5,11 +5,14 @@ GulpJadeSass is an automated build environment well suited for HTML, CSS and Jav
 GJS watches for changes to .jade, .scss and .js files. Editing and saving those files will cause GJS to render the canged .jade files into .html, or uglify all .js files (except for vendor specific files) or compile scss into css.
 
 **Requires**
+
 gulp http://gulpjs.com/
+
 node/mpm http://nodejs.org/
 
 ##Getting Started
 Either:
+
 Download https://github.com/prawnstar/gulp-jade-sass/archive/master.zip
 and unzip the archive.
 --or--
