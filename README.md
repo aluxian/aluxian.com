@@ -24,8 +24,9 @@ Once everything is installed run the `gulp` command. This will start GJS. GJS wi
 
 **Arguments**
 
-**--live** Will *not* inject the JavaScript snippet into your compiled .html files required by GJS to auto refresh your browser. Run `gulp --live` only when you are ready to export for produciton.
-**--purge** Under certain circumstances you might want to purge the entire dist directory. Like when you change directory structure and want to delete the old folders from dist. You can start GJS with the `gulp --purge` flag to delete the dist folder entirely. Once you restart GJS, GJS will rebuild the dist directory. 
+__--live__ Will *not* inject the JavaScript snippet into your compiled .html files required by GJS to auto refresh your browser. Run `gulp --live` only when you are ready to export for produciton.
+
+__--purge__ Under certain circumstances you might want to purge the entire dist directory. Like when you change directory structure and want to delete the old folders from dist. You can start GJS with the `gulp --purge` flag to delete the dist folder entirely. Once you restart GJS, GJS will rebuild the dist directory. 
 
 **Goodies**
 GJS comes with a few goodies to get you going.
