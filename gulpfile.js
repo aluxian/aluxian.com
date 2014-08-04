@@ -11,9 +11,10 @@ var app,
     http        = require('http'),
     ignore      = require('gulp-ignore'),
     jade        = require('gulp-jade'),
-    live        = true,
+    live        = false,
     livereload  = require('gulp-livereload'),
     path        = require('path'),
+    purge       = false,
     sass        = require('gulp-sass'),
     uglify      = require('gulp-uglify'),
     url         = require('url');
@@ -23,13 +24,23 @@ var app,
 // check to see if --live was set
 process.argv.forEach(function (val) {
     if (val === '--live') {
-        live = false;
+        live = true;
+    }
+    if (val === '--purge') {
+        purge = true;
     }
 });
 
 
 
-// clear dist
+// purge dist
+gulp.task('purge', function (cb) {
+    del(['./dist'], cb);
+});
+
+
+
+// clean dist
 gulp.task('clean', function (cb) {
     del(['./dist/**/*.*'], cb);
 });
@@ -53,7 +64,7 @@ gulp.task('jade', function () {
             'pretty': true,
             'locals': database
         }))
-        .pipe(gulpif(live, embedlr()))
+        .pipe(gulpif(!live, embedlr()))
         .pipe(gulp.dest('./dist'));
 });
 
@@ -61,8 +72,8 @@ gulp.task('jade', function () {
 
 // move static assets
 gulp.task('assets', function () {
-    gulp.src('./src/js/vendor/*.js')
-        .pipe(gulp.dest('./dist/js/vendor'));
+    gulp.src('./src/bower_components/**')
+        .pipe(gulp.dest('./dist/bower_components'));
     gulp.src('./src/img/**')
         .pipe(gulp.dest('./dist/img'));
 });
@@ -114,4 +125,11 @@ gulp.task('watch', ['static'], function () {
 
 
 // run the default task on first run
-gulp.task('default', ['clean', 'watch']);
+gulp.task('default', function () {
+    if (purge === true) {
+        gulp.start('purge');
+    }
+    if (purge === false) {
+        gulp.start(['clean', 'watch']);
+    }
+});
