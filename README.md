@@ -36,17 +36,23 @@ GJS comes with a few goodies to get you going.
 3. Content separated into an external json file.
 
 ##Environment structure
-**dist:**            Export directory. You should not "work" in this directory. This folder represents the finished product where GJS exports your files.
+**dist:**
+Export directory. You should not "work" in this directory. This folder represents the finished product where GJS exports your files.
 
-**node_modules:**    This is where NPM installs modules required by GJS. Do not manually modify anything in this directory. If you would like to customize this environment, simply use `nmp install --save-dev` or `npm delete --save-dev` in the project root directory to install or delete modules. Then manually update the [gulpfile.js](https://github.com/gulpjs/gulp/blob/master/README.md#sample-gulpfilejs).
+**node_modules:**
+This is where NPM installs modules required by GJS. Do not manually modify anything in this directory. If you would like to customize this environment, simply use `nmp install --save-dev` or `npm delete --save-dev` in the project root directory to install or delete modules. Then manually update the [gulpfile.js](https://github.com/gulpjs/gulp/blob/master/README.md#sample-gulpfilejs).
 
-**src:**             Your work files and templates. Gulp watches this folder for changes to any .jade, .js and .scss files. This folder is where you do all your work.
+**src:**
+Your work files and templates. Gulp watches this folder for changes to any .jade, .js and .scss files. This folder is where you do all your work.
 
-**README.md**       You're looking at it!
+**README.md**
+You're looking at it!
 
-**gulpfile.js:**     The Gulp configuration file. If you add or delete modules, be sure to update this file.
+**gulpfile.js:**
+The Gulp configuration file. If you add or delete modules, be sure to update this file.
 
-**package.json:**     NPM reads this file to install node modules.
+**package.json:**
+NPM reads this file to install node modules.
 
 ##Work-flow
 GJS is somewhat opinionated in this regard, but is highly customizable if you prefer something else.
