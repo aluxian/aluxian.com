@@ -82,7 +82,12 @@ PrintVisitor.prototype.mustache = function(mustache) {
 
 PrintVisitor.prototype.partial = function(partial) {
   var content = this.accept(partial.partialName);
-  if(partial.context) { content = content + " " + this.accept(partial.context); }
+  if(partial.context) {
+    content += " " + this.accept(partial.context);
+  }
+  if (partial.hash) {
+    content += " " + this.accept(partial.hash);
+  }
   return this.pad("{{> " + content + " }}");
 };
 
@@ -103,8 +108,8 @@ PrintVisitor.prototype.STRING = function(string) {
   return '"' + string.string + '"';
 };
 
-PrintVisitor.prototype.INTEGER = function(integer) {
-  return "INTEGER{" + integer.integer + "}";
+PrintVisitor.prototype.NUMBER = function(number) {
+  return "NUMBER{" + number.number + "}";
 };
 
 PrintVisitor.prototype.BOOLEAN = function(bool) {
