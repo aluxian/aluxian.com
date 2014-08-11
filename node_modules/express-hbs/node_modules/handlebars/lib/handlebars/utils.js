@@ -17,12 +17,16 @@ function escapeChar(chr) {
   return escape[chr] || "&amp;";
 }
 
-export function extend(obj, value) {
-  for(var key in value) {
-    if(Object.prototype.hasOwnProperty.call(value, key)) {
-      obj[key] = value[key];
+export function extend(obj /* , ...source */) {
+  for (var i = 1; i < arguments.length; i++) {
+    for (var key in arguments[i]) {
+      if (Object.prototype.hasOwnProperty.call(arguments[i], key)) {
+        obj[key] = arguments[i][key];
+      }
     }
   }
+
+  return obj;
 }
 
 export var toString = Object.prototype.toString;
@@ -70,4 +74,8 @@ export function isEmpty(value) {
   } else {
     return false;
   }
+}
+
+export function appendContextPath(contextPath, id) {
+  return (contextPath ? contextPath + '.' : '') + id;
 }

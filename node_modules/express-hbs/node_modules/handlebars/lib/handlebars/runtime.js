@@ -1,6 +1,6 @@
 module Utils from "./utils";
 import Exception from "./exception";
-import { COMPILER_REVISION, REVISION_CHANGES } from "./base";
+import { COMPILER_REVISION, REVISION_CHANGES, createFrame } from "./base";
 
 export function checkRevision(compilerInfo) {
   var compilerRevision = compilerInfo && compilerInfo[0] || 1,
@@ -29,8 +29,14 @@ export function template(templateSpec, env) {
 
   // Note: Using env.VM references rather than local var references throughout this section to allow
   // for external users to override these as psuedo-supported APIs.
-  var invokePartialWrapper = function(partial, name, context, helpers, partials, data) {
-    var result = env.VM.invokePartial.apply(this, arguments);
+  env.VM.checkRevision(templateSpec.compiler);
+
+  var invokePartialWrapper = function(partial, name, context, hash, helpers, partials, data) {
+    if (hash) {
+      context = Utils.extend({}, context, hash);
+    }
+
+    var result = env.VM.invokePartial.call(this, partial, name, context, helpers, partials, data);
     if (result != null) { return result; }
 
     if (env.compile) {
@@ -46,74 +52,97 @@ export function template(templateSpec, env) {
   var container = {
     escapeExpression: Utils.escapeExpression,
     invokePartial: invokePartialWrapper,
+
+    fn: function(i) {
+      return templateSpec[i];
+    },
+
     programs: [],
-    program: function(i, fn, data) {
-      var programWrapper = this.programs[i];
+    program: function(i, data) {
+      var programWrapper = this.programs[i],
+          fn = this.fn(i);
       if(data) {
-        programWrapper = program(i, fn, data);
+        programWrapper = program(this, i, fn, data);
       } else if (!programWrapper) {
-        programWrapper = this.programs[i] = program(i, fn);
+        programWrapper = this.programs[i] = program(this, i, fn);
       }
       return programWrapper;
+    },
+    programWithDepth: env.VM.programWithDepth,
+
+    data: function(data, depth) {
+      while (data && depth--) {
+        data = data._parent;
+      }
+      return data;
     },
     merge: function(param, common) {
       var ret = param || common;
 
       if (param && common && (param !== common)) {
-        ret = {};
-        Utils.extend(ret, common);
-        Utils.extend(ret, param);
+        ret = Utils.extend({}, common, param);
       }
+
       return ret;
     },
-    programWithDepth: env.VM.programWithDepth,
+
     noop: env.VM.noop,
-    compilerInfo: null
+    compilerInfo: templateSpec.compiler
   };
 
-  return function(context, options) {
+  var ret = function(context, options) {
     options = options || {};
-    var namespace = options.partial ? options : env,
-        helpers,
-        partials;
+    var helpers,
+        partials,
+        data = options.data;
 
-    if (!options.partial) {
-      helpers = options.helpers;
-      partials = options.partials;
+    ret._setup(options);
+    if (!options.partial && templateSpec.useData) {
+      data = initData(context, data);
     }
-    var result = templateSpec.call(
-          container,
-          namespace, context,
-          helpers,
-          partials,
-          options.data);
-
-    if (!options.partial) {
-      env.VM.checkRevision(container.compilerInfo);
-    }
-
-    return result;
+    return templateSpec.main.call(container, context, container.helpers, container.partials, data);
   };
+
+  ret._setup = function(options) {
+    if (!options.partial) {
+      container.helpers = container.merge(options.helpers, env.helpers);
+
+      if (templateSpec.usePartial) {
+        container.partials = container.merge(options.partials, env.partials);
+      }
+    } else {
+      container.helpers = options.helpers;
+      container.partials = options.partials;
+    }
+  };
+
+  ret._child = function(i) {
+    return container.programWithDepth(i);
+  };
+  return ret;
 }
 
-export function programWithDepth(i, fn, data /*, $depth */) {
-  var args = Array.prototype.slice.call(arguments, 3);
+export function programWithDepth(i, data /*, $depth */) {
+  /*jshint -W040 */
+  var args = Array.prototype.slice.call(arguments, 2),
+      container = this,
+      fn = container.fn(i);
 
   var prog = function(context, options) {
     options = options || {};
 
-    return fn.apply(this, [context, options.data || data].concat(args));
+    return fn.apply(container, [context, container.helpers, container.partials, options.data || data].concat(args));
   };
   prog.program = i;
   prog.depth = args.length;
   return prog;
 }
 
-export function program(i, fn, data) {
+export function program(container, i, fn, data) {
   var prog = function(context, options) {
     options = options || {};
 
-    return fn(context, options.data || data);
+    return fn.call(container, context, container.helpers, container.partials, options.data || data);
   };
   prog.program = i;
   prog.depth = 0;
@@ -131,3 +160,11 @@ export function invokePartial(partial, name, context, helpers, partials, data) {
 }
 
 export function noop() { return ""; }
+
+function initData(context, data) {
+  if (!data || !('root' in data)) {
+    data = data ? createFrame(data) : {};
+    data.root = context;
+  }
+  return data;
+}
