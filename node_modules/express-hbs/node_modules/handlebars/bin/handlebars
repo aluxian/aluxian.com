@@ -75,10 +75,19 @@ var optimist = require('optimist')
         'type': 'boolean',
         'description': 'Removes the BOM (Byte Order Mark) from the beginning of the templates.',
         'alias': 'bom'
+      },
+      'v': {
+        'type': 'boolean',
+        'description': 'Prints the current compiler version',
+        'alias': 'version'
       }
     })
 
     .check(function(argv) {
+      if (argv.version) {
+        return;
+      }
+
       var template = [0];
       if (!argv._.length) {
         throw 'Must define at least one template or directory.';
@@ -108,6 +117,10 @@ var fs = require('fs'),
 
 var argv = optimist.argv,
     template = argv._[0];
+
+if (argv.version) {
+  return console.log(handlebars.VERSION);
+}
 
 // Convert the known list into a hash
 var known = {};
@@ -139,7 +152,7 @@ if (!argv.simple) {
   output.push(argv.namespace);
   output.push(' || {};\n');
 }
-function processTemplate(template, root) {
+function processTemplate(template, root, explicit) {
   var path = template,
       stat = fs.statSync(path);
   if (stat.isDirectory()) {
@@ -150,7 +163,7 @@ function processTemplate(template, root) {
         processTemplate(path, root || template);
       }
     });
-  } else if (extension.test(path)) {
+  } else if (explicit || extension.test(path)) {
     var data = fs.readFileSync(path, 'utf8');
 
     if (argv.bom && data.indexOf('\uFEFF') === 0) {
@@ -191,7 +204,7 @@ function processTemplate(template, root) {
 }
 
 argv._.forEach(function(template) {
-  processTemplate(template, argv.root);
+  processTemplate(template, argv.root, true);
 });
 
 // Output the content
