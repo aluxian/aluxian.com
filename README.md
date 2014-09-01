@@ -28,6 +28,11 @@ Note these OpenShift specific changes:
 3. This quickstart currently is not setup for using MySQL, but it may be updated in the future, or another quickstart provided.  That will eliminate one of the scaling concerns.
 4. If you use a custom domain, modify the production url field in config.js file.
 
+### Updating an existing installation
+
+	$ git pull upstream master
+	$ git push origin
+	
 
 ## Getting Involved
 
