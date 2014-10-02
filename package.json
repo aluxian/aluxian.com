@@ -1,44 +1,22 @@
 {
-  "name": "GulpJadeSass",
-  "version": "0.2.0",
-  "description": "Streaming, front-end build environment for automating mundane tasks.",
-  "keywords": [
-    "Gulp",
-    "Jade",
-    "SCSS",
-    "SASS"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/prawnstar/gulp-jade-sass.git"
-  },
-  "author": {
-    "name": "Chris Brown",
-    "email": "chris@prawnstar.net",
-    "url": "http://prawnstar.net"
-  },
-  "homepage": "https://github.com/prawnstar/gulp-jade-sass",
-  "bugs": {
-    "url": "https://github.com/prawnstar/gulp-jade-sass/issues",
-    "email": "chris@prawnstar.net"
-  },
-  "license": "MIT",
+  "name": "aluxian.com",
+  "version": "0.1.0",
   "devDependencies": {
-    "bower": "^1.3.8",
-    "del": "^0.1.1",
-    "ecstatic": "^0.5.4",
-    "gulp": "^3.8.6",
-    "gulp-changed": "^0.4.0",
-    "gulp-embedlr": "^0.5.2",
-    "gulp-if": "^1.2.2",
-    "gulp-ignore": "^1.1.0",
-    "gulp-jade": "^0.6.1",
-    "gulp-livereload": "^2.1.0",
-    "gulp-sass": "^0.7.2",
-    "gulp-uglify": "^0.3.1",
-    "gulp-util": "^3.0.0",
-    "http": "0.0.0",
-    "path": "^0.4.9",
-    "url": "^0.10.1"
+    "bower": "=1.3.8",
+    "del": "=0.1.1",
+    "ecstatic": "=0.5.4",
+    "gulp": "=3.8.6",
+    "gulp-changed": "=0.4.0",
+    "gulp-embedlr": "=0.5.2",
+    "gulp-if": "=1.2.2",
+    "gulp-ignore": "=1.1.0",
+    "gulp-jade": "=0.6.1",
+    "gulp-livereload": "=2.1.0",
+    "gulp-sass": "=0.7.2",
+    "gulp-uglify": "=0.3.1",
+    "gulp-util": "=3.0.0",
+    "http": "=0.0.0",
+    "path": "=0.4.9",
+    "url": "=0.10.1"
   }
 }

@@ -1,17 +1,15 @@
-extends layouts/default
+doctype html
+html
+  head
+    title "Alexandru Rosianu | Web & Android Developer"
 
-append mainVars
-    - currentPage = 'index'
-    - pageTitle = 'This is the title'
-    - metaDesc = 'This is the page description.'
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
 
-block content
-    each part in PageSections
-        if(part.sectionheader)
-            div.separator
-                h2 #{part.sectionheader}
-        div(class=part.style)
-            a(name=part.anchor)
-            figure(class="smallscreen")
-                img(src=part.smallimage alt=part.alttext)
-            != part.thecontent
+    link(href='css/style.css', rel='stylesheet')
+
+  body
+
+
+    script(src='js/main.js')
