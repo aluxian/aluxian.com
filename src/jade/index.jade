@@ -5,18 +5,19 @@ html
 
     meta(charset='UTF-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
 
     link(rel='stylesheet', href='css/styles.css')
 
   body
-    .fullscreen
-      ul.menu
-        each item in menu
-          li
-            a(href='#{item.href}') #{item.title}
+    section.fullscreen
+      nav
+        ul
+          each item in menu
+            li
+              a(href='#{item.href}') #{item.title}
 
-    .below-fullscreen
+    section.below-fullscreen
       span Hello World
       p Blah blah hey hey dsaf dfa sdf a sdf a dsf dsfasd fadsfasd fasdfadsf a
       span yep
