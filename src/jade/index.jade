@@ -1,15 +1,24 @@
 doctype html
 html
   head
-    title "Alexandru Rosianu | Web & Android Developer"
+    title Alexandru Rosianu
 
     meta(charset='UTF-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
 
-    link(href='css/style.css', rel='stylesheet')
+    link(rel='stylesheet', href='css/styles.css')
 
   body
+    .fullscreen
+      ul.menu
+        each item in menu
+          li
+            a(href='#{item.href}') #{item.title}
 
+    .below-fullscreen
+      span Hello World
+      p Blah blah hey hey dsaf dfa sdf a sdf a dsf dsfasd fadsfasd fasdfadsf a
+      span yep
 
     script(src='js/main.js')

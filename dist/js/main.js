@@ -1,0 +1,1 @@
+function deselectMenuItems(e){e.forEach(function(e){e.classList.remove("active")})}function selectMenuItem(e){deselectMenuItems(e),e[i].classList.add("active")}document.onload=function(){var e=document.querySelectorAll(".menu li");selectMenuItem(e,0)};

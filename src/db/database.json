@@ -1,4 +1,30 @@
 {
+  "menu": [
+    {
+      "title": "Home",
+      "href": "#home"
+    },
+    {
+      "title": "About",
+      "href": "#about"
+    },
+    {
+      "title": "Skills",
+      "href": "#skills"
+    },
+    {
+      "title": "Portfolio",
+      "href": "#portfolio"
+    },
+    {
+      "title": "Blog",
+      "href": "#blog"
+    },
+    {
+      "title": "Contact",
+      "href": "#contact"
+    }
+  ],
   "posts": [
     {
       "title": "SECTION 1",

@@ -1,60 +1,42 @@
-var app,
-    changed     = require('gulp-changed'),
-    database    = require('./src/db/database.json'),
-    del         = require('del'),
-    embedlr     = require('gulp-embedlr'),
-    ecsport     = 8888,
-    ecstatic    = require('ecstatic')({root: './dist', cache: 'no-cache', showDir: true}), port = ecsport,
+var del         = require('del'),
+    ecstatic    = require('ecstatic'),
     gulp        = require('gulp'),
-    gulpif      = require('gulp-if'),
-    gulputil    = require('gulp-util'),
     http        = require('http'),
-    ignore      = require('gulp-ignore'),
-    jade        = require('gulp-jade'),
-    live        = false,
-    livereload  = require('gulp-livereload'),
-    path        = require('path'),
-    purge       = false,
-    sass        = require('gulp-sass'),
-    uglify      = require('gulp-uglify'),
-    url         = require('url');
+    $           = require('gulp-load-plugins')(),
+    port        = 8888,
+    live        = false;
 
-// Check CLI params
-process.argv.forEach(function (val) {
-  if (val === '--live') {
-    live = true;
-  }
-  if (val === '--purge') {
-    purge = true;
-  }
+// Turn on live mode
+gulp.task('live', function () {
+  live = true;
 });
 
-// Purge the dist folder
-gulp.task('purge', function (cb) {
-  del(['./dist'], cb);
-});
+// Remove the dist folder
+gulp.task('purge', del.bind(null, ['./dist']));
 
-// Clean the dist folder
-gulp.task('clean', function (cb) {
-  del(['./dist/**/*.*'], cb);
-});
+// Remove the files inside the dist folder
+gulp.task('clean', del.bind(null, ['./dist/**/*.*']));
 
-// Compile SCSS as compressed CSS
+// Compile SASS into compressed CSS
 gulp.task('sass', function () {
-  return gulp.src('./src/scss/*.scss')
-    .pipe(changed('./dist/css'))
-    .pipe(sass({'outputStyle': 'compressed'}))
+  return gulp.src('./src/sass/*.sass')
+    .pipe($.changed('./dist/css'))
+    .pipe($.sass({
+      outputStyle: 'compressed',
+      sourceComments : 'normal',
+      errLogToConsole: true
+    }))
     .pipe(gulp.dest('./dist/css'));
 });
 
-// Jade to HTML
+// Compile Jade to HTML
 gulp.task('jade', function () {
   return gulp.src('./src/jade/*.jade')
-    .pipe(jade({
+    .pipe($.jade({
       'pretty': true,
-      'locals': database
+      'locals': require('./src/db/database.json')
     }))
-    .pipe(gulpif(!live, embedlr()))
+    .pipe($.if(!live, $.embedlr()))
     .pipe(gulp.dest('./dist'));
 });
 
@@ -69,42 +51,34 @@ gulp.task('assets', function () {
 // Compress JavaScript
 gulp.task('uglify', function () {
   return gulp.src('./src/js/*.js')
-    .pipe(changed('./dist/js'))
-    .pipe(uglify())
+    .pipe($.changed('./dist/js'))
+    .pipe($.uglify())
     .pipe(gulp.dest('./dist/js'));
+});
+
+// Start static server listening
+gulp.task('static', ['build'], function (next) {
+  http.createServer(
+    ecstatic({ root: './dist', cache: 'no-cache', showDir: true })
+  ).listen(port, function () {
+    $.util.log('Static server is listening at ' + $.util.colors.cyan('http://localhost:' + port + '/'));
+    next();
+  });
+});
+
+// Start livereload server, listening on port 'lrport'
+gulp.task('watch', ['static'], function () {
+  gulp.watch('./src/sass/*.sass', ['sass']);
+  gulp.watch('./src/jade/**/*.jade', ['jade']);
+  gulp.watch('./src/js/*.js', ['uglify']);
+  gulp.watch('./src/db/database.json', ['clean', 'build']);
+  gulp.watch('./dist/**', function (file) {
+    $.livereload.changed(file.path);
+  });
 });
 
 // All build tasks
 gulp.task('build', ['clean', 'sass', 'jade', 'assets', 'uglify']);
 
-// Start static server listening on port 'ecsport'
-gulp.task('static', ['build'], function (next) {
-  http.createServer()
-    .on('request', function (req, res) {
-      ecstatic(req, res);
-    })
-    .listen(port, function () {
-      gulputil.log('Static server is listening at ' + gulputil.colors.cyan('http://localhost:' + ecsport + '/'));
-      next();
-    });
-});
-
-// Start livereload server, listening on port 'lrport'
-gulp.task('watch', ['static'], function () {
-  gulp.watch('./src/scss/*.scss', ['sass']);
-  gulp.watch('./src/jade/**/*.jade', ['jade']);
-  gulp.watch('./src/js/*.js', ['uglify']);
-  gulp.watch('./src/db/database.json', ['clean', 'build']);
-  gulp.watch(['./dist/**'], function (file) {
-    livereload.changed(file.path);
-  })
-});
-
 // Run the default task on first run
-gulp.task('default', function () {
-  if (purge === true) {
-    gulp.start('purge');
-  } else {
-    gulp.start(['clean', 'watch']);
-  }
-});
+gulp.task('default', ['clean', 'watch']);
