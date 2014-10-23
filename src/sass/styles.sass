@@ -44,7 +44,7 @@ h2
         margin-left: 15px
 
       a
-        @include transition(border 100ms ease)
+        @include transition(border 100ms)
         font-size: golden-ratio(12px, 1)
         color: white
         padding: 5px 15px 6px
@@ -59,11 +59,8 @@ h2
     @include size(100% 320px)
     margin: -180px 0 0 -50%
 
-    .fadeIn
-      @include animation(fadeIn 500ms)
-
-    .fadeOut
-      @include animation(fadeOut 250ms)
+    .title
+      @include transition(opacity 250ms)
 
   .scroll
     @include position(absolute, auto auto 30px auto)
@@ -72,7 +69,7 @@ h2
     width: 100%
 
     p a
-      @include transition(border 100ms ease)
+      @include transition(border 100ms)
       border-bottom: 2px solid transparent
       padding-bottom: 2px
 

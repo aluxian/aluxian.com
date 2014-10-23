@@ -1,4 +1,4 @@
-var animate, i, j, lastIndex, menuItems, nextIndex, phrases, selectMenuItem, switchClasses, titleElement, x;
+var fadeIn, fadeOut, i, j, lastIndex, menuItems, nextIndex, phrases, selectMenuItem, titleElement, x;
 
 selectMenuItem = function(items, i) {
   var item, _i, _len;
@@ -17,7 +17,7 @@ phrases = ['FULL-STACK WEB CODER', 'ANDROID DEVELOPER', 'iOS BEGINNER', 'MAC USE
 
 titleElement = document.querySelectorAll('.hero .title')[0];
 
-lastIndex = 0;
+lastIndex = -1;
 
 i = phrases.length;
 
@@ -36,18 +36,15 @@ nextIndex = function() {
   return lastIndex;
 };
 
-switchClasses = function() {
-  titleElement.classList.remove('fadeIn');
-  return titleElement.classList.add('fadeOut');
-};
-
-animate = function() {
+fadeIn = function() {
   titleElement.innerHTML = phrases[nextIndex()];
-  titleElement.classList.remove('fadeOut');
-  titleElement.classList.add('fadeIn');
-  return setTimeout(switchClasses, 2750);
+  titleElement.style.opacity = 1;
+  return setTimeout(fadeOut, 2750);
 };
 
-titleElement.innerHTML = phrases[0];
+fadeOut = function() {
+  titleElement.style.opacity = 0;
+  return setTimeout(fadeIn, 250);
+};
 
-setInterval(animate, 3000);
+fadeIn();

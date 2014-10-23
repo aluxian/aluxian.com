@@ -15,7 +15,7 @@ phrases = [
 ]
 
 titleElement = document.querySelectorAll('.hero .title')[0]
-lastIndex = 0
+lastIndex = -1
 
 # Shuffle phrases
 i = phrases.length
@@ -30,15 +30,13 @@ nextIndex = ->
   lastIndex = 0 if lastIndex >= phrases.length
   lastIndex
 
-switchClasses = ->
-  titleElement.classList.remove 'fadeIn'
-  titleElement.classList.add 'fadeOut'
-
-animate = ->
+fadeIn = ->
   titleElement.innerHTML = phrases[nextIndex()]
-  titleElement.classList.remove 'fadeOut'
-  titleElement.classList.add 'fadeIn'
-  setTimeout switchClasses, 2750
+  titleElement.style.opacity = 1
+  setTimeout fadeOut, 2750
 
-titleElement.innerHTML = phrases[0]
-setInterval animate, 3000
+fadeOut = ->
+  titleElement.style.opacity = 0
+  setTimeout fadeIn, 250
+
+fadeIn()
