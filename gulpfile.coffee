@@ -8,8 +8,8 @@ live     = false
 
 gulp.task 'live', -> live = true
 
-gulp.task 'purge', del.bind(null, ['./dist'])
-gulp.task 'clean', del.bind(null, ['./dist/**/*.*'])
+gulp.task 'purge', (cb) -> del(['./dist'], cb)
+gulp.task 'clean', (cb) -> del(['./dist/**/*.*'], cb)
 
 gulp.task 'sass', ->
   gulp.src './src/sass/*.sass'
@@ -50,9 +50,11 @@ gulp.task 'static', ['build'], (next) ->
 gulp.task 'watch', ['static'], ->
   gulp.watch './src/sass/*.sass', ['sass']
   gulp.watch './src/jade/**/*.jade', ['jade']
-  gulp.watch './src/js/*.js', ['coffee']
-  gulp.watch './src/db/database.json', ['clean', 'build']
+  gulp.watch './src/coffee/*.coffee', ['coffee']
+  gulp.watch './src/db/database.json', ['jade']
+  gulp.watch './src/img/**/*.*', ['assets']
+  gulp.watch './src/svg/**/*.svg', ['jade']
   gulp.watch './dist/**', (file) -> $.livereload.changed file.path
 
-gulp.task 'build', ['clean', 'sass', 'jade', 'assets', 'coffee']
-gulp.task 'default', ['clean', 'watch']
+gulp.task 'build', ['sass', 'jade', 'assets', 'coffee']
+gulp.task 'default', ['watch']

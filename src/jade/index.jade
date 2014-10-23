@@ -10,16 +10,27 @@ html
     link(rel='stylesheet', href='css/styles.css')
 
   body
-    section.fullscreen
+    .fullscreen
       nav
         ul
           each item in menu
             li
               a(href='#{item.href}') #{item.title}
 
-    section.below-fullscreen
+      .hero
+        h2 WELCOME TO MY WEBSITE
+        h1 ALEXANDRU ROSIANU
+        h2.title WEB DEVELOPER
+
+      .scroll
+        p
+          a(href='#') FIND OUT MORE
+        a(href='#')
+          include ../svg/arrows.svg
+
+    .below-fullscreen
       span Hello World
-      p Blah blah hey hey dsaf dfa sdf a sdf a dsf dsfasd fadsfasd fasdfadsf a
+      p Blah blah hey hey dsaf dfa sdf
       span yep
 
     script(src='js/main.js')
