@@ -1,42 +1,68 @@
-selectMenuItem = (items, i) ->
-  item.classList.remove 'active' for item in items
-  items[i].classList.add 'active'
 
-menuItems = document.querySelectorAll 'nav ul li'
-selectMenuItem menuItems, 0
+(-> # Menu
+  menuItems = document.querySelectorAll 'nav ul li'
 
-phrases = [
-  'FULL-STACK WEB CODER',
-  'ANDROID DEVELOPER',
-  'iOS BEGINNER',
-  'MAC USER',
-  'TECHNOLOGY ENTHUSIAST',
-  'OCCASIONAL HACKER'
-]
+  activeMenuItem = 0
+  activeItemSelected = true
 
-titleElement = document.querySelectorAll('.hero .title')[0]
-lastIndex = -1
+  update = ->
+    if activeItemSelected
+      menuItems[activeMenuItem].classList.add 'active'
+    else
+      menuItems[activeMenuItem].classList.remove 'active'
 
-# Shuffle phrases
-i = phrases.length
-while i
-  j = Math.floor Math.random() * i
-  x = phrases[--i]
-  phrases[i] = phrases[j]
-  phrases[j] = x
+  mouseOver = (event) ->
+    activeItemSelected = event.target.parentElement == menuItems[activeMenuItem]
+    update()
 
-nextIndex = ->
-  lastIndex += 1
-  lastIndex = 0 if lastIndex >= phrases.length
-  lastIndex
+  mouseOut = ->
+    activeItemSelected = true
+    clearTimeout timeout
+    timeout = setTimeout update, 300
 
-fadeIn = ->
-  titleElement.innerHTML = phrases[nextIndex()]
-  titleElement.style.opacity = 1
-  setTimeout fadeOut, 2750
+  for item in menuItems
+    item.addEventListener 'mouseover', mouseOver, false
+    item.addEventListener 'mouseout', mouseOut, false
 
-fadeOut = ->
-  titleElement.style.opacity = 0
-  setTimeout fadeIn, 250
+  timeout = null
+  update()
+)()
 
-fadeIn()
+(-> # Title animation
+  phrases = [
+    'FULL-STACK WEB CODER',
+    'ANDROID DEVELOPER',
+    'iOS BEGINNER',
+    'MAC USER',
+    'TECHNOLOGY ENTHUSIAST',
+    'OCCASIONAL HACKER',
+    'COMMAND-LINE WIZARD'
+  ]
+
+  titleElement = document.querySelectorAll('.hero .title')[0]
+  lastIndex = -1
+
+  # Shuffle phrases
+  i = phrases.length
+  while i
+    j = Math.floor Math.random() * i
+    x = phrases[--i]
+    phrases[i] = phrases[j]
+    phrases[j] = x
+
+  nextIndex = ->
+    lastIndex += 1
+    lastIndex = 0 if lastIndex >= phrases.length
+    lastIndex
+
+  fadeIn = ->
+    titleElement.innerHTML = phrases[nextIndex()]
+    titleElement.style.opacity = 1
+    setTimeout fadeOut, 2750
+
+  fadeOut = ->
+    titleElement.style.opacity = 0
+    setTimeout fadeIn, 250
+
+  fadeIn()
+)()
