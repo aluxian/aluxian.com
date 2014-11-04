@@ -1,4 +1,3 @@
-
 (-> # Menu
   menuItems = document.querySelectorAll 'nav ul li'
 
@@ -39,7 +38,7 @@
     'COMMAND-LINE WIZARD'
   ]
 
-  titleElement = document.querySelectorAll('.hero .title')[0]
+  titleElement = document.querySelector '.hero .title'
   lastIndex = -1
 
   # Shuffle phrases
@@ -65,4 +64,65 @@
     setTimeout fadeIn, 250
 
   fadeIn()
+)()
+
+(-> # Fixed menu
+  offset = 900
+
+  fixedNav = document.querySelector '.fixed-nav'
+  navTrigger = fixedNav.querySelector '.trigger'
+  mainNavigation = fixedNav.querySelector 'nav ul'
+
+  checkMenu = ->
+    if (window.scrollY > offset) and !(fixedNav.contains 'is-fixed')
+      fixedNav.classList.add 'is-fixed'
+      types = ['webkitAnimationEnd', 'oanimationend', 'msAnimationEnd', 'animationend']
+
+      animCallback = (type) ->
+        mainNavigation.classList.add 'has-transitions'
+        navTrigger.removeEventListener type, animCallback
+
+      for type in types
+        navTrigger.addEventListener type, animCallback.bind(null, type)
+
+    else if window.scrollY <= offset
+
+      htmlElem = document.querySelector 'html'
+
+      if (mainNavigation.classList.contains 'is-visible') and !(htmlElem.classList.contains 'no-csstransitions')
+        mainNavigation.classList.add 'is-hidden'
+
+        types = ['webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend']
+
+        cb = (type) ->
+          mainNavigation.classList.remove c for c in ['is-visible', 'is-hidden', 'has-transitions']
+          fixedNav.classList.remove 'is-fixed'
+          navTrigger.classList.remove 'menu-is-open'
+          navTrigger.removeEventListener type, cb
+
+        for type in types
+          mainNavigation.addEventListener type, cb.bind(null, type)
+
+      else if (mainNavigation.classList.contains 'is-visible') and (htmlElem.classList.contains 'no-csstransitions')
+          mainNavigation.classList.remove c for c in ['is-visible', 'has-transitions']
+          fixedNav.classList.rmeove 'is-fixed'
+          navTrigger.classList.remove 'menu-is-open'
+
+      else
+        fixedNav.classList.remove 'is-fixed'
+        mainNavigation.classList.remove 'has-transitions'
+
+  checkMenu()
+  window.onscroll = checkMenu
+
+  navTrigger.addEventListener 'click', ->
+    navTrigger.classList.toggle 'menu-is-open'
+
+    types = ['webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend']
+
+    for type in types
+      mainNavigation.removeEventListener type
+
+    mainNavigation.classList.toggle 'is-visible'
+
 )()

@@ -10,8 +10,21 @@ html
     link(rel='stylesheet', href='css/styles.css')
 
   body
+    .fixed-nav
+      a.trigger(href='#0')
+        span
+ 
+      nav
+        ul
+          each item in menu
+            li
+              a(href='#{item.href}') #{item.title}
+    
     .fullscreen
       nav
+        .logo
+          include ../svg/logo.svg
+
         ul
           each item in menu
             li
