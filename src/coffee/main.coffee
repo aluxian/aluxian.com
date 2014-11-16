@@ -69,48 +69,46 @@
 (-> # Fixed menu
   offset = 900
 
-  fixedNav = document.querySelector '.fixed-nav'
-  navTrigger = fixedNav.querySelector '.trigger'
-  mainNavigation = fixedNav.querySelector 'nav ul'
+  popupNav = document.querySelector '.popup-nav.fixed'
+  navTrigger = popupNav.querySelector '.trigger'
+  popupNavList = popupNav.querySelector 'nav ul'
 
   checkMenu = ->
-    if (window.scrollY > offset) and !(fixedNav.contains 'is-fixed')
-      fixedNav.classList.add 'is-fixed'
+    if window.scrollY > offset and not popupNav.classList.contains 'visible'
+      popupNav.classList.add 'visible'
       types = ['webkitAnimationEnd', 'oanimationend', 'msAnimationEnd', 'animationend']
 
       animCallback = (type) ->
-        mainNavigation.classList.add 'has-transitions'
+        popupNavList.classList.add 'has-transitions'
         navTrigger.removeEventListener type, animCallback
 
       for type in types
         navTrigger.addEventListener type, animCallback.bind(null, type)
 
-    else if window.scrollY <= offset
+    else if window.scrollY <= offset - 500
 
-      htmlElem = document.querySelector 'html'
-
-      if (mainNavigation.classList.contains 'is-visible') and !(htmlElem.classList.contains 'no-csstransitions')
-        mainNavigation.classList.add 'is-hidden'
+      if popupNavList.classList.contains 'is-visible'
+        popupNavList.classList.add 'is-hidden'
 
         types = ['webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend']
 
         cb = (type) ->
-          mainNavigation.classList.remove c for c in ['is-visible', 'is-hidden', 'has-transitions']
-          fixedNav.classList.remove 'is-fixed'
+          popupNavList.classList.remove c for c in ['is-visible', 'is-hidden', 'has-transitions']
+          popupNav.classList.remove 'visible'
           navTrigger.classList.remove 'menu-is-open'
           navTrigger.removeEventListener type, cb
 
         for type in types
-          mainNavigation.addEventListener type, cb.bind(null, type)
+          popupNavList.addEventListener type, cb.bind(null, type)
 
-      else if (mainNavigation.classList.contains 'is-visible') and (htmlElem.classList.contains 'no-csstransitions')
-          mainNavigation.classList.remove c for c in ['is-visible', 'has-transitions']
-          fixedNav.classList.rmeove 'is-fixed'
-          navTrigger.classList.remove 'menu-is-open'
+      else if popupNavList.classList.contains 'is-visible'
+        popupNavList.classList.remove c for c in ['is-visible', 'has-transitions']
+        popupNav.classList.remove 'visible'
+        navTrigger.classList.remove 'menu-is-open'
 
       else
-        fixedNav.classList.remove 'is-fixed'
-        mainNavigation.classList.remove 'has-transitions'
+        popupNav.classList.remove 'visible'
+        popupNavList.classList.remove 'has-transitions'
 
   checkMenu()
   window.onscroll = checkMenu
@@ -121,8 +119,8 @@
     types = ['webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend']
 
     for type in types
-      mainNavigation.removeEventListener type
+      popupNavList.removeEventListener type
 
-    mainNavigation.classList.toggle 'is-visible'
+    popupNavList.classList.toggle 'is-visible'
 
 )()

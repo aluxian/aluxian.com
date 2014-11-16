@@ -10,7 +10,7 @@ html
     link(rel='stylesheet', href='css/styles.css')
 
   body
-    .fixed-nav
+    .popup-nav.fixed
       a.trigger(href='#0')
         span
  
@@ -24,6 +24,16 @@ html
       nav
         .logo
           include ../svg/logo.svg
+          
+        .popup-nav
+          a.trigger(href='#0')
+            span
+     
+          nav
+            ul
+              each item in menu
+                li
+                  a(href='#{item.href}') #{item.title}
 
         ul
           each item in menu
@@ -42,8 +52,59 @@ html
           include ../svg/arrows.svg
 
     .below-fullscreen
-      span Hello World
-      p Blah blah hey hey dsaf dfa sdf
-      span yep
+      section
+        h3
+          span About Me
+        
+        ul
+          li
+            p
+              span WHO I AM
+              span I’m an avid programmer from Romania, passionate about code, design, user experience and technology. I also like science, travelling and films.
+          li
+            p
+              span WHAT I DO
+              span I create websites, I build Android/iOS applications and I play with Sketch trying to design things.
+          li
+            p
+              span WORK
+              span I work for a brilliant startup called #[a(href='https://www.startersquad.com' target='_blank') StarterSquad], where my distributed team and I help people transform their ideas into thriving startups that change the world.
+          li
+            p
+              span FREE TIME
+              span In my free time I swim, read, play games, rock my guitar and participate in contests, conferences or hackathons.
+          li
+            p
+              span EARLY LIFE
+              span Read more about how I started to love programming on my blog, #[a(href='#' target='_blank') right here].
+        
+      img(src='../img/photo.jpg')
+        
+      section
+        h3
+          span Skills
+        
+        ul
+          li
+            p
+              span WEB
+              span Fullstack JS, CSS Preprocessors, Workflow 
+                
+            p
+              span MOBILE &amp; DESKTOP
+              span Android, .NET
+                
+            p
+              span OTHERS
+              span Databases, Testing, Agile Development
+                
+            p
+              span STILL LEARNING
+              span iOS, Mac, UX/UI Design
+                
+            p
+              span WHAT I USE
+              span Atom, MacVim, Android Studio<br>iTerm 2, Sketch 3, OS X
+              
 
     script(src='js/main.js')

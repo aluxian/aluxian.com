@@ -61,18 +61,18 @@
 })();
 
 (function() {
-  var checkMenu, fixedNav, mainNavigation, navTrigger, offset;
+  var checkMenu, navTrigger, offset, popupNav, popupNavList;
   offset = 900;
-  fixedNav = document.querySelector('.fixed-nav');
-  navTrigger = fixedNav.querySelector('.trigger');
-  mainNavigation = fixedNav.querySelector('nav ul');
+  popupNav = document.querySelector('.popup-nav.fixed');
+  navTrigger = popupNav.querySelector('.trigger');
+  popupNavList = popupNav.querySelector('nav ul');
   checkMenu = function() {
-    var animCallback, c, cb, htmlElem, type, types, _i, _j, _k, _len, _len1, _len2, _ref, _results, _results1;
-    if ((window.scrollY > offset) && !(fixedNav.contains('is-fixed'))) {
-      fixedNav.classList.add('is-fixed');
+    var animCallback, c, cb, type, types, _i, _j, _k, _len, _len1, _len2, _ref, _results, _results1;
+    if (window.scrollY > offset && !popupNav.classList.contains('visible')) {
+      popupNav.classList.add('visible');
       types = ['webkitAnimationEnd', 'oanimationend', 'msAnimationEnd', 'animationend'];
       animCallback = function(type) {
-        mainNavigation.classList.add('has-transitions');
+        popupNavList.classList.add('has-transitions');
         return navTrigger.removeEventListener(type, animCallback);
       };
       _results = [];
@@ -81,39 +81,38 @@
         _results.push(navTrigger.addEventListener(type, animCallback.bind(null, type)));
       }
       return _results;
-    } else if (window.scrollY <= offset) {
-      htmlElem = document.querySelector('html');
-      if ((mainNavigation.classList.contains('is-visible')) && !(htmlElem.classList.contains('no-csstransitions'))) {
-        mainNavigation.classList.add('is-hidden');
+    } else if (window.scrollY <= offset - 500) {
+      if (popupNavList.classList.contains('is-visible')) {
+        popupNavList.classList.add('is-hidden');
         types = ['webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend'];
         cb = function(type) {
           var c, _j, _len1, _ref;
           _ref = ['is-visible', 'is-hidden', 'has-transitions'];
           for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
             c = _ref[_j];
-            mainNavigation.classList.remove(c);
+            popupNavList.classList.remove(c);
           }
-          fixedNav.classList.remove('is-fixed');
+          popupNav.classList.remove('visible');
           navTrigger.classList.remove('menu-is-open');
           return navTrigger.removeEventListener(type, cb);
         };
         _results1 = [];
         for (_j = 0, _len1 = types.length; _j < _len1; _j++) {
           type = types[_j];
-          _results1.push(mainNavigation.addEventListener(type, cb.bind(null, type)));
+          _results1.push(popupNavList.addEventListener(type, cb.bind(null, type)));
         }
         return _results1;
-      } else if ((mainNavigation.classList.contains('is-visible')) && (htmlElem.classList.contains('no-csstransitions'))) {
+      } else if (popupNavList.classList.contains('is-visible')) {
         _ref = ['is-visible', 'has-transitions'];
         for (_k = 0, _len2 = _ref.length; _k < _len2; _k++) {
           c = _ref[_k];
-          mainNavigation.classList.remove(c);
+          popupNavList.classList.remove(c);
         }
-        fixedNav.classList.rmeove('is-fixed');
+        popupNav.classList.remove('visible');
         return navTrigger.classList.remove('menu-is-open');
       } else {
-        fixedNav.classList.remove('is-fixed');
-        return mainNavigation.classList.remove('has-transitions');
+        popupNav.classList.remove('visible');
+        return popupNavList.classList.remove('has-transitions');
       }
     }
   };
@@ -125,8 +124,8 @@
     types = ['webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend'];
     for (_i = 0, _len = types.length; _i < _len; _i++) {
       type = types[_i];
-      mainNavigation.removeEventListener(type);
+      popupNavList.removeEventListener(type);
     }
-    return mainNavigation.classList.toggle('is-visible');
+    return popupNavList.classList.toggle('is-visible');
   });
 })();
