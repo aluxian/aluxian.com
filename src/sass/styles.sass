@@ -63,7 +63,7 @@ h2
 
 h3
   @include font(inherit, 22px, 300)
-  margin: 0 auto 90px
+  margin: 0 auto 80px
 
   span
     border-bottom: 1px solid
@@ -174,7 +174,7 @@ h3
   text-align: center
   color: white
   background:
-    image: url(../img/background.jpg)
+    color: black
     repeat: no-repeat
     position: center
     size: cover
@@ -205,7 +205,7 @@ h3
         font-size: golden-ratio(12px, 1)
         padding: 5px 15px 6px
         border: 2px solid transparent
-        border-radius: 5px
+        border-radius: 3px
 
       &.active a, a:hover, a:focus
         border-color: white
@@ -223,7 +223,7 @@ h3
       margin-top: -150px
       height: 300px
 
-    .title
+    h2:last-child
       @include transition(opacity 250ms)
 
   .scroll
@@ -256,19 +256,85 @@ h3
     width: 100%
 
   section
-    padding: 90px 0 50px
+    padding: 90px 0 60px
 
-    li > p
-      max-width: 560px
-      line-height: 34px
-      margin: 0 auto 50px
+    &.grey
+      background-color: #F2F2F2
 
-      span
-        display: block
+    li
+      margin: 0 50px
 
-        &:first-child
-          @include font(inherit, 15px, 300)
-          margin-bottom: 2px
+      & > p
+        max-width: 560px
+        line-height: 34px
+        margin: 0 auto 50px
 
-        &:last-child
-          font-size: golden-ratio(15px, 1)
+        span
+          display: block
+
+          &:first-child
+            @include font(inherit, 15px, 300)
+            margin-bottom: 2px
+
+          &:last-child
+            font-size: golden-ratio(15px, 1)
+
+    .row
+      @include outer-container
+      max-width: 880px
+      padding: 0 20px
+
+      .item
+        max-width: 410px
+        margin: 0 auto 60px
+        padding: 0 5px
+
+        @include respond-to(desktop)
+          @include span-columns(6)
+          margin-bottom: 40px
+
+        img
+          width: 100%
+          border-top-left-radius: 2px
+          border-top-right-radius: 2px
+
+        footer
+          @include position(relative, -4px auto auto auto)
+          @include size(100% 60px)
+          border-bottom-left-radius: 2px
+          border-bottom-right-radius: 2px
+          background-color: white
+          text-align: left
+          color: #E74A64
+
+          span:first-child
+            @include font(inherit, 17px, 300)
+            margin-left: 15px
+            line-height: 60px
+
+          .btn
+            @include font(inherit, 12px, 300)
+            margin-top: 11px
+            margin-right: 15px
+            padding: 5px 8px 6px
+            border: 1px solid
+            border-radius: 2px
+            float: right
+
+  & > footer
+    @include font(inherit, 17px, 300)
+    padding: 50px 0 70px
+
+    hr
+      width: 100px
+      margin: 50px auto 50px
+
+    ul
+      li
+        display: inline
+
+        svg
+          width: 65px
+
+      li + li
+        margin-left: 30px

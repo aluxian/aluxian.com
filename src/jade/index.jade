@@ -21,7 +21,7 @@ html
               a(href='#{item.href}') #{item.title}
     
     .fullscreen
-      nav
+      header
         .logo
           include ../svg/logo.svg
           
@@ -35,15 +35,16 @@ html
                 li
                   a(href='#{item.href}') #{item.title}
 
-        ul
-          each item in menu
-            li
-              a(href='#{item.href}') #{item.title}
+        nav
+          ul
+            each item in menu
+              li
+                a(href='#{item.href}') #{item.title}
 
       .hero
         h2 WELCOME TO MY WEBSITE
         h1 ALEXANDRU ROSIANU
-        h2.title WEB DEVELOPER
+        h2 WEB DEVELOPER
 
       .scroll
         p
@@ -60,7 +61,7 @@ html
           li
             p
               span WHO I AM
-              span I’m an avid programmer from Romania, passionate about code, design, user experience and technology. I also like science, travelling and films.
+              span I’m an avid programmer from Romania, passionate about code, design, user experience and technology. I like science, travelling and films.
           li
             p
               span WHAT I DO
@@ -100,11 +101,46 @@ html
                 
             p
               span STILL LEARNING
-              span iOS, Mac, UX/UI Design
+              span iOS, Mac, UX/UI Design, DevOps
                 
             p
               span WHAT I USE
-              span Atom, MacVim, Android Studio<br>iTerm 2, Sketch 3, OS X
+              span Atom, MacVim, Android Studio#[br]IntelliJ IDEA, iTerm 2, Sketch 3, OS X
+                
+      section.grey
+        h3
+          span Portfolio
+        
+        .row
+          .item
+            img(src='../img/portfolio-1.jpg')
+            
+            footer
+              span CNRV.ro
+              span.btn READ MORE
+            
+          .item
+            img(src='../img/portfolio-2.jpg')
+            
+            footer
+              span Aluxian.com
+              span.btn READ MORE
               
-
+      footer
+        p Proudly hosted on Github.#[br]Designed and created by myself.
+        hr
+        ul
+          li
+            a(href='#')
+              include ../svg/gplus.svg
+          li
+            a(href='#')
+              include ../svg/facebook.svg
+          li
+            a(href='#')
+              include ../svg/twitter.svg
+          li
+            a(href='#')
+              include ../svg/github.svg
+            
     script(src='js/main.js')

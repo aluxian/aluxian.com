@@ -32,7 +32,7 @@
 (function() {
   var fadeIn, fadeOut, i, j, lastIndex, nextIndex, phrases, titleElement, x;
   phrases = ['FULL-STACK WEB CODER', 'ANDROID DEVELOPER', 'iOS BEGINNER', 'MAC USER', 'TECHNOLOGY ENTHUSIAST', 'OCCASIONAL HACKER', 'COMMAND-LINE WIZARD'];
-  titleElement = document.querySelector('.hero .title');
+  titleElement = document.querySelector('.hero h2:last-child');
   lastIndex = -1;
   i = phrases.length;
   while (i) {
@@ -67,45 +67,45 @@
   navTrigger = popupNav.querySelector('.trigger');
   popupNavList = popupNav.querySelector('nav ul');
   checkMenu = function() {
-    var animCallback, c, cb, type, types, _i, _j, _k, _len, _len1, _len2, _ref, _results, _results1;
+    var animCallback, c, cb, type, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2, _results, _results1;
     if (window.scrollY > offset && !popupNav.classList.contains('visible')) {
       popupNav.classList.add('visible');
-      types = ['webkitAnimationEnd', 'oanimationend', 'msAnimationEnd', 'animationend'];
       animCallback = function(type) {
         popupNavList.classList.add('has-transitions');
         return navTrigger.removeEventListener(type, animCallback);
       };
+      _ref = ['webkitAnimationEnd', 'oanimationend', 'msAnimationEnd', 'animationend'];
       _results = [];
-      for (_i = 0, _len = types.length; _i < _len; _i++) {
-        type = types[_i];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        type = _ref[_i];
         _results.push(navTrigger.addEventListener(type, animCallback.bind(null, type)));
       }
       return _results;
     } else if (window.scrollY <= offset - 500) {
       if (popupNavList.classList.contains('is-visible')) {
         popupNavList.classList.add('is-hidden');
-        types = ['webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend'];
         cb = function(type) {
-          var c, _j, _len1, _ref;
-          _ref = ['is-visible', 'is-hidden', 'has-transitions'];
-          for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
-            c = _ref[_j];
+          var c, _j, _len1, _ref1;
+          _ref1 = ['is-visible', 'is-hidden', 'has-transitions'];
+          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+            c = _ref1[_j];
             popupNavList.classList.remove(c);
           }
           popupNav.classList.remove('visible');
           navTrigger.classList.remove('menu-is-open');
           return navTrigger.removeEventListener(type, cb);
         };
+        _ref1 = ['webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend'];
         _results1 = [];
-        for (_j = 0, _len1 = types.length; _j < _len1; _j++) {
-          type = types[_j];
+        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+          type = _ref1[_j];
           _results1.push(popupNavList.addEventListener(type, cb.bind(null, type)));
         }
         return _results1;
       } else if (popupNavList.classList.contains('is-visible')) {
-        _ref = ['is-visible', 'has-transitions'];
-        for (_k = 0, _len2 = _ref.length; _k < _len2; _k++) {
-          c = _ref[_k];
+        _ref2 = ['is-visible', 'has-transitions'];
+        for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
+          c = _ref2[_k];
           popupNavList.classList.remove(c);
         }
         popupNav.classList.remove('visible');
@@ -119,13 +119,19 @@
   checkMenu();
   window.onscroll = checkMenu;
   return navTrigger.addEventListener('click', function() {
-    var type, types, _i, _len;
+    var type, _i, _len, _ref;
     navTrigger.classList.toggle('menu-is-open');
-    types = ['webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend'];
-    for (_i = 0, _len = types.length; _i < _len; _i++) {
-      type = types[_i];
+    _ref = ['webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend'];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      type = _ref[_i];
       popupNavList.removeEventListener(type);
     }
     return popupNavList.classList.toggle('is-visible');
   });
+})();
+
+(function() {
+  var randomInt;
+  randomInt = Math.floor(Math.random() * 4);
+  return document.querySelector('.fullscreen').style.backgroundImage = "url('../img/background-" + randomInt + ".jpg')";
 })();

@@ -38,7 +38,7 @@
     'COMMAND-LINE WIZARD'
   ]
 
-  titleElement = document.querySelector '.hero .title'
+  titleElement = document.querySelector '.hero h2:last-child'
   lastIndex = -1
 
   # Shuffle phrases
@@ -76,13 +76,12 @@
   checkMenu = ->
     if window.scrollY > offset and not popupNav.classList.contains 'visible'
       popupNav.classList.add 'visible'
-      types = ['webkitAnimationEnd', 'oanimationend', 'msAnimationEnd', 'animationend']
 
       animCallback = (type) ->
         popupNavList.classList.add 'has-transitions'
         navTrigger.removeEventListener type, animCallback
 
-      for type in types
+      for type in ['webkitAnimationEnd', 'oanimationend', 'msAnimationEnd', 'animationend']
         navTrigger.addEventListener type, animCallback.bind(null, type)
 
     else if window.scrollY <= offset - 500
@@ -90,15 +89,13 @@
       if popupNavList.classList.contains 'is-visible'
         popupNavList.classList.add 'is-hidden'
 
-        types = ['webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend']
-
         cb = (type) ->
           popupNavList.classList.remove c for c in ['is-visible', 'is-hidden', 'has-transitions']
           popupNav.classList.remove 'visible'
           navTrigger.classList.remove 'menu-is-open'
           navTrigger.removeEventListener type, cb
 
-        for type in types
+        for type in ['webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend']
           popupNavList.addEventListener type, cb.bind(null, type)
 
       else if popupNavList.classList.contains 'is-visible'
@@ -116,11 +113,13 @@
   navTrigger.addEventListener 'click', ->
     navTrigger.classList.toggle 'menu-is-open'
 
-    types = ['webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend']
-
-    for type in types
+    for type in ['webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend']
       popupNavList.removeEventListener type
 
     popupNavList.classList.toggle 'is-visible'
+)()
 
+(-> # Choose a header background
+  randomInt = Math.floor(Math.random() * 4)
+  document.querySelector('.fullscreen').style.backgroundImage = "url('../img/background-#{randomInt}.jpg')"
 )()
