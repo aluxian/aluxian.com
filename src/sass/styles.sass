@@ -83,7 +83,7 @@ h3
     width: 90%
     max-width: 400px
     border-radius: 0.25em
-    box-shadow: 0 0 10px rgba($color-accent, 0.4)
+    box-shadow: 0 0 10px rgba($color-pink, 0.4)
     background: white
     visibility: hidden
     overflow: hidden
@@ -120,7 +120,7 @@ h3
     @include size(44px 44px)
     background: white
     border-radius: 0.25em
-    box-shadow: 0 0 10px rgba($color-accent, .4)
+    box-shadow: 0 0 10px rgba($color-pink, .4)
     overflow: hidden
     text-indent: 100%
     white-space: nowrap
@@ -130,7 +130,7 @@ h3
       @include position(absolute, 50% auto auto 50%)
       @include transition(background 0.3s)
       @include size(20px 2px)
-      background: $color-accent
+      background: $color-pink
       display: block
       margin-top: -1px
       margin-left: -10px
@@ -159,7 +159,7 @@ h3
       background: none
 
       &::before, &::after
-        background: $color-accent
+        background: $color-pink
 
       &::before
         @include transform(rotate(135deg))
@@ -246,7 +246,7 @@ h3
 .below-fullscreen
   @include position(absolute, 100% auto auto auto)
   text-align: center
-  color: #2C3E51
+  color: $color-blue
   width: 100%
 
   a:hover, a:focus
@@ -333,8 +333,30 @@ h3
       li
         display: inline
 
+        a:hover
+          border: none
+          cursor: default
+
         svg
+          border-radius: 65px
           width: 65px
+
+          path
+            @include transition(fill 150ms)
+            fill: $color-blue
+
+          ellipse
+            @include transition(stroke 150ms)
+            stroke: $color-blue
+
+          g:hover
+            cursor: auto
+
+            path
+              fill: $color-pink
+
+            ellipse
+              stroke: $color-pink
 
       li + li
         margin-left: 30px
