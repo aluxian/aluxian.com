@@ -11,20 +11,9 @@ html
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400|Oswald:400,300')
 
   body
-    .popup-nav.fixed
-      a.trigger(href='#0')
-        span
- 
-      nav
-        ul
-          each item in menu
-            li
-              a(href='#{item.href}') #{item.title}
-    
     .fullscreen
       header
-        .logo
-          include ../svg/logo.svg
+        a.logo(href='/') AR
         
         .popup-nav
           a.trigger(href='#0')
@@ -34,7 +23,7 @@ html
             ul
               each item in menu
                 li
-                  a(href='#{item.href}') #{item.title}*/
+                  a(href='#{item.href}') #{item.title}
 
         nav
           ul
