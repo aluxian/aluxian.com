@@ -30,36 +30,38 @@ h1
     border-width: 2px
 
   @include respond-to(mobile-3)
-    font-size: golden-ratio(40px, 1)
+    font-size: golden-ratio(30px, 1)
 
   @include respond-to(mobile-2)
-    font-size: golden-ratio(35px, 1)
+    font-size: golden-ratio(25px, 1)
 
   @include respond-to(mobile-1)
-    font-size: golden-ratio(30px, 1)
+    font-size: golden-ratio(20px, 1)
+    padding: 1px 8px 2px
 
   @include respond-to(tablet)
     font-size: golden-ratio(50px, 1)
 
 h2
   @include font($font-hero, 30px)
-  margin: 15px 0
+  margin: 20px 0
 
   @include respond-to(mobile)
-    font-size: golden-ratio(26px, 1)
+    font-size: golden-ratio(16px, 1)
     border-width: 2px
 
   @include respond-to(mobile-3)
-    font-size: golden-ratio(25px, 1)
+    font-size: golden-ratio(15px, 1)
 
   @include respond-to(mobile-2)
-    font-size: golden-ratio(24px, 1)
+    font-size: golden-ratio(14px, 1)
 
   @include respond-to(mobile-1)
-    font-size: golden-ratio(23px, 1)
+    font-size: golden-ratio(13px, 1)
+    margin: 16px 0 15px
 
   @include respond-to(tablet)
-    font-size: golden-ratio(27px, 1)
+    font-size: golden-ratio(17px, 1)
 
 h3
   @include font(inherit, 22px, 300)
@@ -182,33 +184,39 @@ h3
   a
     color: white
 
-  nav
-    margin-top: 60px
-
+  header
     .logo
       display: none
+      text-align: left
+      margin: 40px 10% 0
+
+      svg
+        height: 50px
 
       @include respond-to(mobile)
         display: inherit
 
-    li
-      display: inline
+    & > nav
+      margin-top: 60px
 
-      @include respond-to(mobile)
-        display: none
+      li
+        display: inline
 
-      + li
-        margin-left: 15px
+        @include respond-to(mobile)
+          display: none
 
-      a
-        @include transition(border 200ms)
-        font-size: golden-ratio(12px, 1)
-        padding: 5px 15px 6px
-        border: 2px solid transparent
-        border-radius: 3px
+        + li
+          margin-left: 15px
 
-      &.active a, a:hover, a:focus
-        border-color: white
+        a
+          @include transition(border 200ms)
+          font-size: golden-ratio(12px, 1)
+          padding: 5px 15px 6px
+          border: 2px solid transparent
+          border-radius: 3px
+
+        &.active a, a:hover, a:focus
+          border-color: white
 
   .hero
     @include position(absolute, 50% auto auto 50%)
@@ -218,6 +226,9 @@ h3
     @include respond-to(mobile)
       margin-top: -130px
       height: 220px
+
+    @include respond-to(mobile-1)
+      margin-top: -100px
 
     @include respond-to(tablet)
       margin-top: -150px
@@ -231,17 +242,28 @@ h3
     text-align: center
     width: 100%
 
+    @include respond-to(mobile-1)
+      bottom: 25px
+
     p a
       @include transition(border 200ms)
       @include font($font-hero, 13px)
       border-bottom: 2px solid transparent
       padding-bottom: 2px
 
+      @include respond-to(mobile-1)
+        font-size: golden-ratio(10px, 1)
+        border-width: 1px
+
       &:hover, &:focus
         border-color: white
 
     svg
       @include animation(floating 2s infinite)
+      width: 30px
+
+      @include respond-to(mobile-1)
+        width: 20px
 
 .below-fullscreen
   @include position(absolute, 100% auto auto auto)
@@ -278,6 +300,13 @@ h3
 
           &:last-child
             font-size: golden-ratio(15px, 1)
+
+        @include respond-to(mobile-1)
+          line-height: 30px
+
+          span
+            &:last-child
+              font-size: golden-ratio(13px, 1)
 
     .row
       @include outer-container
@@ -325,6 +354,9 @@ h3
     @include font(inherit, 17px, 300)
     padding: 50px 0 70px
 
+    @include respond-to(mobile-1)
+      font-size: golden-ratio(12px, 1)
+
     hr
       width: 100px
       margin: 50px auto 50px
@@ -340,6 +372,9 @@ h3
         svg
           border-radius: 65px
           width: 65px
+
+          @include respond-to(mobile-1)
+            width: 50px
 
           path
             @include transition(fill 150ms)
@@ -360,3 +395,6 @@ h3
 
       li + li
         margin-left: 30px
+
+        @include respond-to(mobile-1)
+          margin-left: 10px

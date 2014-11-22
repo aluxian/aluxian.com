@@ -120,6 +120,13 @@
 )()
 
 (-> # Choose a header background
-  randomInt = Math.floor(Math.random() * 4)
+  randomInt = Math.floor(Math.random() * 3)
   document.querySelector('.fullscreen').style.backgroundImage = "url('../img/background-#{randomInt}.jpg')"
+)()
+
+(-> # Resize header
+  fullscreen = document.querySelector '.fullscreen'
+  belowFullscreen = document.querySelector '.below-fullscreen'
+  fullscreen.style.height = fullscreen.offsetHeight
+  belowFullscreen.style.top = fullscreen.offsetHeight
 )()

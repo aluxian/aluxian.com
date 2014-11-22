@@ -132,6 +132,14 @@
 
 (function() {
   var randomInt;
-  randomInt = Math.floor(Math.random() * 4);
+  randomInt = Math.floor(Math.random() * 3);
   return document.querySelector('.fullscreen').style.backgroundImage = "url('../img/background-" + randomInt + ".jpg')";
+})();
+
+(function() {
+  var belowFullscreen, fullscreen;
+  fullscreen = document.querySelector('.fullscreen');
+  belowFullscreen = document.querySelector('.below-fullscreen');
+  fullscreen.style.height = fullscreen.offsetHeight;
+  return belowFullscreen.style.top = fullscreen.offsetHeight;
 })();
