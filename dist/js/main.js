@@ -97,7 +97,6 @@
   } else if (window.innerHeight < 400) {
     height = 400;
   }
-  console.log(height);
   fullscreen.style.height = height + 'px';
   return belowFullscreen.style.top = height + 'px';
 })();

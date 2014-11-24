@@ -25,43 +25,47 @@ h1
   padding: 6px 15px 0
   margin: 0
 
-  @include respond-to(mobile)
+  @include respond-to(mobile-5)
+    font-size: golden-ratio(50px, 1)
+
+  @include respond-to(mobile-4)
     font-size: golden-ratio(45px, 1)
     border-width: 2px
 
   @include respond-to(mobile-3)
-    font-size: golden-ratio(30px, 1)
+    font-size: golden-ratio(40px, 1)
 
   @include respond-to(mobile-2)
-    font-size: golden-ratio(25px, 1)
+    font-size: golden-ratio(33px, 1)
 
   @include respond-to(mobile-1)
-    font-size: golden-ratio(20px, 1)
-    padding: 1px 8px 2px
+    font-size: golden-ratio(27px, 1)
+    padding: 3px 8px 2px
 
-  @include respond-to(tablet)
-    font-size: golden-ratio(50px, 1)
+  @include respond-to(mobile-0)
+    font-size: golden-ratio(20px, 1)
+    padding: 3px 8px 0
 
 h2
-  @include font($font-hero, 30px)
+  @include font($font-hero, 25px)
   margin: 20px 0
 
-  @include respond-to(mobile)
-    font-size: golden-ratio(16px, 1)
+  @include respond-to(mobile-5)
+    font-size: golden-ratio(18px, 1)
+
+  @include respond-to(mobile-4)
+    font-size: golden-ratio(17px, 1)
     border-width: 2px
 
   @include respond-to(mobile-3)
-    font-size: golden-ratio(15px, 1)
+    font-size: golden-ratio(16px, 1)
 
   @include respond-to(mobile-2)
-    font-size: golden-ratio(14px, 1)
+    font-size: golden-ratio(15px, 1)
 
   @include respond-to(mobile-1)
-    font-size: golden-ratio(13px, 1)
+    font-size: golden-ratio(14px, 1)
     margin: 16px 0 15px
-
-  @include respond-to(tablet)
-    font-size: golden-ratio(17px, 1)
 
 h3
   @include font(inherit, 22px, 300)
@@ -97,13 +101,13 @@ h3
       svg
         height: 50px
 
-      @include respond-to(mobile)
+      @include respond-to(mobile-4)
         display: inline-block
 
     .popup-nav
       display: none
 
-      @include respond-to(mobile)
+      @include respond-to(mobile-4)
         display: block
 
       .trigger
@@ -126,10 +130,8 @@ h3
 
           &::before, &::after
             @include size(100% 100%)
-            @include transform(translateZ(0))
-            @include backface-visibility(hidden)
             @include position(absolute, auto auto auto 0)
-            @include transition(transform 0.3s, background 0.3s, position 0.3s)
+            @include transition(transform 0.3s, position 0.3s)
             @include transform(rotate(0))
             background: inherit
             content: ''
@@ -170,7 +172,6 @@ h3
         z-index: 1
 
         @include position(absolute, 40px 10% auto auto)
-        @include backface-visibility(hidden)
         @include transition(transform 0.3s, visibility 0.3s)
         @include transform-origin(100% 0)
         @include transform(scale(0))
@@ -184,7 +185,6 @@ h3
               @include animation(slide-in #{$i * 0.1s + 0.1})
 
         li
-          @include backface-visibility(hidden)
           text-align: left
 
           a
@@ -202,7 +202,7 @@ h3
     & > nav
       margin-top: 60px
 
-      @include respond-to(mobile)
+      @include respond-to(mobile-4)
         display: none
 
       li
@@ -226,16 +226,16 @@ h3
     @include size(100% 320px)
     margin: -180px 0 0 -50%
 
-    @include respond-to(mobile)
+    @include respond-to(mobile-5)
+      margin-top: -150px
+      height: 300px
+
+    @include respond-to(mobile-4)
       margin-top: -130px
       height: 220px
 
     @include respond-to(mobile-1)
-      margin-top: -100px
-
-    @include respond-to(tablet)
-      margin-top: -150px
-      height: 300px
+      margin-top: -110px
 
     h2:last-child
       @include transition(opacity 0.25s)
