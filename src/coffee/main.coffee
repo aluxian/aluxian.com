@@ -84,6 +84,6 @@
 (-> # Make header size static
   fullscreen = document.querySelector '.fullscreen'
   belowFullscreen = document.querySelector '.below-fullscreen'
-  fullscreen.style.height = fullscreen.offsetHeight
-  belowFullscreen.style.top = fullscreen.offsetHeight
+  fullscreen.style.height = fullscreen.offsetHeight + 'px'
+  belowFullscreen.style.top = fullscreen.offsetHeight + 'px'
 )()

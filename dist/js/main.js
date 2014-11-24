@@ -81,6 +81,6 @@
   var belowFullscreen, fullscreen;
   fullscreen = document.querySelector('.fullscreen');
   belowFullscreen = document.querySelector('.below-fullscreen');
-  fullscreen.style.height = fullscreen.offsetHeight;
-  return belowFullscreen.style.top = fullscreen.offsetHeight;
+  fullscreen.style.height = fullscreen.offsetHeight + 'px';
+  return belowFullscreen.style.top = fullscreen.offsetHeight + 'px';
 })();
