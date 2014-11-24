@@ -78,7 +78,13 @@
 
 (-> # Choose a header background
   randomInt = Math.floor(Math.random() * 3)
-  document.querySelector('.fullscreen').style.backgroundImage = "url('../img/background-#{randomInt}.jpg')"
+  size = 1920
+
+  size = 1440 if (window.innerWidth <= 1440 && window.innerHeight <= 1024)
+  size = 768  if (window.innerWidth <= 768  && window.innerHeight <= 768)
+  size = 480  if (window.innerWidth <= 480  && window.innerHeight <= 480)
+
+  document.querySelector('.fullscreen').style.backgroundImage = "url('../img/background-#{randomInt}@#{size}.jpg')"
 )()
 
 (-> # Make header size static

@@ -72,9 +72,19 @@
 })();
 
 (function() {
-  var randomInt;
+  var randomInt, size;
   randomInt = Math.floor(Math.random() * 3);
-  return document.querySelector('.fullscreen').style.backgroundImage = "url('../img/background-" + randomInt + ".jpg')";
+  size = 1920;
+  if (window.innerWidth <= 1440 && window.innerHeight <= 1024) {
+    size = 1440;
+  }
+  if (window.innerWidth <= 768 && window.innerHeight <= 768) {
+    size = 768;
+  }
+  if (window.innerWidth <= 480 && window.innerHeight <= 480) {
+    size = 480;
+  }
+  return document.querySelector('.fullscreen').style.backgroundImage = "url('../img/background-" + randomInt + "@" + size + ".jpg')";
 })();
 
 (function() {
