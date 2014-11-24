@@ -21,7 +21,7 @@
 
   for item in menuItems
     item.addEventListener 'mouseover', mouseOver, false
-    item.addEventListener 'mouseout', mouseOut, false
+    item.addEventListener 'mouseout',  mouseOut,  false
 
   timeout = null
   update()
@@ -80,9 +80,9 @@
   randomInt = Math.floor(Math.random() * 3)
   size = 1920
 
-  size = 1440 if (window.innerWidth <= 1440 && window.innerHeight <= 1024)
-  size = 768  if (window.innerWidth <= 768  && window.innerHeight <= 768)
-  size = 480  if (window.innerWidth <= 480  && window.innerHeight <= 480)
+  size = 1440 if window.innerWidth <= 1440 and window.innerHeight <= 1024
+  size = 768  if window.innerWidth <= 768  and window.innerHeight <= 768
+  size = 480  if window.innerWidth <= 480  and window.innerHeight <= 480
 
   document.querySelector('.fullscreen').style.backgroundImage = "url('../img/background-#{randomInt}@#{size}.jpg')"
 )()
@@ -90,6 +90,15 @@
 (-> # Make header size static
   fullscreen = document.querySelector '.fullscreen'
   belowFullscreen = document.querySelector '.below-fullscreen'
-  fullscreen.style.height = fullscreen.offsetHeight + 'px'
-  belowFullscreen.style.top = fullscreen.offsetHeight + 'px'
+  height = fullscreen.offsetHeight
+
+  if window.innerWidth >= 480 && window.innerHeight < 600
+    height = 600
+  else if window.innerHeight < 400
+    height = 400
+
+  console.log height
+
+  fullscreen.style.height = height + 'px'
+  belowFullscreen.style.top = height + 'px'
 )()
