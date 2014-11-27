@@ -47,11 +47,11 @@ html
         h3
           span About Me
         
-        ul
+        ul.paragraphs
           li
             p
               span WHO I AM
-              span I’m an avid programmer from Romania, passionate about code, design, user experience and technology. I like science, travelling and films.
+              span I’m an avid programmer from Romania, passionate about code, design, startups and technology. I like science, travelling and films.
           li
             p
               span WHAT I DO
@@ -75,11 +75,15 @@ html
         h3
           span Skills
         
-        ul
+        ul.paragraphs
           li
             p
               span WEB
-              span Fullstack JS, CSS Preprocessors, Workflow 
+              span SASS, Jade#[br]AngularJS, Backbone
+                
+            p
+              span BACKEND
+              span Node.js, Java, Scala#[br]Express, Geddy, Sails, Akka
                 
             p
               span MOBILE &amp; DESKTOP
@@ -87,15 +91,15 @@ html
                 
             p
               span OTHERS
-              span Databases, Testing, Agile Development
+              span Graph/NoSQL/SQL Databases#[br]Testing, Agile Development
                 
             p
               span STILL LEARNING
-              span iOS, Mac, UX/UI Design, DevOps
+              span iOS/Mac Dev, UX/UI Design, DevOps
                 
             p
               span WHAT I USE
-              span Atom, MacVim, Android Studio#[br]IntelliJ IDEA, iTerm 2, Sketch 3, OS X
+              span Atom, MacVim, Android Studio#[br]IDEA, iTerm 2, Sketch 3, OS X
                 
       section.grey
         h3
@@ -115,6 +119,26 @@ html
             footer
               span Aluxian.com
               span.btn READ MORE
+              
+      section
+        h3
+          span Timeline
+          
+        ul.posts
+          each event in events
+            li
+              p #{event.meta}
+              p: a(href="#{event.link}") #{event.title}
+              
+      section.grey
+        h3
+          span Recent Blog Posts
+          
+        ul.posts
+          each post in posts
+            li
+              p #{post.meta}
+              p: a(href="#{post.link}") #{post.title}
               
       footer
         p Proudly hosted on Github.#[br]Designed and created by myself.

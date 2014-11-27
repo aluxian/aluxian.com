@@ -27,24 +27,36 @@
   ],
   "posts": [
     {
-      "title": "SECTION 1",
-      "category": "categ 1",
-      "link": "http://section1"
+      "meta": "16 August",
+      "title": "Getting Started With Design Sprints",
+      "link": "#"
     },
     {
-      "title": "SECTION 2",
-      "category": "categ 2",
-      "link": "http://section2"
+      "meta": "5 August",
+      "title": "Tips For Mastering A Programming Language Using Spaced Repetition",
+      "link": "#"
     },
     {
-      "title": "SECTION 3",
-      "category": "categ 3",
-      "link": "http://section3"
+      "meta": "21 July",
+      "title": "The Current State Of E-Commerce Search",
+      "link": "#"
+    }
+  ],
+  "events": [
+    {
+      "meta": "16 August, 2014",
+      "title": "Won 2nd place at InfoEducatie",
+      "link": "#"
     },
     {
-      "title": "SECTION 4",
-      "category": "categ 4",
-      "link": "http://section4"
+      "meta": "14 May, 2015",
+      "title": "Won first place at C# olympiad",
+      "link": "#"
+    },
+    {
+      "meta": "21 July, 2016",
+      "title": "Startup award",
+      "link": "#"
     }
   ]
 }
