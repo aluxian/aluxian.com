@@ -12,6 +12,8 @@ html
 
   body
     .fullscreen
+      a(name='home')
+      
       header
         a.logo(href='/') AR
         
@@ -43,6 +45,8 @@ html
           include ../svg/arrows.svg
 
     .below-fullscreen
+      a(name='about')
+      
       section
         h3
           span About Me
@@ -71,6 +75,8 @@ html
         
       img(src='../img/photo.jpg')
         
+      a(name='skills')
+        
       section
         h3
           span Skills
@@ -81,56 +87,71 @@ html
               span WEB
               span SASS, Jade#[br]AngularJS, Backbone
                 
+          li
             p
               span BACKEND
               span Node.js, Java, Scala#[br]Express, Geddy, Sails, Akka
                 
+          li
             p
               span MOBILE &amp; DESKTOP
               span Android, .NET
                 
+          li
             p
               span OTHERS
-              span Graph/NoSQL/SQL Databases#[br]Testing, Agile Development
+              span Graph/NoSQL/SQL Databases#[br]Testing, Agile Development#[br]Machine Learning
                 
+          li
             p
               span STILL LEARNING
               span iOS/Mac Dev, UX/UI Design, DevOps
                 
+          li
             p
               span WHAT I USE
               span Atom, MacVim, Android Studio#[br]IDEA, iTerm 2, Sketch 3, OS X
                 
-      section.grey
+      a(name='portfolio')
+                
+      section.inverted
         h3
           span Portfolio
         
         .row
           .item
-            img(src='../img/portfolio-1.jpg')
+            a(href='#')
+              img(src='../img/portfolio-1.jpg')
             
             footer
-              span CNRV.ro
-              span.btn READ MORE
+              span
+                a(href='#') CNRV.ro
+              //- span.btn READ MORE
             
           .item
-            img(src='../img/portfolio-2.jpg')
+            a(href='#')
+              img(src='../img/portfolio-2.jpg')
             
             footer
-              span Aluxian.com
-              span.btn READ MORE
+              span
+                a(href='#') Aluxian.com
+              //- span.btn READ MORE
               
+      a(name='achievements')
+      
       section
         h3
-          span Timeline
+          span Achievements
           
         ul.posts
-          each event in events
+          each item in events
             li
-              p #{event.meta}
-              p: a(href="#{event.link}") #{event.title}
+              p #{item.meta}
+              p: a(href="#{item.link}") #{item.title}
               
-      section.grey
+      a(name='blog')
+                
+      section.inverted
         h3
           span Recent Blog Posts
           

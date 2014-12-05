@@ -87,6 +87,39 @@
   document.querySelector('.fullscreen').style.backgroundImage = "url('../img/background-#{randomInt}@#{size}.jpg')"
 )()
 
+(-> # Scrolling helper
+  window.scrollTo = (to) ->
+    firefox = navigator.userAgent.indexOf('Firefox')
+    msie = navigator.userAgent.indexOf('MSIE')
+    doc = if firefox != -1 or msie != -1 then document.documentElement else document.body
+
+    easeInOutQuad = (t, b, c, d) ->
+      t /= d/2
+      if t < 1
+        c/2*t*t + b
+      else
+        -c/2 * ((t-1)*(t-3) - 1) + b
+
+    requestAnimFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || (callback) -> window.setTimeout(callback, 1000 / 60)
+
+    start = doc.scrollTop
+    change = to.offsetTop - start
+    console.log to, to.offsetTop, start, change
+    currentTime = 0
+    increment = 20
+    duration = 800
+
+    animateScroll = ->
+      currentTime += increment
+      val = easeInOutQuad(currentTime, start, change, duration)
+      doc.scrollTop = val
+
+      if currentTime < duration
+        requestAnimFrame(animateScroll)
+
+    animateScroll()
+)()
+
 (-> # Make header size static
   fullscreen = document.querySelector '.fullscreen'
   belowFullscreen = document.querySelector '.below-fullscreen'
@@ -99,4 +132,7 @@
 
   fullscreen.style.height = height + 'px'
   belowFullscreen.style.top = height + 'px'
+
+  onClick = -> window.scrollTo document.querySelector("a[name='#{this.hash.substring(1)}']")
+  item.onclick = onClick for item in document.querySelectorAll 'nav a'
 )()

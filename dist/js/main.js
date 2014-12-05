@@ -88,7 +88,43 @@
 })();
 
 (function() {
-  var belowFullscreen, fullscreen, height;
+  return window.scrollTo = function(to) {
+    var animateScroll, change, currentTime, doc, duration, easeInOutQuad, firefox, increment, msie, requestAnimFrame, start;
+    firefox = navigator.userAgent.indexOf('Firefox');
+    msie = navigator.userAgent.indexOf('MSIE');
+    doc = firefox !== -1 || msie !== -1 ? document.documentElement : document.body;
+    easeInOutQuad = function(t, b, c, d) {
+      t /= d / 2;
+      if (t < 1) {
+        return c / 2 * t * t + b;
+      } else {
+        return -c / 2 * ((t - 1) * (t - 3) - 1) + b;
+      }
+    };
+    requestAnimFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function(callback) {
+      return window.setTimeout(callback, 1000 / 60);
+    };
+    start = doc.scrollTop;
+    change = to.offsetTop - start;
+    console.log(to, to.offsetTop, start, change);
+    currentTime = 0;
+    increment = 20;
+    duration = 800;
+    animateScroll = function() {
+      var val;
+      currentTime += increment;
+      val = easeInOutQuad(currentTime, start, change, duration);
+      doc.scrollTop = val;
+      if (currentTime < duration) {
+        return requestAnimFrame(animateScroll);
+      }
+    };
+    return animateScroll();
+  };
+})();
+
+(function() {
+  var belowFullscreen, fullscreen, height, item, onClick, _i, _len, _ref, _results;
   fullscreen = document.querySelector('.fullscreen');
   belowFullscreen = document.querySelector('.below-fullscreen');
   height = fullscreen.offsetHeight;
@@ -98,5 +134,15 @@
     height = 400;
   }
   fullscreen.style.height = height + 'px';
-  return belowFullscreen.style.top = height + 'px';
+  belowFullscreen.style.top = height + 'px';
+  onClick = function() {
+    return window.scrollTo(document.querySelector("a[name='" + (this.hash.substring(1)) + "']"));
+  };
+  _ref = document.querySelectorAll('nav a');
+  _results = [];
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    item = _ref[_i];
+    _results.push(item.onclick = onClick);
+  }
+  return _results;
 })();

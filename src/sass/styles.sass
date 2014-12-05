@@ -10,6 +10,8 @@ html
   font-family: $font-primary
 
 a
+  @include transition(border 0.2s)
+  border-bottom: 1px solid transparent
   text-decoration: none
   color: #E74A64
 
@@ -249,7 +251,6 @@ h3
       bottom: 25px
 
     p a
-      @include transition(border 0.2s)
       @include font($font-hero, 13px)
       border-bottom: 2px solid transparent
       padding-bottom: 2px
@@ -275,25 +276,29 @@ h3
   width: 100%
 
   a:hover, a:focus
-    border-bottom: 1px solid
+    border-color: initial
 
   img
     width: 100%
 
   section
-    padding: 90px 0 60px
+    padding: 90px 20px 120px
 
-    &.grey
-      background-color: #F5F5F5
+    &.inverted
+      background-color: $color-blue-dark
+      color: white
 
     ul.paragraphs
       li
-        margin: 0 50px
+        margin: 0 30px
+
+        & + li
+          margin-top: 50px
 
         & > p
           max-width: 560px
           line-height: 34px
-          margin: 0 auto 50px
+          margin: 0 auto
 
           span
             display: block
@@ -315,54 +320,58 @@ h3
     ul.posts
       text-align: left
       max-width: 560px
-      margin: 0 auto 40px
-
-      a:hover
-        border: none
+      padding: 0 30px
+      margin: 0 auto
 
       li
+        & + li
+          margin-top: 30px
+
         p
           line-height: 34px
-
-        p:first-child
-          font-size: golden-ratio(15px, 1)
           margin: 0
 
+        p:first-child
+          @include font(inherit, 13px, 400)
+
         p:last-child
-          font-size: golden-ratio(14px, 1)
-          margin: 0 0 10px
-          font-style: italic
+          @include font(inherit, 15px, 300)
 
     .row
       @include outer-container
-      max-width: 880px
-      padding: 0 20px
+      max-width: 840px
+
+      @include respond-to(desktop)
+        & + .row
+          margin-top: 40px
 
       .item
         max-width: 410px
-        margin: 0 auto 60px
+        margin: 0 auto
         padding: 0 5px
+
+        &:first-child
+          margin-bottom: 40px
 
         @include respond-to(desktop)
           @include span-columns(6)
-          margin-bottom: 40px
 
-        img, footer
-          border-left: 1px solid #EEE
-          border-right: 1px solid #EEE
+          &:first-child
+            margin-bottom: 0
+
+        a:hover, a:active
+          border-color: transparent
 
         img
           width: 100%
-          border-top-left-radius: 2px
-          border-top-right-radius: 2px
-          border-top: 1px solid #EEE
+          border-top-left-radius: 3px
+          border-top-right-radius: 3px
 
         footer
           @include position(relative, -4px auto auto auto)
           @include size(100% 60px)
           border-bottom-left-radius: 2px
           border-bottom-right-radius: 2px
-          border-bottom: 1px solid #EEE
           background-color: white
           text-align: left
           color: #E74A64
@@ -370,7 +379,7 @@ h3
           span:first-child
             @include font(inherit, 17px, 300)
             margin-left: 15px
-            line-height: 60px
+            line-height: 62px
 
           .btn
             @include font(inherit, 12px, 300)
@@ -383,7 +392,7 @@ h3
 
   & > footer
     @include font(inherit, 17px, 300)
-    padding: 50px 0 70px
+    padding: 70px 0 90px
 
     @include respond-to(mobile-1)
       font-size: golden-ratio(12px, 1)
