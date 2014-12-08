@@ -6,13 +6,15 @@ html
     meta(charset='UTF-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
+      
+    meta(property='og:description', content='I’m an avid programmer from Romania, passionate about code, design, startups and technology. I like science, travelling and films.')
 
     link(rel='stylesheet', href='css/styles.css')
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400|Oswald:400,300')
 
   body
     .fullscreen
-      a(name='home')
+      a(name='home' id='home')
       
       header
         a.logo(href='/') AR
@@ -25,13 +27,13 @@ html
             ul
               each item in menu
                 li
-                  a(href='#{item.href}') #{item.title}
+                  a(href='#{item.href}', data-scroll) #{item.title}
 
         nav
           ul
             each item in menu
               li
-                a(href='#{item.href}') #{item.title}
+                a(href='#{item.href}', data-scroll) #{item.title}
 
       .hero
         h2 WELCOME TO MY WEBSITE
@@ -40,12 +42,12 @@ html
 
       .scroll
         p
-          a(href='#') FIND OUT MORE
-        a(href='#')
+          a(href='#about' data-scroll) FIND OUT MORE
+        a(href='#about' data-scroll)
           include ../svg/arrows.svg
 
     .below-fullscreen
-      a(name='about')
+      a(name='about' id='about')
       
       section
         h3
@@ -63,7 +65,7 @@ html
           li
             p
               span WORK
-              span I work for a brilliant startup called #[a(href='https://www.startersquad.com' target='_blank') StarterSquad], where my distributed team and I help people transform their ideas into thriving startups that change the world.
+              span I work for a brilliant startup called #[a(href='https://www.startersquad.com') StarterSquad], where my distributed team and I help people transform their ideas into thriving startups that change the world.
           li
             p
               span FREE TIME
@@ -71,11 +73,11 @@ html
           li
             p
               span EARLY LIFE
-              span Read more about how I started to love programming on my blog, #[a(href='#' target='_blank') right here].
+              span Read more about how I started to love programming on my blog, #[a(href='#') right here].
         
       img(src='../img/photo.jpg')
         
-      a(name='skills')
+      a(name='skills' id='skills')
         
       section
         h3
@@ -112,7 +114,7 @@ html
               span WHAT I USE
               span Atom, MacVim, Android Studio#[br]IDEA, iTerm 2, Sketch 3, OS X
                 
-      a(name='portfolio')
+      a(name='portfolio' id='portfolio')
                 
       section.inverted
         h3
@@ -137,7 +139,7 @@ html
                 a(href='#') Aluxian.com
               //- span.btn READ MORE
               
-      a(name='achievements')
+      a(name='achievements' id='achievements')
       
       section
         h3
@@ -149,7 +151,7 @@ html
               p #{item.meta}
               p: a(href="#{item.link}") #{item.title}
               
-      a(name='blog')
+      a(name='blog' id='blog')
                 
       section.inverted
         h3
@@ -166,16 +168,17 @@ html
         hr
         ul
           li
-            a(href='#')
+            a(href='https://plus.google.com/+AlexandruRosianu')
               include ../svg/gplus.svg
           li
-            a(href='#')
+            a(href='https://www.facebook.com/aluxian')
               include ../svg/facebook.svg
           li
-            a(href='#')
+            a(href='https://twitter.com/Aluxian')
               include ../svg/twitter.svg
           li
-            a(href='#')
+            a(href='https://github.com/Aluxian')
               include ../svg/github.svg
-            
+              
+    script(src='bower_components/smooth-scroll/dist/js/smooth-scroll.js')
     script(src='js/main.js')

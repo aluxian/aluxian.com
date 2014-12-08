@@ -5,32 +5,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:description" content="I’m an avid programmer from Romania, passionate about code, design, startups and technology. I like science, travelling and films.">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400|Oswald:400,300">
   </head>
   <body>
-    <div class="fullscreen"><a name="home"></a>
+    <div class="fullscreen"><a name="home" id="home"></a>
       <header><a href="/" class="logo">AR</a>
         <div class="popup-nav"><a href="#0" class="trigger"><span></span></a>
           <nav>
             <ul>
-              <li><a href="#home">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#skills">Skills</a></li>
-              <li><a href="#portfolio">Portfolio</a></li>
-              <li><a href="#achievements">Achievements</a></li>
-              <li><a href="#blog">Blog</a></li>
+              <li><a href="#home" data-scroll>Home</a></li>
+              <li><a href="#about" data-scroll>About</a></li>
+              <li><a href="#skills" data-scroll>Skills</a></li>
+              <li><a href="#portfolio" data-scroll>Portfolio</a></li>
+              <li><a href="#achievements" data-scroll>Achievements</a></li>
+              <li><a href="#blog" data-scroll>Blog</a></li>
             </ul>
           </nav>
         </div>
         <nav>
           <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#achievements">Achievements</a></li>
-            <li><a href="#blog">Blog</a></li>
+            <li><a href="#home" data-scroll>Home</a></li>
+            <li><a href="#about" data-scroll>About</a></li>
+            <li><a href="#skills" data-scroll>Skills</a></li>
+            <li><a href="#portfolio" data-scroll>Portfolio</a></li>
+            <li><a href="#achievements" data-scroll>Achievements</a></li>
+            <li><a href="#blog" data-scroll>Blog</a></li>
           </ul>
         </nav>
       </header>
@@ -40,7 +41,7 @@
         <h2>WEB DEVELOPER</h2>
       </div>
       <div class="scroll">
-        <p><a href="#">FIND OUT MORE</a></p><a href="#"><svg viewbox="0 0 30 30">
+        <p><a href="#about" data-scroll>FIND OUT MORE</a></p><a href="#about" data-scroll><svg viewbox="0 0 30 30">
   <g fill="#FFF">
     <path d="M25.5 11L25.5 12 4.5 12 4.5 10 23.5 10 23.5-9 25.5-9 25.5 11Z" transform="translate(15.049242, 1.5) rotate(45) translate(-15.049242, -1.5)" />
     <path d="M25.5 24.3L25.5 25.3 4.5 25.3 4.5 23.3 23.5 23.3 23.5 4.3 25.5 4.3 25.5 24.3Z" transform="translate(15.049242, 14.849242) rotate(45) translate(-15.049242, -14.849242)" />
@@ -49,7 +50,7 @@
 </a>
       </div>
     </div>
-    <div class="below-fullscreen"><a name="about"></a>
+    <div class="below-fullscreen"><a name="about" id="about"></a>
       <section>
         <h3><span>About Me</span></h3>
         <ul class="paragraphs">
@@ -60,16 +61,16 @@
             <p><span>WHAT I DO</span><span>I create websites, I build Android/iOS applications and I play with Sketch trying to design things.</span></p>
           </li>
           <li>
-            <p><span>WORK</span><span>I work for a brilliant startup called <a href="https://www.startersquad.com" target="_blank">StarterSquad</a>, where my distributed team and I help people transform their ideas into thriving startups that change the world.</span></p>
+            <p><span>WORK</span><span>I work for a brilliant startup called <a href="https://www.startersquad.com">StarterSquad</a>, where my distributed team and I help people transform their ideas into thriving startups that change the world.</span></p>
           </li>
           <li>
             <p><span>FREE TIME</span><span>In my free time I swim, read, play games, rock my guitar and participate in contests, conferences or hackathons.</span></p>
           </li>
           <li>
-            <p><span>EARLY LIFE</span><span>Read more about how I started to love programming on my blog, <a href="#" target="_blank">right here</a>.</span></p>
+            <p><span>EARLY LIFE</span><span>Read more about how I started to love programming on my blog, <a href="#">right here</a>.</span></p>
           </li>
         </ul>
-      </section><img src="../img/photo.jpg"><a name="skills"></a>
+      </section><img src="../img/photo.jpg"><a name="skills" id="skills"></a>
       <section>
         <h3><span>Skills</span></h3>
         <ul class="paragraphs">
@@ -92,7 +93,7 @@
             <p><span>WHAT I USE</span><span>Atom, MacVim, Android Studio<br>IDEA, iTerm 2, Sketch 3, OS X</span></p>
           </li>
         </ul>
-      </section><a name="portfolio"></a>
+      </section><a name="portfolio" id="portfolio"></a>
       <section class="inverted">
         <h3><span>Portfolio</span></h3>
         <div class="row">
@@ -105,7 +106,7 @@
             </footer>
           </div>
         </div>
-      </section><a name="achievements"></a>
+      </section><a name="achievements" id="achievements"></a>
       <section>
         <h3><span>Achievements</span></h3>
         <ul class="posts">
@@ -122,7 +123,7 @@
             <p><a href="#">Startup award</a></p>
           </li>
         </ul>
-      </section><a name="blog"></a>
+      </section><a name="blog" id="blog"></a>
       <section class="inverted">
         <h3><span>Recent Blog Posts</span></h3>
         <ul class="posts">
@@ -144,7 +145,7 @@
         <p>Proudly hosted on Github.<br>Designed and created by myself.</p>
         <hr>
         <ul>
-          <li><a href="#"><svg viewBox="0 0 80 80">
+          <li><a href="https://plus.google.com/+AlexandruRosianu"><svg viewBox="0 0 80 80">
   <g fill="#fff">
     <ellipse stroke-width="4" cx="40" cy="40" rx="38" ry="38" />
     <path d="M60 39.4L55.6 39.4 55.6 35 53.4 35 53.4 39.4 49 39.4 49 41.6 53.4 41.6 53.4 46 55.6 46 55.6 41.6 60 41.6 60 39.4M37.2 57C32.2 57 29 54.7 29 51.4 29 48.2 32 47.1 33 46.7 34.9 46.1 37.5 46 37.9 46 38.3 46 38.6 46 38.9 46 42.5 48.5 44 49.7 44 52.1 44 54.9 41.6 57 37.2 57L37.2 57ZM36.7 39C32.8 39 31 33.9 31 30.9 31 29.7 31.2 28.3 32 27.4 32.7 26.5 34 26 35.2 26 39 26 41 31.1 41 34.4 41 35.2 40.9 36.6 39.9 37.6 39.1 38.3 37.9 39 36.7 39L36.7 39ZM43.9 43.9L42.2 42.6C41.7 42.2 41 41.6 41 40.6 41 39.6 41.7 39 42.3 38.4 44.3 36.9 46.3 35.3 46.3 31.9 46.3 28.4 44.1 26.7 43 25.8L45.9 25.8 49 24 39 24C36.4 24 32.9 24.3 30.1 26.4 28.1 28.1 27.4 30.6 27.4 32.7 27.4 36.3 30.3 39.9 35.4 39.9 35.9 39.9 36.4 39.9 36.9 39.8 36.7 40.4 36.4 40.8 36.4 41.6 36.4 43 37.2 43.9 37.9 44.7 35.7 44.9 31.7 45.1 28.7 46.8 25.9 48.4 25 50.8 25 52.4 25 55.8 28.2 59 35.2 59 43.5 59 48 54.6 48 50.3 48 47.1 46 45.6 43.9 43.9L43.9 43.9Z"
@@ -152,14 +153,14 @@
   </g>
 </svg>
 </a></li>
-          <li><a href="#"><svg viewBox="0 0 80 80">
+          <li><a href="https://www.facebook.com/aluxian"><svg viewBox="0 0 80 80">
   <g fill="#fff">
     <ellipse stroke-width="4" cx="40" cy="40" rx="38" ry="38" />
     <path d="M42.3 57L42.3 41 47.9 41 48.8 34.8 42.3 34.8 42.3 30.8C42.3 29 42.9 27.8 45.6 27.8L49 27.8 49 22.2C48.4 22.2 46.4 22 44 22 39 22 35.6 24.9 35.6 30.2L35.6 34.8 30 34.8 30 41 35.6 41 35.6 57 42.3 57" />
   </g>
 </svg>
 </a></li>
-          <li><a href="#"><svg viewBox="0 0 80 80">
+          <li><a href="https://twitter.com/Aluxian"><svg viewBox="0 0 80 80">
   <g fill="#fff">
     <ellipse stroke-width="4" cx="40" cy="40" rx="38" ry="38" />
     <path d="M53.9 31.7C55.4 30.8 56.5 29.3 57 27.6 55.6 28.4 54.1 29.1 52.5 29.4 51.2 27.9 49.3 27 47.2 27 43.3 27 40.1 30.4 40.1 34.6 40.1 35.2 40.1 35.7 40.2 36.3 34.3 36 29 33 25.4 28.4 24.8 29.5 24.5 30.8 24.5 32.2 24.5 34.8 25.7 37.1 27.7 38.5 26.5 38.5 25.4 38.1 24.4 37.6 24.4 37.6 24.4 37.6 24.4 37.6 24.4 41.3 26.9 44.4 30.2 45.1 29.6 45.2 28.9 45.3 28.3 45.3 27.8 45.3 27.4 45.3 26.9 45.2 27.8 48.2 30.5 50.4 33.6 50.5 31.2 52.5 28.1 53.7 24.7 53.7 24.1 53.7 23.6 53.7 23 53.6 26.2 55.7 30 57 34 57 47.2 57 54.4 45.5 54.4 35.5 54.4 35.1 54.4 34.8 54.4 34.5 55.8 33.4 57 32.1 58 30.6 56.7 31.2 55.3 31.6 53.9 31.7Z"
@@ -167,7 +168,7 @@
   </g>
 </svg>
 </a></li>
-          <li><a href="#"><svg viewBox="0 0 80 80">
+          <li><a href="https://github.com/Aluxian"><svg viewBox="0 0 80 80">
   <g fill="#fff">
     <ellipse stroke-width="4" cx="40" cy="40" rx="38" ry="38" />
     <path d="M29 47.5C29.7 48.1 30.1 48.8 30.1 48.8 30.1 48.9 30.2 48.9 30.2 49L30.2 49C30.2 49 30.2 49 30.1 49 30 49.2 30 49.5 30.1 49.7 30.3 50 30.7 50.1 30.9 50 30.9 49.9 30.9 49.9 30.9 49.9 32.5 51.3 34.4 50.7 35.2 50.3 35.4 49.1 35.8 48.3 36.3 47.9 32.4 47.4 28.3 45.9 28.3 39 28.3 37 29 35.4 30.1 34.2 30 33.7 29.4 31.9 30.3 29.4 30.3 29.4 31.8 29 35.1 31.3 36.5 30.9 38 30.7 39.5 30.7 41 30.7 42.5 30.9 43.9 31.3 47.2 29 48.7 29.4 48.7 29.4 49.6 31.9 49 33.7 48.9 34.2 50 35.4 50.7 37 50.7 39 50.7 45.9 46.6 47.4 42.7 47.9 43.3 48.4 43.9 49.5 43.9 51.2 43.9 53.6 43.8 55.5 43.8 56.1 43.8 56.6 44.2 57.1 45 57 52 54.6 57 47.9 57 39.9 57 30 49.2 22 39.5 22 29.8 22 22 30 22 39.9 22 47.9 27 54.6 34 57 34.8 57.1 35.2 56.6 35.2 56.1 35.2 55.7 35.1 54.3 35.1 52.8 30.3 53.9 29.2 50.6 29.2 50.6 28.4 48.6 27.3 48 27.3 48 25.7 46.9 27.4 46.9 27.4 46.9 27.7 47 27.9 47 28.1 47.1 28.1 47.1 28 47.2 28 47.2 27.9 47.5 28.1 47.8 28.4 47.9 28.6 48.1 28.9 48 29 47.8 29 47.7 29 47.6 29 47.5ZM28.9 48.9C28.7 49.1 28.4 49 28.2 48.8 28 48.5 27.9 48.2 28.1 48.1 28.3 47.9 28.6 48 28.8 48.2 29 48.5 29.1 48.8 28.9 48.9ZM30.9 51.9C30.8 52.1 30.5 52 30.2 51.8 30 51.6 29.9 51.3 30.1 51.1 30.2 50.9 30.5 51 30.8 51.2 31 51.4 31.1 51.7 30.9 51.9ZM33 51.7C32.9 52 32.7 52.1 32.4 52 32.1 51.8 32 51.6 32 51.3 32.1 51 32.3 50.9 32.6 51 32.9 51.2 33 51.4 33 51.7ZM34 51.5C34 51.8 33.8 52 33.5 52 33.2 52 33 51.8 33 51.5 33 51.2 33.2 51 33.5 51 33.8 51 34 51.2 34 51.5ZM35 51.4C35 51.6 34.8 51.9 34.6 52 34.3 52.1 34 51.9 34 51.6 34 51.4 34.2 51.1 34.4 51 34.7 50.9 35 51.1 35 51.4Z"
@@ -178,6 +179,7 @@
         </ul>
       </footer>
     </div>
+    <script src="bower_components/smooth-scroll/dist/js/smooth-scroll.js"></script>
     <script src="js/main.js"></script>
   
 <script type="text/javascript">document.write('<script src="' + (location.protocol || 'http:') + '//' + (location.hostname || 'localhost') + ':35729/livereload.js?snipver=1" type="text/javascript"><\/script>')</script>
