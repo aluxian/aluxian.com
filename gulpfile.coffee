@@ -33,6 +33,8 @@ gulp.task 'assets', ->
     .pipe gulp.dest './dist/bower_components'
   gulp.src './src/img/**'
     .pipe gulp.dest './dist/img'
+  gulp.src './src/favicons/**'
+    .pipe gulp.dest './dist'
 
 gulp.task 'coffee', ->
   gulp.src './src/coffee/*.coffee'
@@ -53,6 +55,7 @@ gulp.task 'watch', ['static'], ->
   gulp.watch './src/coffee/*.coffee', ['coffee']
   gulp.watch './src/db/database.json', ['jade']
   gulp.watch './src/img/**/*.*', ['assets']
+  gulp.watch './src/favicons/**/*.*', ['assets']
   gulp.watch './src/svg/**/*.svg', ['jade']
   gulp.watch './dist/**', (file) -> $.livereload.changed file.path
 

@@ -84,6 +84,7 @@
   fullscreen.style.height = height + 'px';
   belowFullscreen.style.top = height + 'px';
   return smoothScroll.init({
+    offset: -20,
     callbackAfter: function(toggle) {
       var _j, _len1;
       for (i = _j = 0, _len1 = menuItems.length; _j < _len1; i = ++_j) {

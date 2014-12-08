@@ -99,6 +99,7 @@
 
   # Anchor smooth scrolling
   smoothScroll.init
+    offset: -20
     callbackAfter: (toggle) ->
       for item, i in menuItems
         if item.childNodes[0] == toggle
