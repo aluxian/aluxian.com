@@ -1,10 +1,8 @@
-// # Ghost bootloader
-// Orchestrates the loading of Ghost
-// When run from command line.
+var path = require('path');
+var ghost = require('ghost');
 
-var ghost = require('./core'),
-    errors = require('./core/server/errors');
-
-ghost().otherwise(function (err) {
-    errors.logErrorAndExit(err, err.context, err.help);
+ghost({
+    config: path.join(__dirname, 'config.js')
+}).then(function (ghostServer) {
+    ghostServer.start();
 });
