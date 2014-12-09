@@ -1,8 +1,14 @@
 (function() {
-  var belowFullscreen, fadeIn, fadeOut, fullscreen, height, i, item, j, lastIndex, menuItems, mouseOut, mouseOver, navList, nextIndex, phrases, popupNav, randomInt, selectedMenuItem, selectedMenuItemHighlighted, size, timeout, titleElement, trigger, update, x, _i, _len;
+  var belowFullscreen, fadeIn, fadeOut, fullscreen, height, i, item, j, lastIndex, menuItems, mouseOut, mouseOver, navList, nextIndex, phrases, popupNav, randomInt, selectedMenuItem, selectedMenuItemHighlighted, size, timeout, titleElement, trigger, update, x, _i, _j, _len, _len1;
   menuItems = document.querySelectorAll('header > nav ul li');
   selectedMenuItem = 0;
   selectedMenuItemHighlighted = true;
+  for (i = _i = 0, _len = menuItems.length; _i < _len; i = ++_i) {
+    item = menuItems[i];
+    if (item.childNodes[0].attributes.href.value === document.location.hash) {
+      selectedMenuItem = i;
+    }
+  }
   update = function() {
     if (selectedMenuItemHighlighted) {
       return menuItems[selectedMenuItem].classList.add('active');
@@ -20,8 +26,8 @@
     clearTimeout(timeout);
     return timeout = setTimeout(update, 300);
   };
-  for (_i = 0, _len = menuItems.length; _i < _len; _i++) {
-    item = menuItems[_i];
+  for (_j = 0, _len1 = menuItems.length; _j < _len1; _j++) {
+    item = menuItems[_j];
     item.addEventListener('mouseover', mouseOver, false);
     item.addEventListener('mouseout', mouseOut, false);
   }
@@ -86,8 +92,8 @@
   return smoothScroll.init({
     offset: -20,
     callbackAfter: function(toggle) {
-      var _j, _len1;
-      for (i = _j = 0, _len1 = menuItems.length; _j < _len1; i = ++_j) {
+      var _k, _len2;
+      for (i = _k = 0, _len2 = menuItems.length; _k < _len2; i = ++_k) {
         item = menuItems[i];
         if (item.childNodes[0] === toggle) {
           menuItems[selectedMenuItem].classList.remove('active');

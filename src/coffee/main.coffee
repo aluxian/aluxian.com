@@ -5,6 +5,10 @@
   selectedMenuItem = 0
   selectedMenuItemHighlighted = true
 
+  for item, i in menuItems
+    if item.childNodes[0].attributes.href.value == document.location.hash
+      selectedMenuItem = i
+
   update = ->
     if selectedMenuItemHighlighted
       menuItems[selectedMenuItem].classList.add 'active'
