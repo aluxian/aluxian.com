@@ -88,7 +88,7 @@ html
             p
               span FREE TIME
               span In my free time I swim, read, play games, rock my guitar and participate in contests, conferences or hackathons.
-          li
+          //-li
             p
               span EARLY LIFE
               span Read more about how I started to love programming on my blog, #[a(href='#') right here].
@@ -105,7 +105,7 @@ html
           li
             p
               span WEB
-              span SASS, Jade#[br]AngularJS, Backbone
+              span SASS/LESS/Stylus, Jade#[br]AngularJS, Backbone
                 
           li
             p
@@ -140,26 +140,26 @@ html
         
         .row
           .item
-            a(href='#')
+            a(href='http://cnrv.herokuapp.com')
               img(src='../img/portfolio-1.jpg')
             
             footer
               span
-                a(href='#') CNRV.ro
+                a(href='http://cnrv.herokuapp.com') CNRV.ro
               //- span.btn READ MORE
             
           .item
-            a(href='#')
+            a(href='//www.aluxian.com')
               img(src='../img/portfolio-2.jpg')
             
             footer
               span
-                a(href='#') Aluxian.com
+                a(href='//www.aluxian.com') Aluxian.com
               //- span.btn READ MORE
               
-      a(name='achievements' id='achievements')
+      //-a(name='achievements' id='achievements')
       
-      section
+      //-section
         h3
           span Achievements
           
@@ -167,11 +167,12 @@ html
           each item in events
             li
               p #{item.meta}
-              p: a(href="#{item.link}") #{item.title}
+              p
+                a(href="#{item.link}") #{item.title}
               
-      a(name='blog' id='blog')
+      //-a(name='blog' id='blog')
                 
-      section.inverted
+      //-section.inverted
         h3
           span Recent Blog Posts
           
@@ -182,7 +183,7 @@ html
               p: a(href="#{post.link}") #{post.title}
               
       footer
-        p Proudly hosted on Github.#[br]Designed and created by myself.
+        p Proudly hosted on Github.#[br]Designed and coded with &hearts; by myself.
         hr
         ul
           li
