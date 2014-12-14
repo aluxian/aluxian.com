@@ -1,3 +1,4 @@
+fs       = require 'fs'
 del      = require 'del'
 ecstatic = require 'ecstatic'
 gulp     = require 'gulp'
@@ -20,7 +21,7 @@ gulp.task 'sass', ->
       errLogToConsole: true
     .pipe $.concat 'styles.css'
     .pipe $.if live, $.cssmin()
-    .pipe gulp.dest './dist/css'
+    .pipe gulp.dest './dist'
 
 gulp.task 'jade', ->
   gulp.src './src/jade/*.jade'
@@ -28,6 +29,8 @@ gulp.task 'jade', ->
       pretty: true
       locals: require './src/db/database.json'
     .pipe $.if !live, $.embedlr()
+    .pipe $.htmlmin
+      collapseWhitespace: true
     .pipe gulp.dest './dist'
 
 gulp.task 'assets', ->
@@ -42,7 +45,12 @@ gulp.task 'coffee', ->
     .pipe $.if /[.]coffee$/, $.coffee({ bare: true }).on('error', $.util.log)
     .pipe $.concat 'main.js'
     .pipe $.if live, $.uglify()
-    .pipe gulp.dest './dist/js'
+    .pipe gulp.dest './temp'
+
+gulp.task 'inject', ['coffee'], ->
+  gulp.src './dist/index.html'
+    .pipe $.replace /<!-- inject:js-->/, '<script>' + fs.readFileSync('./temp/main.js', 'utf8') + '</script>'
+    .pipe gulp.dest './dist'
 
 gulp.task 'static', ['build'], (next) ->
   http.createServer ecstatic { root: './dist', cache: 'no-cache', showDir: true }
@@ -53,12 +61,12 @@ gulp.task 'static', ['build'], (next) ->
 gulp.task 'watch', ['static'], ->
   gulp.watch './src/sass/*.sass', ['sass']
   gulp.watch './src/jade/**/*.jade', ['jade']
-  gulp.watch './src/coffee/*.coffee', ['coffee']
+  gulp.watch './src/coffee/*.coffee', ['coffee', 'inject']
   gulp.watch './src/db/database.json', ['jade']
   gulp.watch './src/img/**/*.*', ['assets']
   gulp.watch './src/favicons/**/*.*', ['assets']
   gulp.watch './src/svg/**/*.svg', ['jade']
   gulp.watch './dist/**', (file) -> $.livereload.changed file.path
 
-gulp.task 'build', ['sass', 'jade', 'assets', 'coffee']
+gulp.task 'build', ['sass', 'jade', 'assets', 'coffee', 'inject']
 gulp.task 'default', ['watch']
