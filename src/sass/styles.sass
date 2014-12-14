@@ -1,7 +1,7 @@
-@import ../bower_components/normalize-css/normalize.css
 @import ../bower_components/bourbon/dist/bourbon
 @import ../bower_components/neat/app/assets/stylesheets/neat
 
+@import fonts
 @import variables
 @import keyframes
 @import mixins
@@ -406,9 +406,10 @@ h3
       li
         display: inline
 
-        a:hover
+        a:hover, a:active
           border: none
           cursor: default
+          border-color: transparent
 
         svg
           border-radius: 65px

@@ -12,12 +12,14 @@ gulp.task 'purge', (cb) -> del(['./dist'], cb)
 gulp.task 'clean', (cb) -> del(['./dist/**/*.*'], cb)
 
 gulp.task 'sass', ->
-  gulp.src './src/sass/*.sass'
+  gulp.src ['./src/bower_components/normalize-css/normalize.css', './src/sass/*.sass']
     .pipe $.changed './dist/css'
-    .pipe $.sass
+    .pipe $.if /[.]sass$/, $.sass
       outputStyle: 'compressed'
       sourceComments : 'normal'
       errLogToConsole: true
+    .pipe $.concat 'styles.css'
+    .pipe $.if live, $.cssmin()
     .pipe gulp.dest './dist/css'
 
 gulp.task 'jade', ->
@@ -29,17 +31,16 @@ gulp.task 'jade', ->
     .pipe gulp.dest './dist'
 
 gulp.task 'assets', ->
-  gulp.src './src/bower_components/**'
-    .pipe gulp.dest './dist/bower_components'
   gulp.src './src/img/**'
     .pipe gulp.dest './dist/img'
   gulp.src './src/favicons/**'
     .pipe gulp.dest './dist'
 
 gulp.task 'coffee', ->
-  gulp.src './src/coffee/*.coffee'
+  gulp.src ['./src/bower_components/smooth-scroll/dist/js/smooth-scroll.js', './src/coffee/*.coffee']
     .pipe $.changed './dist/js'
-    .pipe $.coffee({ bare: true }).on 'error', $.util.log
+    .pipe $.if /[.]coffee$/, $.coffee({ bare: true }).on('error', $.util.log)
+    .pipe $.concat 'main.js'
     .pipe $.if live, $.uglify()
     .pipe gulp.dest './dist/js'
 
