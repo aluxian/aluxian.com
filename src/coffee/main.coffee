@@ -86,7 +86,7 @@
   size = 768  if innerWidth <= 768  and innerHeight <= 768
   size = 480  if innerWidth <= 480  and innerHeight <= 480
 
-  document.querySelector('.fullscreen').style.backgroundImage = "url('../img/background-#{randomInt}@#{size}.jpg')"
+  document.querySelector('.fullscreen').style.backgroundImage = "url('img/background-#{randomInt}@#{size}.jpg')"
 
   # Make header size static
   fullscreen = document.querySelector '.fullscreen'

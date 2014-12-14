@@ -1,3 +1,3 @@
 # aluxian.com
 
-WIP
+Made w/ Gulp, Jade, SASS & CoffeeScript.
