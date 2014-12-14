@@ -31,6 +31,7 @@ gulp.task 'jade', ->
     .pipe $.if !live, $.embedlr()
     .pipe $.htmlmin
       collapseWhitespace: true
+      keepClosingSlash: true
     .pipe gulp.dest './dist'
 
 gulp.task 'assets', ->
