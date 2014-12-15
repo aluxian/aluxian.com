@@ -360,7 +360,7 @@ h3
           &:first-child
             margin-bottom: 0
 
-        a:hover, a:active
+        a:hover, a:active, a:focus
           border-color: transparent
 
         img
@@ -406,7 +406,10 @@ h3
       li
         display: inline
 
-        a:hover, a:active
+        a
+          border-color: transparent
+
+        a:hover, a:active, a:focus
           border: none
           cursor: default
           border-color: transparent
@@ -415,8 +418,17 @@ h3
           border-radius: 65px
           width: 65px
 
-          @include respond-to(mobile-1)
+          @include respond-to(mobile-4)
             width: 50px
+
+          @include respond-to(mobile-2)
+            width: 45px
+
+          @include respond-to(mobile-1)
+            width: 40px
+
+          @include respond-to(mobile-0)
+            width: 35px
 
           path
             @include transition(fill 0.15s)
@@ -439,4 +451,7 @@ h3
         margin-left: 30px
 
         @include respond-to(mobile-1)
-          margin-left: 10px
+          margin-left: 20px
+
+        @include respond-to(mobile-0)
+          margin-left: 15px
