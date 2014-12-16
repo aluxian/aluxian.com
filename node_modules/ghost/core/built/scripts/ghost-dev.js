@@ -477,6 +477,7 @@ define("ghost/assets/lib/uploader",
 
                 // This is the start point if no image exists
                 $dropzone.find('img.js-upload-target').css({display: 'none'});
+                $dropzone.find('div.description').show();
                 $dropzone.removeClass('pre-image-uploader image-uploader-url').addClass('image-uploader');
                 this.removeExtras();
                 this.buildExtras();
@@ -500,6 +501,7 @@ define("ghost/assets/lib/uploader",
                 $dropzone.find('.js-cancel').on('click', function () {
                     $dropzone.find('.js-url').remove();
                     $dropzone.find('.js-fileupload').removeClass('right');
+                    $dropzone.trigger('imagecleared');
                     self.removeExtras();
                     self.initWithDropzone();
                 });
@@ -541,10 +543,12 @@ define("ghost/assets/lib/uploader",
                 // This is the start point if an image already exists
                 $dropzone.removeClass('image-uploader image-uploader-url').addClass('pre-image-uploader');
                 $dropzone.find('div.description').hide();
+                $dropzone.find('img.js-upload-target').show();
                 $dropzone.append($cancel);
                 $dropzone.find('.js-cancel').on('click', function () {
                     $dropzone.find('img.js-upload-target').attr({src: ''});
                     $dropzone.find('div.description').show();
+                    $dropzone.trigger('imagecleared');
                     $dropzone.delay(2500).animate({opacity: 100}, 1000, function () {
                         self.init();
                     });
@@ -604,7 +608,11 @@ define("ghost/components/gh-activating-list-item",
     var ActivatingListItem = Ember.Component.extend({
         tagName: 'li',
         classNameBindings: ['active'],
-        active: false
+        active: false,
+
+        unfocusLink: function () {
+            this.$('a').blur();
+        }.on('click')
     });
 
     __exports__["default"] = ActivatingListItem;
@@ -1553,7 +1561,7 @@ define("ghost/components/gh-uploader",
                 }
             });
 
-            $this.find('.js-cancel').on('click', function () {
+            $this.on('imagecleared', function () {
                 self.sendAction('canceled');
             });
         }.on('didInsertElement'),
@@ -1718,44 +1726,6 @@ define("ghost/controllers/forgotten",
 
     __exports__["default"] = ForgottenController;
   });
-define("ghost/controllers/modals/auth-failed-unsaved", 
-  ["exports"],
-  function(__exports__) {
-    "use strict";
-    var AuthFailedUnsavedController = Ember.Controller.extend({
-        editorController: Ember.computed.alias('model'),
-
-        actions: {
-            confirmAccept: function () {
-                var editorController = this.get('editorController');
-
-                if (editorController) {
-                    editorController.get('model').rollback();
-                }
-
-                window.onbeforeunload = null;
-
-                window.location = this.get('ghostPaths').adminRoot + '/signin/';
-            },
-
-            confirmReject: function () {
-            }
-        },
-
-        confirm: {
-            accept: {
-                text: 'Leave',
-                buttonClass: 'btn btn-red'
-            },
-            reject: {
-                text: 'Stay',
-                buttonClass: 'btn btn-default btn-minor'
-            }
-        }
-    });
-
-    __exports__["default"] = AuthFailedUnsavedController;
-  });
 define("ghost/controllers/modals/copy-html", 
   ["exports"],
   function(__exports__) {
@@ -1781,6 +1751,8 @@ define("ghost/controllers/modals/delete-all",
                     type: 'DELETE'
                 }).then(function () {
                     self.notifications.showSuccess('All content deleted from database.');
+                    self.store.unloadAll('post');
+                    self.store.unloadAll('tag');
                 }).catch(function (response) {
                     self.notifications.showErrors(response);
                 });
@@ -1850,7 +1822,27 @@ define("ghost/controllers/modals/delete-user",
   ["exports"],
   function(__exports__) {
     "use strict";
-    var DeleteUserController = Ember.Controller.extend({
+    var DeleteUserController = Ember.ObjectController.extend({
+        userPostCount: Ember.computed('id', function () {
+            var promise,
+                query = {
+                    author: this.get('slug'),
+                    status: 'all'
+                };
+
+            promise = this.store.find('post', query).then(function (results) {
+                return results.meta.pagination.total;
+            });
+
+            return Ember.Object.extend(Ember.PromiseProxyMixin, {
+                count: Ember.computed.alias('content'),
+
+                inflection: Ember.computed('count', function () {
+                    return this.get('count') > 1 ? 'posts' : 'post';
+                })
+            }).create({promise: promise});
+        }),
+
         actions: {
             confirmAccept: function () {
                 var self = this,
@@ -2034,6 +2026,41 @@ define("ghost/controllers/modals/leave-editor",
     });
 
     __exports__["default"] = LeaveEditorController;
+  });
+define("ghost/controllers/modals/signin", 
+  ["ghost/controllers/signin","exports"],
+  function(__dependency1__, __exports__) {
+    "use strict";
+    var SigninController = __dependency1__["default"];
+
+    __exports__["default"] = SigninController.extend({
+        needs: 'application',
+
+        identification: Ember.computed('session.user.email', function () {
+            return this.get('session.user.email');
+        }),
+
+        actions: {
+            authenticate: function () {
+                var appController = this.get('controllers.application'),
+                    self = this;
+
+                appController.set('skipAuthSuccessHandler', true);
+
+                this._super().then(function () {
+                    self.send('closeModal');
+                    self.notifications.showSuccess('Login successful.');
+                    self.set('password', '');
+                }).finally(function () {
+                    appController.set('skipAuthSuccessHandler', undefined);
+                });
+            },
+
+            confirmAccept: function () {
+                this.send('validateAndAuthenticate');
+            }
+        }
+    });
   });
 define("ghost/controllers/modals/transfer-owner", 
   ["exports"],
@@ -3210,6 +3237,7 @@ define("ghost/controllers/settings/labs",
                     formData = new FormData();
 
                 this.set('uploadButtonText', 'Importing');
+                this.set('importErrors', '');
                 this.notifications.closePassive();
 
                 formData.append('importfile', file);
@@ -3277,10 +3305,14 @@ define("ghost/controllers/settings/tags",
     var TagsController = Ember.ArrayController.extend(PaginationMixin, {
         tags: Ember.computed.alias('model'),
 
+        needs: 'application',
+
         activeTag: null,
         activeTagNameScratch: boundOneWay('activeTag.name'),
         activeTagSlugScratch: boundOneWay('activeTag.slug'),
         activeTagDescriptionScratch: boundOneWay('activeTag.description'),
+        activeTagMetaTitleScratch: boundOneWay('activeTag.meta_title'),
+        activeTagMetaDescriptionScratch: boundOneWay('activeTag.meta_description'),
 
         init: function (options) {
             options = options || {};
@@ -3288,17 +3320,89 @@ define("ghost/controllers/settings/tags",
             this._super(options);
         },
 
-        saveActiveTag: function () {
+        isViewingSubview: Ember.computed('controllers.application.showSettingsMenu', function (key, value) {
+            // Not viewing a subview if we can't even see the PSM
+            if (!this.get('controllers.application.showSettingsMenu')) {
+                return false;
+            }
+            if (arguments.length > 1) {
+                return value;
+            }
+
+            return false;
+        }),
+
+        showErrors: function (errors) {
+            errors = Ember.isArray(errors) ? errors : [errors];
+            this.notifications.showErrors(errors);
+        },
+
+        saveActiveTagProperty: function (propKey, newValue) {
             var activeTag = this.get('activeTag'),
-                name = activeTag.get('name'),
+                currentValue = activeTag.get(propKey),
                 self = this;
 
-            activeTag.save().then(function () {
-                self.notifications.showSuccess('Saved ' + name);
-            }).catch(function (error) {
-                self.notifications.showAPIError(error);
+            newValue = newValue.trim();
+
+            // Quit if there was no change
+            if (newValue === currentValue) {
+                return;
+            }
+
+            activeTag.set(propKey, newValue);
+
+            this.notifications.closePassive();
+
+            activeTag.save().catch(function (errors) {
+                self.showErrors(errors);
             });
         },
+
+        seoTitle: Ember.computed('scratch', 'activeTagNameScratch', 'activeTagMetaTitleScratch', function () {
+            var metaTitle = this.get('activeTagMetaTitleScratch') || '';
+
+            metaTitle = metaTitle.length > 0 ? metaTitle : this.get('activeTagNameScratch');
+
+            if (metaTitle && metaTitle.length > 70) {
+                metaTitle = metaTitle.substring(0, 70).trim();
+                metaTitle = Ember.Handlebars.Utils.escapeExpression(metaTitle);
+                metaTitle = new Ember.Handlebars.SafeString(metaTitle + '&hellip;');
+            }
+
+            return metaTitle;
+        }),
+
+        seoURL: Ember.computed('activeTagSlugScratch', function () {
+            var blogUrl = this.get('config').blogUrl,
+                seoSlug = this.get('activeTagSlugScratch') ? this.get('activeTagSlugScratch') : '',
+                seoURL = blogUrl + '/tag/' + seoSlug;
+
+            // only append a slash to the URL if the slug exists
+            if (seoSlug) {
+                seoURL += '/';
+            }
+
+            if (seoURL.length > 70) {
+                seoURL = seoURL.substring(0, 70).trim();
+                seoURL = new Ember.Handlebars.SafeString(seoURL + '&hellip;');
+            }
+
+            return seoURL;
+        }),
+
+        seoDescription: Ember.computed('scratch', 'activeTagDescriptionScratch', 'activeTagMetaDescriptionScratch', function () {
+            var metaDescription = this.get('activeTagMetaDescriptionScratch') || '';
+
+            metaDescription = metaDescription.length > 0 ? metaDescription : this.get('activeTagDescriptionScratch');
+
+            if (metaDescription && metaDescription.length > 156) {
+                metaDescription = metaDescription.substring(0, 156).trim();
+                metaDescription = Ember.Handlebars.Utils.escapeExpression(metaDescription);
+                metaDescription = new Ember.Handlebars.SafeString(metaDescription + '&hellip;');
+            }
+
+            return metaDescription;
+        }),
 
         actions: {
             newTag: function () {
@@ -3325,47 +3429,39 @@ define("ghost/controllers/settings/tags",
             },
 
             saveActiveTagName: function (name) {
-                var activeTag = this.get('activeTag'),
-                    currentName = activeTag.get('name');
-
-                name = name.trim();
-                if (!name || name === currentName) {
-                    return;
-                }
-
-                // setting all of the properties as they are not saved until name is present
-                activeTag.setProperties({
-                    name: name,
-                    slug: this.get('activeTagSlugScratch').trim(),
-                    description: this.get('activeTagDescriptionScratch').trim()
-                });
-                this.saveActiveTag();
+                this.saveActiveTagProperty('name', name);
             },
 
             saveActiveTagSlug: function (slug) {
-                var name = this.get('activeTag.name'),
-                    currentSlug = this.get('activeTag.slug') || '';
-
-                slug = slug.trim();
-                if (!name || !slug || slug === currentSlug) {
-                    return;
-                }
-
-                this.set('activeTag.slug', slug);
-                this.saveActiveTag();
+                this.saveActiveTagProperty('slug', slug);
             },
 
             saveActiveTagDescription: function (description) {
-                var name = this.get('activeTag.name'),
-                    currentDescription = this.get('activeTag.description') || '';
+                this.saveActiveTagProperty('description', description);
+            },
 
-                description = description.trim();
-                if (!name || description === currentDescription) {
-                    return;
-                }
+            saveActiveTagMetaTitle: function (metaTitle) {
+                this.saveActiveTagProperty('meta_title', metaTitle);
+            },
 
-                this.set('activeTag.description', description);
-                this.saveActiveTag();
+            saveActiveTagMetaDescription: function (metaDescription) {
+                this.saveActiveTagProperty('meta_description', metaDescription);
+            },
+
+            showSubview: function () {
+                this.set('isViewingSubview', true);
+            },
+
+            closeSubview: function () {
+                this.set('isViewingSubview', false);
+            },
+
+            setCoverImage: function (image) {
+                this.saveActiveTagProperty('image', image);
+            },
+
+            clearCoverImage: function () {
+                this.saveActiveTagProperty('image', '');
             }
         }
     });
@@ -4069,8 +4165,15 @@ define("ghost/initializers/authentication",
 
             window.ENV['simple-auth'] = {
                 authenticationRoute: 'signin',
-                routeAfterAuthentication: 'content',
-                authorizer: 'simple-auth-authorizer:oauth2-bearer'
+                routeAfterAuthentication: 'posts',
+                authorizer: 'simple-auth-authorizer:oauth2-bearer',
+                localStorageKey: 'ghost' + (Ghost.subdir.indexOf('/') === 0 ? '-' + Ghost.subdir.substr(1) : '') + ':session'
+            };
+
+            window.ENV['simple-auth-oauth2'] = {
+                serverTokenEndpoint: Ghost.apiRoot + '/authentication/token',
+                serverTokenRevocationEndpoint: Ghost.apiRoot + '/authentication/revoke',
+                refreshAccessTokens: true
             };
 
             SimpleAuth.Session.reopen({
@@ -4080,17 +4183,10 @@ define("ghost/initializers/authentication",
             });
 
             SimpleAuth.Authenticators.OAuth2.reopen({
-                serverTokenEndpoint: Ghost.apiRoot + '/authentication/token',
-                serverTokenRevocationEndpoint: Ghost.apiRoot + '/authentication/revoke',
-                refreshAccessTokens: true,
                 makeRequest: function (url, data) {
                     data.client_id = 'ghost-admin';
                     return this._super(url, data);
                 }
-            });
-
-            SimpleAuth.Stores.LocalStorage.reopen({
-                key: 'ghost' + (Ghost.subdir.indexOf('/') === 0 ? '-' + Ghost.subdir.substr(1) : '') + ':session'
             });
         }
     };
@@ -4526,8 +4622,12 @@ define("ghost/mixins/editor-base-controller",
         },
 
         showSaveNotification: function (prevStatus, status, delay) {
-            var message = this.messageMap.success.post[prevStatus][status];
+            var message = this.messageMap.success.post[prevStatus][status],
+                path = this.get('ghostPaths.url').join(this.get('config.blogUrl'), this.get('url'));
 
+            if (status === 'published') {
+                message += '&nbsp;<a href="' + path + '">View Post</a>';
+            }
             this.notifications.showSuccess(message, {delayed: delay});
         },
 
@@ -4577,7 +4677,7 @@ define("ghost/mixins/editor-base-controller",
                 this.set('status', status);
 
                 // Set a default title
-                if (!this.get('titleScratch')) {
+                if (!this.get('titleScratch').trim()) {
                     this.set('titleScratch', '(Untitled)');
                 }
 
@@ -5559,11 +5659,6 @@ define("ghost/mixins/shortcuts-route",
 
         activate: function () {
             this._super();
-
-            if (!this.shortcuts) {
-                return;
-            }
-
             this.registerShortcuts();
         },
 
@@ -5640,8 +5735,8 @@ define("ghost/mixins/text-input",
     __exports__["default"] = BlurField;
   });
 define("ghost/mixins/validation-engine", 
-  ["ghost/utils/ajax","ghost/utils/validator-extensions","ghost/validators/post","ghost/validators/setup","ghost/validators/signup","ghost/validators/signin","ghost/validators/forgotten","ghost/validators/setting","ghost/validators/reset","ghost/validators/user","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __exports__) {
+  ["ghost/utils/ajax","ghost/utils/validator-extensions","ghost/validators/post","ghost/validators/setup","ghost/validators/signup","ghost/validators/signin","ghost/validators/forgotten","ghost/validators/setting","ghost/validators/reset","ghost/validators/user","ghost/validators/tag-settings","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __exports__) {
     "use strict";
     var getRequestErrorMessage = __dependency1__.getRequestErrorMessage;
 
@@ -5654,6 +5749,7 @@ define("ghost/mixins/validation-engine",
     var SettingValidator = __dependency8__["default"];
     var ResetValidator = __dependency9__["default"];
     var UserValidator = __dependency10__["default"];
+    var TagSettingsValidator = __dependency11__["default"];
 
     // our extensions to the validator library
     ValidatorExtensions.init();
@@ -5716,7 +5812,8 @@ define("ghost/mixins/validation-engine",
             forgotten: ForgotValidator,
             setting: SettingValidator,
             reset: ResetValidator,
-            user: UserValidator
+            user: UserValidator,
+            tag: TagSettingsValidator
         },
 
         /**
@@ -5846,6 +5943,7 @@ define("ghost/models/post",
         published_at: DS.attr('moment-date'),
         published_by: DS.belongsTo('user', {async: true}),
         tags: DS.hasMany('tag', {embedded: 'always'}),
+        url: DS.attr('string'),
 
         // Computed post properties
 
@@ -5950,19 +6048,23 @@ define("ghost/models/slug-generator",
     __exports__["default"] = SlugGenerator;
   });
 define("ghost/models/tag", 
-  ["ghost/mixins/nprogress-save","exports"],
-  function(__dependency1__, __exports__) {
+  ["ghost/mixins/validation-engine","ghost/mixins/nprogress-save","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
-    var NProgressSaveMixin = __dependency1__["default"];
+    var ValidationEngine = __dependency1__["default"];
+    var NProgressSaveMixin = __dependency2__["default"];
 
-    var Tag = DS.Model.extend(NProgressSaveMixin, {
+    var Tag = DS.Model.extend(NProgressSaveMixin, ValidationEngine, {
+        validationType: 'tag',
+
         uuid: DS.attr('string'),
         name: DS.attr('string'),
         slug: DS.attr('string'),
         description: DS.attr('string'),
         parent_id: DS.attr('number'),
         meta_title: DS.attr('string'),
-        meta_description: DS.attr('string')
+        meta_description: DS.attr('string'),
+        image: DS.attr('string')
     });
 
     __exports__["default"] = Tag;
@@ -6025,6 +6127,7 @@ define("ghost/models/user",
                 type: 'PUT',
                 data: {
                     password: [{
+                        user_id: this.get('id'),
                         oldPassword: this.get('password'),
                         newPassword: this.get('newPassword'),
                         ne2Password: this.get('ne2Password')
@@ -6137,13 +6240,22 @@ define("ghost/router",
     __exports__["default"] = Router;
   });
 define("ghost/routes/application", 
-  ["ghost/mixins/shortcuts-route","exports"],
-  function(__dependency1__, __exports__) {
+  ["ghost/mixins/shortcuts-route","ghost/utils/ctrl-or-cmd","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
     /* global key */
     var ShortcutsRoute = __dependency1__["default"];
+    var ctrlOrCmd = __dependency2__["default"];
 
-    var ApplicationRoute = Ember.Route.extend(SimpleAuth.ApplicationRouteMixin, ShortcutsRoute, {
+    var ApplicationRoute,
+        shortcuts = {};
+
+    shortcuts.esc = {action: 'closePopups', scope: 'all'};
+    shortcuts.enter = {action: 'confirmModal', scope: 'modal'};
+    shortcuts[ctrlOrCmd + '+s'] = {action: 'save', scope: 'all'};
+
+    ApplicationRoute = Ember.Route.extend(SimpleAuth.ApplicationRouteMixin, ShortcutsRoute, {
+        shortcuts: shortcuts,
 
         afterModel: function (model, transition) {
             if (this.get('session').isAuthenticated) {
@@ -6151,32 +6263,11 @@ define("ghost/routes/application",
             }
         },
 
-        shortcuts: {
-            esc: {action: 'closePopups', scope: 'all'},
-            enter: {action: 'confirmModal', scope: 'modal'}
-        },
-
         title: function (tokens) {
             return tokens.join(' - ') + ' - ' + this.get('config.blogTitle');
         },
 
         actions: {
-            authorizationFailed: function () {
-                var currentRoute = this.get('controller').get('currentRouteName'),
-                    editorController;
-
-                if (currentRoute.split('.')[0] === 'editor') {
-                    editorController = this.controllerFor(currentRoute);
-
-                    if (editorController.get('isDirty')) {
-                        this.send('openModal', 'auth-failed-unsaved', editorController);
-                        return;
-                    }
-                }
-
-                this._super();
-            },
-
             toggleGlobalMobileNav: function () {
                 this.toggleProperty('controller.showGlobalMobileNav');
             },
@@ -6184,9 +6275,11 @@ define("ghost/routes/application",
             openSettingsMenu: function () {
                 this.set('controller.showSettingsMenu', true);
             },
+
             closeSettingsMenu: function () {
                 this.set('controller.showSettingsMenu', false);
             },
+
             toggleSettingsMenu: function () {
                 this.toggleProperty('controller.showSettingsMenu');
             },
@@ -6215,7 +6308,13 @@ define("ghost/routes/application",
             },
 
             sessionAuthenticationSucceeded: function () {
-                var self = this;
+                var appController = this.controllerFor('application'),
+                    self = this;
+
+                if (appController && appController.get('skipAuthSuccessHandler')) {
+                    return;
+                }
+
                 this.store.find('user', 'me').then(function (user) {
                     self.send('signedIn', user);
                     var attemptedTransition = self.get('session').get('attemptedTransition');
@@ -6297,7 +6396,10 @@ define("ghost/routes/application",
                         errorObj.el.addClass('input-error');
                     }
                 });
-            }
+            },
+
+            // noop default for unhandled save (used from shortcuts)
+            save: Ember.K
         }
     });
 
@@ -6389,6 +6491,12 @@ define("ghost/routes/editor/edit",
                     return self.replaceWith('posts.index');
                 }
             });
+        },
+
+        actions: {
+             authorizationFailed: function () {
+                this.send('openModal', 'signin');
+            }
         }
     });
 
@@ -6870,22 +6978,15 @@ define("ghost/routes/settings/apps",
     __exports__["default"] = AppsRoute;
   });
 define("ghost/routes/settings/code-injection", 
-  ["ghost/routes/authenticated","ghost/mixins/loading-indicator","ghost/mixins/current-user-settings","ghost/mixins/style-body","ghost/mixins/shortcuts-route","ghost/utils/ctrl-or-cmd","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __exports__) {
+  ["ghost/routes/authenticated","ghost/mixins/loading-indicator","ghost/mixins/current-user-settings","ghost/mixins/style-body","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
     var AuthenticatedRoute = __dependency1__["default"];
     var loadingIndicator = __dependency2__["default"];
     var CurrentUserSettings = __dependency3__["default"];
     var styleBody = __dependency4__["default"];
-    var ShortcutsRoute = __dependency5__["default"];
-    var ctrlOrCmd = __dependency6__["default"];
 
-    var shortcuts = {},
-        SettingsCodeInjectionRoute;
-
-    shortcuts[ctrlOrCmd + '+s'] = {action: 'save'};
-
-    SettingsCodeInjectionRoute = AuthenticatedRoute.extend(styleBody, loadingIndicator, CurrentUserSettings, ShortcutsRoute, {
+    var SettingsCodeInjectionRoute = AuthenticatedRoute.extend(styleBody, loadingIndicator, CurrentUserSettings, {
         classNames: ['settings-view-code'],
 
         beforeModel: function () {
@@ -6900,8 +7001,6 @@ define("ghost/routes/settings/code-injection",
             });
         },
 
-        shortcuts: shortcuts,
-
         actions: {
             save: function () {
                 this.get('controller').send('save');
@@ -6912,22 +7011,15 @@ define("ghost/routes/settings/code-injection",
     __exports__["default"] = SettingsCodeInjectionRoute;
   });
 define("ghost/routes/settings/general", 
-  ["ghost/routes/authenticated","ghost/mixins/loading-indicator","ghost/mixins/current-user-settings","ghost/mixins/style-body","ghost/mixins/shortcuts-route","ghost/utils/ctrl-or-cmd","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __exports__) {
+  ["ghost/routes/authenticated","ghost/mixins/loading-indicator","ghost/mixins/current-user-settings","ghost/mixins/style-body","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
     var AuthenticatedRoute = __dependency1__["default"];
     var loadingIndicator = __dependency2__["default"];
     var CurrentUserSettings = __dependency3__["default"];
     var styleBody = __dependency4__["default"];
-    var ShortcutsRoute = __dependency5__["default"];
-    var ctrlOrCmd = __dependency6__["default"];
 
-    var shortcuts = {},
-        SettingsGeneralRoute;
-
-    shortcuts[ctrlOrCmd + '+s'] = {action: 'save'};
-
-    SettingsGeneralRoute = AuthenticatedRoute.extend(styleBody, loadingIndicator, CurrentUserSettings, ShortcutsRoute, {
+    var SettingsGeneralRoute = AuthenticatedRoute.extend(styleBody, loadingIndicator, CurrentUserSettings, {
         titleToken: 'General',
 
         classNames: ['settings-view-general'],
@@ -6943,8 +7035,6 @@ define("ghost/routes/settings/general",
                 return records.get('firstObject');
             });
         },
-
-        shortcuts: shortcuts,
 
         actions: {
             save: function () {
@@ -7137,20 +7227,13 @@ define("ghost/routes/settings/users/index",
     __exports__["default"] = UsersIndexRoute;
   });
 define("ghost/routes/settings/users/user", 
-  ["ghost/routes/authenticated","ghost/mixins/style-body","ghost/mixins/shortcuts-route","ghost/utils/ctrl-or-cmd","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+  ["ghost/routes/authenticated","ghost/mixins/style-body","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
     var AuthenticatedRoute = __dependency1__["default"];
     var styleBody = __dependency2__["default"];
-    var ShortcutsRoute = __dependency3__["default"];
-    var ctrlOrCmd = __dependency4__["default"];
 
-    var shortcuts = {},
-        SettingsUserRoute;
-
-    shortcuts[ctrlOrCmd + '+s'] = {action: 'save'};
-
-    SettingsUserRoute = AuthenticatedRoute.extend(styleBody, ShortcutsRoute, {
+    var SettingsUserRoute = AuthenticatedRoute.extend(styleBody, {
         titleToken: 'User',
 
         classNames: ['settings-view-user'],
@@ -7196,8 +7279,6 @@ define("ghost/routes/settings/users/user",
 
             this._super();
         },
-
-        shortcuts: shortcuts,
 
         actions: {
             save: function () {
@@ -7324,7 +7405,7 @@ define("ghost/routes/signup",
                 tokenText,
                 email,
                 model = {},
-                re = /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/;
+                re = /^(?:[A-Za-z0-9_\-]{4})*(?:[A-Za-z0-9_\-]{2}|[A-Za-z0-9_\-]{3})?$/;
 
             return new Ember.RSVP.Promise(function (resolve) {
                 if (!re.test(params.token)) {
@@ -7451,10 +7532,14 @@ define("ghost/serializers/post",
             var root = Ember.String.pluralize(type.typeKey),
                 data = this.serialize(record, options);
 
-            // Don't ever pass uuid's
+            // Properties that exist on the model but we don't want sent in the payload
+
             delete data.uuid;
-            // Don't send HTML
             delete data.html;
+            // Inserted locally as a convenience.
+            delete data.author_id;
+            // Read-only virtual property.
+            delete data.url;
 
             hash[root] = [data];
         }
@@ -8094,7 +8179,6 @@ define("ghost/utils/editor-shortcuts",
     var shortcuts = {};
 
     // General editor shortcuts
-    shortcuts[ctrlOrCmd + '+s'] = 'save';
     shortcuts[ctrlOrCmd + '+alt+p'] = 'publish';
     shortcuts['alt+shift+z'] = 'toggleZenMode';
 
@@ -8128,14 +8212,20 @@ define("ghost/utils/ghost-paths",
   function(__exports__) {
     "use strict";
     var makeRoute = function (root, args) {
-        var parts = Array.prototype.slice.call(args, 0).join('/'),
-            route = [root, parts].join('/');
+        var slashAtStart,
+            slashAtEnd,
+            parts,
+            route;
 
-        if (route.slice(-1) !== '/') {
-            route += '/';
-        }
+        slashAtStart = /^\//;
+        slashAtEnd = /\/$/;
+        route = root.replace(slashAtEnd, '');
+        parts = Array.prototype.slice.call(args, 0);
 
-        return route;
+        parts.forEach(function (part) {
+            route = [route, part.replace(slashAtStart, '').replace(slashAtEnd, '')].join('/');
+        });
+        return route += '/';
     };
 
     function ghostPaths() {
@@ -8161,6 +8251,16 @@ define("ghost/utils/ghost-paths",
 
                 api: function () {
                     return makeRoute(apiRoot, arguments);
+                },
+
+                join: function () {
+                    if (arguments.length > 1) {
+                        return makeRoute(arguments[0], Array.prototype.slice.call(arguments, 1));
+                    } else if (arguments.length === 1) {
+                        var arg = arguments[0];
+                        return arg.slice(-1) === '/' ? arg : arg + '/';
+                    }
+                    return '/';
                 },
 
                 asset: assetUrl
@@ -8677,6 +8777,39 @@ define("ghost/validators/signup",
 
     __exports__["default"] = NewUserValidator.create();
   });
+define("ghost/validators/tag-settings", 
+  ["exports"],
+  function(__exports__) {
+    "use strict";
+    var TagSettingsValidator = Ember.Object.create({
+        check: function (model) {
+            var validationErrors = [],
+                data = model.getProperties('name', 'meta_title', 'meta_description');
+
+            if (validator.empty(data.name)) {
+                validationErrors.push({
+                    message: 'You must specify a name for the tag.'
+                });
+            }
+
+            if (!validator.isLength(data.meta_title, 0, 150)) {
+                validationErrors.push({
+                    message: 'Meta Title cannot be longer than 150 characters.'
+                });
+            }
+
+            if (!validator.isLength(data.meta_description, 0, 200)) {
+                validationErrors.push({
+                    message: 'Meta Description cannot be longer than 200 characters.'
+                });
+            }
+
+            return validationErrors;
+        }
+    });
+
+    __exports__["default"] = TagSettingsValidator;
+  });
 define("ghost/validators/user", 
   ["exports"],
   function(__exports__) {
@@ -9029,8 +9162,40 @@ define("ghost/views/post-item-view",
 
         click: function () {
             this.get('controller').send('showPostContent');
-        }
+        },
+        scrollIntoView: function () {
+            if (!this.get('active')) {
+                return;
+            }
+            var element = this.$(),
+                offset = element.offset().top,
+                elementHeight = element.height(),
+                container = Ember.$('.js-content-scrollbox'),
+                containerHeight = container.height(),
+                currentScroll = container.scrollTop(),
+                isBelowTop,
+                isAboveBottom,
+                isOnScreen;
 
+            isAboveBottom = offset < containerHeight;
+            isBelowTop = offset > elementHeight;
+
+            isOnScreen = isBelowTop && isAboveBottom;
+
+            if (!isOnScreen) {
+                // Scroll so that element is centered in container
+                // 40 is the amount of padding on the container
+                container.clearQueue().animate({
+                    scrollTop: currentScroll + offset - 40 - containerHeight / 2
+                });
+            }
+        },
+        removeScrollBehaviour: function () {
+            this.removeObserver('active', this, this.scrollIntoView);
+        }.on('willDestroyElement'),
+        addScrollBehaviour: function () {
+            this.addObserver('active', this, this.scrollIntoView);
+        }.on('didInsertElement')
     });
 
     __exports__["default"] = PostItemView;
@@ -9075,8 +9240,7 @@ define("ghost/views/post-tags-input",
             ESCAPE: 27,
             UP: 38,
             DOWN: 40,
-            NUMPAD_ENTER: 108,
-            COMMA: 188
+            NUMPAD_ENTER: 108
         },
 
         didInsertElement: function () {
@@ -9112,6 +9276,23 @@ define("ghost/views/post-tags-input",
                 this.get('parentView').set('hasFocus', false);
             },
 
+            keyPress: function (event) {
+                // listen to keypress event to handle comma key on international keyboard
+                var controller = this.get('parentView.controller'),
+                    isComma = ','.localeCompare(String.fromCharCode(event.keyCode || event.charCode)) === 0;
+
+                // use localeCompare in case of international keyboard layout
+                if (isComma) {
+                    event.preventDefault();
+
+                    if (controller.get('selectedSuggestion')) {
+                        controller.send('addSelectedSuggestion');
+                    } else {
+                        controller.send('addNewTag');
+                    }
+                }
+            },
+
             keyDown: function (event) {
                 var controller = this.get('parentView.controller'),
                     keys = this.get('parentView.keys'),
@@ -9131,11 +9312,6 @@ define("ghost/views/post-tags-input",
                     case keys.TAB:
                     case keys.ENTER:
                     case keys.NUMPAD_ENTER:
-                    case keys.COMMA:
-                        if (event.keyCode === keys.COMMA && event.shiftKey) {
-                            break;
-                        }
-
                         if (controller.get('selectedSuggestion')) {
                             event.preventDefault();
                             controller.send('addSelectedSuggestion');
@@ -9365,6 +9541,21 @@ define("ghost/views/settings/tags/settings-menu",
             return this.get('controller.model.isNew') ?
                 'Add Tag' :
                 'Save Tag';
+        }),
+
+        // This observer loads and resets the uploader whenever the active tag changes,
+        // ensuring that we can reuse the whole settings menu.
+        updateUploader: Ember.observer('controller.activeTag.image', 'controller.uploaderReference', function () {
+            var uploader = this.get('controller.uploaderReference'),
+                image = this.get('controller.activeTag.image');
+
+            if (uploader && uploader[0]) {
+                if (image) {
+                    uploader[0].uploaderUi.initWithImage();
+                } else {
+                    uploader[0].uploaderUi.initWithDropzone();
+                }
+            }
         })
     });
 

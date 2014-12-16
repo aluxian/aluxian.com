@@ -2638,33 +2638,69 @@ table, .table {
 
 /* line 125, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal-header {
-  position: relative; }
-  /* line 128, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+  position: relative;
+  margin-bottom: 18px; }
+  /* line 129, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
   .modal-header h1 {
     display: inline-block;
     margin: 0;
     font-size: 1.85em;
     font-weight: 100; }
 
-/* line 136, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+/* line 137, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal-body {
   position: relative;
   overflow-y: auto; }
+  /* line 141, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+  .modal-body .red {
+    color: #e25440; }
 
-/* line 141, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+/* line 146, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal-footer {
   margin-top: 20px; }
 
-/* line 153, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+/* line 158, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal-style-wide {
   width: 550px; }
   @media (max-width: 900px) {
     .modal-style-wide {
       width: 100%; } }
 
-/* line 161, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+/* line 166, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal-style-centered {
   text-align: center; }
+
+/* line 171, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+.modal-body .login-form {
+  display: block; }
+  /* line 175, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+  .modal-body .login-form .password-wrap input {
+    width: 100%; }
+  @media (max-width: 900px) {
+    .modal-body .login-form {
+      margin: 0 auto;
+      max-width: 264px; }
+      /* line 184, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+      .modal-body .login-form .password-wrap {
+        width: 100%;
+        margin: 0 auto 1em; }
+      /* line 189, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+      .modal-body .login-form .btn, .modal-body .login-form .modal-footer .reject-button-class, .modal-footer .modal-body .login-form .reject-button-class {
+        margin: 0;
+        width: 100%;
+        margin-bottom: 1em; } }
+  @media (min-width: 901px) {
+    .modal-body .login-form {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex; }
+      /* line 199, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+      .modal-body .login-form .password-wrap {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+            -ms-flex: 1;
+                flex: 1; } }
 
 @media (max-width: 400px) {
   .notifications {
