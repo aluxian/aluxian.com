@@ -15,6 +15,14 @@
     {
       "title": "Portfolio",
       "href": "#portfolio"
+    },
+    {
+      "title": "Achievements",
+      "href": "#achievements"
+    },
+    {
+      "title": "Blog",
+      "href": "#blog"
     }
   ],
   "posts": [
@@ -31,23 +39,6 @@
     {
       "meta": "21 July",
       "title": "The Current State Of E-Commerce Search",
-      "link": "#"
-    }
-  ],
-  "events": [
-    {
-      "meta": "16 August, 2014",
-      "title": "Won 2nd place at InfoEducatie",
-      "link": "#"
-    },
-    {
-      "meta": "14 May, 2015",
-      "title": "Won first place at C# olympiad",
-      "link": "#"
-    },
-    {
-      "meta": "21 July, 2016",
-      "title": "Startup award",
       "link": "#"
     }
   ]

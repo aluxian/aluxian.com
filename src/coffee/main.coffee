@@ -79,7 +79,7 @@
     navList.classList.toggle 'is-visible'
 
   # Choose a header background
-  randomInt = Math.floor(Math.random() * 3)
+  randomInt = Math.floor(Math.random() * 2)
   size = 1920
 
   size = 1440 if innerWidth <= 1440 and innerHeight <= 1024
