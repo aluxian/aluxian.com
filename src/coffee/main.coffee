@@ -1,4 +1,31 @@
 (->
+  # Async load font files
+  addFont = ->
+    style = document.createElement 'style'
+    style.rel = 'stylesheet'
+    document.head.appendChild style
+    style.textContent = localStorage.fonts
+
+  addFont2 = ->
+    style = document.createElement 'style'
+    style.rel = 'stylesheet'
+    style.href = 'fonts.css'
+    document.head.appendChild style
+
+  try
+    if localStorage.fonts
+      addFont()
+    else
+      request = new XMLHttpRequest()
+      request.open 'GET', 'fonts.css', true
+      request.onload = ->
+        if request.status >= 200 and request.status < 400
+          localStorage.fonts = request.responseText
+          addFont()
+      request.send()
+  catch ex
+    addFont2
+
   # Menu
   menuItems = document.querySelectorAll 'header > nav ul li'
 
