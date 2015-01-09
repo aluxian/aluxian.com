@@ -26,6 +26,11 @@
   catch ex
     addFont2
 
+  # Async load images
+  document.querySelector('img.me').src = 'img/photo.jpg'
+  document.querySelector('img.portfolio-1').src = 'img/portfolio-1.jpg'
+  document.querySelector('img.portfolio-2').src = 'img/portfolio-2.jpg'
+
   # Menu
   menuItems = document.querySelectorAll 'header > nav ul li'
 
