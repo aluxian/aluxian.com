@@ -9,8 +9,8 @@ live     = false
 
 gulp.task 'live', -> live = true
 
-gulp.task 'purge', (cb) -> del(['./dist'], cb)
-gulp.task 'clean', (cb) -> del(['./dist/**/*.*'], cb)
+gulp.task 'purge', (cb) -> del(['./dist', './temp'], cb)
+gulp.task 'clean', (cb) -> del(['./dist/**/*.*', './temp/**/*.*'], cb)
 
 gulp.task 'jade', ->
   gulp.src './src/jade/*.jade'

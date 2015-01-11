@@ -1,15 +1,21 @@
 (->
+  # Background size
+  bgSize = 1920
+  bgSize = 1440 if innerWidth <= 1440 and innerHeight <= 1024
+  bgSize = 768  if innerWidth <= 768  and innerHeight <= 768
+  bgSize = 480  if innerWidth <= 480  and innerHeight <= 480
+
+  # Me photo size
+  imageSize = 1920
+  imageSize = 1440 if innerWidth <= 1440
+  imageSize = 768  if innerWidth <= 768
+  imageSize = 480  if innerWidth <= 480
+
   # Async load font files
   addFont = ->
     style = document.createElement 'style'
     style.rel = 'stylesheet'
-    document.head.appendChild style
     style.textContent = localStorage.fonts
-
-  addFont2 = ->
-    style = document.createElement 'style'
-    style.rel = 'stylesheet'
-    style.href = 'fonts.css'
     document.head.appendChild style
 
   try
@@ -24,10 +30,17 @@
           addFont()
       request.send()
   catch ex
-    addFont2
+    style = document.createElement 'style'
+    style.rel = 'stylesheet'
+    style.href = 'fonts.css'
+    document.head.appendChild style
+
+  # Choose a header background
+  randomInt = Math.floor(Math.random() * 2)
+  document.querySelector('.fullscreen').style.backgroundImage = "url('img/background-#{randomInt}@#{bgSize}.jpg')"
 
   # Async load images
-  document.querySelector('img.me').src = 'img/photo.jpg'
+  document.querySelector('img.me').src = "img/photo@#{imageSize}.jpg"
   document.querySelector('img.portfolio-1').src = 'img/portfolio-1.jpg'
   document.querySelector('img.portfolio-2').src = 'img/portfolio-2.jpg'
 
@@ -109,16 +122,6 @@
   trigger.addEventListener 'click', ->
     trigger.classList.toggle 'menu-is-open'
     navList.classList.toggle 'is-visible'
-
-  # Choose a header background
-  randomInt = Math.floor(Math.random() * 2)
-  size = 1920
-
-  size = 1440 if innerWidth <= 1440 and innerHeight <= 1024
-  size = 768  if innerWidth <= 768  and innerHeight <= 768
-  size = 480  if innerWidth <= 480  and innerHeight <= 480
-
-  document.querySelector('.fullscreen').style.backgroundImage = "url('img/background-#{randomInt}@#{size}.jpg')"
 
   # Make header size static
   fullscreen = document.querySelector '.fullscreen'
