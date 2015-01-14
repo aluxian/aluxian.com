@@ -45,8 +45,6 @@ gulp.task 'sass', ['jade'], ->
       sourceComments : 'normal'
       errLogToConsole: true
     .pipe $.concat 'styles.css'
-    .pipe $.if live, $.uncss
-      html: ['./dist/index.html']
     .pipe $.if live, $.cssmin()
     .pipe gulp.dest './temp'
 
