@@ -297,7 +297,6 @@
   background-size: 4px 4px;
   background-color: #c0bfb6;
   background-position: -1px -1px;
-  background-image: -webkit-linear-gradient(#fff 1px, transparent 1px), -webkit-linear-gradient(0deg, #fff 1px, transparent 1px), -webkit-linear-gradient(#fff 1px, transparent 1px), -webkit-linear-gradient(0deg, #fff 1px, transparent 1px);
   background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px), linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); }
 
 @-webkit-keyframes fade-in {
@@ -1219,8 +1218,7 @@ td, th {
   top: 2px;
   bottom: 2px;
   opacity: 0;
-  -webkit-transition: 0.45s;
-          transition: 0.45s;
+  transition: 0.45s;
   border-radius: 10px; }
 
 /* line 36, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/vendor/nanoscroller */
@@ -1239,8 +1237,7 @@ td, th {
   width: 10px;
   background: rgba(0, 0, 0, 0.15);
   opacity: 1;
-  -webkit-transition: 0.15s;
-          transition: 0.15s; }
+  transition: 0.15s; }
 
 /* line 16, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/patterns/global */
 *, *:before, *:after {
@@ -1334,13 +1331,11 @@ mark {
 a {
   color: #5BA4E5;
   text-decoration: none;
-  -webkit-transition: background 0.3s, color 0.3s;
-          transition: background 0.3s, color 0.3s; }
+  transition: background 0.3s, color 0.3s; }
   /* line 112, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/patterns/global */
   a:hover {
     text-decoration: none;
-    -webkit-transition: background 0.1s, color 0.1s;
-            transition: background 0.1s, color 0.1s; }
+    transition: background 0.1s, color 0.1s; }
   /* line 117, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/patterns/global */
   a.highlight {
     color: #F2A925;
@@ -1542,7 +1537,6 @@ button {
   font-size: 1.3rem;
   text-transform: uppercase;
   color: #aaa9a2;
-  background: -webkit-linear-gradient(top, white 0%, white 25%, rgba(255, 255, 255, 0.9) 100%);
   background: linear-gradient(to bottom, white 0%, white 25%, rgba(255, 255, 255, 0.9) 100%); }
   /* line 61, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/patterns/_shame */
   .floatingheader .button {
@@ -1591,7 +1585,6 @@ button {
     height: 5px;
     width: 80%;
     margin-left: -40%;
-    background-image: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0) 100%);
     background-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0) 100%);
     background-position: 0px -5px;
     background-size: 100% 200%;
@@ -1709,8 +1702,7 @@ legend {
   font-size: 1.4rem;
   font-weight: normal;
   color: #242628;
-  -webkit-transition: border-color 0.15s linear;
-          transition: border-color 0.15s linear; }
+  transition: border-color 0.15s linear; }
   /* line 197, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/patterns/forms */
   .input:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="url"]:focus, input[type="date"]:focus, textarea:focus, .gh-select:focus, select:focus {
     border-color: #aaa9a2;
@@ -1731,12 +1723,10 @@ textarea {
   border-radius: 3px; }
 /* line 226, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/patterns/forms */
 .for-checkbox label .input-toggle-component {
-  -webkit-transition: background 0.15s ease-in-out, border-color 0.15s ease-in-out;
-          transition: background 0.15s ease-in-out, border-color 0.15s ease-in-out; }
+  transition: background 0.15s ease-in-out, border-color 0.15s ease-in-out; }
   /* line 229, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/patterns/forms */
   .for-checkbox label .input-toggle-component:before {
-    -webkit-transition: opacity 0.15s ease-in-out;
-            transition: opacity 0.15s ease-in-out;
+    transition: opacity 0.15s ease-in-out;
     content: '';
     position: absolute;
     width: 10px;
@@ -1763,12 +1753,10 @@ textarea {
   border-radius: 100px; }
 /* line 269, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/patterns/forms */
 .for-radio label .input-toggle-component {
-  -webkit-transition: background 0.15s ease-in-out, border-color 0.15s ease-in-out;
-          transition: background 0.15s ease-in-out, border-color 0.15s ease-in-out; }
+  transition: background 0.15s ease-in-out, border-color 0.15s ease-in-out; }
   /* line 272, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/patterns/forms */
   .for-radio label .input-toggle-component:before {
-    -webkit-transition: opacity 0.15s ease-in-out;
-            transition: opacity 0.15s ease-in-out;
+    transition: opacity 0.15s ease-in-out;
     content: '';
     position: absolute;
     width: 8px;
@@ -1886,8 +1874,7 @@ textarea {
   color: #666;
   background-color: #fff;
   border-color: #e8eaeb;
-  -webkit-transition: background 0.2s ease, border-color 0.2s ease;
-          transition: background 0.2s ease, border-color 0.2s ease; }
+  transition: background 0.2s ease, border-color 0.2s ease; }
   /* line 87, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/patterns/buttons */
   .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
     color: #666;
@@ -1911,8 +1898,7 @@ textarea {
   color: #fff;
   background-color: #A1ADB3;
   border-color: #93a1a8;
-  -webkit-transition: background 0.2s ease, border-color 0.2s ease;
-          transition: background 0.2s ease, border-color 0.2s ease; }
+  transition: background 0.2s ease, border-color 0.2s ease; }
   /* line 87, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/patterns/buttons */
   .btn-alt:hover, .btn-alt:focus, .btn-alt:active, .btn-alt.active, .open > .btn-alt.dropdown-toggle {
     color: #fff;
@@ -1936,8 +1922,7 @@ textarea {
   color: #fff;
   background-color: #5BA4E5;
   border-color: #4598e2;
-  -webkit-transition: background 0.2s ease, border-color 0.2s ease;
-          transition: background 0.2s ease, border-color 0.2s ease; }
+  transition: background 0.2s ease, border-color 0.2s ease; }
   /* line 87, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/patterns/buttons */
   .btn-blue:hover, .btn-blue:focus, .btn-blue:active, .btn-blue.active, .open > .btn-blue.dropdown-toggle {
     color: #fff;
@@ -1961,8 +1946,7 @@ textarea {
   color: #fff;
   background-color: #9FBB58;
   border-color: #94b148;
-  -webkit-transition: background 0.2s ease, border-color 0.2s ease;
-          transition: background 0.2s ease, border-color 0.2s ease; }
+  transition: background 0.2s ease, border-color 0.2s ease; }
   /* line 87, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/patterns/buttons */
   .btn-green:hover, .btn-green:focus, .btn-green:active, .btn-green.active, .open > .btn-green.dropdown-toggle {
     color: #fff;
@@ -1986,8 +1970,7 @@ textarea {
   color: #fff;
   background-color: #e25440;
   border-color: #df402a;
-  -webkit-transition: background 0.2s ease, border-color 0.2s ease;
-          transition: background 0.2s ease, border-color 0.2s ease; }
+  transition: background 0.2s ease, border-color 0.2s ease; }
   /* line 87, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/patterns/buttons */
   .btn-red:hover, .btn-red:focus, .btn-red:active, .btn-red.active, .open > .btn-red.dropdown-toggle {
     color: #fff;
@@ -2262,8 +2245,8 @@ table, .table {
   left: 0;
   z-index: 800;
   background: #242628;
-  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
-          transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1); }
+  transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+  transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1); }
   /* line 28, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/navigation */
   .global-nav i:before {
     display: inline-block;
@@ -2294,15 +2277,13 @@ table, .table {
   text-transform: uppercase;
   border-radius: 4px;
   white-space: nowrap;
-  -webkit-transition: color 0.5s, background 0.5s;
-          transition: color 0.5s, background 0.5s; }
+  transition: color 0.5s, background 0.5s; }
 
 /* line 71, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/navigation */
 .nav-item.active .nav-label, .nav-item:focus .nav-label, .nav-item:hover .nav-label, .nav-item:active .nav-label {
   color: #fff;
   background: #0e0f10;
-  -webkit-transition: color 0.1s, background 0.1s;
-          transition: color 0.1s, background 0.1s; }
+  transition: color 0.1s, background 0.1s; }
 
 /* line 82, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/navigation */
 .ghost-logo {
@@ -2312,8 +2293,7 @@ table, .table {
   color: #656d71;
   font-size: 1.2rem;
   line-height: 1em;
-  -webkit-transition: color 0.5s;
-          transition: color 0.5s; }
+  transition: color 0.5s; }
   /* line 91, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/navigation */
   .ghost-logo span {
     display: none; }
@@ -2321,8 +2301,7 @@ table, .table {
 /* line 96, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/navigation */
 .ghost-logo:hover, .ghost-logo:focus {
   color: #e2edf2;
-  -webkit-transition: color 0.1s;
-          transition: color 0.1s; }
+  transition: color 0.1s; }
   /* line 100, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/navigation */
   .ghost-logo:hover .nav-label, .ghost-logo:focus .nav-label {
     background: transparent; }
@@ -2362,8 +2341,7 @@ table, .table {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    -webkit-transition: background 0.5s;
-            transition: background 0.5s; }
+    transition: background 0.5s; }
     /* line 152, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/navigation */
     .user-menu .name small {
       display: none;
@@ -2377,8 +2355,7 @@ table, .table {
   .user-menu:hover .name {
     color: rgba(255, 255, 255, 0.9);
     background: #131415;
-    -webkit-transition: background 0.1s;
-            transition: background 0.1s; }
+    transition: background 0.1s; }
   /* line 169, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/navigation */
   .user-menu .dropdown {
     position: fixed;
@@ -2414,8 +2391,8 @@ table, .table {
     -webkit-overflow-scrolling: touch;
     -webkit-transform: translate3d(-60px, 0px, 0px);
             transform: translate3d(-60px, 0px, 0px);
-    -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
-            transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1); }
+    transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+    transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1); }
     /* line 214, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/navigation */
     body.global-nav-expanded .global-nav {
       -webkit-transform: translate3d(0, 0px, 0px);
@@ -2474,8 +2451,7 @@ table, .table {
     padding: 0;
     border-bottom: none;
     border-top: #242628 1px solid;
-    -webkit-transition: color 0.5s, background 0.5s;
-            transition: color 0.5s, background 0.5s; }
+    transition: color 0.5s, background 0.5s; }
     /* line 275, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/navigation */
     .user-menu .nav-label {
       padding: 15px;
@@ -2503,13 +2479,11 @@ table, .table {
     .user-menu:hover {
       color: rgba(255, 255, 255, 0.9);
       background: #242628;
-      -webkit-transition: color 0.1s, background 0.1s;
-              transition: color 0.1s, background 0.1s; }
+      transition: color 0.1s, background 0.1s; }
       /* line 309, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/navigation */
       .user-menu:hover .name {
         background: transparent;
-        -webkit-transition: none;
-                transition: none; }
+        transition: none; }
     /* line 315, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/navigation */
     .user-menu .dropdown {
       position: absolute;
@@ -2530,13 +2504,13 @@ table, .table {
     bottom: 0;
     left: 0;
     z-index: 600;
-    -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
-            transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+    transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+    transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
     -webkit-transform: translate3d(260px, 0px, 0px);
             transform: translate3d(260px, 0px, 0px); }
  }
 
-/* line 17, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+/* line 19, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal-container {
   display: none;
   position: fixed;
@@ -2545,25 +2519,15 @@ table, .table {
   left: 0;
   right: 0;
   z-index: 1040;
+  padding-left: 10px;
+  padding-right: 10px;
   overflow-x: auto;
   overflow-y: scroll;
-  -webkit-transition: all 0.15s linear 0s;
-          transition: all 0.15s linear 0s;
+  transition: all 0.15s linear 0s;
   -webkit-transform: translateZ(0);
           transform: translateZ(0); }
 
-/* line 31, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
-.fade {
-  opacity: 0;
-  -webkit-transition: opacity 0.2s linear 0s;
-          transition: opacity 0.2s linear 0s;
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0); }
-  /* line 36, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
-  .fade.in {
-    opacity: 1; }
-
-/* line 41, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+/* line 35, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal-background {
   display: none;
   position: fixed;
@@ -2574,12 +2538,13 @@ table, .table {
   z-index: 1030;
   background: rgba(0, 0, 0, 0.6); }
 
-/* line 57, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+/* line 51, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal, .modal-action {
   left: 50%;
   right: auto;
   z-index: 1050;
-  width: 450px;
+  width: 100%;
+  max-width: 550px;
   margin-left: auto;
   margin-right: auto;
   padding-top: 30px;
@@ -2587,24 +2552,22 @@ table, .table {
   pointer-events: auto; }
   @media (max-width: 900px) {
     .modal, .modal-action {
-      width: 100%;
-      padding: 10px;
-      margin-left: 0; } }
-  /* line 74, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+      padding: 10px; } }
+  /* line 67, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
   .modal button, .modal-action button {
     min-width: 100px; }
-  /* line 79, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+  /* line 72, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
   .modal .image-uploader, .modal-action .image-uploader, .modal .pre-image-uploader, .modal-action .pre-image-uploader {
     margin: 0; }
 
-/* line 84, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+/* line 77, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal-action {
   padding: 60px 0 30px; }
   @media (max-width: 900px) {
     .modal-action {
       padding: 30px 0; } }
 
-/* line 97, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+/* line 90, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal-content {
   position: relative;
   padding: 18px;
@@ -2612,7 +2575,7 @@ table, .table {
   background-color: #FFFFFF;
   border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 6px; }
-  /* line 105, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+  /* line 98, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
   .modal-content .close {
     position: absolute;
     top: 19px;
@@ -2627,80 +2590,105 @@ table, .table {
       content: '\e01c';
       font-size: 1.4rem;
       color: #7d878a;
-      -webkit-transition: color 0.3s linear;
-              transition: color 0.3s linear; }
+      transition: color 0.3s linear; }
     /* line 70, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/modules/icons */
     .modal-content .close:hover {
       text-decoration: none; }
-    /* line 119, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+    /* line 112, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
     .modal-content .close:hover:before {
       color: #35393b; }
 
-/* line 125, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+/* line 118, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal-header {
   position: relative;
   margin-bottom: 18px; }
-  /* line 129, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+  /* line 122, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
   .modal-header h1 {
     display: inline-block;
-    margin: 0;
+    margin: 0 25px 0 0;
     font-size: 1.85em;
     font-weight: 100; }
 
-/* line 137, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+/* line 130, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal-body {
   position: relative;
   overflow-y: auto; }
-  /* line 141, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+  /* line 134, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
   .modal-body .red {
     color: #e25440; }
+  /* line 140, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+  .modal-body > *:first-child {
+    margin-top: 0; }
+  /* line 143, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+  .modal-body > *:last-child {
+    margin-bottom: 0; }
 
-/* line 146, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+/* line 148, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal-footer {
-  margin-top: 20px; }
+  margin-top: 20px;
+  text-align: right; }
+  /* line 156, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+  .modal-footer button {
+    margin-left: 8px; }
 
-/* line 158, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+/* line 165, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal-style-wide {
   width: 550px; }
   @media (max-width: 900px) {
     .modal-style-wide {
       width: 100%; } }
 
-/* line 166, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+/* line 173, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal-style-centered {
   text-align: center; }
 
-/* line 171, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+/* line 178, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
 .modal-body .login-form {
   display: block; }
-  /* line 175, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+  /* line 182, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
   .modal-body .login-form .password-wrap input {
     width: 100%; }
   @media (max-width: 900px) {
     .modal-body .login-form {
       margin: 0 auto;
       max-width: 264px; }
-      /* line 184, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+      /* line 191, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
       .modal-body .login-form .password-wrap {
         width: 100%;
         margin: 0 auto 1em; }
-      /* line 189, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+      /* line 196, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
       .modal-body .login-form .btn, .modal-body .login-form .modal-footer .reject-button-class, .modal-footer .modal-body .login-form .reject-button-class {
         margin: 0;
         width: 100%;
         margin-bottom: 1em; } }
   @media (min-width: 901px) {
     .modal-body .login-form {
-      display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex; }
-      /* line 199, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+      /* line 206, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
       .modal-body .login-form .password-wrap {
-        -webkit-box-flex: 1;
         -webkit-flex: 1;
             -ms-flex: 1;
                 flex: 1; } }
+
+/* line 219, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+.modal-container.open, .modal-container.open > .modal, .modal-container.open > .modal-action, .modal-container.open > .modal-action {
+  display: block; }
+
+/* line 223, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+.modal-background.open {
+  display: block; }
+
+/* line 232, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+.modal-container.fade-out {
+  -webkit-animation-duration: 0.08s;
+          animation-duration: 0.08s; }
+
+/* line 236, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/modals */
+.modal-background.fade-out {
+  -webkit-animation-duration: 0.15s;
+          animation-duration: 0.15s; }
 
 @media (max-width: 400px) {
   .notifications {
@@ -2709,8 +2697,8 @@ table, .table {
     left: 0;
     right: 0;
     z-index: 9999;
-    -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
-            transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1); }
+    transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+    transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1); }
     /* line 26, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/notifications */
     body.settings-menu-expanded .notifications {
       -webkit-transform: translate3d(100%, 0px, 0px);
@@ -2722,8 +2710,8 @@ table, .table {
     left: 0;
     z-index: 980;
     width: 300px;
-    -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
-            transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1); }
+    transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+    transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1); }
     /* line 40, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/notifications */
     body.settings-menu-expanded .notifications {
       -webkit-transform: translate3d(350px, 0px, 0px);
@@ -2879,8 +2867,8 @@ table, .table {
     color: #e7e6db;
     display: inline-block;
     vertical-align: initial;
-    -webkit-transition: -webkit-transform 1s ease;
-            transition: transform 1s ease; }
+    transition: -webkit-transform 1s ease;
+    transition: transform 1s ease; }
   /* line 70, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/modules/icons */
   .image-uploader .media:hover {
     text-decoration: none; }
@@ -2962,15 +2950,13 @@ table, .table {
     background: #fff;
     border: #e3e1d5 1px solid;
     border-radius: 4px;
-    -webkit-transition: all 0.15s ease-in-out;
-            transition: all 0.15s ease-in-out; }
+    transition: all 0.15s ease-in-out; }
   /* line 122, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/uploader */
   .image-uploader .progress {
     position: relative;
     margin: -19px 0 44px 0;
     display: block;
     overflow: hidden;
-    background: -webkit-linear-gradient(top, #f5f5f5, #f9f9f9);
     background: linear-gradient(to bottom, #f5f5f5, #f9f9f9);
     border-radius: 12px;
     box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px inset; }
@@ -3105,16 +3091,16 @@ table, .table {
       -webkit-transform: rotate(-360deg);
           -ms-transform: rotate(-360deg);
               transform: rotate(-360deg);
-      -webkit-transition: -webkit-transform 0.6s ease, top 0.6s ease;
-              transition: transform 0.6s ease, top 0.6s ease; }
+      transition: -webkit-transform 0.6s ease, top 0.6s ease;
+      transition: transform 0.6s ease, top 0.6s ease; }
     /* line 85, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/splitbuttons */
     .splitbtn .dropdown-toggle.up:hover .options:before, .splitbtn .dropdown-toggle.up.open .options:before {
       top: -1px;
       -webkit-transform: rotate(540deg);
           -ms-transform: rotate(540deg);
               transform: rotate(540deg);
-      -webkit-transition: -webkit-transform 0.3s ease, top 0.3s ease;
-              transition: transform 0.3s ease, top 0.3s ease; }
+      transition: -webkit-transform 0.3s ease, top 0.3s ease;
+      transition: transform 0.3s ease, top 0.3s ease; }
 
 /* line 100, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/splitbuttons */
 .splitbutton, .splitbutton-save, .splitbutton-add, .splitbutton-delete, .splitbutton-alt {
@@ -3141,8 +3127,7 @@ table, .table {
     border-radius: 0 2px 2px 0;
     border-left: 0;
     box-shadow: rgba(0, 0, 0, 0.02) 0 1px 0 inset, rgba(0, 0, 0, 0.02) -1px 0 0 inset, rgba(0, 0, 0, 0.02) 0 -1px 0 inset;
-    -webkit-transition: background-color 0.3s linear;
-            transition: background-color 0.3s linear; }
+    transition: background-color 0.3s linear; }
     /* line 57, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/modules/icons */
     .splitbutton .options:before, .splitbutton-save .options:before, .splitbutton-add .options:before, .splitbutton-delete .options:before, .splitbutton-alt .options:before {
       content: '\e001';
@@ -3152,14 +3137,11 @@ table, .table {
       right: 50%;
       margin-top: -3px;
       margin-right: -5px;
-      -webkit-transition: margin-top 0.3s ease;
-              transition: margin-top 0.3s ease;
-      -webkit-transition-property: -webkit-transform;
-              transition-property: transform;
-      -webkit-transition-duration: 0.3;
-              transition-duration: 0.3;
-      -webkit-transition-timing-function: ease;
-              transition-timing-function: ease; }
+      transition: margin-top 0.3s ease;
+      transition-property: -webkit-transform;
+      transition-property: transform;
+      transition-duration: 0.3;
+      transition-timing-function: ease; }
     /* line 70, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/modules/icons */
     .splitbutton .options:hover, .splitbutton-save .options:hover, .splitbutton-add .options:hover, .splitbutton-delete .options:hover, .splitbutton-alt .options:hover {
       text-decoration: none; }
@@ -3196,12 +3178,10 @@ table, .table {
       -webkit-transform: rotate(540deg);
           -ms-transform: rotate(540deg);
               transform: rotate(540deg);
-      -webkit-transition-property: -webkit-transform;
-              transition-property: transform;
-      -webkit-transition-duration: 0.6;
-              transition-duration: 0.6;
-      -webkit-transition-timing-function: ease;
-              transition-timing-function: ease; }
+      transition-property: -webkit-transform;
+      transition-property: transform;
+      transition-duration: 0.6;
+      transition-timing-function: ease; }
     /* line 70, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/modules/icons */
     .splitbutton .options.up:hover:hover, .splitbutton-save .options.up:hover:hover, .splitbutton-add .options.up:hover:hover, .splitbutton-delete .options.up:hover:hover, .splitbutton-alt .options.up:hover:hover, .splitbutton .options.up:focus:hover, .splitbutton-save .options.up:focus:hover, .splitbutton-add .options.up:focus:hover, .splitbutton-delete .options.up:focus:hover, .splitbutton-alt .options.up:focus:hover {
       text-decoration: none; }
@@ -3291,8 +3271,7 @@ table, .table {
     text-align: left;
     color: #333;
     white-space: nowrap;
-    -webkit-transition: none;
-            transition: none; }
+    transition: none; }
   /* line 84, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/dropdowns */
   .dropdown-menu i {
     font-size: 0.9em;
@@ -3820,8 +3799,8 @@ a.badge:hover, a.badge:focus {
   width: 100%;
   max-width: 350px;
   overflow: hidden;
-  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
-          transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+  transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+  transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
   -webkit-transform: translate3d(60px, 0px, 0px);
           transform: translate3d(60px, 0px, 0px); }
   /* line 30, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/settings-menu */
@@ -3842,8 +3821,8 @@ a.badge:hover, a.badge:focus {
     -webkit-overflow-scrolling: touch; }
     @media (min-width: 901px) {
       .settings-menu-container .settings-menu-pane {
-        -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
-                transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1); } }
+        transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+        transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1); } }
     /* line 49, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/settings-menu */
     .settings-menu-container .settings-menu-pane.settings-menu-pane-out-left {
       -webkit-transform: translate3d(-100%, 0px, 0px);
@@ -3919,19 +3898,31 @@ a.badge:hover, a.badge:focus {
   .settings-menu-content textarea {
     height: 108px; }
   /* line 146, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/settings-menu */
+  .settings-menu-content .tag-delete-button {
+    padding-left: 0;
+    color: #e25440; }
+    /* line 150, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/settings-menu */
+    .settings-menu-content .tag-delete-button:before {
+      margin-right: 4px;
+      top: -1px;
+      position: relative; }
+    /* line 157, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/settings-menu */
+    .settings-menu-content .tag-delete-button:hover, .settings-menu-content .tag-delete-button:hover:before {
+      color: #cf3520; }
+  /* line 163, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/settings-menu */
   .settings-menu-content .nav-list {
     margin-top: 3rem; }
-  /* line 150, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/settings-menu */
+  /* line 167, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/settings-menu */
   .settings-menu-content .pre-image-uploader {
     width: auto;
     min-height: 50px;
     max-height: 250px;
     margin-top: 0; }
-  /* line 157, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/settings-menu */
+  /* line 174, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/settings-menu */
   .settings-menu-content .word-count {
     font-weight: bold; }
 
-/* line 171, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/settings-menu */
+/* line 188, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/settings-menu */
 body.settings-menu-expanded .content-cover {
   position: absolute;
   top: 0;
@@ -3939,10 +3930,17 @@ body.settings-menu-expanded .content-cover {
   bottom: 0;
   left: 0;
   z-index: 600;
-  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
-          transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+  transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+  transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
   -webkit-transform: translate3d(-350px, 0px, 0px);
           transform: translate3d(-350px, 0px, 0px); }
+
+/* line 13, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/components/url-preview */
+.ghost-url-preview {
+  width: 98%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
 
 /* line 19, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/default */
 #container {
@@ -3962,12 +3960,12 @@ body.settings-menu-expanded .content-cover {
   left: 0;
   overflow: hidden;
   z-index: 500;
-  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
-          transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1); }
+  transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+  transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1); }
   @media (max-width: 900px) {
     .viewport {
-      -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
-              transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1); } }
+      transition: -webkit-transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+      transition: transform 0.4s cubic-bezier(0.1, 0.7, 0.1, 1); } }
   /* line 49, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/default */
   body.global-nav-expanded .viewport {
     -webkit-transform: translate3d(260px, 0px, 0px);
@@ -4113,8 +4111,7 @@ body.settings-menu-expanded .content-cover {
     border: none;
     color: #fff;
     background: #3c4043;
-    -webkit-transition: background 0.25s ease;
-            transition: background 0.25s ease; }
+    transition: background 0.25s ease; }
     /* line 90, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/setup */
     .setup-form .form-group input:focus {
       border: none;
@@ -4182,8 +4179,7 @@ body.settings-menu-expanded .content-cover {
     box-shadow: none;
     margin: 0;
     position: relative;
-    -webkit-transition: background ease 0.25s;
-            transition: background ease 0.25s; }
+    transition: background ease 0.25s; }
     /* line 41, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/auth */
     .ghost-login input:focus, .ghost-signup input:focus, .ghost-forgotten input:focus, .ghost-reset input:focus {
       border: none;
@@ -4756,16 +4752,15 @@ body.settings-menu-expanded .content-cover {
       right: 0;
       width: 100%;
       border: none;
-      z-index: 100;
-      min-height: 380px; }
-      /* line 102, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+      z-index: 100; }
+      /* line 101, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
       .editor .entry-markdown .markdown, .editor .entry-markdown .entry-preview-content, .editor .entry-preview .markdown, .editor .entry-preview .entry-preview-content {
         height: 50px;
         overflow: hidden; }
-      /* line 108, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+      /* line 107, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
       .editor .entry-markdown:not(.active) .markdown-help:hover:before, .editor .entry-preview:not(.active) .markdown-help:hover:before {
         color: #fff; } }
-  /* line 114, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 113, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .editor .entry-markdown .floatingheader a, .editor .entry-preview .floatingheader a {
     color: #aaa9a2; }
   @media (max-width: 1000px) {
@@ -4779,18 +4774,18 @@ body.settings-menu-expanded .content-cover {
       top: -40px;
       left: 0;
       box-shadow: rgba(0, 0, 0, 0.1) 0 -2px 3px inset; }
-      /* line 131, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+      /* line 130, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
       .editor .entry-markdown .floatingheader a, .editor .entry-preview .floatingheader a {
         color: #fff; } }
-  /* line 136, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 135, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .editor .entry-markdown .floatingheader .entry-word-count, .editor .entry-preview .floatingheader .entry-word-count {
     float: right;
     position: relative;
     top: 2px; }
-  /* line 144, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 143, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .editor .entry-markdown.active, .editor .entry-preview.active {
     z-index: 200; }
-  /* line 150, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 149, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .editor .entry-markdown.active .markdown, .editor .entry-markdown.active .entry-preview-content, .editor .entry-preview.active .markdown, .editor .entry-preview.active .entry-preview-content {
     height: auto;
     overflow: auto;
@@ -4802,11 +4797,11 @@ body.settings-menu-expanded .content-cover {
       color: #aaa9a2;
       background: #fff;
       box-shadow: none; }
-      /* line 165, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+      /* line 164, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
       .editor .entry-markdown.active header a, .editor .entry-preview.active header a {
         color: #aaa9a2; } }
 
-/* line 181, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 180, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .editor .entry-markdown-content textarea {
   border: 0;
   width: 100%;
@@ -4821,7 +4816,7 @@ body.settings-menu-expanded .content-cover {
   bottom: 0;
   left: 0;
   -webkit-overflow-scrolling: touch; }
-  /* line 196, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 195, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .editor .entry-markdown-content textarea:focus {
     outline: 0; }
   @media (max-width: 600px) {
@@ -4836,7 +4831,7 @@ body.settings-menu-expanded .content-cover {
   @media (max-height: 560px) {
     .editor .entry-markdown-content textarea {
       height: calc(100% - 5px); } }
-/* line 218, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 217, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .editor .CodeMirror {
   height: auto;
   position: absolute;
@@ -4844,18 +4839,18 @@ body.settings-menu-expanded .content-cover {
   left: 0;
   right: 0;
   bottom: 0; }
-  /* line 226, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 225, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .editor .CodeMirror pre {
     font-size: 1.6rem;
     line-height: 1.56em;
     font-family: monospace;
     color: #3c4043; }
-  /* line 234, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 233, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .editor .CodeMirror .CodeMirror-focused, .editor .CodeMirror .CodeMirror-selected {
     color: #242628;
     background: #b3d5f3;
     text-shadow: none; }
-  /* line 240, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 239, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .editor .CodeMirror ::-moz-selection {
     color: #242628;
     background: #b3d5f3;
@@ -4864,7 +4859,7 @@ body.settings-menu-expanded .content-cover {
     color: #242628;
     background: #b3d5f3;
     text-shadow: none; }
-/* line 247, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 246, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .editor .CodeMirror-lines {
   padding-top: 65px;
   /* Vertical padding around content */ }
@@ -4874,27 +4869,27 @@ body.settings-menu-expanded .content-cover {
   @media (max-width: 400px) {
     .editor .CodeMirror-lines {
       padding: 15px 0; } }
-/* line 253, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 252, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .editor .CodeMirror pre {
   padding: 0 40px;
   /* Horizontal padding of content */ }
   @media (max-width: 400px) {
     .editor .CodeMirror pre {
       padding: 0 15px; } }
-/* line 258, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 257, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .editor .cm-header {
   color: #3c4043;
   font-size: 1.4em;
   line-height: 1.4em;
   font-weight: bold; }
-/* line 267, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 266, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .editor .cm-variable-2, .editor .cm-variable-3, .editor .cm-keyword {
   color: #3c4043; }
-/* line 277, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 276, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .editor .cm-strong, .editor .cm-comment, .editor .cm-quote, .editor .cm-number, .editor .cm-atom, .editor .cm-tag {
   color: #3c4043;
   font-weight: bold; }
-/* line 283, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 282, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .editor .cm-string, .editor .cm-link {
   color: #3c4043; }
 @media (max-width: 1000px) {
@@ -4902,7 +4897,7 @@ body.settings-menu-expanded .content-cover {
     right: 0;
     left: auto;
     border-right: none; } }
-/* line 298, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 297, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .editor .entry-preview-content {
   position: absolute;
   top: 0;
@@ -4929,18 +4924,18 @@ body.settings-menu-expanded .content-cover {
     .editor .entry-preview-content {
       padding-top: 20px; } }
 @media (max-width: 1000px) {
-  /* line 324, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 323, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .editor .scrolling .floatingheader {
     box-shadow: none; }
-    /* line 328, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+    /* line 327, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
     .editor .scrolling .floatingheader:before, .editor .scrolling .floatingheader:after {
       display: none; }
-  /* line 334, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 333, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .editor .scrolling .CodeMirror-scroll, .editor .scrolling .entry-preview-content {
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05) inset; }
  }
 
-/* line 346, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 345, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .markdown-help {
   position: relative;
   top: -5px;
@@ -4962,28 +4957,28 @@ body.settings-menu-expanded .content-cover {
   .markdown-help:hover:hover {
     text-decoration: none; }
 
-/* line 367, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 366, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .entry-preview-content, .content-preview-content {
   font-size: 1.8rem;
   line-height: 1.5em;
   font-weight: 200; }
-  /* line 372, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 371, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .entry-preview-content a, .content-preview-content a {
     color: #5BA4E5;
     text-decoration: underline; }
-  /* line 377, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 376, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .entry-preview-content sup a, .content-preview-content sup a {
     text-decoration: none; }
-  /* line 381, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 380, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .entry-preview-content .btn, .entry-preview-content .modal-footer .reject-button-class, .modal-footer .entry-preview-content .reject-button-class, .content-preview-content .btn, .content-preview-content .modal-footer .reject-button-class, .modal-footer .content-preview-content .reject-button-class {
     text-decoration: none;
     color: #35393b; }
-  /* line 386, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 385, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .entry-preview-content .img-placeholder, .content-preview-content .img-placeholder {
     border: 5px dashed #35393b;
     height: 100px;
     position: relative; }
-    /* line 391, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+    /* line 390, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
     .entry-preview-content .img-placeholder span, .content-preview-content .img-placeholder span {
       display: block;
       height: 30px;
@@ -4992,17 +4987,17 @@ body.settings-menu-expanded .content-cover {
       top: 50%;
       width: 100%;
       text-align: center; }
-  /* line 403, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 402, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .entry-preview-content a.image-edit, .content-preview-content a.image-edit {
     width: 16px;
     height: 16px; }
-  /* line 409, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 408, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .entry-preview-content img, .content-preview-content img {
     max-width: 100%;
     height: auto;
     margin: 0 auto; }
 
-/* line 418, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 417, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .js-embed-placeholder, .iframe-embed-placeholder {
   background: #f9f9f9;
   border: none;
@@ -5012,31 +5007,28 @@ body.settings-menu-expanded .content-cover {
   font-size: 1.6rem;
   text-align: center; }
 
-/* line 433, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 432, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 body.zen {
   background: #f3f2ed; }
-  /* line 436, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 435, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   body.zen .usermenu {
     display: none; }
-  /* line 442, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 441, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   body.zen .global-nav, body.zen .page-header, body.zen #publish-bar {
     opacity: 0;
     height: 0;
     overflow: hidden;
-    -webkit-transition: all 0.5s ease-out;
-            transition: all 0.5s ease-out; }
-  /* line 449, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+    transition: all 0.5s ease-out; }
+  /* line 448, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   body.zen .page-content {
     top: 0;
-    -webkit-transition: all 0.5s ease-out;
-            transition: all 0.5s ease-out; }
-  /* line 455, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+    transition: all 0.5s ease-out; }
+  /* line 454, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   body.zen .entry-markdown, body.zen .entry-preview {
     bottom: 0;
-    -webkit-transition: all 0.5s ease-out;
-            transition: all 0.5s ease-out; }
+    transition: all 0.5s ease-out; }
 
-/* line 466, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 465, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 #publish-bar {
   height: 40px;
   padding: 0;
@@ -5053,43 +5045,43 @@ body.zen {
   @media (max-width: 1000px) {
     #publish-bar {
       font-weight: normal; } }
-  /* line 485, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 484, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   #publish-bar .post-settings:hover, #publish-bar .post-settings.active {
     color: #e2edf2; }
-  /* line 490, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 489, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   #publish-bar .post-settings-menu {
     position: absolute;
     bottom: 41px;
     right: -3px; }
-  /* line 497, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 496, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   #publish-bar .splitbtn .btn, #publish-bar .splitbtn .modal-footer .reject-button-class, .modal-footer #publish-bar .splitbtn .reject-button-class {
     border-top: rgba(255, 255, 255, 0.3) 1px solid; }
 
-/* line 503, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 502, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .extended-tags {
   position: static;
   min-height: 100%; }
-  /* line 508, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 507, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .extended-tags #entry-tags:after {
     right: 10px; }
-  /* line 513, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 512, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .extended-tags .tags {
     width: 281px; }
-  /* line 518, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 517, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .extended-tags .tag-label, .extended-tags .tag-label.touch {
     color: #fff; }
-  /* line 522, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 521, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .extended-tags .tag-input {
     width: 100%;
     margin-top: 5px;
     padding-top: 5px;
     padding-left: 10px;
     border-top: 1px solid #242628; }
-  /* line 530, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 529, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .extended-tags .right {
     display: none; }
 
-/* line 536, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 535, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 #entry-tags input[type="text"].tag-input {
   display: inline-block;
   vertical-align: top;
@@ -5100,10 +5092,10 @@ body.zen {
   width: 100%;
   line-height: 1;
   padding: 9px; }
-  /* line 547, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 546, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   #entry-tags input[type="text"].tag-input:focus {
     outline: none; }
-/* line 552, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 551, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 #entry-tags .tag {
   display: inline;
   margin-right: 3px;
@@ -5128,94 +5120,91 @@ body.zen {
   /* line 93, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/modules/icons */
   #entry-tags .tag:hover {
     text-decoration: none; }
-  /* line 568, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 567, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   #entry-tags .tag:hover {
     cursor: pointer; }
 
-/* line 574, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 573, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .suggestions {
   top: auto;
   bottom: calc(100% + 15px); }
-  /* line 580, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 579, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .suggestions li.selected, .suggestions li.selected a {
     text-decoration: none;
     color: #fff;
     background: #5BA4E5; }
-  /* line 586, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 585, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .suggestions li.selected mark {
     color: #fff; }
-  /* line 591, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 590, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .suggestions mark {
     background: none;
     color: #000;
     font-weight: bold; }
 
-/* line 598, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 597, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 #entry-actions {
-  display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
       -ms-flex-pack: end;
           justify-content: flex-end;
   -webkit-align-content: center;
       -ms-flex-line-pack: center;
           align-content: center;
-  -webkit-box-align: center;
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   margin-right: 6px;
   position: relative; }
-  /* line 606, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 605, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   #entry-actions .dropdown {
     position: absolute;
     bottom: 49px;
     right: 0; }
-    /* line 611, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+    /* line 610, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
     #entry-actions .dropdown.fade-in-scale {
       -webkit-animation-duration: 0.1s;
               animation-duration: 0.1s; }
-    /* line 615, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+    /* line 614, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
     #entry-actions .dropdown.fade-out {
       -webkit-animation-duration: 0.01s;
               animation-duration: 0.01s; }
-    /* line 619, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+    /* line 618, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
     #entry-actions .dropdown .dropdown-menu {
       top: auto;
       left: auto;
       right: 100%;
       bottom: 100%; }
-  /* line 627, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 626, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   #entry-actions.unsaved {
     padding-bottom: 0; }
-    /* line 630, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+    /* line 629, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
     #entry-actions.unsaved .delete {
       display: none; }
 
-/* line 636, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 635, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 #entry-actions-menu {
   position: absolute;
   bottom: 50px;
   right: -5px; }
 
-/* line 642, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 641, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .tags-wrapper {
   white-space: nowrap; }
-  /* line 645, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 644, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .tags-wrapper span {
     display: inline-block;
     margin-right: 10px; }
 
-/* line 651, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 650, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .tag-label {
   display: block;
   width: 40px;
   height: 40px;
   position: relative; }
-  /* line 657, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 656, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .tag-label:before {
     position: absolute;
     top: 50%;
@@ -5225,24 +5214,20 @@ body.zen {
             transform: translateX(-50%) translateY(-50%);
     font-size: 1.3rem;
     color: #7D878A;
-    -webkit-transition: color 0.15s linear;
-            transition: color 0.15s linear; }
-  /* line 667, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+    transition: color 0.15s linear; }
+  /* line 666, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .tag-label:hover:before {
     color: #fff; }
 
-/* line 673, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 672, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 #entry-tags.focused .tag-label:before {
   color: #fff; }
 
-/* line 678, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 677, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .publish-bar-inner {
-  display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
   -webkit-flex-direction: row;
       -ms-flex-direction: row;
           flex-direction: row;
@@ -5252,20 +5237,17 @@ body.zen {
   -webkit-align-content: space-between;
       -ms-flex-line-pack: justify;
           align-content: space-between;
-  -webkit-box-align: center;
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   height: 100%;
   width: 100%; }
 
-/* line 689, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 688, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .publish-bar-tags-icon {
-  -webkit-box-flex: 0;
   -webkit-flex: 0 1 auto;
       -ms-flex: 0 1 auto;
           flex: 0 1 auto;
@@ -5275,9 +5257,8 @@ body.zen {
   min-width: 40px;
   max-width: 40px; }
 
-/* line 696, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 695, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .publish-bar-tags {
-  -webkit-box-flex: 0;
   -webkit-flex: 0 1 auto;
       -ms-flex: 0 1 auto;
           flex: 0 1 auto;
@@ -5287,7 +5268,7 @@ body.zen {
   margin-right: 10px;
   height: 40px;
   overflow-y: hidden; }
-  /* line 703, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 702, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .publish-bar-tags .tags-wrapper {
     white-space: nowrap;
     overflow: auto;
@@ -5296,9 +5277,8 @@ body.zen {
     padding-bottom: 9px;
     height: 70px; }
 
-/* line 713, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 712, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .publish-bar-tags-input {
-  -webkit-box-flex: 1;
   -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
@@ -5307,13 +5287,11 @@ body.zen {
           align-self: auto;
   position: relative; }
 
-/* line 719, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 718, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .publish-bar-actions {
-  display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-flex: 1;
   -webkit-flex: 1 0 auto;
       -ms-flex: 1 0 auto;
           flex: 1 0 auto;
@@ -5322,13 +5300,12 @@ body.zen {
           align-self: auto;
   text-align: right; }
 
-/* line 726, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 725, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .post-settings {
   display: inline-block;
   padding: 8px 10px;
   color: #7d878a;
-  -webkit-transition: all 0.15s ease-out 0s;
-          transition: all 0.15s ease-out 0s;
+  transition: all 0.15s ease-out 0s;
   position: relative; }
   /* line 57, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/modules/icons */
   .post-settings:before {
@@ -5337,22 +5314,22 @@ body.zen {
   /* line 70, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/modules/icons */
   .post-settings:hover {
     text-decoration: none; }
-  /* line 735, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 734, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .post-settings:hover, .post-settings.active {
     color: #242628; }
 
-/* line 741, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 740, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .post-settings-menu .dropdown-menu {
   top: auto;
   bottom: 100%;
   left: auto;
   right: 100%; }
 
-/* line 755, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 754, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .seo-preview {
   font-family: Arial, sans-serif; }
 
-/* line 759, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 758, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .seo-preview-title {
   font-size: 1.8rem;
   line-height: 2.16rem;
@@ -5361,7 +5338,7 @@ body.zen {
   -webkit-text-overflow: ellipsis;
   word-wrap: break-word; }
 
-/* line 768, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 767, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .seo-preview-link {
   margin: 1px 0 2px 0;
   font-size: 1.3rem;
@@ -5369,29 +5346,25 @@ body.zen {
   color: #006621;
   word-wrap: break-word; }
 
-/* line 776, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 775, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .seo-preview-description {
   font-size: 1.3rem;
   line-height: 1.4;
   color: #545454;
   word-wrap: break-word; }
 
-/* line 788, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
-.markdown-help-container {
-  padding-bottom: 20px; }
-
-/* line 792, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+/* line 787, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
 .modal-markdown-help-table {
-  margin: 20px 0;
+  margin: 0 0 20px;
   width: 100%; }
-  /* line 796, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+  /* line 791, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .modal-markdown-help-table td, .modal-markdown-help-table th {
-    padding: 8px; }
-  /* line 800, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
+    padding: 8px 0; }
+  /* line 795, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/editor */
   .modal-markdown-help-table th {
     text-align: left; }
 
-/* line 19, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+/* line 20, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
 .settings-nav {
   width: 25%;
   position: absolute;
@@ -5405,7 +5378,7 @@ body.zen {
     .settings-nav {
       width: 100%;
       top: 0; } }
-  /* line 34, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  /* line 35, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
   .settings-nav ul {
     list-style: none;
     margin: 0;
@@ -5414,7 +5387,7 @@ body.zen {
     @media (max-width: 900px) {
       .settings-nav ul {
         border-bottom: #edece4 1px solid; } }
-  /* line 44, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  /* line 45, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
   .settings-nav li {
     border-top: #fff 1px solid;
     position: relative; }
@@ -5422,7 +5395,7 @@ body.zen {
       .settings-nav li {
         margin-right: 0;
         border-top: #edece4 1px solid; } }
-    /* line 54, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+    /* line 55, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
     .settings-nav li:before {
       position: absolute;
       top: 50%;
@@ -5430,16 +5403,15 @@ body.zen {
       -webkit-transform: translateY(-50%);
           -ms-transform: translateY(-50%);
               transform: translateY(-50%);
-      -webkit-transition: color 0.1s;
-              transition: color 0.1s;
+      transition: color 0.1s;
       color: #aaa9a2; }
       @media (max-width: 900px) {
         .settings-nav li:before {
           left: 15px; } }
-    /* line 67, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+    /* line 68, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
     .settings-nav li:hover:before {
       color: #242628; }
-    /* line 71, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+    /* line 72, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
     .settings-nav li a {
       display: block;
       border-bottom: #edece4 1px solid;
@@ -5457,12 +5429,12 @@ body.zen {
           /* line 93, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/modules/icons */
           .settings-nav li a:hover {
             text-decoration: none; } }
-      /* line 87, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+      /* line 88, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
       .settings-nav li a:hover, .settings-nav li a:focus {
         color: #242628;
         background: #edece4;
         text-decoration: none; }
-      /* line 94, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+      /* line 95, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
       .settings-nav li a:before {
         margin-right: 20px; }
         @media (max-width: 900px) {
@@ -5475,29 +5447,28 @@ body.zen {
         z-index: 300;
         border-top: #edece4 1px solid;
         box-shadow: #fff 1px 0 0, #edece4 0 1px 0;
-        -webkit-transition: all 0.15s ease-out 0s;
-                transition: all 0.15s ease-out 0s; }
-        /* line 113, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+        transition: all 0.15s ease-out 0s; }
+        /* line 114, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
         .settings-nav li.active:before {
           color: #242628; }
-        /* line 117, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+        /* line 118, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
         .settings-nav li.active a {
           color: #242628;
           font-weight: bold;
           background: #fff; }
-          /* line 122, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+          /* line 123, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
           .settings-nav li.active a:focus {
             background: #edece4; } }
-    /* line 129, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+    /* line 130, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
     .settings-nav li:first-of-type {
       border-top: none; }
 
-/* line 136, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+/* line 137, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
 .settings-nav-labs .icon-labs:before {
   font-size: 16px; }
 
 @media (max-width: 900px) {
-  /* line 148, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  /* line 149, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
   .settings-content.fade-in {
     -webkit-animation: none;
             animation: none; }
@@ -5511,12 +5482,12 @@ body.zen {
     bottom: 0;
     overflow: auto;
     -webkit-overflow-scrolling: touch; } }
-/* line 163, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+/* line 164, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
 .settings-content .settings-general img {
   max-width: 100%;
   max-height: 400px;
   display: block; }
-/* line 169, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+/* line 170, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
 .settings-content .content {
   padding: 40px; }
   @media (max-width: 550px) {
@@ -5534,12 +5505,12 @@ body.zen {
       overflow-x: hidden;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch; } }
-/* line 190, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+/* line 191, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
 .settings-content .word-count {
   float: right;
   font-weight: bold; }
 
-/* line 204, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+/* line 205, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
 .settings-view-header, .settings-subview-header {
   position: fixed;
   top: 0;
@@ -5551,18 +5522,18 @@ body.zen {
   text-align: center;
   color: #fff;
   background: #242628; }
-  /* line 216, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  /* line 217, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
   .settings-view-header .btn-back, .settings-subview-header .btn-back {
     position: absolute;
     top: 4px;
     left: 4px;
     color: #fff;
     background: transparent; }
-  /* line 224, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  /* line 225, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
   .settings-view-header .btn, .settings-view-header .modal-footer .reject-button-class, .modal-footer .settings-view-header .reject-button-class, .settings-subview-header .btn, .settings-subview-header .modal-footer .reject-button-class, .modal-footer .settings-subview-header .reject-button-class {
     vertical-align: top;
     line-height: 1.45; }
-  /* line 229, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  /* line 230, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
   .settings-view-header .page-actions, .settings-subview-header .page-actions {
     position: absolute;
     top: 4px;
@@ -5574,11 +5545,11 @@ body.zen {
       padding: 30px 40px;
       line-height: 1.15em;
       background: none; }
-      /* line 242, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+      /* line 243, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
       .settings-view-header .btn, .settings-view-header .modal-footer .reject-button-class, .modal-footer .settings-view-header .reject-button-class, .settings-subview-header .btn, .settings-subview-header .modal-footer .reject-button-class, .modal-footer .settings-subview-header .reject-button-class {
         vertical-align: middle;
         line-height: 1.428571429; }
-      /* line 247, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+      /* line 248, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
       .settings-view-header .page-title, .settings-subview-header .page-title {
         display: inline;
         padding: 0;
@@ -5586,7 +5557,7 @@ body.zen {
         line-height: 1.3;
         overflow: visible;
         color: #242628; }
-      /* line 256, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+      /* line 257, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
       .settings-view-header .page-actions, .settings-subview-header .page-actions {
         position: static;
         float: right; } }
@@ -5594,50 +5565,48 @@ body.zen {
 @media (min-width: 900px) {
   .settings-view-header {
     text-align: left; }
-    /* line 268, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+    /* line 269, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
     .settings-view-header .btn-back {
       display: none;
       vertical-align: middle;
       color: #666; } }
 
 @media (min-width: 900px) {
-  /* line 278, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  /* line 279, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
   .settings-subview-header .btn-back {
     position: static;
     float: left;
     color: #666; }
  }
 
-/* line 291, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+/* line 292, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
 .permalink-input-wrapper {
   position: relative;
   outline: 0;
   padding: 2px 0 2px 6px; }
-  /* line 297, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  /* line 298, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
   .permalink-input-wrapper:focus, .permalink-input-wrapper.focus {
     border-color: #aaa9a2; }
-    /* line 301, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+    /* line 302, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
     .permalink-input-wrapper:focus .permalink-help, .permalink-input-wrapper.focus .permalink-help {
       border-color: #aaa9a2; }
-  /* line 307, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  /* line 308, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
   .permalink-input-wrapper .permalink-fake-input {
-    display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
             flex-wrap: wrap;
-    -webkit-box-align: center;
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center;
     margin-right: 40px; }
-  /* line 314, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  /* line 315, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
   .permalink-input-wrapper .permalink-domain {
     margin: 5px -1px 3px 0;
     color: #7E878B; }
-  /* line 319, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  /* line 320, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
   .permalink-input-wrapper .permalink-parameter {
     position: relative;
     padding: 3px 6px 4px;
@@ -5646,7 +5615,7 @@ body.zen {
     background: #E3EDF2;
     box-shadow: inset 0px 0px 0px 1px #CDD5D9;
     color: #7E878B; }
-    /* line 332, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+    /* line 333, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
     .permalink-input-wrapper .permalink-parameter:after {
       content: "/";
       position: absolute;
@@ -5654,9 +5623,8 @@ body.zen {
       left: -7px;
       font-size: 1.4rem;
       color: #7E878B; }
-  /* line 343, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  /* line 344, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
   .permalink-input-wrapper .permalink-input {
-    -webkit-box-flex: 1;
     -webkit-flex: 1 0;
         -ms-flex: 1 0;
             flex: 1 0;
@@ -5666,43 +5634,136 @@ body.zen {
     background: transparent;
     min-width: 60px;
     border: 0; }
-  /* line 355, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  /* line 356, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
   .permalink-input-wrapper .popover, .permalink-input-wrapper .permalink-help {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     width: 36px; }
-  /* line 364, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  /* line 365, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
   .permalink-input-wrapper .permalink-help {
     border-left: 1px solid #E0DFD7;
-    -webkit-transition: border-color 0.15s linear;
-            transition: border-color 0.15s linear; }
-    /* line 368, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+    transition: border-color 0.15s linear; }
+    /* line 369, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
     .permalink-input-wrapper .permalink-help:before {
       color: #E0DFD7;
-      -webkit-transition: color 0.15s linear;
-              transition: color 0.15s linear; }
-    /* line 373, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+      transition: color 0.15s linear; }
+    /* line 374, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
     .permalink-input-wrapper .permalink-help:hover:before {
       color: #aaa9a2; }
-  /* line 379, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  /* line 380, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
   .permalink-input-wrapper .popover-item {
     margin-left: -5px;
     min-width: 320px; }
 
-/* line 18, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+/* line 393, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+.navigation-item {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  @media (max-width: 600px) {
+    .navigation-item {
+      margin-bottom: 20px; } }
+  @media (min-width: 601px) {
+    .navigation-item {
+      margin-bottom: 10px; } }
+
+/* line 404, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+.navigation-item-drag-handle {
+  padding-left: 10px;
+  padding-right: 17px;
+  width: 27px;
+  cursor: move; }
+
+/* line 411, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+.navigation-inputs {
+  width: 100%; }
+
+@media (max-width: 600px) {
+  /* line 416, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  .navigation-item-label {
+    margin-bottom: 5px; }
+
+  /* line 421, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  .navigation-item-label, .navigation-item-url {
+    display: block;
+    width: 100%; }
+ }
+
+@media (min-width: 601px) {
+  /* line 428, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  .navigation-inputs {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
+
+  /* line 432, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  .navigation-item-label {
+    -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    margin-right: 10px; }
+
+  /* line 437, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  .navigation-item-url {
+    -webkit-flex-grow: 3;
+        -ms-flex-positive: 3;
+            flex-grow: 3; }
+ }
+
+/* line 442, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+.navigation-item-action {
+  padding-left: 10px;
+  width: 40px;
+  position: relative; }
+  /* line 447, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  .navigation-item-action button {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    margin-top: -2px; }
+  /* line 457, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  .navigation-item-action .icon-trash:before {
+    color: #c0bfb6;
+    font-size: 16px;
+    transition: color 0.1s linear; }
+  /* line 463, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  .navigation-item-action .icon-trash:hover:before {
+    color: #e25440; }
+  /* line 469, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  .navigation-item-action .icon-add:before {
+    background: #9FBB58;
+    color: #fff;
+    font-size: 12px;
+    padding: 3px;
+    border-radius: 2px;
+    transition: background 0.1s linear; }
+  /* line 478, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/settings */
+  .navigation-item-action .icon-add:hover:before {
+    background: #849f41; }
+
+/* line 19, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+.users-list-wrapper {
+  overflow: auto;
+  height: 100%; }
+
+/* line 29, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
 .invited-users {
   margin-bottom: 34px; }
 
-/* line 22, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+/* line 33, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
 .user-list-title {
   font-size: 13px;
   font-weight: normal;
   color: #c0bfb6;
   margin-bottom: 14px; }
 
-/* line 29, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+/* line 40, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
 .user-list-item {
   border-top: 1px solid #edece4; }
   @media (max-width: 550px) {
@@ -5716,35 +5777,32 @@ body.zen {
         clear: both; } }
   @media (min-width: 551px) {
     .user-list-item {
-      display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
-      -webkit-box-pack: start;
       -webkit-justify-content: start;
           -ms-flex-pack: start;
               justify-content: start;
-      -webkit-box-align: center;
       -webkit-align-items: center;
           -ms-flex-align: center;
               align-items: center;
       padding: 0 15px;
       height: 68px; } }
 
-/* line 49, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+/* line 60, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
 a.user-list-item {
   text-decoration: none; }
   @media (min-width: 601px) {
-    /* line 55, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+    /* line 66, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
     a.user-list-item:hover {
       background: #f7f7f3; }
 
-    /* line 59, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+    /* line 70, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
     a.user-list-item:last-of-type:hover {
       box-shadow: inset 0px -1px 0px #edece4; }
  }
 
-/* line 65, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+/* line 76, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
 .user-list-item-icon {
   width: 35px;
   height: 35px;
@@ -5755,7 +5813,7 @@ a.user-list-item {
   color: transparent;
   overflow: hidden;
   position: relative; }
-  /* line 76, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+  /* line 87, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
   .user-list-item-icon:before {
     position: absolute;
     top: 50%;
@@ -5766,7 +5824,7 @@ a.user-list-item {
     color: #aaa9a2;
     font-size: 14px; }
 
-/* line 88, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+/* line 99, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
 .user-list-item-figure {
   width: 35px;
   height: 35px;
@@ -5781,13 +5839,11 @@ a.user-list-item {
     float: left;
     margin-right: 15px; } }
 
-/* line 107, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+/* line 118, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
 .user-list-item-body {
-  -webkit-box-flex: 1;
   -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
-  -webkit-box-align: stretch;
   -webkit-align-items: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
@@ -5796,13 +5852,13 @@ a.user-list-item {
   @media (max-width: 550px) {
     .user-list-item-body {
       margin-top: 3px; } }
-  /* line 117, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+  /* line 128, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
   .user-list-item-body .name {
     display: inline-block;
     font-size: 15px;
     font-weight: 400;
     color: #242628; }
-  /* line 124, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+  /* line 135, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
   .user-list-item-body .description {
     display: inline-block;
     font-size: 12px;
@@ -5815,27 +5871,27 @@ a.user-list-item {
     float: left;
     width: 100%;
     margin: 12px 0 0 50px; } }
-/* line 142, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+/* line 153, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
 .user-list-item-aside .user-list-action:not(:first-of-type) {
   margin-left: 20px; }
   @media (min-width: 551px) {
     .user-list-item-aside .user-list-action:not(:first-of-type) {
       margin-left: 50px; } }
-/* line 150, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+/* line 161, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
 .user-list-item-aside .role-label {
   float: left;
   margin-top: -1px; }
-/* line 155, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+/* line 166, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
 .user-list-item-aside .role-label + .role-label {
   margin-left: 5px; }
 
-/* line 160, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+/* line 171, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
 .user-list-action {
   font-size: 11px;
   text-transform: uppercase;
   text-decoration: underline; }
 
-/* line 171, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+/* line 182, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
 .role-label {
   display: inline-block;
   padding: 6px 8px;
@@ -5846,15 +5902,15 @@ a.user-list-item {
   letter-spacing: 0.1em;
   font-weight: 400;
   background: #eee; }
-  /* line 182, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+  /* line 193, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
   .role-label.owner {
     color: rgba(255, 255, 255, 0.8);
     background: #242628; }
-  /* line 187, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+  /* line 198, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
   .role-label.administrator {
     color: rgba(255, 255, 255, 0.8);
     background: #e25440; }
-  /* line 192, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+  /* line 203, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
   .role-label.editor {
     color: rgba(255, 255, 255, 0.8);
     background: #5BA4E5; }
@@ -5864,31 +5920,28 @@ a.user-list-item {
   content: "";
   display: table;
   clear: both; }
-/* line 208, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
-.invite-new-user .modal-body fieldset {
-  margin: 1em 0 0 0; }
-/* line 213, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+/* line 220, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
 .invite-new-user .form-group {
   margin-bottom: 0;
   padding: 0; }
-  /* line 218, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+  /* line 225, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
   .invite-new-user .form-group label {
     position: static;
     display: block;
     text-align: left; }
-  /* line 224, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+  /* line 231, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
   .invite-new-user .form-group:nth-of-type(1) {
     float: left;
     width: 60%; }
-  /* line 229, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+  /* line 236, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
   .invite-new-user .form-group:nth-of-type(2) {
     float: left;
     width: 35%;
     margin-left: 5%; }
-  /* line 235, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+  /* line 242, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
   .invite-new-user .form-group input {
     width: 100%; }
-/* line 240, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
+/* line 247, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/users */
 .invite-new-user .btn-green {
   width: 100%; }
 
@@ -5933,7 +5986,6 @@ a.user-list-item {
     right: 0;
     bottom: 0;
     height: 110px;
-    background: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.18));
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.18)); }
 
 /* line 76, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/user */
@@ -5948,8 +6000,7 @@ a.user-list-item {
   z-index: 2;
   border-width: 0;
   border-radius: 3px;
-  -webkit-transition: color 0.3s ease, background 0.3s ease;
-          transition: color 0.3s ease, background 0.3s ease; }
+  transition: color 0.3s ease, background 0.3s ease; }
   @media (max-width: 1000px) {
     .user-cover-edit {
       right: 15px; } }
@@ -6066,8 +6117,7 @@ a.user-list-item {
   line-height: 120px;
   text-transform: uppercase;
   text-decoration: none;
-  -webkit-transition: opacity 0.3s ease;
-          transition: opacity 0.3s ease; }
+  transition: opacity 0.3s ease; }
 
 /* line 21, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/about */
 .settings-about h1 {
@@ -6230,8 +6280,7 @@ a.user-list-item {
         color: #fff;
         padding: 2px 6px 3px;
         border-radius: 3px;
-        -webkit-transition: opacity 0.15s ease-in-out;
-                transition: opacity 0.15s ease-in-out;
+        transition: opacity 0.15s ease-in-out;
         font-size: 1rem;
         pointer-events: none; }
       /* line 198, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/about */
@@ -6244,8 +6293,7 @@ a.user-list-item {
         -webkit-transform: translateX(-50%);
             -ms-transform: translateX(-50%);
                 transform: translateX(-50%);
-        -webkit-transition: opacity 0.15s ease-in-out;
-                transition: opacity 0.15s ease-in-out;
+        transition: opacity 0.15s ease-in-out;
         width: 0;
         height: 0;
         border-left: 8px solid transparent;
@@ -6305,8 +6353,7 @@ a.user-list-item {
     position: relative;
     padding-left: 10px;
     padding-right: 10px;
-    -webkit-transition: padding 0.3s ease-in-out;
-            transition: padding 0.3s ease-in-out; }
+    transition: padding 0.3s ease-in-out; }
     /* line 27, /Users/hannah/Ghost/Ghost-Release/release/core/client/assets/sass/layouts/tags */
     .tags-search .btn.active, .tags-search .modal-footer .active.reject-button-class, .modal-footer .tags-search .active.reject-button-class {
       box-shadow: none; }
@@ -6324,8 +6371,7 @@ a.user-list-item {
     border: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    -webkit-transition: all 0.3s ease-in-out;
-            transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     opacity: 0;
     pointer-events: none; }
   @media (max-width: 400px) {
