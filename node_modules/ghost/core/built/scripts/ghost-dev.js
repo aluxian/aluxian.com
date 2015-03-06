@@ -236,7 +236,7 @@ define("ghost/app",
 
     var App = Ember.Application.extend({
         modulePrefix: 'ghost',
-        Resolver: Resolver['default']
+        Resolver: Resolver.default
     });
 
     // Runtime configuration of Ember.Application
@@ -1054,6 +1054,137 @@ define("ghost/components/gh-modal-dialog",
 
     __exports__["default"] = ModalDialog;
   });
+define("ghost/components/gh-navitem-url-input", 
+  ["exports"],
+  function(__exports__) {
+    "use strict";
+    function joinUrlParts(url, path) {
+        if (path[0] !== '/' && url.slice(-1) !== '/') {
+            path = '/' + path;
+        } else if (path[0] === '/' && url.slice(-1) === '/') {
+            path = path.slice(1);
+        }
+
+        return url + path;
+    }
+
+    var NavItemUrlInputComponent = Ember.TextField.extend({
+        classNameBindings: ['fakePlaceholder'],
+
+        isBaseUrl: Ember.computed('baseUrl', 'value', function () {
+            return this.get('baseUrl') === this.get('value');
+        }),
+
+        fakePlaceholder: Ember.computed('isBaseUrl', 'hasFocus', function () {
+            return this.get('isBaseUrl') && this.get('last') && !this.get('hasFocus');
+        }),
+
+        isRelative: Ember.computed('value', function () {
+            return !validator.isURL(this.get('value'));
+        }),
+
+        didInsertElement: function () {
+            var url = this.get('url'),
+                baseUrl = this.get('baseUrl');
+
+            this.set('value', url);
+
+            // if we have a relative url, create the absolute url to be displayed in the input
+            if (this.get('isRelative')) {
+                url = joinUrlParts(baseUrl, url);
+                this.set('value', url);
+            }
+        },
+
+        focusIn: function (event) {
+            this.set('hasFocus', true);
+
+            if (this.get('isBaseUrl')) {
+                // position the cursor at the end of the input
+                Ember.run.next(function (el) {
+                    var length = el.value.length;
+
+                    el.setSelectionRange(length, length);
+                }, event.target);
+            }
+        },
+
+        keyDown: function (event) {
+            // delete the "placeholder" value all at once
+            if (this.get('isBaseUrl') && (event.keyCode === 8 || event.keyCode === 46)) {
+                this.set('value', '');
+
+                event.preventDefault();
+            }
+        },
+
+        keyPress: function (event) {
+            // enter key
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                this.notifyUrlChanged();
+            }
+
+            return true;
+        },
+
+        focusOut: function () {
+            this.set('hasFocus', false);
+
+            this.notifyUrlChanged();
+        },
+
+        notifyUrlChanged: function () {
+            this.set('value', this.get('value').trim());
+
+            var url = this.get('value'),
+                baseUrl = this.get('baseUrl');
+
+            if (this.get('isRelative')) {
+                this.set('value', joinUrlParts(baseUrl, url));
+            }
+
+            this.sendAction('change', url);
+        }
+    });
+
+    __exports__["default"] = NavItemUrlInputComponent;
+  });
+define("ghost/components/gh-navitem", 
+  ["exports"],
+  function(__exports__) {
+    "use strict";
+    var NavItemComponent = Ember.Component.extend({
+        classNames: 'navigation-item',
+
+        attributeBindings: ['order:data-order'],
+        order: Ember.computed.readOnly('navItem.order'),
+
+        keyPress: function (event) {
+            // enter key
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                this.get('controller').send('addItem');
+            }
+        },
+
+        actions: {
+            addItem: function () {
+                this.sendAction('addItem');
+            },
+
+            deleteItem: function (item) {
+                this.sendAction('deleteItem', item);
+            },
+
+            updateUrl: function (value) {
+                this.sendAction('updateUrl', value, this.get('navItem'));
+            }
+        }
+    });
+
+    __exports__["default"] = NavItemComponent;
+  });
 define("ghost/components/gh-notification", 
   ["exports"],
   function(__exports__) {
@@ -1447,16 +1578,20 @@ define("ghost/components/gh-trim-focus-input",
         attributeBindings: ['autofocus'],
 
         autofocus: Ember.computed(function () {
-            return (device.ios()) ? false : 'autofocus';
+            if (this.get('focus')) {
+                return (device.ios()) ? false : 'autofocus';
+            }
+
+            return false;
         }),
 
-        setFocus: function () {
+        didInsertElement: function () {
             // This fix is required until Mobile Safari has reliable
             // autofocus, select() or focus() support
-            if (this.focus && !device.ios()) {
+            if (this.get('focus') && !device.ios()) {
                 this.$().val(this.$().val()).focus();
             }
-        }.on('didInsertElement'),
+        },
 
         focusOut: function () {
             var text = this.$().val();
@@ -1468,11 +1603,12 @@ define("ghost/components/gh-trim-focus-input",
     __exports__["default"] = TrimFocusInput;
   });
 define("ghost/components/gh-upload-modal", 
-  ["ghost/components/gh-modal-dialog","ghost/assets/lib/uploader","exports"],
-  function(__dependency1__, __dependency2__, __exports__) {
+  ["ghost/components/gh-modal-dialog","ghost/assets/lib/uploader","ghost/utils/caja-sanitizers","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     "use strict";
     var ModalDialog = __dependency1__["default"];
     var upload = __dependency2__["default"];
+    var cajaSanitizers = __dependency3__["default"];
 
     var UploadModal = ModalDialog.extend({
         layoutName: 'components/gh-modal-dialog',
@@ -1480,6 +1616,16 @@ define("ghost/components/gh-upload-modal",
         didInsertElement: function () {
             this._super();
             upload.call(this.$('.js-drop-zone'), {fileStorage: this.get('config.fileStorage')});
+        },
+        keyDown: function () {
+            this.setErrorState(false);
+        },
+        setErrorState: function (state) {
+            if (state) {
+                this.$('.js-upload-url').addClass('error');
+            } else {
+                this.$('.js-upload-url').removeClass('error');
+            }
         },
         confirm: {
             reject: {
@@ -1491,15 +1637,23 @@ define("ghost/components/gh-upload-modal",
             },
             accept: {
                 buttonClass: 'btn btn-blue right',
-                text: 'Save', // The accept button texttext: 'Save'
+                text: 'Save', // The accept button text: 'Save'
                 func: function () {
-                    var imageType = 'model.' + this.get('imageType');
+                    var imageType = 'model.' + this.get('imageType'),
+                        value;
 
                     if (this.$('.js-upload-url').val()) {
-                        this.set(imageType, this.$('.js-upload-url').val());
+                        value = this.$('.js-upload-url').val();
+
+                        if (!Ember.isEmpty(value) && !cajaSanitizers.url(value)) {
+                            this.setErrorState(true);
+                            return {message: 'Image URI is not valid'};
+                        }
                     } else {
-                        this.set(imageType, this.$('.js-upload-target').attr('src'));
+                        value = this.$('.js-upload-target').attr('src');
                     }
+
+                    this.set(imageType, value);
                     return true;
                 }
             }
@@ -1510,12 +1664,17 @@ define("ghost/components/gh-upload-modal",
                 this.sendAction();
             },
             confirm: function (type) {
-                var func = this.get('confirm.' + type + '.func');
+                var result,
+                    func = this.get('confirm.' + type + '.func');
+
                 if (typeof func === 'function') {
-                    func.apply(this);
+                    result = func.apply(this);
                 }
-                this.sendAction();
-                this.sendAction('confirm' + type);
+
+                if (!result.message) {
+                    this.sendAction();
+                    this.sendAction('confirm' + type);
+                }
             }
         }
     });
@@ -1530,6 +1689,10 @@ define("ghost/components/gh-uploader",
 
     var PostImageUploader = Ember.Component.extend({
         classNames: ['image-uploader', 'js-post-image-upload'],
+
+        imageSource: Ember.computed('image', function () {
+            return this.get('image') || '';
+        }),
 
         setup: function () {
             var $this = this.$(),
@@ -1573,22 +1736,21 @@ define("ghost/components/gh-url-preview",
         classNames: 'ghost-url-preview',
         prefix: null,
         slug: null,
-        theUrl: null,
 
-        generateUrl: function () {
+        url: Ember.computed('slug', function () {
             // Get the blog URL and strip the scheme
             var blogUrl = this.get('config').blogUrl,
                 noSchemeBlogUrl = blogUrl.substr(blogUrl.indexOf('://') + 3), // Remove `http[s]://`
 
                 // Get the prefix and slug values
                 prefix = this.get('prefix') ? this.get('prefix') + '/' : '',
-                slug = this.get('slug') ? this.get('slug') : '',
+                slug = this.get('slug') ? this.get('slug') + '/' : '',
 
                 // Join parts of the URL together with slashes
                 theUrl = noSchemeBlogUrl + '/' + prefix + slug;
 
-            this.set('the-url', theUrl);
-        }.on('didInsertElement').observes('slug')
+            return theUrl;
+        })
     });
 
     __exports__["default"] = urlPreview;
@@ -1626,10 +1788,18 @@ define("ghost/controllers/application",
         showGlobalMobileNav: false,
         showSettingsMenu: false,
 
-         userImageAlt: Ember.computed('session.user.name', function () {
+        userImage: Ember.computed('session.user.image', function () {
+            return this.get('session.user.image') || this.get('ghostPaths.url').asset('/shared/img/user-image.png');
+        }),
+
+        userImageBackground: Ember.computed('userImage', function () {
+            return 'background-image: url(' + this.get('userImage') + ')';
+        }),
+
+        userImageAlt: Ember.computed('session.user.name', function () {
             var name = this.get('session.user.name');
 
-            return name + '\'s profile picture';
+            return (name) ? name + '\'s profile picture' : 'Profile picture';
         }),
 
         actions: {
@@ -2126,13 +2296,17 @@ define("ghost/controllers/modals/leave-editor",
     __exports__["default"] = LeaveEditorController;
   });
 define("ghost/controllers/modals/signin", 
-  ["ghost/controllers/signin","exports"],
+  ["ghost/mixins/validation-engine","exports"],
   function(__dependency1__, __exports__) {
     "use strict";
-    var SigninController = __dependency1__["default"];
+    var ValidationEngine = __dependency1__["default"];
 
-    __exports__["default"] = SigninController.extend({
+    __exports__["default"] = Ember.Controller.extend(SimpleAuth.AuthenticationControllerMixin, ValidationEngine, {
         needs: 'application',
+
+        authenticator: 'simple-auth-authenticator:oauth2-password-grant',
+
+        validationType: 'signin',
 
         identification: Ember.computed('session.user.email', function () {
             return this.get('session.user.email');
@@ -2145,12 +2319,31 @@ define("ghost/controllers/modals/signin",
 
                 appController.set('skipAuthSuccessHandler', true);
 
-                this._super().then(function () {
+                this._super(this.getProperties('identification', 'password')).then(function () {
                     self.send('closeModal');
                     self.notifications.showSuccess('Login successful.');
                     self.set('password', '');
+                }).catch(function () {
+                    // if authentication fails a rejected promise will be returned.
+                    // it needs to be caught so it doesn't generate an exception in the console,
+                    // but it's actually "handled" by the sessionAuthenticationFailed action handler.
                 }).finally(function () {
                     appController.set('skipAuthSuccessHandler', undefined);
+                });
+            },
+
+            validateAndAuthenticate: function () {
+                var self = this;
+
+                // Manually trigger events for input fields, ensuring legacy compatibility with
+                // browsers and password managers that don't send proper events on autofill
+                $('#login').find('input').trigger('change');
+
+                this.validate({format: false}).then(function () {
+                    self.notifications.closePassive();
+                    self.send('authenticate');
+                }).catch(function (errors) {
+                    self.notifications.showErrors(errors);
                 });
             },
 
@@ -2377,7 +2570,7 @@ define("ghost/controllers/post-settings-menu",
             if (metaTitle.length > 70) {
                 metaTitle = metaTitle.substring(0, 70).trim();
                 metaTitle = Ember.Handlebars.Utils.escapeExpression(metaTitle);
-                metaTitle = new Ember.Handlebars.SafeString(metaTitle + '&hellip;');
+                metaTitle = Ember.String.htmlSafe(metaTitle + '&hellip;');
             }
 
             return metaTitle;
@@ -2413,7 +2606,7 @@ define("ghost/controllers/post-settings-menu",
                 // Limit to 156 characters
                 placeholder = placeholder.substring(0, 156).trim();
                 placeholder = Ember.Handlebars.Utils.escapeExpression(placeholder);
-                placeholder = new Ember.Handlebars.SafeString(placeholder + '&hellip;');
+                placeholder = Ember.String.htmlSafe(placeholder + '&hellip;');
             }
 
             return placeholder;
@@ -2431,7 +2624,7 @@ define("ghost/controllers/post-settings-menu",
 
             if (seoURL.length > 70) {
                 seoURL = seoURL.substring(0, 70).trim();
-                seoURL = new Ember.Handlebars.SafeString(seoURL + '&hellip;');
+                seoURL = Ember.String.htmlSafe(seoURL + '&hellip;');
             }
 
             return seoURL;
@@ -2452,7 +2645,7 @@ define("ghost/controllers/post-settings-menu",
             // generate a slug if a post is new and doesn't have a title yet or
             // if the title is still '(Untitled)' and the slug is unaltered.
             if ((this.get('model.isNew') && !title) || title === '(Untitled)') {
-                debounceId = Ember.run.debounce(this, 'generateAndSetSlug', ['slug'], 700);
+                debounceId = Ember.run.debounce(this, 'generateAndSetSlug', 'model.slug', 700);
             }
 
             this.set('debounceId', debounceId);
@@ -2945,16 +3138,14 @@ define("ghost/controllers/post-tags-input",
 
         makeSuggestionObject: function (matchingTag, _searchTerm) {
             var searchTerm = Ember.Handlebars.Utils.escapeExpression(_searchTerm),
-                // jscs:disable
                 regexEscapedSearchTerm = searchTerm.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&'),
-                // jscs:enable
                 tagName = Ember.Handlebars.Utils.escapeExpression(matchingTag.get('name')),
                 regex = new RegExp('(' + regexEscapedSearchTerm + ')', 'gi'),
                 highlightedName,
                 suggestion = Ember.Object.create();
 
             highlightedName = tagName.replace(regex, '<mark>$1</mark>');
-            highlightedName = new Ember.Handlebars.SafeString(highlightedName);
+            highlightedName = Ember.String.htmlSafe(highlightedName);
 
             suggestion.set('tag', matchingTag);
             suggestion.set('highlightedName', highlightedName);
@@ -3064,6 +3255,18 @@ define("ghost/controllers/posts/post",
         isPublished: Ember.computed.equal('model.status', 'published'),
         classNameBindings: ['model.featured'],
 
+        authorName: Ember.computed('model.author.name', 'model.author.email', function () {
+            return this.get('model.author.name') || this.get('model.author.email');
+        }),
+
+        authorAvatar: Ember.computed('model.author.image', function () {
+            return this.get('model.author.image') || this.get('ghostPaths.url').asset('/shared/img/user-image.png');
+        }),
+
+        authorAvatarBackground: Ember.computed('authorAvatar', function () {
+            return 'background-image: url(' + this.get('authorAvatar') + ')';
+        }),
+
         actions: {
             toggleFeatured: function () {
                 var options = {disableNProgress: true},
@@ -3095,7 +3298,7 @@ define("ghost/controllers/reset",
         newPassword: '',
         ne2Password: '',
         token: '',
-        submitButtonDisabled: false,
+        submitting: false,
     
         validationType: 'reset',
     
@@ -3163,6 +3366,9 @@ define("ghost/controllers/settings",
         }),
         showTags: Ember.computed('session.user.name', function () {
             return this.get('session.user.isAuthor') ? false : true;
+        }),
+        showNavigation: Ember.computed('session.user.name', function () {
+            return this.get('session.user.isAuthor') || this.get('session.user.isEditor') ? false : true;
         }),
         showCodeInjection: Ember.computed('session.user.name', 'controllers.feature.codeInjectionUI', function () {
             return this.get('session.user.isAuthor') || this.get('session.user.isEditor') || !this.get('controllers.feature.codeInjectionUI') ? false : true;
@@ -3275,6 +3481,14 @@ define("ghost/controllers/settings/general",
     "use strict";
     var SettingsGeneralController = Ember.Controller.extend({
         selectedTheme: null,
+
+        logoImageSource: Ember.computed('model.logo', function () {
+            return this.get('model.logo') || '';
+        }),
+
+        coverImageSource: Ember.computed('model.cover', function () {
+            return this.get('model.cover') || '';
+        }),
 
         isDatedPermalinks: Ember.computed('model.permalinks', function (key, value) {
             // setter
@@ -3439,6 +3653,168 @@ define("ghost/controllers/settings/labs",
 
     __exports__["default"] = LabsController;
   });
+define("ghost/controllers/settings/navigation", 
+  ["exports"],
+  function(__exports__) {
+    "use strict";
+    var NavigationController,
+        NavItem;
+
+    NavItem = Ember.Object.extend({
+        label: '',
+        url: '',
+        last: false,
+
+        isComplete: Ember.computed('label', 'url', function () {
+            return !(Ember.isBlank(this.get('label').trim()) || Ember.isBlank(this.get('url')));
+        })
+    });
+
+    NavigationController = Ember.Controller.extend({
+        blogUrl: Ember.computed('config.blogUrl', function () {
+            var url = this.get('config.blogUrl');
+
+            return url.slice(-1) !== '/' ? url + '/' : url;
+        }),
+
+        navigationItems: Ember.computed('model.navigation', function () {
+            var navItems,
+                lastItem;
+
+            try {
+                navItems = JSON.parse(this.get('model.navigation') || [{}]);
+            } catch (e) {
+                navItems = [{}];
+            }
+
+            navItems = navItems.map(function (item) {
+                return NavItem.create(item);
+            });
+
+            lastItem = navItems.get('lastObject');
+            if (!lastItem || lastItem.get('isComplete')) {
+                navItems.addObject(NavItem.create({last: true}));
+            }
+
+            return navItems;
+        }),
+
+        updateLastNavItem: Ember.observer('navigationItems.[]', function () {
+            var navItems = this.get('navigationItems');
+
+            navItems.forEach(function (item, index, items) {
+                if (index === (items.length - 1)) {
+                    item.set('last', true);
+                } else {
+                    item.set('last', false);
+                }
+            });
+        }),
+
+        actions: {
+            addItem: function () {
+                var navItems = this.get('navigationItems'),
+                    lastItem = navItems.get('lastObject');
+
+                if (lastItem && lastItem.get('isComplete')) {
+                    navItems.addObject(NavItem.create({last: true})); // Adds new blank navItem
+                }
+            },
+
+            deleteItem: function (item) {
+                if (!item) {
+                    return;
+                }
+
+                var navItems = this.get('navigationItems');
+
+                navItems.removeObject(item);
+            },
+
+            moveItem: function (index, newIndex) {
+                var navItems = this.get('navigationItems'),
+                    item = navItems.objectAt(index);
+
+                navItems.removeAt(index);
+                navItems.insertAt(newIndex, item);
+            },
+
+            updateUrl: function (url, navItem) {
+                if (!navItem) {
+                    return;
+                }
+
+                if (Ember.isBlank(url)) {
+                    navItem.set('url', this.get('blogUrl'));
+
+                    return;
+                }
+
+                navItem.set('url', url);
+            },
+
+            save: function () {
+                var self = this,
+                    navSetting,
+                    blogUrl = this.get('config').blogUrl,
+                    blogUrlRegex = new RegExp('^' + blogUrl + '(.*)', 'i'),
+                    navItems = this.get('navigationItems'),
+                    match;
+
+                // Don't save if there's a blank label.
+                if (navItems.find(function (item) { return !item.get('isComplete') && !item.get('last');})) {
+                    self.notifications.showErrors(['One of your navigation items has an empty label.<br>Please enter a new label or delete the item before saving.']);
+                    return;
+                }
+
+                navSetting = navItems.map(function (item) {
+                    var label,
+                        url;
+
+                    if (!item || !item.get('isComplete')) {
+                        return;
+                    }
+
+                    label = item.get('label').trim();
+                    url = item.get('url').trim();
+
+                    // is this an internal URL?
+                    match = url.match(blogUrlRegex);
+
+                    if (match) {
+                        url = match[1];
+
+                        // if the last char is not a slash, then add one,
+                        // this also handles the empty case for the homepage
+                        if (url[url.length - 1] !== '/') {
+                            url += '/';
+                        }
+                    } else if (!validator.isURL(url) && url !== '' && url[0] !== '/') {
+                        url = '/' + url;
+                    }
+
+                    return {label: label, url: url};
+                }).compact();
+
+                this.set('model.navigation', JSON.stringify(navSetting));
+
+                // trigger change event because even if the final JSON is unchanged
+                // we need to have navigationItems recomputed.
+                this.get('model').notifyPropertyChange('navigation');
+
+                this.notifications.closePassive();
+
+                this.get('model').save().then(function () {
+                    self.notifications.showSuccess('Navigation items saved.');
+                }).catch(function (err) {
+                    self.notifications.showErrors(err);
+                });
+            }
+        }
+    });
+
+    __exports__["default"] = NavigationController;
+  });
 define("ghost/controllers/settings/tags", 
   ["ghost/mixins/pagination-controller","ghost/mixins/settings-menu-controller","ghost/utils/bound-one-way","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
@@ -3497,7 +3873,7 @@ define("ghost/controllers/settings/tags",
             if (metaTitle && metaTitle.length > 70) {
                 metaTitle = metaTitle.substring(0, 70).trim();
                 metaTitle = Ember.Handlebars.Utils.escapeExpression(metaTitle);
-                metaTitle = new Ember.Handlebars.SafeString(metaTitle + '&hellip;');
+                metaTitle = Ember.String.htmlSafe(metaTitle + '&hellip;');
             }
 
             return metaTitle;
@@ -3515,7 +3891,7 @@ define("ghost/controllers/settings/tags",
 
             if (seoURL.length > 70) {
                 seoURL = seoURL.substring(0, 70).trim();
-                seoURL = new Ember.Handlebars.SafeString(seoURL + '&hellip;');
+                seoURL = Ember.String.htmlSafe(seoURL + '&hellip;');
             }
 
             return seoURL;
@@ -3529,7 +3905,7 @@ define("ghost/controllers/settings/tags",
             if (metaDescription && metaDescription.length > 156) {
                 metaDescription = metaDescription.substring(0, 156).trim();
                 metaDescription = Ember.Handlebars.Utils.escapeExpression(metaDescription);
-                metaDescription = new Ember.Handlebars.SafeString(metaDescription + '&hellip;');
+                metaDescription = Ember.String.htmlSafe(metaDescription + '&hellip;');
             }
 
             return metaDescription;
@@ -3914,8 +4290,9 @@ define("ghost/controllers/signin",
                     data = model.getProperties('identification', 'password');
 
                 this._super(data).catch(function () {
-                    // If simple-auth's authenticate rejects we need to catch it
-                    // to avoid an unhandled rejection exception.
+                    // if authentication fails a rejected promise will be returned.
+                    // it needs to be caught so it doesn't generate an exception in the console,
+                    // but it's actually "handled" by the sessionAuthenticationFailed action handler.
                 });
             },
 
@@ -4057,8 +4434,8 @@ define("ghost/helpers/gh-blog-url",
   ["exports"],
   function(__exports__) {
     "use strict";
-    var blogUrl = Ember.Handlebars.makeBoundHelper(function () {
-        return new Ember.Handlebars.SafeString(this.get('config.blogUrl'));
+    var blogUrl = Ember.HTMLBars.makeBoundHelper(function () {
+        return Ember.String.htmlSafe(this.get('config.blogUrl'));
     });
 
     __exports__["default"] = blogUrl;
@@ -4067,9 +4444,17 @@ define("ghost/helpers/gh-count-characters",
   ["exports"],
   function(__exports__) {
     "use strict";
-    var countCharacters = Ember.Handlebars.makeBoundHelper(function (content) {
+    var countCharacters = Ember.HTMLBars.makeBoundHelper(function (arr /* hashParams */) {
         var el = document.createElement('span'),
-            length = content ? content.length : 0;
+            length,
+            content;
+
+        if (!arr || !arr.length) {
+            return;
+        }
+
+        content = arr[0] || '';
+        length = content.length;
 
         el.className = 'word-count';
 
@@ -4081,7 +4466,7 @@ define("ghost/helpers/gh-count-characters",
 
         el.innerHTML = 200 - length;
 
-        return new Ember.Handlebars.SafeString(el.outerHTML);
+        return Ember.String.htmlSafe(el.outerHTML);
     });
 
     __exports__["default"] = countCharacters;
@@ -4090,9 +4475,19 @@ define("ghost/helpers/gh-count-down-characters",
   ["exports"],
   function(__exports__) {
     "use strict";
-    var countDownCharacters = Ember.Handlebars.makeBoundHelper(function (content, maxCharacters) {
+    var countDownCharacters = Ember.HTMLBars.makeBoundHelper(function (arr /* hashParams */) {
         var el = document.createElement('span'),
-            length = content ? content.length : 0;
+            content,
+            maxCharacters,
+            length;
+
+        if (!arr || arr.length < 2) {
+            return;
+        }
+
+        content = arr[0] || '';
+        maxCharacters = arr[1];
+        length = content.length;
 
         el.className = 'word-count';
 
@@ -4104,7 +4499,7 @@ define("ghost/helpers/gh-count-down-characters",
 
         el.innerHTML = length;
 
-        return new Ember.Handlebars.SafeString(el.outerHTML);
+        return Ember.String.htmlSafe(el.outerHTML);
     });
 
     __exports__["default"] = countDownCharacters;
@@ -4115,12 +4510,21 @@ define("ghost/helpers/gh-count-words",
     "use strict";
     var counter = __dependency1__["default"];
 
-    var countWords = Ember.Handlebars.makeBoundHelper(function (markdown) {
+    var countWords = Ember.HTMLBars.makeBoundHelper(function (arr /* hashParams */) {
+        if (!arr || !arr.length) {
+            return;
+        }
+
+        var markdown,
+            count;
+
+        markdown = arr[0] || '';
+
         if (/^\s*$/.test(markdown)) {
             return '0 words';
         }
 
-        var count = counter(markdown || '');
+        count = counter(markdown);
 
         return count + (count === 1 ? ' word' : ' words');
     });
@@ -4131,26 +4535,28 @@ define("ghost/helpers/gh-format-html",
   ["ghost/utils/caja-sanitizers","exports"],
   function(__dependency1__, __exports__) {
     "use strict";
-    /* global Handlebars, html_sanitize*/
+    /* global html_sanitize*/
     var cajaSanitizers = __dependency1__["default"];
 
-    var formatHTML = Ember.Handlebars.makeBoundHelper(function (html) {
-        var escapedhtml = html || '';
+    var formatHTML = Ember.HTMLBars.makeBoundHelper(function (arr /* hashParams */) {
+        if (!arr || !arr.length) {
+            return;
+        }
+
+        var escapedhtml = arr[0] || '';
 
         // replace script and iFrame
-        // jscs:disable
         escapedhtml = escapedhtml.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
             '<pre class="js-embed-placeholder">Embedded JavaScript</pre>');
         escapedhtml = escapedhtml.replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi,
             '<pre class="iframe-embed-placeholder">Embedded iFrame</pre>');
-        // jscs:enable
 
         // sanitize HTML
         // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
         escapedhtml = html_sanitize(escapedhtml, cajaSanitizers.url, cajaSanitizers.id);
         // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
 
-        return new Handlebars.SafeString(escapedhtml);
+        return Ember.String.htmlSafe(escapedhtml);
     });
 
     __exports__["default"] = formatHTML;
@@ -4159,7 +4565,7 @@ define("ghost/helpers/gh-format-markdown",
   ["ghost/utils/caja-sanitizers","exports"],
   function(__dependency1__, __exports__) {
     "use strict";
-    /* global Showdown, Handlebars, html_sanitize*/
+    /* global Showdown, html_sanitize*/
     var cajaSanitizers = __dependency1__["default"];
 
     var showdown,
@@ -4167,26 +4573,29 @@ define("ghost/helpers/gh-format-markdown",
 
     showdown = new Showdown.converter({extensions: ['ghostimagepreview', 'ghostgfm', 'footnotes', 'highlight']});
 
-    formatMarkdown = Ember.Handlebars.makeBoundHelper(function (markdown) {
-        var escapedhtml = '';
+    formatMarkdown = Ember.HTMLBars.makeBoundHelper(function (arr /* hashParams */) {
+        if (!arr || !arr.length) {
+            return;
+        }
+
+        var escapedhtml = '',
+            markdown = arr[0] || '';
 
         // convert markdown to HTML
-        escapedhtml = showdown.makeHtml(markdown || '');
+        escapedhtml = showdown.makeHtml(markdown);
 
         // replace script and iFrame
-        // jscs:disable
         escapedhtml = escapedhtml.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
             '<pre class="js-embed-placeholder">Embedded JavaScript</pre>');
         escapedhtml = escapedhtml.replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi,
             '<pre class="iframe-embed-placeholder">Embedded iFrame</pre>');
-        // jscs:enable
 
         // sanitize html
         // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
         escapedhtml = html_sanitize(escapedhtml, cajaSanitizers.url, cajaSanitizers.id);
         // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
 
-        return new Handlebars.SafeString(escapedhtml);
+        return Ember.String.htmlSafe(escapedhtml);
     });
 
     __exports__["default"] = formatMarkdown;
@@ -4195,8 +4604,13 @@ define("ghost/helpers/gh-format-timeago",
   ["exports"],
   function(__exports__) {
     "use strict";
-    /* global moment */
-    var formatTimeago = Ember.Handlebars.makeBoundHelper(function (timeago) {
+    var formatTimeago = Ember.HTMLBars.makeBoundHelper(function (arr /* hashParams */) {
+        if (!arr || !arr.length) {
+            return;
+        }
+
+        var timeago = arr[0];
+
         return moment(timeago).fromNow();
         // stefanpenner says cool for small number of timeagos.
         // For large numbers moment sucks => single Ember.Object based clock better
@@ -4258,7 +4672,7 @@ define("ghost/helpers/gh-path",
             base = base + url;
         }
 
-        return new Ember.Handlebars.SafeString(base);
+        return Ember.String.htmlSafe(base);
     }
 
     __exports__["default"] = ghostPathsHelper;
@@ -4756,7 +5170,7 @@ define("ghost/mixins/editor-base-controller",
             if (status === 'published') {
                 message += '&nbsp;<a href="' + path + '">View ' + this.get('postOrPage') + '</a>';
             }
-            this.notifications.showSuccess(message, {delayed: delay});
+            this.notifications.showSuccess(message.htmlSafe(), {delayed: delay});
         },
 
         showErrorNotification: function (prevStatus, status, errors, delay) {
@@ -4765,7 +5179,7 @@ define("ghost/mixins/editor-base-controller",
 
             message += '<br />' + error;
 
-            this.notifications.showError(message, {delayed: delay});
+            this.notifications.showError(message.htmlSafe(), {delayed: delay});
         },
 
         shouldFocusTitle: Ember.computed.alias('model.isNew'),
@@ -4879,9 +5293,7 @@ define("ghost/mixins/editor-base-controller",
                 var editor = this.get('codemirror'),
                     line = this.findLine(Ember.$(e.currentTarget).attr('id')),
                     lineNumber = editor.getLineNumber(line),
-                    // jscs:disable
                     match = line.text.match(/\([^\n]*\)?/),
-                    // jscs:enable
                     replacement = '(http://)';
 
                 if (match) {
@@ -4891,9 +5303,7 @@ define("ghost/mixins/editor-base-controller",
                         {line: lineNumber, ch: match.index + match[0].length - 1}
                     );
                 } else {
-                    // jscs:disable
                     match = line.text.match(/\]/);
-                    // jscs:enable
                     if (match) {
                         editor.replaceRange(
                             replacement,
@@ -5175,10 +5585,8 @@ define("ghost/mixins/marker-manager",
   function(__exports__) {
     "use strict";
     var MarkerManager = Ember.Mixin.create({
-        // jscs:disable
         imageMarkdownRegex: /^(?:\{<(.*?)>\})?!(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?$/gim,
         markerRegex: /\{<([\w\W]*?)>\}/,
-        // jscs:enable
 
         uploadId: 1,
 
@@ -5340,9 +5748,7 @@ define("ghost/mixins/marker-manager",
             var editor = this.get('codemirror'),
                 ln = editor.getLineNumber(line),
 
-                // jscs:disable
                 markerRegex = /\{<([\w\W]*?)>\}/,
-                // jscs:enable
 
                 markerText = line.text.match(markerRegex);
 
@@ -5920,12 +6326,15 @@ define("ghost/mixins/validation-engine",
             // get the validator's error messages from the array.
             // normalize array members to map to strings.
             message = errors.map(function (error) {
+                var errorMessage;
                 if (typeof error === 'string') {
-                    return error;
+                    errorMessage = error;
+                } else {
+                    errorMessage = error.message;
                 }
 
-                return error.message;
-            }).join('<br />');
+                return Ember.Handlebars.Utils.escapeExpression(errorMessage);
+            }).join('<br />').htmlSafe();
         } else if (errors instanceof Error) {
             message += errors.message || '.';
         } else if (typeof errors === 'object') {
@@ -6182,7 +6591,8 @@ define("ghost/models/setting",
         availableThemes: DS.attr(),
         ghost_head: DS.attr('string'),
         ghost_foot: DS.attr('string'),
-        labs: DS.attr('string')
+        labs: DS.attr('string'),
+        navigation: DS.attr('string')
     });
 
     __exports__["default"] = Setting;
@@ -6405,6 +6815,7 @@ define("ghost/router",
             this.route('tags');
             this.route('labs');
             this.route('code-injection');
+            this.route('navigation');
         });
 
         // Redirect debug to settings labs
@@ -7301,6 +7712,43 @@ define("ghost/routes/settings/labs",
 
     __exports__["default"] = LabsRoute;
   });
+define("ghost/routes/settings/navigation", 
+  ["ghost/routes/authenticated","ghost/mixins/current-user-settings","ghost/mixins/style-body","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    "use strict";
+    var AuthenticatedRoute = __dependency1__["default"];
+    var CurrentUserSettings = __dependency2__["default"];
+    var styleBody = __dependency3__["default"];
+
+    var NavigationRoute = AuthenticatedRoute.extend(styleBody, CurrentUserSettings, {
+
+        titleToken: 'Navigation',
+
+        classNames: ['settings-view-navigation'],
+
+        beforeModel: function () {
+            return this.currentUser().then(this.transitionAuthor());
+        },
+
+        model: function () {
+            return this.store.find('setting', {type: 'blog,theme'}).then(function (records) {
+                return records.get('firstObject');
+            });
+        },
+
+        actions: {
+            save: function () {
+                // since shortcuts are run on the route, we have to signal to the components
+                // on the page that we're about to save.
+                $('.page-actions .btn-blue').focus();
+
+                this.get('controller').send('save');
+            }
+        }
+    });
+
+    __exports__["default"] = NavigationRoute;
+  });
 define("ghost/routes/settings/tags", 
   ["ghost/routes/authenticated","ghost/mixins/current-user-settings","ghost/mixins/pagination-route","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
@@ -7726,21 +8174,6 @@ define("ghost/serializers/post",
             return this._super.apply(this, arguments);
         },
 
-        keyForAttribute: function (attr) {
-            return attr;
-        },
-
-        keyForRelationship: function (relationshipName) {
-            // this is a hack to prevent Ember-Data from deleting our `tags` reference.
-            // ref: https://github.com/emberjs/data/issues/2051
-            // @TODO: remove this once the situation becomes clearer what to do.
-            if (relationshipName === 'tags') {
-                return 'tag';
-            }
-
-            return relationshipName;
-        },
-
         serializeIntoHash: function (hash, type, record, options) {
             options = options || {};
             options.includeId = true;
@@ -7850,21 +8283,6 @@ define("ghost/serializers/user",
             delete payload[pluralizedRoot];
 
             return this._super.apply(this, arguments);
-        },
-
-        keyForAttribute: function (attr) {
-            return attr;
-        },
-
-        keyForRelationship: function (relationshipName) {
-            // this is a hack to prevent Ember-Data from deleting our `tags` reference.
-            // ref: https://github.com/emberjs/data/issues/2051
-            // @TODO: remove this once the situation becomes clearer what to do.
-            if (relationshipName === 'roles') {
-                return 'role';
-            }
-
-            return relationshipName;
         }
     });
 
@@ -7897,7 +8315,7 @@ define("ghost/utils/ajax",
     "use strict";
     /* global ic */
 
-    var ajax = window.ajax = function () {
+    var ajax = function () {
         return ic.ajax.request.apply(null, arguments);
     };
 
@@ -8010,12 +8428,10 @@ define("ghost/utils/caja-sanitizers",
      * URLs are allowed if they start with http://, https://, or /.
      */
     url = function (url) {
-        // jscs:disable
         url = url.toString().replace(/['"]+/g, '');
         if (/^https?:\/\//.test(url) || /^\//.test(url)) {
             return url;
         }
-        // jscs:enable
     };
 
     /**
@@ -8135,9 +8551,7 @@ define("ghost/utils/codemirror-shortcuts",
 
                 hashPrefix = new Array(currentHeaderLevel + 2).join('#');
 
-                // jscs:disable
                 replacementLine = hashPrefix + ' ' + line.replace(/^#* /, '');
-                // jscs:enable
 
                 this.replaceRange(replacementLine, fromLineStart, toLineEnd);
                 this.setCursor(cursor.line, cursor.ch + replacementLine.length);
@@ -8172,9 +8586,7 @@ define("ghost/utils/codemirror-shortcuts",
                 return;
 
             case 'list':
-                // jscs:disable
                 md = text.replace(/^(\s*)(\w\W*)/gm, '$1* $2');
-                // jscs:enable
                 this.replaceSelection(md, 'end');
                 return;
 
@@ -8598,8 +9010,19 @@ define("ghost/utils/notifications",
             this._super(object);
         },
         handleNotification: function (message, delayed) {
-            if (!message.status) {
-                message.status = 'passive';
+            if (typeof message.toJSON === 'function') {
+                // If this is a persistent message from the server, treat it as html safe
+                if (message.get('status') === 'persistent') {
+                    message.set('message', message.get('message').htmlSafe());
+                }
+
+                if (!message.get('status')) {
+                    message.set('status', 'passive');
+                }
+            } else {
+                if (!message.status) {
+                    message.status = 'passive';
+                }
             }
 
             if (!delayed) {
@@ -8799,12 +9222,14 @@ define("ghost/utils/word-count",
     "use strict";
     // jscs: disable
     function wordCount(s) {
-        s = s.replace(/(^\s*)|(\s*$)/gi, ''); // exclude  start and end white-space
-        s = s.replace(/[ ]{2,}/gi, ' '); // 2 or more space to 1
-        s = s.replace(/\n /gi, '\n'); // exclude newline with a start spacing
-        s = s.replace(/\n+/gi, '\n');
+        s = s.replace(/<(.|\n)*?>/g, ' '); // strip tags
+        s = s.replace(/[^\w\s]/g, ''); // ignore non-alphanumeric letters
+        s = s.replace(/(^\s*)|(\s*$)/gi, ''); // exclude starting and ending white-space
+        s = s.replace(/\n /gi, ' '); // convert newlines to spaces
+        s = s.replace(/\n+/gi, ' ');
+        s = s.replace(/[ ]{2,}/gi, ' '); // convert 2 or more spaces to 1
 
-        return s.split(/ |\n/).length;
+        return s.split(' ').length;
     }
 
     __exports__["default"] = wordCount;
@@ -9122,43 +9547,59 @@ define("ghost/validators/user",
     __exports__["default"] = UserValidator;
   });
 define("ghost/views/application", 
-  ["ghost/utils/mobile","ghost/utils/bind","exports"],
-  function(__dependency1__, __dependency2__, __exports__) {
+  ["ghost/utils/mobile","exports"],
+  function(__dependency1__, __exports__) {
     "use strict";
     var mobileQuery = __dependency1__["default"];
-    var bind = __dependency2__["default"];
 
     var ApplicationView = Ember.View.extend({
         elementId: 'container',
 
-        setupGlobalMobileNav: function () {
+        didInsertElement: function () {
             // #### Navigating within the sidebar closes it.
             var self = this;
+
             $('body').on('click tap', '.js-nav-item', function () {
-                if (mobileQuery.matches) {
-                    self.set('controller.showGlobalMobileNav', false);
-                }
+                Ember.run(function () {
+                    if (mobileQuery.matches) {
+                        self.set('controller.showGlobalMobileNav', false);
+                    }
+                });
             });
 
             // #### Close the nav if mobile and clicking outside of the nav or not the burger toggle
             $('.js-nav-cover').on('click tap', function () {
-                var isOpen = self.get('controller.showGlobalMobileNav');
-                if (isOpen) {
-                    self.set('controller.showGlobalMobileNav', false);
-                }
+                Ember.run(function () {
+                    var isOpen = self.get('controller.showGlobalMobileNav');
+
+                    if (isOpen) {
+                        self.set('controller.showGlobalMobileNav', false);
+                    }
+                });
             });
 
-            // #### Listen to the viewport and change user-menu dropdown triangle classes accordingly
-            mobileQuery.addListener(this.swapUserMenuDropdownTriangleClasses);
-            this.swapUserMenuDropdownTriangleClasses(mobileQuery);
-        }.on('didInsertElement'),
-
-        swapUserMenuDropdownTriangleClasses: function (mq) {
-            if (mq.matches) {
-                $('.js-user-menu-dropdown-menu').removeClass('dropdown-triangle-top-right ').addClass('dropdown-triangle-bottom');
-            } else {
-                $('.js-user-menu-dropdown-menu').removeClass('dropdown-triangle-bottom').addClass('dropdown-triangle-top-right');
+            function swapUserMenuDropdownTriangleClasses(mq) {
+                if (mq.matches) {
+                    $('.js-user-menu-dropdown-menu').removeClass('dropdown-triangle-top-right ').addClass('dropdown-triangle-bottom');
+                } else {
+                    $('.js-user-menu-dropdown-menu').removeClass('dropdown-triangle-bottom').addClass('dropdown-triangle-top-right');
+                }
             }
+
+            // #### Listen to the viewport and change user-menu dropdown triangle classes accordingly
+            this.set('swapUserMenuDropdownTriangleClasses', Ember.run.bind(this, swapUserMenuDropdownTriangleClasses));
+
+            mobileQuery.addListener(this.get('swapUserMenuDropdownTriangleClasses'));
+            swapUserMenuDropdownTriangleClasses(mobileQuery);
+
+            this.set('closeGlobalMobileNavOnDesktop', Ember.run.bind(this, function closeGlobalMobileNavOnDesktop(mq) {
+                if (!mq.matches) {
+                    // Is desktop sized
+                    this.set('controller.showGlobalMobileNav', false);
+                }
+            }));
+
+            mobileQuery.addListener(this.get('closeGlobalMobileNavOnDesktop'));
         },
 
         showGlobalMobileNavObserver: function () {
@@ -9169,20 +9610,10 @@ define("ghost/views/application",
             }
         }.observes('controller.showGlobalMobileNav'),
 
-        setupCloseNavOnDesktop: function () {
-            this.set('closeGlobalMobileNavOnDesktop', bind(function closeGlobalMobileNavOnDesktop(mq) {
-                if (!mq.matches) {
-                    // Is desktop sized
-                    this.set('controller.showGlobalMobileNav', false);
-                }
-            }, this));
-
-            mobileQuery.addListener(this.closeGlobalMobileNavOnDesktop);
-        }.on('didInsertElement'),
-
-        removeCloseNavOnDesktop: function () {
-            mobileQuery.removeListener(this.closeGlobalMobileNavOnDesktop);
-        }.on('willDestroyElement'),
+        willDestroyElement: function () {
+            mobileQuery.removeListener(this.get('closeGlobalMobileNavOnDesktop'));
+            mobileQuery.removeListener(this.get('swapUserMenuDropdownTriangleClasses'));
+        },
 
         toggleSettingsMenuBodyClass: function () {
             $('body').toggleClass('settings-menu-expanded', this.get('controller.showSettingsMenu'));
@@ -9732,6 +10163,46 @@ define("ghost/views/settings/labs",
 
     __exports__["default"] = SettingsLabsView;
   });
+define("ghost/views/settings/navigation", 
+  ["ghost/views/settings/content-base","exports"],
+  function(__dependency1__, __exports__) {
+    "use strict";
+    var BaseView = __dependency1__["default"];
+
+    var SettingsNavigationView = BaseView.extend({
+
+        didInsertElement: function () {
+            var navContainer = Ember.$('.js-settings-navigation'),
+                navElements = '.navigation-item:not(.navigation-item:last-child)',
+                self = this;
+
+            navContainer.sortable({
+                handle: '.navigation-item-drag-handle',
+                items: navElements,
+
+                start: function (event, ui) {
+                    Ember.run(function () {
+                        ui.item.data('start-index', ui.item.index());
+                    });
+                },
+
+                update: function (event, ui) {
+                    Ember.run(function () {
+                        self.get('controller').send('moveItem', ui.item.data('start-index'), ui.item.index());
+                        ui.item.remove();
+                    });
+                }
+            });
+        },
+
+        willDestroyElement: function () {
+            Ember.$('.js-settings-navigation').sortable('destroy');
+        }
+
+    });
+
+    __exports__["default"] = SettingsNavigationView;
+  });
 define("ghost/views/settings/tags", 
   ["ghost/views/settings/content-base","ghost/mixins/pagination-view-infinite-scroll","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
@@ -9831,7 +10302,7 @@ define("ghost/views/settings/users/users-list-view",
 /*global require */
 
 if (!window.disableBoot) {
-    window.App = require('ghost/app')['default'].create();
+    window.App = require('ghost/app').default.create();
 }
 
 //# sourceMappingURL=ghost-dev.js.map
