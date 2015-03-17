@@ -1,6 +1,6 @@
 # Ghost for OpenShift
 
-Ghost is a free, open, simple blogging platform that's available to anyone who wants to use it. Lovingly created and maintained by [John O'Nolan](http://twitter.com/JohnONolan) + [Hannah Wolfe](http://twitter.com/ErisDS) + an amazing group of [contributors](https://github.com/TryGhost/Ghost/contributors).
+Ghost is a free, open, simple blogging platform that is available to anyone who wants to use it. 
 
 Visit the project's website at <http://ghost.org> &bull; docs on <http://support.ghost.org>.
 
@@ -14,9 +14,9 @@ Note these OpenShift specific changes:
 
 2. Even though the Node.js cartridge itself is scalable, this application will not play nice with scaling right now because the images are stored on disk, and since OpenShift does not currently support shared physical disk storage across scaled gears, this cartridge will not scale.  We are working on a solution for this.
 
-3. This quickstart is setup for using MySQL (5.1 or 5.5) or PostgreSQL (8.4 or 9.2).  Once you click the Deploy link on the OpenShift Hub, you can choose which database you would like to use.
+3. This quickstart is setup to use MySQL (5.1 or 5.5) or PostgreSQL (8.4 or 9.2).  Once you click the Deploy link on the OpenShift Hub, you can choose which database you would like to use.
 
-4. If you use a custom domain, modify the production url field in config.js file.
+4. If you use a custom domain, modify the production url field in the config.js file.
 
 ### Upgrading to The Latest Version
 
