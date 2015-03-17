@@ -6,28 +6,15 @@ Visit the project's website at <http://ghost.org> &bull; docs on <http://support
 
 ## Running Ghost on OpenShift
 
-This is a basic quickstart to get Ghost running on OpenShift.  
-
-If you have already created an application with this, and are having issues with it not working when you do a restart, 
-run this command, then issue a restart and it should be fixed.
-
-	rhc set-env NODE_ENV=production --app $appname
-
-Where $appname is the name of your application.  This was due to the pre_start_nodejs script not running on a restart.
-
-The easiest way is to use the following command, make sure that you run 'gem update rhc' first so that you have the newest version:
-
-	rhc app create ghost nodejs-0.10 --env NODE_ENV=production --from-code https://github.com/openshift-quickstart/openshift-ghost-quickstart.git
-
-'ghost' will be the name of your application.  
+The easiest way to deploy Ghost on OpenShift is to use the [QuickStart on the OpenShift Hub](https://hub.openshift.com/quickstarts/119-ghost-0-5-10).
 
 Note these OpenShift specific changes:
 
 1. The content/data and content/images directories have been removed.  They are created on the server and symlinked to your $OPENSHIFT\_DATA\_DIR so that posts and uploaded images will persist across 'git pushes'
 
-2. Even though the Node.js cartridge itself is scalable, this application will not play nice with scaling right now because it is using **SQLite3** as the database (which is a file store), and the images are stored on disk, and since OpenShift does not currently support shared physical disk storage across scaled gears, this cartridge will not scale.  We are working on a solution for this.
+2. Even though the Node.js cartridge itself is scalable, this application will not play nice with scaling right now because the images are stored on disk, and since OpenShift does not currently support shared physical disk storage across scaled gears, this cartridge will not scale.  We are working on a solution for this.
 
-3. This quickstart currently is not setup for using MySQL, use [MySQL repository](https://github.com/openshift-quickstart/openshift-ghost-mysql-quickstart) if you need it. That will eliminate one of the scaling concerns.
+3. This quickstart is setup for using MySQL (5.1 or 5.5) or PostgreSQL (8.4 or 9.2).  Once you click the Deploy link on the OpenShift Hub, you can choose which database you would like to use.
 
 4. If you use a custom domain, modify the production url field in config.js file.
 
