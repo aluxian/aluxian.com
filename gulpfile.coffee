@@ -7,7 +7,8 @@ $        = require('gulp-load-plugins')()
 port     = 8888
 live     = false
 
-DIST = '../gh-pages.aluxian.com'
+#DIST = '../gh-pages.aluxian.com'
+DIST = './dist'
 
 gulp.task 'live', -> live = true
 

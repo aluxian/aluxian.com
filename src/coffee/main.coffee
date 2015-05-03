@@ -84,7 +84,10 @@
     'MAC USER',
     'TECHNOLOGY ENTHUSIAST',
     'OCCASIONAL HACKER',
-    'COMMAND-LINE WIZARD'
+    'PROBLEM SOLVER',
+    'YOUNG & CREATIVE',
+    'FRONTEND-ER',
+    'BACKEND-ER'
   ]
 
   titleElement = document.querySelector '.hero h2:last-child'
@@ -128,10 +131,8 @@
   belowFullscreen = document.querySelector '.below-fullscreen'
   height = fullscreen.offsetHeight
 
-  if innerWidth >= 480 && innerHeight < 600
+  if innerHeight < 600
     height = 600
-  else if innerHeight < 400
-    height = 400
 
   fullscreen.style.height = height + 'px'
   belowFullscreen.style.top = height + 'px'
