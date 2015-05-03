@@ -7,10 +7,12 @@ $        = require('gulp-load-plugins')()
 port     = 8888
 live     = false
 
+DIST = '../gh-pages.aluxian.com'
+
 gulp.task 'live', -> live = true
 
-gulp.task 'purge', (cb) -> del(['./dist', './temp'], cb)
-gulp.task 'clean', (cb) -> del(['./dist/**/*.*', './temp/**/*.*'], cb)
+gulp.task 'purge', (cb) -> del([DIST, './temp'], cb)
+gulp.task 'clean', (cb) -> del([DIST + '/**/*.*', './temp/**/*.*'], cb)
 
 gulp.task 'jade', ->
   gulp.src './src/jade/*.jade'
@@ -21,13 +23,13 @@ gulp.task 'jade', ->
     .pipe $.htmlmin
       collapseWhitespace: true
       keepClosingSlash: true
-    .pipe gulp.dest './dist'
+    .pipe gulp.dest DIST
 
 gulp.task 'assets', ->
   gulp.src './src/img/**'
-    .pipe gulp.dest './dist/img'
+    .pipe gulp.dest DIST + '/img'
   gulp.src './src/favicons/**'
-    .pipe gulp.dest './dist'
+    .pipe gulp.dest DIST
 
 gulp.task 'fonts', ->
   gulp.src './src/sass/fonts.sass'
@@ -36,7 +38,7 @@ gulp.task 'fonts', ->
       sourceComments : 'normal'
       errLogToConsole: true
     .pipe $.if live, $.cssmin()
-    .pipe gulp.dest './dist'
+    .pipe gulp.dest DIST
 
 gulp.task 'sass', ['jade'], ->
   gulp.src ['./src/bower_components/normalize-css/normalize.css', './src/sass/styles.sass']
@@ -56,13 +58,13 @@ gulp.task 'coffee', ->
     .pipe gulp.dest './temp'
 
 gulp.task 'inject', ['sass', 'coffee'], ->
-  gulp.src './dist/index.html'
+  gulp.src DIST + '/index.html'
     .pipe $.replace /<!-- inject:css-->/, '<style>' + fs.readFileSync('./temp/styles.css', 'utf8') + '</style>'
     .pipe $.replace /<!-- inject:js-->/, '<script>' + fs.readFileSync('./temp/main.js', 'utf8') + '</script>'
-    .pipe gulp.dest './dist'
+    .pipe gulp.dest DIST
 
 gulp.task 'static', ['build'], (next) ->
-  http.createServer ecstatic { root: './dist', cache: 'no-cache', showDir: true }
+  http.createServer ecstatic { root: DIST, cache: 'no-cache', showDir: true }
     .listen port, ->
       $.util.log 'Static server is listening at ' + $.util.colors.cyan("http://localhost:#{port}/")
       next()
@@ -75,7 +77,7 @@ gulp.task 'watch', ['static'], ->
   gulp.watch './src/img/**/*.*', ['assets']
   gulp.watch './src/favicons/**/*.*', ['assets']
   gulp.watch './src/svg/**/*.svg', ['jade', 'inject']
-  gulp.watch './dist/**', (file) -> $.livereload.changed file.path
+  gulp.watch DIST + '/**', (file) -> $.livereload.changed file.path
 
 gulp.task 'build', ['fonts', 'sass', 'jade', 'assets', 'coffee', 'inject']
 gulp.task 'default', ['watch']
