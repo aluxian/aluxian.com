@@ -7,8 +7,7 @@ $        = require('gulp-load-plugins')()
 port     = 8888
 live     = false
 
-#DIST = '../gh-pages.aluxian.com'
-DIST = './dist'
+DIST = '../gh-pages.aluxian.com'
 
 gulp.task 'live', -> live = true
 
@@ -18,10 +17,10 @@ gulp.task 'clean', (cb) -> del([DIST + '/**/*.*', './temp/**/*.*'], cb)
 gulp.task 'jade', ->
   gulp.src './src/jade/*.jade'
     .pipe $.jade
-      pretty: true
+      pretty: !live
       locals: require './src/db/database.json'
     .pipe $.if !live, $.embedlr()
-    .pipe $.htmlmin
+    .pipe $.if live, $.htmlmin
       collapseWhitespace: true
       keepClosingSlash: true
     .pipe gulp.dest DIST
@@ -35,7 +34,7 @@ gulp.task 'assets', ->
 gulp.task 'fonts', ->
   gulp.src './src/sass/fonts.sass'
     .pipe $.sass
-      outputStyle: 'compressed'
+      outputStyle: if live then 'compressed' else 'nested'
       sourceComments: 'map'
       sourceMap: 'sass'
       errLogToConsole: true
@@ -46,7 +45,7 @@ gulp.task 'fonts', ->
 gulp.task 'sass', ['jade'], ->
   gulp.src ['./src/bower_components/normalize-css/normalize.css', './src/sass/styles.sass']
     .pipe $.if /[.]sass$/, $.sass
-      outputStyle: 'compressed'
+      outputStyle: if live then 'compressed' else 'nested'
       sourceComments: 'map'
       sourceMap: 'sass'
       errLogToConsole: true
@@ -75,6 +74,7 @@ gulp.task 'static', ['build'], (next) ->
       next()
 
 gulp.task 'watch', ['static'], ->
+  $.livereload.listen()
   gulp.watch './src/sass/*.sass', ['fonts', 'sass', 'inject']
   gulp.watch './src/jade/**/*.jade', ['jade', 'inject']
   gulp.watch './src/coffee/*.coffee', ['coffee', 'inject']
