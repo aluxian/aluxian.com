@@ -36,8 +36,8 @@ gulp.task 'fonts', ->
   gulp.src './src/sass/fonts.sass'
     .pipe $.sass
       outputStyle: 'compressed'
-      sourceComments : 'normal'
       errLogToConsole: true
+      indentedSyntax: true
     .pipe $.if live, $.cssmin()
     .pipe gulp.dest DIST
 
@@ -45,8 +45,8 @@ gulp.task 'sass', ['jade'], ->
   gulp.src ['./src/bower_components/normalize-css/normalize.css', './src/sass/styles.sass']
     .pipe $.if /[.]sass$/, $.sass
       outputStyle: 'compressed'
-      sourceComments : 'normal'
       errLogToConsole: true
+      indentedSyntax: true
     .pipe $.concat 'styles.css'
     .pipe $.if live, $.cssmin()
     .pipe gulp.dest './temp'
