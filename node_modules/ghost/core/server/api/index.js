@@ -57,7 +57,6 @@ cacheInvalidationHeader = function (req, result) {
     var parsedUrl = req._parsedUrl.pathname.replace(/^\/|\/$/g, '').split('/'),
         method = req.method,
         endpoint = parsedUrl[0],
-        id = parsedUrl[1],
         cacheInvalidate,
         jsonResult = result.toJSON ? result.toJSON() : result,
         post,
@@ -80,10 +79,9 @@ cacheInvalidationHeader = function (req, result) {
 
             // Don't set x-cache-invalidate header for drafts
             if (hasStatusChanged || wasDeleted || wasPublishedUpdated) {
-                cacheInvalidate = '/, /page/*, /rss/, /rss/*, /tag/*, /author/*, /sitemap-*.xml';
-                if (id && post.slug && post.url) {
-                    cacheInvalidate +=  ', ' + post.url;
-                }
+                cacheInvalidate = '/*';
+            } else {
+                cacheInvalidate = '/' + config.routeKeywords.preview + '/' + post.uuid + '/';
             }
         }
     }
@@ -170,7 +168,7 @@ formatHttpErrors = function (error) {
 
         errorContent.message = _.isString(errorItem) ? errorItem :
             (_.isObject(errorItem) ? errorItem.message : 'Unknown API Error');
-        errorContent.type = errorItem.type || 'InternalServerError';
+        errorContent.errorType = errorItem.errorType || 'InternalServerError';
         errors.push(errorContent);
     });
 

@@ -9,7 +9,7 @@
 // if (P_A_C_K_E_R.detect(some_string)) {
 //     var unpacked = P_A_C_K_E_R.unpack(some_string);
 // }
-// 
+//
 //
 
 var P_A_C_K_E_R = {
@@ -18,7 +18,7 @@ var P_A_C_K_E_R = {
     },
 
     get_chunks: function(str) {
-        var chunks = str.match(/eval\(\(?function\(.*?,0,\{\}\)\)($|\n)/g);
+        var chunks = str.match(/eval\(\(?function\(.*?(,0,\{\}\)\)|split\('\|'\)\)\))($|\n)/g);
         return chunks ? chunks : [];
     },
 

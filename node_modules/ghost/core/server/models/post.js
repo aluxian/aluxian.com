@@ -5,13 +5,9 @@ var _              = require('lodash'),
     sequence       = require('../utils/sequence'),
     errors         = require('../errors'),
     Showdown       = require('showdown-ghost'),
-    ghostgfm       = require('../../shared/lib/showdown/extensions/ghostgfm'),
-    footnotes      = require('../../shared/lib/showdown/extensions/ghostfootnotes'),
-    highlight      = require('../../shared/lib/showdown/extensions/ghosthighlight'),
-    converter      = new Showdown.converter({extensions: [ghostgfm, footnotes, highlight]}),
+    converter      = new Showdown.converter({extensions: ['ghostgfm', 'footnotes', 'highlight']}),
     ghostBookshelf = require('./base'),
-    xmlrpc         = require('../xmlrpc'),
-    sitemap        = require('../data/sitemap'),
+    events         = require('../events'),
 
     config          = require('../config'),
     permalinkSetting = '',
@@ -30,7 +26,7 @@ getPermalinkSetting = function (model, attributes, options) {
     }
     return ghostBookshelf.model('Settings').findOne({key: 'permalinks'}).then(function (response) {
         if (response) {
-            response = response.toJSON();
+            response = response.toJSON(options);
             permalinkSetting = response.hasOwnProperty('value') ? response.value : '';
         }
     });
@@ -39,6 +35,14 @@ getPermalinkSetting = function (model, attributes, options) {
 Post = ghostBookshelf.Model.extend({
 
     tableName: 'posts',
+
+    emitChange: function (event, usePreviousResourceType) {
+        var resourceType = this.get('page') ? 'page' : 'post';
+        if (usePreviousResourceType) {
+            resourceType = this.updated('page') ? 'page' : 'post';
+        }
+        events.emit(resourceType + '.' + event, this);
+    },
 
     defaults: function () {
         return {
@@ -53,9 +57,6 @@ Post = ghostBookshelf.Model.extend({
         ghostBookshelf.Model.prototype.initialize.apply(this, arguments);
 
         this.on('saved', function (model, response, options) {
-            if (model.get('status') === 'published') {
-                xmlrpc.ping(model.toJSON());
-            }
             return self.updateTags(model, response, options);
         });
 
@@ -63,40 +64,51 @@ Post = ghostBookshelf.Model.extend({
         this.on('fetching', getPermalinkSetting);
 
         this.on('created', function (model) {
-            var isPage = !!model.get('page');
-            if (isPage) {
-                sitemap.pageAdded(model);
-            } else {
-                sitemap.postAdded(model);
-            }
-        });
-        this.on('updated', function (model) {
-            var isPage = !!model.get('page'),
-                wasPage = !!model.updated('page');
+            model.emitChange('added');
 
-            if (isPage && wasPage) {
-                // Page value didn't change, remains a page
-                sitemap.pageEdited(model);
-            } else if (!isPage && !wasPage) {
-                // Remains a Post
-                sitemap.postEdited(model);
-            } else if (isPage && !wasPage) {
-                // Switched from Post to Page
-                sitemap.postDeleted(model);
-                sitemap.pageAdded(model);
-            } else if (!isPage && wasPage) {
-                // Switched from Page to Post
-                sitemap.pageDeleted(model);
-                sitemap.postAdded(model);
+            if (model.get('status') === 'published') {
+                model.emitChange('published');
             }
         });
-        this.on('destroyed', function (model) {
-            var isPage = !!model.get('page');
-            if (isPage) {
-                sitemap.pageDeleted(model);
+
+        this.on('updated', function (model) {
+            model.statusChanging = model.get('status') !== model.updated('status');
+            model.isPublished = model.get('status') === 'published';
+            model.wasPublished = model.updated('status') === 'published';
+            model.resourceTypeChanging = model.get('page') !== model.updated('page');
+
+            // Handle added and deleted for changing resource
+            if (model.resourceTypeChanging) {
+                if (model.wasPublished) {
+                    model.emitChange('unpublished', true);
+                }
+
+                model.emitChange('deleted', true);
+                model.emitChange('added');
+
+                if (model.isPublished) {
+                    model.emitChange('published');
+                }
             } else {
-                sitemap.postDeleted(model);
+                if (model.statusChanging) {
+                    model.emitChange(model.isPublished ? 'published' : 'unpublished');
+                } else {
+                    if (model.isPublished) {
+                        model.emitChange('published.edited');
+                    }
+                }
+
+                // Fire edited if this wasn't a change between resourceType
+                model.emitChange('edited');
             }
+        });
+
+        this.on('destroyed', function (model) {
+            if (model.previous('status') === 'published') {
+                model.emitChange('unpublished');
+            }
+
+            model.emitChange('deleted');
         });
     },
 
@@ -192,7 +204,7 @@ Post = ghostBookshelf.Model.extend({
                 var doNotExist = [],
                     sequenceTasks = [];
 
-                existingTags = existingTags.toJSON();
+                existingTags = existingTags.toJSON(options);
 
                 doNotExist = _.reject(self.myTags, function (tag) {
                     return _.any(existingTags, function (existingTag) {
@@ -276,7 +288,7 @@ Post = ghostBookshelf.Model.extend({
             validOptions = {
                 findAll: ['withRelated'],
                 findOne: ['importing', 'withRelated'],
-                findPage: ['page', 'limit', 'status', 'staticPages'],
+                findPage: ['page', 'limit', 'status', 'staticPages', 'featured'],
                 add: ['importing']
             };
 
@@ -371,6 +383,14 @@ Post = ghostBookshelf.Model.extend({
                 options.staticPages = options.staticPages === 'true' || options.staticPages === '1' ? true : false;
             }
             options.where.page = options.staticPages;
+        }
+
+        if (options.featured) {
+            // convert string true/false to boolean
+            if (!_.isBoolean(options.featured)) {
+                options.featured = options.featured === 'true' || options.featured === '1' ? true : false;
+            }
+            options.where.featured = options.featured;
         }
 
         // Unless `all` is passed as an option, filter on
@@ -477,14 +497,7 @@ Post = ghostBookshelf.Model.extend({
                 pagination.next = null;
                 pagination.prev = null;
 
-                // Pass include to each model so that toJSON works correctly
-                if (options.include) {
-                    _.each(postCollection.models, function (item) {
-                        item.include = options.include;
-                    });
-                }
-
-                data.posts = postCollection.toJSON();
+                data.posts = postCollection.toJSON(options);
                 data.meta = meta;
                 meta.pagination = pagination;
 
@@ -502,14 +515,14 @@ Post = ghostBookshelf.Model.extend({
                 if (tagInstance) {
                     meta.filters = {};
                     if (!tagInstance.isNew()) {
-                        meta.filters.tags = [tagInstance.toJSON()];
+                        meta.filters.tags = [tagInstance.toJSON(options)];
                     }
                 }
 
                 if (authorInstance) {
                     meta.filters = {};
                     if (!authorInstance.isNew()) {
-                        meta.filters.author = authorInstance.toJSON();
+                        meta.filters.author = authorInstance.toJSON(options);
                     }
                 }
 
@@ -542,7 +555,7 @@ Post = ghostBookshelf.Model.extend({
 
         return ghostBookshelf.Model.findOne.call(this, data, options).then(function (post) {
             if ((withNext || withPrev) && post && !post.page) {
-                var postData = post.toJSON(),
+                var postData = post.toJSON(options),
                     publishedAt = postData.published_at,
                     prev,
                     next;

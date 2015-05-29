@@ -19,12 +19,14 @@ utils = {
     /**
      * Timespans in seconds and milliseconds for better readability
      */
-    ONE_HOUR_S: 3600,
-    ONE_DAY_S: 86400,
-    ONE_YEAR_S: 31536000,
-    ONE_HOUR_MS: 3600000,
-    ONE_DAY_MS: 86400000,
-    ONE_YEAR_MS: 31536000000,
+    ONE_HOUR_S:          3600,
+    ONE_DAY_S:          86400,
+    ONE_YEAR_S:      31536000,
+    ONE_HOUR_MS:      3600000,
+    ONE_DAY_MS:      86400000,
+    ONE_WEEK_MS:    604800000,
+    ONE_MONTH_MS:  2628000000,
+    ONE_YEAR_MS:  31536000000,
 
     /**
      * Return a unique identifier with the given `len`.
@@ -65,7 +67,7 @@ utils = {
 
         return string;
     },
-    // The token is encoded URL safe by replcaing '+' with '-', '\' with '_' and removing '='
+    // The token is encoded URL safe by replacing '+' with '-', '\' with '_' and removing '='
     // NOTE: the token is not encoded using valid base64 anymore
     encodeBase64URLsafe: function (base64String) {
         return base64String.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');

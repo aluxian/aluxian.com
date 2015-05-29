@@ -138,6 +138,7 @@ ghostBookshelf.Model = ghostBookshelf.Model.extend({
         var attrs = _.extend({}, this.attributes),
             self = this;
         options = options || {};
+        options = _.pick(options, ['shallow', 'baseKey', 'include', 'context']);
 
         if (options && options.shallow) {
             return attrs;
@@ -150,9 +151,9 @@ ghostBookshelf.Model = ghostBookshelf.Model.extend({
         _.each(this.relations, function (relation, key) {
             if (key.substring(0, 7) !== '_pivot_') {
                 // if include is set, expand to full object
-                var fullKey = _.isEmpty(options.name) ? key : options.name + '.' + key;
+                var fullKey = _.isEmpty(options.baseKey) ? key : options.baseKey + '.' + key;
                 if (_.contains(self.include, fullKey)) {
-                    attrs[key] = relation.toJSON({name: fullKey, include: self.include});
+                    attrs[key] = relation.toJSON(_.extend({}, options, {baseKey: fullKey, include: self.include}));
                 }
             }
         });
@@ -212,7 +213,7 @@ ghostBookshelf.Model = ghostBookshelf.Model.extend({
         return filteredOptions;
     },
 
-     // ## Model Data Functions
+    // ## Model Data Functions
 
     /**
      * ### Find All
@@ -293,7 +294,11 @@ ghostBookshelf.Model = ghostBookshelf.Model.extend({
     destroy: function (options) {
         var id = options.id;
         options = this.filterOptions(options, 'destroy');
-        return this.forge({id: id}).destroy(options);
+
+        // Fetch the object before destroying it, so that the changed data is available to events
+        return this.forge({id: id}).fetch(options).then(function (obj) {
+            return obj.destroy(options);
+        });
     },
 
     /**
