@@ -124,6 +124,10 @@ User = ghostBookshelf.Model.extend({
         // remove password hash for security reasons
         delete attrs.password;
 
+        if (!options || !options.context || (!options.context.user && !options.context.internal)) {
+            delete attrs.email;
+        }
+
         return attrs;
     },
 
@@ -340,14 +344,7 @@ User = ghostBookshelf.Model.extend({
                 pagination.next = null;
                 pagination.prev = null;
 
-                // Pass include to each model so that toJSON works correctly
-                if (options.include) {
-                    _.each(userCollection.models, function (item) {
-                        item.include = options.include;
-                    });
-                }
-
-                data.users = userCollection.toJSON();
+                data.users = userCollection.toJSON(options);
                 data.meta = meta;
                 meta.pagination = pagination;
 
@@ -365,7 +362,7 @@ User = ghostBookshelf.Model.extend({
                 if (roleInstance) {
                     meta.filters = {};
                     if (!roleInstance.isNew()) {
-                        meta.filters.roles = [roleInstance.toJSON()];
+                        meta.filters.roles = [roleInstance.toJSON(options)];
                     }
                 }
 
@@ -593,7 +590,7 @@ User = ghostBookshelf.Model.extend({
             // Users with the role 'Editor' and 'Author' have complex permissions when the action === 'edit'
             // We now have all the info we need to construct the permissions
             if (_.any(loadedPermissions.user.roles, {name: 'Author'})) {
-                 // If this is the same user that requests the operation allow it.
+                // If this is the same user that requests the operation allow it.
                 hasUserPermission = hasUserPermission || context.user === userModel.get('id');
             }
 
@@ -614,7 +611,7 @@ User = ghostBookshelf.Model.extend({
 
             // Users with the role 'Editor' have complex permissions when the action === 'destroy'
             if (_.any(loadedPermissions.user.roles, {name: 'Editor'})) {
-                 // If this is the same user that requests the operation allow it.
+                // If this is the same user that requests the operation allow it.
                 hasUserPermission = context.user === userModel.get('id');
 
                 // Alternatively, if the user we are trying to edit is an Author, allow it
@@ -697,9 +694,8 @@ User = ghostBookshelf.Model.extend({
                         });
                 }, errors.logAndThrowError);
             }
-            return Promise.reject(new errors.NoPermissionError('Your account is locked due to too many ' +
-                'login attempts. Please reset your password to log in again by clicking ' +
-                'the "Forgotten password?" link!'));
+            return Promise.reject(new errors.NoPermissionError('Your account is locked. Please reset your password ' +
+                'to log in again by clicking the "Forgotten password?" link!'));
         }, function (error) {
             if (error.message === 'NotFound' || error.message === 'EmptyResponse') {
                 return Promise.reject(new errors.NotFoundError('There is no user with that email address.'));
@@ -873,7 +869,7 @@ User = ghostBookshelf.Model.extend({
             contextUser = results[1];
 
             // check if user has the owner role
-            var currentRoles = contextUser.toJSON().roles;
+            var currentRoles = contextUser.toJSON(options).roles;
             if (!_.any(currentRoles, {id: ownerRole.id})) {
                 return Promise.reject(new errors.NoPermissionError('Only owners are able to transfer the owner role.'));
             }
@@ -883,7 +879,7 @@ User = ghostBookshelf.Model.extend({
         }).then(function (results) {
             var adminRole = results[0],
                 user = results[1],
-                currentRoles = user.toJSON().roles;
+                currentRoles = user.toJSON(options).roles;
 
             if (!_.any(currentRoles, {id: adminRole.id})) {
                 return Promise.reject(new errors.ValidationError('Only administrators can be assigned the owner role.'));
@@ -898,7 +894,8 @@ User = ghostBookshelf.Model.extend({
                 .query('whereIn', 'id', [contextUser.id, results[2]])
                 .fetch({withRelated: ['roles']});
         }).then(function (users) {
-            return users.toJSON({include: ['roles']});
+            options.include = ['roles'];
+            return users.toJSON(options);
         });
     },
 

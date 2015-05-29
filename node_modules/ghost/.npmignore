@@ -23,6 +23,7 @@ node_modules/**
 *.iml
 config.js
 core/built/**/*.map
+core/built/**/test-*
 core/client/**
 core/test/**
 CONTRIBUTING.md
@@ -31,3 +32,4 @@ SECURITY.md
 *.html
 !core/server/email-templates/**
 bower_components/**
+.editorconfig
