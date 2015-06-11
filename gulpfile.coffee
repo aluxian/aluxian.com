@@ -1,6 +1,7 @@
 fs       = require 'fs'
 del      = require 'del'
 ecstatic = require 'ecstatic'
+mergeStream = require 'merge-stream'
 gulp     = require 'gulp'
 http     = require 'http'
 $        = require('gulp-load-plugins')()
@@ -11,28 +12,30 @@ DIST = '../gh-pages.aluxian.com'
 
 gulp.task 'live', -> live = true
 
-gulp.task 'purge', (cb) -> del([DIST, './temp'], cb)
-gulp.task 'clean', (cb) -> del([DIST + '/**/*.*', './temp/**/*.*'], cb)
+gulp.task 'purge', (cb) -> del([DIST, 'temp/'], cb)
+gulp.task 'clean', (cb) -> del([DIST + '/**/*.*', 'temp/**/*.*'], cb)
 
 gulp.task 'jade', ->
-  gulp.src './src/jade/*.jade'
+  gulp.src 'src/index.jade'
     .pipe $.jade
       pretty: !live
-      locals: require './src/db/database.json'
-    .pipe $.if !live, $.embedlr()
+      locals: require './src/locals.json'
     .pipe $.if live, $.htmlmin
       collapseWhitespace: true
       keepClosingSlash: true
     .pipe gulp.dest DIST
 
 gulp.task 'assets', ->
-  gulp.src './src/img/**'
+  img = gulp.src 'src/img/**'
     .pipe gulp.dest DIST + '/img'
-  gulp.src './src/favicons/**'
+
+  fav = gulp.src 'src/favicons/**'
     .pipe gulp.dest DIST
 
+  mergeStream img, fav
+
 gulp.task 'fonts', ->
-  gulp.src './src/sass/fonts.sass'
+  gulp.src 'src/sass/fonts.sass'
     .pipe $.sass
       outputStyle: if live then 'compressed' else 'nested'
       errLogToConsole: true
@@ -41,44 +44,49 @@ gulp.task 'fonts', ->
     .pipe gulp.dest DIST
 
 gulp.task 'sass', ['jade'], ->
-  gulp.src ['./src/bower_components/normalize-css/normalize.css', './src/sass/styles.sass']
-    .pipe $.if /[.]sass$/, $.sass
+  gulp.src ['bower_components/normalize-css/normalize.css', 'src/sass/styles.sass']
+    .pipe $.if /[.]sass$/, $.sass({
       outputStyle: if live then 'compressed' else 'nested'
-      errLogToConsole: true
       indentedSyntax: true
+      includePaths: [
+        'bower_components/bourbon/app/assets/stylesheets/'
+        'bower_components/neat/app/assets/stylesheets/'
+      ]
+    }).on 'error', (err) ->
+      $.sass.logError err
+      this.emit 'end'
     .pipe $.concat 'styles.css'
+    .pipe $.if live, $.combineMediaQueries()
     .pipe $.if live, $.cssmin()
-    .pipe gulp.dest './temp'
+    .pipe gulp.dest DIST
 
 gulp.task 'coffee', ->
-  gulp.src ['./src/bower_components/smooth-scroll/dist/js/smooth-scroll.js', './src/coffee/*.coffee']
+  gulp.src ['bower_components/smooth-scroll/dist/js/smooth-scroll.js', 'src/scripts.coffee']
     .pipe $.if /[.]coffee$/, $.coffee({ bare: true }).on('error', $.util.log)
-    .pipe $.concat 'main.js'
+    .pipe $.concat 'scripts.js'
     .pipe $.if live, $.uglify()
-    .pipe gulp.dest './temp'
+    .pipe gulp.dest DIST
 
 gulp.task 'inject', ['sass', 'coffee'], ->
   gulp.src DIST + '/index.html'
-    .pipe $.replace /<!-- inject:css-->/, '<style>' + fs.readFileSync('./temp/styles.css', 'utf8') + '</style>'
-    .pipe $.replace /<!-- inject:js-->/, '<script>' + fs.readFileSync('./temp/main.js', 'utf8') + '</script>'
+    .pipe $.replace /<!-- inject:css-->/, '<style>' + fs.readFileSync('temp/styles.css', 'utf8') + '</style>'
+    .pipe $.replace /<!-- inject:js-->/, '<script>' + fs.readFileSync('temp/scripts.js', 'utf8') + '</script>'
     .pipe gulp.dest DIST
 
 gulp.task 'static', ['build'], (next) ->
   http.createServer ecstatic { root: DIST, cache: 'no-cache', showDir: true }
     .listen port, ->
-      $.util.log 'Static server is listening at ' + $.util.colors.cyan("http://localhost:#{port}/")
+      $.util.log 'Static server listening at ' + $.util.colors.cyan("http://localhost:#{port}/")
       next()
 
 gulp.task 'watch', ['static'], ->
-  $.livereload.listen()
   gulp.watch './src/sass/*.sass', ['fonts', 'sass', 'inject']
-  gulp.watch './src/jade/**/*.jade', ['jade', 'inject']
-  gulp.watch './src/coffee/*.coffee', ['coffee', 'inject']
-  gulp.watch './src/db/database.json', ['jade', 'inject']
-  gulp.watch './src/img/**/*.*', ['assets']
-  gulp.watch './src/favicons/**/*.*', ['assets']
-  gulp.watch './src/svg/**/*.svg', ['jade', 'inject']
-  gulp.watch DIST + '/**', (file) -> $.livereload.changed file.path
+  gulp.watch './src/index.jade', ['jade', 'inject']
+  gulp.watch './src/scripts.coffee', ['coffee', 'inject']
+  gulp.watch './src/locals.json', ['jade', 'inject']
+  gulp.watch './src/img/**', ['assets']
+  gulp.watch './src/favicons/**', ['assets']
+  gulp.watch './src/svg/**', ['jade', 'inject']
 
-gulp.task 'build', ['fonts', 'sass', 'jade', 'assets', 'coffee', 'inject']
+gulp.task 'build', ['fonts', 'assets', 'inject']
 gulp.task 'default', ['watch']
