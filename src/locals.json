@@ -26,17 +26,17 @@
     "description": "I create websites, I build servers, I craft Android/iOS applications and I play with Sketch learning to design great UIs."
   }, {
     "title": "WORK",
-    "description": "I work for a brilliant startup called <a target=\"_blank\" href=\"https://www.startersquad.com\"> StarterSquad</a>, where my distributed team and I help people transform their ideas into thriving startups that change the world."
+    "description": "I work for a brilliant startup called <a target=\"_blank\" href=\"https://www.startersquad.com\">StarterSquad</a>, where my distributed team and I help people transform their ideas into thriving startups that change the world."
   }, {
     "title": "FREE TIME",
     "description": "In my free time I swim, read, play games, rock my guitar and participate in contests, conferences or hackathons."
   }, {
     "title": "EARLY LIFE",
-    "description": "Read more about how I started to love programming on my blog, <a href=\"http://blog.aluxian.com/how-my-programming-journey-began/\"> right here</a>."
+    "description": "Read more about how I started to love programming on my blog, <a href=\"http://blog.aluxian.com/how-my-programming-journey-began/\">right here</a>."
   }],
   "skills": [{
     "title": "WEB",
-    "description": "SASS/LESS/Stylus, Jade<br>AngularJS"
+    "description": "SASS/LESS/Stylus<br>EJS/Handlebars/Jade<br>jQuery, AngularJS"
   }, {
     "title": "BACKEND",
     "description": "Node.js, Java, Scala<br>Express, Hapi, Sails, Akka"
@@ -45,7 +45,7 @@
     "description": "Android, .NET"
   }, {
     "title": "OTHERS",
-    "description": "Graph/NoSQL/SQL Databases<br>Testing, Agile Development<br>Gulp, webpack"
+    "description": "Graph/NoSQL/SQL Databases<br>Testing, Agile Development<br>Grunt/Gulp/webpack"
   }, {
     "title": "STILL LEARNING",
     "description": "iOS/Mac Dev, UX/UI Design<br>DevOps, Machine Learning"
@@ -61,7 +61,7 @@
     }, {
       "id": "2",
       "title": "Aluxian.com",
-      "url": "//www.aluxian.com"
+      "url": "http://www.aluxian.com"
     }],
     [{
       "id": "3",
@@ -74,75 +74,51 @@
     }]
   ],
   "achievements": [{
-      "date": "18 April, 2015",
-      "description": "Won the <a href=\"http://fiipractic.asii.ro\"> FII Pratic Hackathon</a> with <a href=\"http://www.uninet.biz/\"> UniNet</a>, a social network for students"
-    },
-
-    {
-      "date": "11 April, 2015",
-      "description": "Messenger for Desktop was <a href=\"http://www.producthunt.com/posts/messenger-for-desktop\"> featured on Product Hunt</a>"
-    },
-
-    {
-      "date": "10 April, 2015",
-      "description": "Launched <a href=\"http://messengerfordesktop.com/\"> Messenger for Desktop</a> which has over 250,000 page views and more than 300,000 downloads (including updates)"
-    },
-
-    {
-      "date": "27-29 March, 2015",
-      "description": "Met cool people at <a href=\"http://www.up.co/communities/romania/iasi/startup-weekend/4571\"> Startup Weekend Iasi</a>, my team and I were crowd's favourite with <a href=\"http://www.peerworkout.co/\"> PeerWorkout</a>"
-    },
-
-    {
-      "date": "17 March, 2015",
-      "description": "Completed a <a href=\"https://www.coursera.org/course/cloudcomputing\"> Cloud Computing Concepts course</a> on Coursera"
-    },
-
-    {
-      "date": "17 December, 2014",
-      "description": "Completed a <a href=\"https://www.coursera.org/course/ml\"> Machine Learning course</a> offered by Stanford University on Coursera"
-    },
-
-    {
-      "date": "28 July – 3 August, 2014",
-      "description": "Went to the <a href=\"http://infoeducatie.ro/2014/\"> InfoEducatie National Contest</a> with Butler, a voice assistant application"
-    },
-
-    {
-      "date": "15-18 May, 2014",
-      "description": "Went to the <a href=\"http://www.satmar.ro/oti2014/public/\"> National Olympiad of C#</a>"
-    },
-
-    {
-      "date": "16 December, 2013",
-      "description": "Won the <a href=\"http://createhs.com\"> CreateHS</a> November challenge with <a href=\"http://cnrv.herokuapp.com\"> CNRV.ro</a> judged by <a href=\"https://twitter.com/gvanrossum\"> @gvanrossum</a> <a href=\"https://twitter.com/pamelafox\"> @pamelafox</a> <a href=\"https://twitter.com/jeresig\"> @jeresig</a> <a href=\"https://twitter.com/dhh\"> @dhh</a>"
-    },
-
-    {
-      "date": "11 November, 2013",
-      "description": "Started working at <a href=\"https://www.startersquad.com\"> StarterSquad.com</a>"
-    },
-
-    {
-      "date": "1-3 November, 2013",
-      "description": "Learned about startups and met fascinating people at <a href=\"http://iasi.startupweekend.org\"> Startup Weekend Iasi</a>"
-    },
-
-    {
-      "date": "28 July – 3 August, 2013",
-      "description": "1st place @ <a href=\"http://infoeducatie.ro/2013/\"> Cisco Network Programmability contest</a> with a QoS Manager app for Cisco routers"
-    },
-
-    {
-      "date": "28 July – 3 August, 2013",
-      "description": "Went to the <a href=\"http://infoeducatie.ro/2013/\"> InfoEducatie National Contest</a> with Hub, a social messaging platforms aggregator app"
-    },
-
-    {
-      "date": "September 2012 – June 2013",
-      "description": "Published a videos app in the Play Store that reached 80,000 installs"
-    }
-  ],
+    "date": "19 June, 2015",
+    "description": "Launched <a href=\"http://whatsapp-desktop.com/\">WhatsApp for Desktop</a>"
+  },{
+    "date": "18 April, 2015",
+    "description": "Won <a href=\"http://fiipractic.asii.ro\">FII Pratic Hackathon</a> with <a href=\"http://www.uninet.biz/\">UniNet</a>, a social network for students"
+  }, {
+    "date": "11 April, 2015",
+    "description": "Messenger for Desktop was <a href=\"http://www.producthunt.com/posts/messenger-for-desktop\">featured on Product Hunt</a>"
+  }, {
+    "date": "10 April, 2015",
+    "description": "Launched <a href=\"http://messengerfordesktop.com/\">Messenger for Desktop</a> which has over 100,000 visitors/month and more than 1 million downloads so far (including updates)"
+  }, {
+    "date": "27-29 March, 2015",
+    "description": "Met cool people at <a href=\"http://www.up.co/communities/romania/iasi/startup-weekend/4571\">Startup Weekend Iasi</a>, my team and I were the crowd's favourite with <a href=\"http://www.peerworkout.co/\">PeerWorkout</a>"
+  }, {
+    "date": "17 March, 2015",
+    "description": "Completed a <a href=\"https://www.coursera.org/course/cloudcomputing\">Cloud Computing Concepts course</a> on Coursera"
+  }, {
+    "date": "17 December, 2014",
+    "description": "Completed a <a href=\"https://www.coursera.org/course/ml\">Machine Learning course</a> offered by Stanford University on Coursera"
+  }, {
+    "date": "28 July – 3 August, 2014",
+    "description": "Went to the <a href=\"http://infoeducatie.ro/2014/\">InfoEducatie National Contest</a> with Butler, a voice-powered personal assistant"
+  }, {
+    "date": "15-18 May, 2014",
+    "description": "Went to the <a href=\"http://www.satmar.ro/oti2014/public/\">National Olympiad of C#</a>"
+  }, {
+    "date": "16 December, 2013",
+    "description": "Won the <a href=\"http://createhs.com\">CreateHS</a> November challenge with <a href=\"http://cnrv.herokuapp.com\">CNRV.ro</a> judged by <a href=\"https://twitter.com/gvanrossum\">@gvanrossum</a> <a href=\"https://twitter.com/pamelafox\">@pamelafox</a> <a href=\"https://twitter.com/jeresig\">@jeresig</a> <a href=\"https://twitter.com/dhh\">@dhh</a>"
+  }, {
+    "date": "11 November, 2013",
+    "description": "Started working at <a href=\"https://www.startersquad.com\">StarterSquad.com</a>"
+  }, {
+    "date": "1-3 November, 2013",
+    "description": "Learned about startups and met fascinating people at <a href=\"http://iasi.startupweekend.org\">Startup Weekend Iasi</a>"
+  }, {
+    "date": "28 July – 3 August, 2013",
+    "description": "1st place @ <a href=\"http://infoeducatie.ro/2013/\">Cisco Network Programmability contest</a> with a QoS Manager app for Cisco routers"
+  }, {
+    "date": "28 July – 3 August, 2013",
+    "description": "Went to the <a href=\"http://infoeducatie.ro/2013/\">InfoEducatie National Contest</a> with Hub, a social-messaging platforms aggregator app"
+  }, {
+    "date": "September 2012 – June 2013",
+    "description": "Published a videos app in the Play Store that reached 80,000 installs"
+  }],
   "posts": [{
     "meta": "9 June 2015",
     "title": "How my programming journey began",
