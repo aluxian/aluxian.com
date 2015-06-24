@@ -127,6 +127,7 @@
   }],
   "posts": [{
     "meta": "9 June 2015",
+    "tags": ["Personal Life", "Programming"],
     "title": "How my programming journey began",
     "url": "http://blog.aluxian.com/how-my-programming-journey-began/"
   }]

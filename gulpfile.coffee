@@ -1,19 +1,19 @@
-fs       = require 'fs'
-del      = require 'del'
+fs = require 'fs'
+del = require 'del'
 ecstatic = require 'ecstatic'
 mergeStream = require 'merge-stream'
-gulp     = require 'gulp'
-http     = require 'http'
-$        = require('gulp-load-plugins')()
-port     = 8888
-live     = false
+gulp = require 'gulp'
+http = require 'http'
+$ = require('gulp-load-plugins')()
+port = 8888
+live = false
 
 DIST = '../gh-pages.aluxian.com'
 
 gulp.task 'live', -> live = true
 
-gulp.task 'purge', (cb) -> del([DIST, 'temp/'], cb)
-gulp.task 'clean', (cb) -> del([DIST + '/**/*.*', 'temp/**/*.*'], cb)
+gulp.task 'purge', (cb) -> del([DIST], cb)
+gulp.task 'clean', (cb) -> del([DIST + '/**'], cb)
 
 gulp.task 'jade', ->
   gulp.src 'src/index.jade'
@@ -29,10 +29,13 @@ gulp.task 'assets', ->
   img = gulp.src 'src/img/**'
     .pipe gulp.dest DIST + '/img'
 
-  fav = gulp.src 'src/favicons/**'
+  assets = gulp.src [
+    'src/favicons/**'
+    'src/assets/**'
+  ]
     .pipe gulp.dest DIST
 
-  mergeStream img, fav
+  mergeStream img, assets
 
 gulp.task 'fonts', ->
   gulp.src 'src/sass/fonts.sass'
@@ -43,7 +46,7 @@ gulp.task 'fonts', ->
     .pipe $.if live, $.cssmin()
     .pipe gulp.dest DIST
 
-gulp.task 'sass', ['jade'], ->
+gulp.task 'sass', ->
   gulp.src ['bower_components/normalize-css/normalize.css', 'src/sass/styles.sass']
     .pipe $.if /[.]sass$/, $.sass({
       outputStyle: if live then 'compressed' else 'nested'
@@ -67,12 +70,6 @@ gulp.task 'coffee', ->
     .pipe $.if live, $.uglify()
     .pipe gulp.dest DIST
 
-gulp.task 'inject', ['sass', 'coffee'], ->
-  gulp.src DIST + '/index.html'
-    .pipe $.replace /<!-- inject:css-->/, '<style>' + fs.readFileSync('temp/styles.css', 'utf8') + '</style>'
-    .pipe $.replace /<!-- inject:js-->/, '<script>' + fs.readFileSync('temp/scripts.js', 'utf8') + '</script>'
-    .pipe gulp.dest DIST
-
 gulp.task 'static', ['build'], (next) ->
   http.createServer ecstatic { root: DIST, cache: 'no-cache', showDir: true }
     .listen port, ->
@@ -80,13 +77,13 @@ gulp.task 'static', ['build'], (next) ->
       next()
 
 gulp.task 'watch', ['static'], ->
-  gulp.watch './src/sass/*.sass', ['fonts', 'sass', 'inject']
-  gulp.watch './src/index.jade', ['jade', 'inject']
-  gulp.watch './src/scripts.coffee', ['coffee', 'inject']
-  gulp.watch './src/locals.json', ['jade', 'inject']
+  gulp.watch './src/sass/*.sass', ['fonts', 'sass']
+  gulp.watch './src/index.jade', ['jade']
+  gulp.watch './src/scripts.coffee', ['coffee']
+  gulp.watch './src/locals.json', ['jade']
   gulp.watch './src/img/**', ['assets']
   gulp.watch './src/favicons/**', ['assets']
-  gulp.watch './src/svg/**', ['jade', 'inject']
+  gulp.watch './src/svg/**', ['jade']
 
-gulp.task 'build', ['fonts', 'assets', 'inject']
+gulp.task 'build', ['jade', 'assets', 'fonts', 'sass', 'coffee']
 gulp.task 'default', ['watch']
