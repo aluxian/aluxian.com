@@ -137,12 +137,7 @@ html
         ul.posts
           each post in posts
             li
-              p
-                span #{post.meta} on
-                - var i = 0
-                while i < post.tags.length - 1
-                  span &nbsp;#{post.tags[i++]},
-                span &nbsp;#{post.tags[post.tags.length - 1]}
+              p #{post.meta} on #{post.tags.join(', ')}
               p
                  a(href='#{post.url}') #{post.title}
             
