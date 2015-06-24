@@ -186,7 +186,7 @@ h3
           @include transform(scale(1))
           visibility: visible
 
-          @for $i from 1 through 7
+          @for $i from 1 through 8
             li:nth-child(#{$i})
               @include animation(slide-in #{$i * 0.1s + 0.1})
 
@@ -228,8 +228,8 @@ h3
           border-radius: 3px
 
           @include respond-to(mobile-5)
-            padding-left: 10px
-            padding-left: 10px
+            padding-left: 6px
+            padding-right: 6px
 
         &.active a, a:hover, a:focus
           border-color: white
