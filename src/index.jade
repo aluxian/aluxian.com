@@ -138,11 +138,11 @@ html
           each post in posts
             li
               p
-                span #{post.meta} on 
+                span #{post.meta} on
                 - var i = 0
                 while i < post.tags.length - 1
-                  span #{post.tags[i++]}, 
-                span #{post.tags[post.tags.length - 1]}
+                  span &nbsp;#{post.tags[i++]},
+                span &nbsp;#{post.tags[post.tags.length - 1]}
               p
                  a(href='#{post.url}') #{post.title}
             
