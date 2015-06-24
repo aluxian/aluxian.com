@@ -20,7 +20,19 @@ Note these OpenShift specific changes:
 
 ### Upgrading to The Latest Version
 
-In most cases all you need to do is run `npm update` in root directory. There are 2 things you should be aware of while upgrading your blog:
+Upgrading from the older version of this repo `< 0.5.7` requires extra steps. You'll notice there is no longer `./core`, that is because this repo now depends on `ghost` which lives in `./node_modules/ghost`. 
+
+ 1. Delete `./core`
+ 2. Delete `./package.json` & `./index.js`
+ 3. `./Gruntfile.js` & `./bower.json` are unnecessary because they are handled by the external `ghost` dependency and can be removed.
+ 4. Copy the following files to the root: `./Makefile`, `./index.js`, `./package.json`
+ 5. Make a copy of your `./config.js` because you'll need to copy that over but you don't want to overwrite it.
+ 6. Copy `./config.js` to the root.
+ 7. Modify `./config.js` so it uses your configuration variables, I.E. `mail {...}` and `url`.
+ 8. Run `npm install --production`
+ 9. `push` your updates.
+
+If you are upgrading from `>= 0.5.7` then in most cases all you need to do is run `npm update` in root directory. There are 2 things you should be aware of while upgrading your blog:
 
 1. RedHat OpenShift runs on Linux x64 platform. If you are running `npm update` on any other plaform (e.g. Linux x32 or Mac) you will need to make sure you have `node_modules/ghost/node_modules/sqlite3/lib/binding/node-v11-linux-x64/node_sqlite3.node` in place.
 
