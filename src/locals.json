@@ -73,7 +73,7 @@
     }, {
       "id": "4",
       "title": "WhatsApp for Desktop",
-      "url": "http://whatsapp-desktop.com"
+      "url": "https://github.com/Aluxian/WhatsApp-Desktop"
     }]
   ],
   "achievements": [{
@@ -81,7 +81,7 @@
     "description": "WhatsApp for Desktop was <a href=\"http://www.producthunt.com/tech/whatsapp-for-desktop\">#1 on Product Hunt</a> and <a href=\"https://news.ycombinator.com/item?id=9757555\">#3 on Hacker News</a>"
   }, {
     "date": "19 June, 2015",
-    "description": "Launched <a href=\"http://whatsapp-desktop.com/\">WhatsApp for Desktop</a> which has almost 60,000 visitors and downloads"
+    "description": "Launched <a href=\"https://github.com/Aluxian/WhatsApp-Desktop\">WhatsApp for Desktop</a> which has almost 60,000 visitors and downloads"
   }, {
     "date": "18 April, 2015",
     "description": "Won <a href=\"http://fiipractic.asii.ro\">FII Pratic Hackathon</a> with <a href=\"http://www.uninet.biz/\">UniNet</a>, a social network for students"
