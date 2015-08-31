@@ -39,7 +39,7 @@
   }],
   "skills": [{
     "title": "WEB",
-    "description": "SASS/LESS/Stylus<br>EJS/Handlebars/Jade<br>jQuery, AngularJS"
+    "description": "SASS/LESS/Stylus<br>EJS/Handlebars/Jade<br>jQuery, AngularJS<br>React, Flux, ES6"
   }, {
     "title": "BACKEND",
     "description": "Node.js, Java, Scala<br>Express, Hapi, Sails, Akka"
@@ -48,7 +48,7 @@
     "description": "Android, .NET"
   }, {
     "title": "OTHERS",
-    "description": "Graph/NoSQL/SQL Databases<br>Testing, Agile Development<br>Grunt/Gulp/webpack"
+    "description": "Docker Engine, Machine & Swarm<br>Graph/NoSQL/SQL Databases<br>Testing, Agile Development<br>Grunt/Gulp/webpack"
   }, {
     "title": "STILL LEARNING",
     "description": "iOS/Mac Dev, UX/UI Design<br>DevOps, Machine Learning"
@@ -77,49 +77,55 @@
     }]
   ],
   "achievements": [{
-    "date": "22 June, 2015",
+    "date": "24 August 2015",
+    "description": "Started mentoring on a daily basis on <a href=\"https://www.codementor.io/aluxian\">Codementor</a>"
+  }, {
+    "date": "1 August 2015",
+    "description": "Built an <i>awesome</i> stack for <a href=\"https://github.com/FOUfashion/\">Fou</a> with Hapi, React, Fluxible, ES6 and Docker"
+  }, {
+    "date": "22 June 2015",
     "description": "WhatsApp for Desktop was <a href=\"http://www.producthunt.com/tech/whatsapp-for-desktop\">#1 on Product Hunt</a> and <a href=\"https://news.ycombinator.com/item?id=9757555\">#3 on Hacker News</a>"
   }, {
-    "date": "19 June, 2015",
-    "description": "Launched <a href=\"https://github.com/Aluxian/WhatsApp-Desktop\">WhatsApp for Desktop</a> which has almost 60,000 visitors and downloads"
+    "date": "19 June 2015",
+    "description": "Launched <a href=\"https://github.com/Aluxian/WhatsApp-Desktop\">WhatsApp for Desktop</a> which has over 140,000 downloads"
   }, {
-    "date": "18 April, 2015",
+    "date": "18 April 2015",
     "description": "Won <a href=\"http://fiipractic.asii.ro\">FII Pratic Hackathon</a> with <a href=\"http://www.uninet.biz/\">UniNet</a>, a social network for students"
   }, {
-    "date": "11 April, 2015",
+    "date": "11 April 2015",
     "description": "Messenger for Desktop was <a href=\"http://www.producthunt.com/posts/messenger-for-desktop\">featured on Product Hunt</a>"
   }, {
-    "date": "10 April, 2015",
+    "date": "10 April 2015",
     "description": "Launched <a href=\"http://messengerfordesktop.com/\">Messenger for Desktop</a> which has over 100,000 visitors/month and more than 1 million downloads so far (including updates)"
   }, {
-    "date": "27-29 March, 2015",
+    "date": "27–29 March 2015",
     "description": "Met cool people at <a href=\"http://www.up.co/communities/romania/iasi/startup-weekend/4571\">Startup Weekend Iasi</a>, my team and I were the crowd's favourite with <a href=\"http://www.peerworkout.co/\">PeerWorkout</a>"
   }, {
-    "date": "17 March, 2015",
+    "date": "17 March 2015",
     "description": "Completed a <a href=\"https://www.coursera.org/course/cloudcomputing\">Cloud Computing Concepts course</a> on Coursera"
   }, {
-    "date": "17 December, 2014",
+    "date": "17 December 2014",
     "description": "Completed a <a href=\"https://www.coursera.org/course/ml\">Machine Learning course</a> offered by Stanford University on Coursera"
   }, {
-    "date": "28 July – 3 August, 2014",
+    "date": "28 July – 3 August 2014",
     "description": "Went to the <a href=\"http://infoeducatie.ro/2014/\">InfoEducatie National Contest</a> with Butler, a voice-powered personal assistant"
   }, {
-    "date": "15-18 May, 2014",
+    "date": "15–18 May 2014",
     "description": "Went to the <a href=\"http://www.satmar.ro/oti2014/public/\">National Olympiad of C#</a>"
   }, {
-    "date": "16 December, 2013",
+    "date": "16 December 2013",
     "description": "Won the <a href=\"http://createhs.com\">CreateHS</a> November challenge with <a href=\"http://cnrv.herokuapp.com\">CNRV.ro</a> judged by <a href=\"https://twitter.com/gvanrossum\">@gvanrossum</a> <a href=\"https://twitter.com/pamelafox\">@pamelafox</a> <a href=\"https://twitter.com/jeresig\">@jeresig</a> <a href=\"https://twitter.com/dhh\">@dhh</a>"
   }, {
-    "date": "11 November, 2013",
+    "date": "11 November 2013",
     "description": "Started working at <a href=\"https://www.startersquad.com\">StarterSquad.com</a>"
   }, {
-    "date": "1-3 November, 2013",
+    "date": "1–3 November 2013",
     "description": "Learned about startups and met fascinating people at <a href=\"http://iasi.startupweekend.org\">Startup Weekend Iasi</a>"
   }, {
-    "date": "28 July – 3 August, 2013",
+    "date": "28 July – 3 August 2013",
     "description": "1st place @ <a href=\"http://infoeducatie.ro/2013/\">Cisco Network Programmability contest</a> with a QoS Manager app for Cisco routers"
   }, {
-    "date": "28 July – 3 August, 2013",
+    "date": "28 July – 3 August 2013",
     "description": "Went to the <a href=\"http://infoeducatie.ro/2013/\">InfoEducatie National Contest</a> with Hub, a social-messaging platforms aggregator app"
   }, {
     "date": "September 2012 – June 2013",

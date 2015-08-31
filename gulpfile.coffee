@@ -19,7 +19,7 @@ gulp.task 'jade', ->
   gulp.src 'src/index.jade'
     .pipe $.jade
       pretty: !live
-      locals: require './src/locals.json'
+      locals: JSON.parse(fs.readFileSync('./src/locals.json'))
     .pipe $.if live, $.htmlmin
       collapseWhitespace: true
       keepClosingSlash: true
