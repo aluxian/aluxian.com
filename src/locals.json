@@ -77,6 +77,15 @@
       "id": "4",
       "title": "WhatsApp for Desktop",
       "url": "https://github.com/Aluxian/WhatsApp-Desktop"
+    }],
+    [{
+      "id": "5",
+      "title": "Fou",
+      "url": "http://fou-fashion.herokuapp.com"
+    }, {
+      "id": "6",
+      "title": "Electron SuperKit",
+      "url": "https://github.com/Aluxian/electron-superkit"
     }]
   ],
   "achievements": [{
@@ -145,12 +154,12 @@
     "tags": ["NW.js", "Desktop", "Node.js", "Tutorial"],
     "title": "How to create cross-platform desktop apps with NW.js",
     "url": "http://blog.aluxian.com/how-to-create-cross-platform-desktop-apps-with-nw-js/"
-  },{
+  }, {
     "meta": "5 July 2015",
     "tags": ["Open Source"],
     "title": "Free code signing certificate for Open-Source Software",
     "url": "http://blog.aluxian.com/free-code-signing-certificate-for-open-source-software/"
-  },{
+  }, {
     "meta": "9 June 2015",
     "tags": ["Personal Life", "Programming"],
     "title": "How my programming journey began",
