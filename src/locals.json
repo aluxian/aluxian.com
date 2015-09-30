@@ -62,12 +62,12 @@
   "portfolio": [
     [{
       "id": "1",
-      "title": "CNRV.ro",
-      "url": "http://cnrv.herokuapp.com"
-    }, {
-      "id": "2",
       "title": "Aluxian.com",
       "url": "http://www.aluxian.com"
+    }, {
+      "id": "2",
+      "title": "CNRV.ro",
+      "url": "https://cnrv.herokuapp.com"
     }],
     [{
       "id": "3",
@@ -81,11 +81,25 @@
     [{
       "id": "5",
       "title": "Fou",
-      "url": "http://fou-fashion.herokuapp.com"
+      "url": "https://fou-fashion.herokuapp.com"
     }, {
       "id": "6",
+      "title": "Cattics",
+      "url": "https://alux-cattics.herokuapp.com"
+    }],
+    [{
+      "id": "7",
       "title": "Electron SuperKit",
       "url": "https://github.com/Aluxian/electron-superkit"
+    }, {
+      "id": "8",
+      "title": "NW.js Starter",
+      "url": "https://github.com/Aluxian/nwjs-starter"
+    }],
+    [{
+      "id": "9",
+      "title": "UniNet",
+      "url": "https://uninet.herokuapp.com/"
     }]
   ],
   "achievements": [{
@@ -105,7 +119,7 @@
     "description": "Finished Android Pro, a course by <a href=\"http://fiipractic.asii.ro\">FII Pratic</a> @ <a href=\"http://www.uaic.ro/en/\">UAIC</a>"
   }, {
     "date": "18 April 2015",
-    "description": "Won <a href=\"http://fiipractic.asii.ro\">FII Pratic Hackathon</a> with <a href=\"http://www.uninet.biz/\">UniNet</a>, a social network for students"
+    "description": "Won <a href=\"http://fiipractic.asii.ro\">FII Pratic Hackathon</a> with <a href=\"https://uninet.herokuapp.com/\">UniNet</a>, a social network for students"
   }, {
     "date": "11 April 2015",
     "description": "Messenger for Desktop was <a href=\"http://www.producthunt.com/posts/messenger-for-desktop\">featured on Product Hunt</a>"
