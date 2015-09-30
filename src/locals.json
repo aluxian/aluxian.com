@@ -164,8 +164,18 @@
     "description": "Published a videos app in the Play Store that reached 80,000 installs"
   }],
   "posts": [{
+    "meta": "30 September 2015",
+    "tags": ["Tips"],
+    "title": "Tips for getting started on Codementor",
+    "url": "http://blog.aluxian.com/tips-for-getting-started-on-codementor/"
+  }, {
+    "meta": "30 September 2015",
+    "tags": ["Tips"],
+    "title": "How to prepare for IELTS",
+    "url": "http://blog.aluxian.com/how-to-prepare-for-ielts/"
+  }, {
     "meta": "6 July 2015",
-    "tags": ["NW.js", "Desktop", "Node.js", "Tutorial"],
+    "tags": ["Tutorials", "NW.js"],
     "title": "How to create cross-platform desktop apps with NW.js",
     "url": "http://blog.aluxian.com/how-to-create-cross-platform-desktop-apps-with-nw-js/"
   }, {
@@ -175,7 +185,7 @@
     "url": "http://blog.aluxian.com/free-code-signing-certificate-for-open-source-software/"
   }, {
     "meta": "9 June 2015",
-    "tags": ["Personal Life", "Programming"],
+    "tags": ["Personal Life"],
     "title": "How my programming journey began",
     "url": "http://blog.aluxian.com/how-my-programming-journey-began/"
   }]
