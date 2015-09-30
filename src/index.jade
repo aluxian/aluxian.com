@@ -90,7 +90,7 @@ html
                 span #{item.title}
                 span !{item.description}
 
-      img.me
+      img.me(alt='Alexandru Roșianu')
         
       a(name='skills' id='skills')
         
@@ -116,7 +116,7 @@ html
             each item, i in row
               .item
                 a(href='#{item.url}')
-                  img(src='img/portfolio-#{item.id}.jpg' width='400' height='250')
+                  img(src='img/portfolio-#{item.id}.jpg' width='400' height='250' alt='#{item.title}')
                 
                 footer
                   span
