@@ -59,7 +59,7 @@ gulp.task 'sass', ->
       $.sass.logError err
       this.emit 'end'
     .pipe $.concat 'styles.css'
-    .pipe $.if live, $.combineMediaQueries()
+    # .pipe $.if live, $.combineMediaQueries() # crashes build
     .pipe $.if live, $.cssmin()
     .pipe gulp.dest DIST
 
