@@ -100,9 +100,16 @@
       "id": "9",
       "title": "UniNet",
       "url": "https://uninet.herokuapp.com/"
+    }, {
+      "id": "10",
+      "title": "Remembered.io (Chrome)",
+      "url": "https://chrome.google.com/webstore/detail/rememberedio/egpbbjmbnfomdknchobbhfilakbnibii"
     }]
   ],
   "achievements": [{
+    "date": "8 October 2015",
+    "description": "Created a <a href=\"https://chrome.google.com/webstore/detail/rememberedio/egpbbjmbnfomdknchobbhfilakbnibii\">Chrome extension</a> for <a href=\"https://remembered.io/\">Remembered.io</a>"
+  }, {
     "date": "24 August 2015",
     "description": "Started mentoring on a daily basis on <a href=\"https://www.codementor.io/aluxian\">Codementor</a>"
   }, {
