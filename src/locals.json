@@ -42,7 +42,7 @@
   }],
   "skills": [{
     "title": "WEB",
-    "description": "SASS/LESS/Stylus<br>EJS/Handlebars/Jade<br>jQuery, AngularJS<br>React, Flux, ES6"
+    "description": "SASS/LESS/Stylus<br>EJS/Handlebars/Jade<br>ECMAScript 6<br><br>jQuery, AngularJS<br>React, Flux"
   }, {
     "title": "BACKEND",
     "description": "Node.js, Java, Scala<br>Express, Hapi, Sails, Akka"
@@ -50,11 +50,14 @@
     "title": "MOBILE & DESKTOP",
     "description": "Android, .NET"
   }, {
+    "title": "DEVOPS, DB, ML",
+    "description": "Docker Engine, Machine & Swarm<br>Graph/NoSQL/SQL Databases<br>Spark, Hadoop"
+  }, {
     "title": "OTHERS",
-    "description": "Docker Engine, Machine & Swarm<br>Graph/NoSQL/SQL Databases<br>Testing, Agile Development<br>Grunt/Gulp/webpack"
+    "description": "Testing, Agile Development<br>Grunt/Gulp/webpack"
   }, {
     "title": "STILL LEARNING",
-    "description": "iOS/Mac Dev, UX/UI Design<br>DevOps, Machine Learning"
+    "description": "iOS/Mac Dev, UX/UI Design<br>Machine Learning"
   }, {
     "title": "WHAT I USE",
     "description": "Atom, MacVim, Android Studio<br>IDEA, iTerm 2, Sketch 3, OS X"
@@ -107,6 +110,12 @@
     }]
   ],
   "achievements": [{
+    "date": "14 December 2015",
+    "description": "Completed <a href=\"https://www.coursera.org/course/intrologic\">Introduction to Logic</a> on Coursera"
+  }, {
+    "date": "30 November 2015",
+    "description": "Completed <a href=\"https://www.coursera.org/course/maththink\">Introduction to Mathematical Thinking</a> on Coursera"
+  }, {
     "date": "8 October 2015",
     "description": "Created a <a href=\"https://chrome.google.com/webstore/detail/rememberedio/egpbbjmbnfomdknchobbhfilakbnibii\">Chrome extension</a> for <a href=\"https://remembered.io/\">Remembered.io</a>"
   }, {
@@ -132,7 +141,7 @@
     "description": "Messenger for Desktop was <a href=\"http://www.producthunt.com/posts/messenger-for-desktop\">featured on Product Hunt</a>"
   }, {
     "date": "10 April 2015",
-    "description": "Launched <a href=\"http://messengerfordesktop.com/\">Messenger for Desktop</a> which has over 100,000 visitors/month and more than 1 million downloads so far (including updates)"
+    "description": "Launched <a href=\"http://messengerfordesktop.com/\">Messenger for Desktop</a> which has more than 2 million downloads so far"
   }, {
     "date": "27–29 March 2015",
     "description": "Met cool people at <a href=\"http://www.up.co/communities/romania/iasi/startup-weekend/4571\">Startup Weekend Iasi</a>, my team and I were the crowd's favourite with <a href=\"http://www.peerworkout.co/\">PeerWorkout</a>"
