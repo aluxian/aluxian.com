@@ -1,0 +1,28 @@
+.page.contact {
+  form {
+    input, textarea {
+      color: #fff;
+      font-size: 22px;
+      padding: 20px 10px;
+      border: 0;
+      background: #2B2B2B;
+
+      &:active, &:focus {
+        box-shadow: none;
+      }
+    }
+
+    input {
+      height: 50px;
+    }
+
+    textarea {
+      min-height: 180px;
+      padding-top: 10px;
+    }
+
+    .button {
+      margin-top: 50px;
+    }
+  }
+}

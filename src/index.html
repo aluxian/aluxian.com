@@ -1,0 +1,322 @@
+<!doctype html>
+<!--suppress HtmlUnknownTarget, HtmlUnknownTag -->
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Alexandru Roșianu</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon"
+          href="data:image/png;base64,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">
+    <link rel="icon" type="image/png"
+          href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEGElEQVR4Ae2XT1NbVRjG80EcV5KmgfgBnC5Y10UXzrQzpEXKHyu2aeyiowuxC0dcyMYZFWeYWKtFUgINAWwLNIEKTUubCbTUacYahkwrWoRM8GJzaWAe7+ONl5xz7q3AgpXvzDOT4Z57nt/7nvecw3VVp4Iv++6+O+ZLnVl/NXUGeyF60ZPeLv7YG2NV9HbtXeb2lXDtramq/wGcAdLtaLnfDr+lDtSlTtuOrU2fw6FZe9XuDqAdd55DjdU4aiZPiWNn+5DHi0Nb/w03n/TBv22An8ZRhF0U8Hn0GGqmKiBmY9Cw3VhF9MHZ/wb45KlzTr/MfYyqsAFxM2AB5LGD2Mzh3J3giwA6MLeBcpSg/NKSOHjRb0IkA7YAuYUkEtkZZFYKsIu5+x/AdztoD1D78NaWGUNfRl7ohzVcGDQADAg3Ie4OIC8vU7iOzym8NjqkLNFS7hvsv9YC33RQBfhyZVUc/OhrdC2ImSxmPsMrF+souGO9EsAauqJlAKo7gKm/IETx9wg8w03wjp2QATqR3YQQibiRxeQMhNBncJgAVCSsVKArwmdliL4QflUqcB6ewUZWQQQ49PMsxHiCtm6ud6c0iY7+K04AJUxNd6JtIoSezAPkN6HE+GQrPDED4IoE8F1BrFXxjyGrlP0rJTGLbEgB2E6UlkdwoL+BAPD80FwJEEIOYqSTAZrTCIenMxDieQaNOwTQln/EkUg99l22AfDPZ6CGjry+Bk0v2B5MievN2wfYzODIpWNw971pDxDVdOw0tMdhGwAdieSnaEvNoAQxcg87TIDocTZhBUC6B0vYRWws4KwMwG0Y4fbz48LiGiA9+3a0AfsGDIChpq0mbMk9ghxFll5QwZBapelbURVggACGer9StiCepfD6vwBX/wF4H6PPNuR9zuPWasAtfYSMNLS4dM8e4PujqOo5isa02lu57BfwDDeb54DdWb40H6I5pUB0KWVdhSYDxExz3hfucBAJTW3u8AQB3oLrvcXH8k7FSLyFJbSFOMhTUXlDuitiZXOKnX9tWN1F6/fQNGIAXPpTl/Z3FqdYPgnAUrhTOS825KN4sMI8Ug92fvv8U8iRnvvQbELf7dPsTA4muVk+E8IZpNsSx1JbZad66y1z7nvOz63HtWfz7Tey915/2zoHeLdzIF9UIeylGFPM2tnc3Hpce96E3nireBfUTAX4kgVhgZgwgiElGFea07i/QTHnwcPO946eALOvHhcBKP7TyZfNDDghJ6aJJLdoahlb5tHjcuaCuTfRiuqJd2D7aVZ94yRftiYkDA0URSgH41gjDxuuuaO598bJdaePUw4gPSdjKTm5ZSQYXqZEY6HkV801l82ZpHeiNe74eW78jQNJz8ksGFWWKTOWjMvdPqZmTvOXzr9R9TfnTYn1FNI0PAAAAABJRU5ErkJggg==">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<!-- Top Bar Navigation -->
+<header class="fixed contain-to-grid" data-magellan-expedition data-options="destination_threshold:25">
+    <nav class="top-bar" data-topbar data-options="scrolltop:false">
+        <ul class="title-area">
+            <li class="name">
+                <h1>
+                    <a href="/">
+                        <span class="firstname">alexandru</span>
+                        <span class="lastname">roșianu</span>
+                    </a>
+                </h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a href></a></li>
+        </ul>
+
+        <section class="top-bar-section">
+            <!-- Right Nav Section -->
+            <ul class="right">
+                <li data-magellan-arrival="home" class="active">
+                    <a href="#home">Home</a>
+                </li>
+                <li data-magellan-arrival="about">
+                    <a href="#about">About</a>
+                </li>
+                <li data-magellan-arrival="portfolio">
+                    <a href="#portfolio">Portfolio</a>
+                </li>
+                <!--<li data-magellan-arrival="blog">
+                  <a href="#blog">Blog</a>
+                </li>-->
+                <li data-magellan-arrival="contact">
+                    <a href="#contact">Contact</a>
+                </li>
+            </ul>
+        </section>
+    </nav>
+</header>
+
+<!-- Page: Home -->
+<section class="page home">
+    <a name="home" data-magellan-destination="home"></a>
+
+    <div class="row">
+        <div class="large-12 columns text-center center-vertically">
+            <h1>I BRING IDEAS TO LIFE</h1>
+
+            <h1 class="subheader">Web &amp; Android developer, aspiring entrepreneur,<br>computer whiz, technology
+                enthusiast.</h1>
+            <a href="#portfolio" class="button green big">SEE MY WORK</a>
+
+            <div><a href="#about">or find out more about me</a></div>
+        </div>
+    </div>
+</section>
+
+<!-- Page: About -->
+<section class="page about">
+    <a name="about" data-magellan-destination="about"></a>
+
+    <!-- Photo of me -->
+    <!--<div data-interchange="[photo/small.html, (small)], [photo/medium.html, (medium)], [photo/large.html, (large)]">-->
+    <!--<div class="profile-picture" data-image="img/me.jpg"></div>-->
+    <!--</div>-->
+
+    <div class="row">
+        <div class="large-12 columns text-center">
+            <h1 class="page-title">About Me</h1>
+
+            <div class="text-left">
+                <p>Hi! My name is Alexandru Roșianu and I’m a technology enthusiast. I like science, programming,
+                    physics and art. I’m passionate about gorgeous design, good UX, beautiful code and cool gadgets.</p>
+
+                <p>I live in Romania as an undergraduate student. I look forward to going to a university in the UK.</p>
+
+                <p>Other hobbies include travelling, music etc.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Page: Portfolio -->
+<section class="page portfolio">
+    <a name="portfolio" data-magellan-destination="portfolio"></a>
+
+    <div class="row">
+        <div class="large-12 columns text-center">
+            <h1 class="page-title">Portfolio</h1>
+
+            <div class="row">
+
+                <div class="medium-6 columns">
+                    <figure class="portfolio-item">
+                        <img src="http://tympanus.net/Tutorials/CaptionHoverEffects/images/2.png" alt="img01">
+
+                        <div class="caption-wrapper">
+                            <figcaption>
+                                <a class="title" href="http://www.aluxian.com/">aluxian.com</a>
+                                <!--<a class="read-about-it" href="#">Read about it &rarr;</a>-->
+                            </figcaption>
+                        </div>
+                    </figure>
+                </div>
+
+                <div class="medium-6 columns">
+                    <figure class="portfolio-item">
+                        <img src="http://tympanus.net/Tutorials/CaptionHoverEffects/images/2.png" alt="img01">
+
+                        <div class="caption-wrapper">
+                            <figcaption>
+                                <a class="title" href="#">cnrv.ro</a>
+                                <!--<a class="read-about-it" href="#">Read about it &rarr;</a>-->
+                            </figcaption>
+                        </div>
+                    </figure>
+                </div>
+
+            </div>
+
+            <!--<div class="row">-->
+
+            <!--<div class="medium-6 columns">-->
+            <!--<figure class="portfolio-item">-->
+            <!--<img src="http://tympanus.net/Tutorials/CaptionHoverEffects/images/2.png" alt="img01">-->
+            <!--<div class="caption-wrapper">-->
+            <!--<figcaption>-->
+            <!--<a class="title" href="#">Facebook for Muzei</a>-->
+            <!--&lt;!&ndash;<a class="read-about-it" href="#">Read about it &rarr;</a>&ndash;&gt;-->
+            <!--</figcaption>-->
+            <!--</div>-->
+            <!--</figure>-->
+            <!--</div>-->
+
+            <!--<div class="medium-6 columns">-->
+            <!--<figure class="portfolio-item">-->
+            <!--<img src="http://tympanus.net/Tutorials/CaptionHoverEffects/images/2.png" alt="img01">-->
+            <!--<div class="caption-wrapper">-->
+            <!--<figcaption>-->
+            <!--<a class="title" href="#">Some other awesome thingy</a>-->
+            <!--&lt;!&ndash;<a class="read-about-it" href="#">Read about it &rarr;</a>&ndash;&gt;-->
+            <!--</figcaption>-->
+            <!--</div>-->
+            <!--</figure>-->
+            <!--</div>-->
+
+            <!--</div>-->
+        </div>
+    </div>
+</section>
+
+<!-- Page: Blog -->
+<!--<section class="page blog">
+  <a name="blog" data-magellan-destination="blog"></a>
+
+  <div class="row">
+    <div class="large-12 columns text-center">
+      <h1 class="page-title">Latest Blog Posts</h1>
+
+      <div class="blog-post text-left">
+        <div class="description">
+          <span>17 OCTOBER 2013 ON ELEMENTS | MARKDOWN</span>
+        </div>
+        <div class="title">
+          <a href="#">Testing the Elements</a>
+        </div>
+      </div>
+
+      <div class="blog-post text-left">
+        <div class="description">
+          <span>16 MAY 2013 ON HTML | W3C</span>
+        </div>
+        <div class="title">
+          <a href="#">An Introduction to WooCommerce</a>
+        </div>
+      </div>
+
+      <div class="blog-post text-left">
+        <div class="description">
+          <span>16 MAY 2013 ON HTML | W3C</span>
+        </div>
+        <div class="title">
+          <a href="#">A Cinematic Tour of WooThemes Offices</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>-->
+
+<!-- Page: Contact -->
+<section class="page contact">
+    <a name="contact" data-magellan-destination="contact"></a>
+
+    <div class="row">
+        <div class="large-12 columns text-center">
+            <h1 class="page-title">Get in Touch</h1>
+
+            <form>
+                <div class="row">
+                    <div class="medium-6 columns">
+                        <input type="text" placeholder="Name" required>
+                    </div>
+                    <div class="medium-6 columns">
+                        <input type="email" placeholder="Email Address" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <input type="text" placeholder="Subject" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <textarea placeholder="Message" required></textarea>
+                    </div>
+                </div>
+
+                <button class="button green big email send">
+              <span class="t_send">
+                <span>
+                  <i class="icon envelop"></i>
+                  SEND
+                </span>
+              </span>
+
+              <span class="t_sending">
+                <span>
+                  SENDING...
+                </span>
+              </span>
+
+              <span class="t_sent">
+                <span>
+                  SUCCESS!
+                  <i class="icon smiley"></i>
+                </span>
+              </span>
+
+              <span class="t_error">
+                <span>
+                  ERROR
+                  <i class="icon sad"></i>
+                </span>
+              </span>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Social media icons -->
+<section class="social">
+    <div class="row">
+        <div class="large-12 columns text-center">
+            <span>Designed &amp; developed with love by myself.</span>
+            <span>Proudly hosted at Github.</span>
+            <ul class="inline-list">
+                <li>
+                    <a target="_blank" href="https://github.com/Aluxian">
+                        <i class="icon github"></i>
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" href="https://plus.google.com/+AlexandruRosianu">
+                        <i class="icon google"></i>
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" href="https://www.facebook.com/aluxian">
+                        <i class="icon facebook"></i>
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" href="https://twitter.com/Aluxian">
+                        <i class="icon twitter"></i>
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" href="http://blog.aluxian.com/rss/">
+                        <i class="icon rss"></i>
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" href="https://www.linkedin.com/in/alexandrurosianu">
+                        <i class="icon linkedin"></i>
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" href="mailto:Alexandru Rosianu<me@aluxian.com>">
+                        <i class="icon email"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Javascript files -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

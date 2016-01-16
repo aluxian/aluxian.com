@@ -1,0 +1,27 @@
+.page.blog {
+  .blog-post {
+    .description {
+      color: #4A4A4A;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .title {
+      font-size: 30px;
+      font-weight: 600;
+
+      a {
+        color: #fff;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  .blog-post + .blog-post {
+    margin-top: 20px;
+  }
+}

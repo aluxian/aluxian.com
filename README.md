@@ -1,17 +1,3 @@
-# aluxian.com
+# aluxian.com website
 
-Made w/ Gulp, Jade, SASS & CoffeeScript.
-
-Install dependencies:
-
-    npm install -g gulp
-    npm install
-    bower install
-
-Production build:
-
-    gulp live build
-
-Dev mode:
-
-    gulp watch
+This is my personal website, where you can find out more about me and my work.

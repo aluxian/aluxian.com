@@ -1,0 +1,62 @@
+.page.home {
+  height: 100%;
+
+  h1 {
+    font-size: 78px;
+    color: #fff;
+
+    &.subheader {
+      color: $body-font-color;
+      margin-top: 30px;
+      font-size: 30px;
+      font-weight: 300;
+      font-family: $body-font-family;
+    }
+  }
+
+  .center-vertically {
+    height: 400px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  @media #{$screen} and (max-width: 918px) {
+    .center-vertically {
+      height: 450px;
+    }
+  }
+
+  @media #{$screen} and (max-width: 693px) {
+    .center-vertically {
+      height: 500px;
+    }
+  }
+
+  [href="#portfolio"] {
+    margin-top: 70px;
+    margin-bottom: 30px;
+
+    &:active {
+      margin-top: 71px;
+    }
+  }
+
+  [href="#about"] {
+    color: $body-font-color;
+  }
+}
+
+@media #{$screen} and (max-width: 592px) {
+  .page.home {
+    min-height: 965px;
+    height: 110%;
+
+    h1 {
+      font-size: 58px;
+    }
+  }
+}

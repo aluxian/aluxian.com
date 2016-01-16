@@ -1,0 +1,24 @@
+@mixin send-text-cont($active) {
+  $texts: send sending sent error;
+
+  @each $text in $texts {
+    @if $text != $active {
+      .t_#{$text} {
+        animation: moveDown .5s;
+        opacity: 0;
+      }
+    }
+  }
+
+  .t_#{$active} {
+    animation: moveUp .5s;
+    opacity: 1;
+  }
+}
+
+@mixin send-text($active) {
+  &.#{$active} {
+    @content;
+    @include send-text-cont($active);
+  }
+}

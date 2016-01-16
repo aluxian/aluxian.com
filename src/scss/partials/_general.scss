@@ -1,0 +1,36 @@
+// Set a hover transition for every link
+a {
+  transition: color .1s;
+}
+
+// Change placeholder color
+::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #404040;
+  font-weight: 300;
+}
+
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #404040;
+  opacity: 1;
+  font-weight: 300;
+}
+
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #404040;
+  opacity: 1;
+  font-weight: 300;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #404040;
+  font-weight: 300;
+}
+
+// Remove outlines
+.button:focus {
+  outline: none;
+}
