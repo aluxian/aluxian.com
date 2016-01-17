@@ -110,6 +110,9 @@
     }]
   ],
   "achievements": [{
+    "date": "10 January 2016",
+    "description": "Finished <a href=\"http://aluxian.github.io/Tweeather/\">Tweeather</a> a ML project"
+  }, {
     "date": "14 December 2015",
     "description": "Completed <a href=\"https://www.coursera.org/course/intrologic\">Introduction to Logic</a> on Coursera"
   }, {
@@ -180,6 +183,16 @@
     "description": "Published a videos app in the Play Store that reached 80,000 installs"
   }],
   "posts": [{
+    "meta": "16 January 2016",
+    "tags": ["Machine Learning", "Apache Spark", "Hadoop"],
+    "title": "Tweeather – What, Why and How?",
+    "url": "http://blog.aluxian.com/tweeather-what-why-and-how/"
+  }, {
+    "meta": "15 November 2015",
+    "tags": ["Reviews"],
+    "title": "How to remember everything (Review of Remembered.io)",
+    "url": "http://blog.aluxian.com/how-to-remember-everything-review-remembered-io/"
+  }, {
     "meta": "30 September 2015",
     "tags": ["Tips"],
     "title": "Tips for getting started on Codementor",
