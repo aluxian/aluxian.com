@@ -8,7 +8,7 @@ var _           = require('lodash'),
     errors      = require('../errors'),
     session     = require('cookie-session'),
     utils       = require('../utils'),
-    private;
+    privateBlogging;
 
 function verifySessionHash(salt, hash) {
     if (!salt || !hash) {
@@ -24,7 +24,7 @@ function verifySessionHash(salt, hash) {
     });
 }
 
-private = {
+privateBlogging = {
     checkIsPrivate: function checkIsPrivate(req, res, next) {
         return api.settings.read({context: {internal: true}, key: 'isPrivate'}).then(function then(response) {
             var pass = response.settings[0];
@@ -49,7 +49,9 @@ private = {
         }
 
         // take care of rss and sitemap 404s
-        if (req.url.lastIndexOf('/rss', 0) === 0 || req.url.lastIndexOf('/sitemap', 0) === 0) {
+        if (req.path.lastIndexOf('/rss/', 0) === 0 ||
+            req.path.lastIndexOf('/rss/') === req.url.length - 5 ||
+            (req.path.lastIndexOf('/sitemap', 0) === 0 && req.path.lastIndexOf('.xml') === req.path.length - 4)) {
             return errors.error404(req, res, next);
         } else if (req.url.lastIndexOf('/robots.txt', 0) === 0) {
             fs.readFile(path.join(config.paths.corePath, 'shared', 'private-robots.txt'), function readFile(err, buf) {
@@ -64,7 +66,7 @@ private = {
                 res.end(buf);
             });
         } else {
-            return private.authenticatePrivateSession(req, res, next);
+            return privateBlogging.authenticatePrivateSession(req, res, next);
         }
     },
 
@@ -133,4 +135,4 @@ private = {
     }
 };
 
-module.exports = private;
+module.exports = privateBlogging;

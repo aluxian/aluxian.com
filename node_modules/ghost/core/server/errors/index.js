@@ -207,7 +207,7 @@ errors = {
         return {errors: errors, statusCode: statusCode};
     },
 
-    handleAPIError: function (error, permsMessage) {
+    formatAndRejectAPIError: function (error, permsMessage) {
         if (!error) {
             return this.rejectError(
                 new this.NoPermissionError(permsMessage || 'You do not have permission to perform this action')
@@ -232,6 +232,14 @@ errors = {
         }
 
         return this.rejectError(new this.InternalServerError(error));
+    },
+
+    handleAPIError: function errorHandler(err, req, res, next) {
+        /*jshint unused:false */
+        var httpErrors = this.formatHttpErrors(err);
+        this.logError(err);
+        // Send a properly formatted HTTP response containing the errors
+        res.status(httpErrors.statusCode).json({errors: httpErrors.errors});
     },
 
     renderErrorPage: function (code, err, req, res, next) {
@@ -272,7 +280,7 @@ errors = {
         function renderErrorInt(errorView) {
             var stack = null;
 
-            if (process.env.NODE_ENV !== 'production' && err.stack) {
+            if (code !== 404 && process.env.NODE_ENV !== 'production' && err.stack) {
                 stack = parseStack(err.stack);
             }
 
@@ -328,7 +336,7 @@ errors = {
         // 500 errors should never be cached
         res.set({'Cache-Control': 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0'});
 
-        if (err.status === 404) {
+        if (err.status === 404 || err.code === 404) {
             return this.error404(req, res, next);
         }
 
@@ -374,6 +382,7 @@ _.each([
     'logErrorAndExit',
     'logErrorWithRedirect',
     'handleAPIError',
+    'formatAndRejectAPIError',
     'formatHttpErrors',
     'renderErrorPage',
     'error404',

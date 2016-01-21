@@ -3,7 +3,9 @@
 
 var moment            = require('moment'),
     _                 = require('lodash'),
-    ghostConfig = '';
+    ghostConfig = '',
+    // @TODO: unify this with routes.apiBaseUrl
+    apiPath = '/ghost/api/v0.1';
 
 // ## setConfig
 // Simple utility function to allow
@@ -16,7 +18,15 @@ function setConfig(config) {
 }
 
 function getBaseUrl(secure) {
-    return (secure && ghostConfig.urlSSL) ? ghostConfig.urlSSL : ghostConfig.url;
+    if (secure && ghostConfig.urlSSL) {
+        return ghostConfig.urlSSL;
+    } else {
+        if (secure) {
+            return ghostConfig.url.replace('http://', 'https://');
+        } else {
+            return ghostConfig.url;
+        }
+    }
 }
 
 function urlJoin() {
@@ -90,9 +100,9 @@ function createUrl(urlPath, absolute, secure) {
 // Creates the url path for a post, given a post and a permalink
 // Parameters:
 // - post - a json object representing a post
-// - permalinks - a string containing the permalinks setting
-function urlPathForPost(post, permalinks) {
+function urlPathForPost(post) {
     var output = '',
+        permalinks = ghostConfig.theme.permalinks,
         tags = {
             year:   function () { return moment(post.published_at).format('YYYY'); },
             month:  function () { return moment(post.published_at).format('MM'); },
@@ -146,7 +156,7 @@ function urlFor(context, data, absolute) {
     knownPaths = {
         home: '/',
         rss: '/rss/',
-        api: '/ghost/api/v0.1',
+        api: apiPath,
         sitemap_xsl: '/sitemap.xsl'
     };
 
@@ -188,6 +198,7 @@ function urlFor(context, data, absolute) {
             return urlPath;
         } else if (context === 'nav' && data.nav) {
             urlPath = data.nav.url;
+            secure = data.nav.secure || secure;
             baseUrl = getBaseUrl(secure);
             hostname = baseUrl.split('//')[1] + ghostConfig.paths.subdir;
             if (urlPath.indexOf(hostname) > -1
@@ -210,14 +221,34 @@ function urlFor(context, data, absolute) {
     }
 
     // This url already has a protocol so is likely an external url to be returned
-    if (urlPath && (urlPath.indexOf('://') !== -1 || urlPath.indexOf('mailto:') === 0)) {
+    // or it is an alternative scheme, protocol-less, or an anchor-only path
+    if (urlPath && (urlPath.indexOf('://') !== -1 || urlPath.match(/^(\/\/|#|[a-zA-Z0-9\-]+:)/))) {
         return urlPath;
     }
 
     return createUrl(urlPath, absolute, secure);
 }
 
+function apiUrl() {
+    // @TODO unify this with urlFor
+    var url;
+
+    if (ghostConfig.forceAdminSSL) {
+        url = (ghostConfig.urlSSL || ghostConfig.url).replace(/^.*?:\/\//g, 'https://');
+    } else if (ghostConfig.urlSSL) {
+        url = ghostConfig.urlSSL.replace(/^.*?:\/\//g, 'https://');
+    } else if (ghostConfig.url.match(/^https:/)) {
+        url = ghostConfig.url;
+    } else {
+        url = ghostConfig.url.replace(/^.*?:\/\//g, '//');
+    }
+
+    return url.replace(/\/$/, '') + apiPath + '/';
+}
+
 module.exports.setConfig = setConfig;
 module.exports.urlJoin = urlJoin;
 module.exports.urlFor = urlFor;
 module.exports.urlPathForPost = urlPathForPost;
+module.exports.apiUrl = apiUrl;
+module.exports.getBaseUrl = getBaseUrl;
