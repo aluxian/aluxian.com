@@ -1,0 +1,13 @@
+.DS_Store
+.git
+.svn
+vendor
+node_modules
+bower_components
+.codekit
+.sass-cache
+assets/fonts/FontAwesome.otf
+assets/fonts/fontawesome-webfont.eot
+assets/fonts/fontawesome-webfont.svg
+assets/fonts/fontawesome-webfont.ttf
+assets/fonts/fontawesome-webfont.woff

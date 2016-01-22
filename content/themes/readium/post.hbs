@@ -1,0 +1,114 @@
+{{!< default}}
+
+{{! The comment above "< default" means - insert everything in this file into
+    the {body} of the default.hbs template, which contains our header/footer. }}
+
+{{! Everything inside the #post tags pulls data from the post }}
+{{#post}}
+
+<main class="content" role="main">
+    <article class="{{post_class}}">
+        <div class="wrapper-background">
+        
+            {{#if image}}
+            <header class="highlight-header post-head" style="background-image: url({{image}})">
+                <header class="post-header">
+                    <h1 class="post-title">{{title}}</h1>
+                    <section class="post-meta">
+                        <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="DD MMMM YYYY"}}</time> {{tags prefix=" on "}}
+                    </section>
+                </header>
+            </header>
+            <br>
+            {{else}}
+            <br><br><br><br>
+            <header class="post-header">
+                <h1 class="post-title">{{title}}</h1>
+                <section class="post-meta">
+                    <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="DD MMMM YYYY"}}</time> {{tags prefix=" on "}}
+                </section>
+            </header>
+            <h2 class="article-spacer"><span>&#10020;</span></h2>
+            {{/if}}
+        
+            
+        </div>
+        <div class="wrapper-content">
+            
+            
+            
+            <section class="post-content">
+                {{content}}
+            </section>
+            
+            <h2 class="article-spacer"><span>&#10020;</span></h2>
+            
+            <footer class="post-footer">
+            
+            {{! Everything inside the #author tags pulls data from the author }}
+            {{#author}}
+            
+                {{#if image}}
+                <figure class="author-image">
+                    <a class="img" href="{{url}}" style="background-image: url({{image}})"><span class="hidden">{{name}}'s Picture</span></a>
+                </figure>
+                {{/if}}
+            
+                <section class="author">
+                    <h4 itemprop="author" itemscope itemtype="http://schema.org/Person">{{name}}</h4>
+            
+                    {{#if bio}}
+                        <p>{{bio}}</p>
+                    {{else}}
+                        <p>Read <a href="{{url}}">more posts</a> by this author.</p>
+                    {{/if}}
+                    <div class="author-meta">
+                        {{#if location}}<span class="author-location icon-location">{{location}}</span>&nbsp;&nbsp;·&nbsp;&nbsp;{{/if}}
+                        {{#if website}}<span class="author-link icon-link"><a href="{{website}}">{{website}}</a></span>{{/if}}
+                    </div>
+                </section>
+            
+            {{/author}}
+            
+            </footer>
+            
+            <h2 class="article-spacer"><span>&#10020;</span></h2>
+            
+        </div>
+        
+
+    </article>
+</main>
+
+<aside class="read-next">
+    {{#next_post}}
+        <a class="read-next-story" href="{{url}}">
+            <section class="post">
+                <h4>Next Story</h4>
+                <h2>{{title}}</h2>
+                <p>{{excerpt words="19"}}&hellip;</p>
+            </section>
+        </a>
+    {{else}}
+        <div class="read-next-story nocontent">
+            <h4>Next Story</h4>
+            <h5>You are already looking at the most recent article. Perhaps check out a previous one?</h5>
+        </div>
+    {{/next_post}}
+    {{#prev_post}}
+        <a class="read-next-story prev" href="{{url}}">
+            <section class="post">
+                <h4>Previous Story</h4>
+                <h2>{{title}}</h2>
+                <p>{{excerpt words="19"}}&hellip;</p>
+            </section>
+        </a>
+    {{else}}
+        <div class="read-next-story prev nocontent">
+            <h4>Previous Story</h4>
+            <h5>You are already looking at the most previous article. Perhaps check out a newer one?</h5>
+        </div>
+    {{/prev_post}}
+</aside>
+
+{{/post}}
