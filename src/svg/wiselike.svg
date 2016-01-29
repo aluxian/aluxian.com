@@ -1,4 +1,6 @@
-<svg height="47px" viewBox="0 0 108 47" width="108px">
+<svg height="47px" version="1.1" viewBox="0 0 108 47" width="108px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <title>I am a Codementor</title>
+  <desc>I am a Codementor</desc>
   <defs><filter filterUnits="objectBoundingBox" height="200%" id="filter-1" width="200%" x="-50%" y="-50%"><feOffset dx="0.5" dy="0.5" in="SourceAlpha" result="shadowOffsetOuter1"/><feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="0.5"/><feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.353408062 0"/><feMerge><feMergeNode in="shadowMatrixOuter1"/><feMergeNode in="SourceGraphic"/></feMerge></filter><rect height="45" id="path-2" rx="5" width="106" x="0" y="0"/><rect height="41" id="path-3" rx="5" width="48" x="0" y="0"/></defs>
   <g fill-rule="evenodd" fill="none" id="Page-1" stroke-width="1" stroke="none">
     <g id="Group-12" transform="translate(0.050049, 0.000000)"><g filter="url(#filter-1)" id="Rectangle-5"><use fill-rule="evenodd" fill="#073648" xlink:href="#path-2"/><use fill="none" xlink:href="#path-2"/></g>

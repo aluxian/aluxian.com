@@ -151,13 +151,19 @@ html
       a(name='contact' id='contact')
               
       footer
-        p.codementor
-          a(target='_blank' href='//www.codementor.io/aluxian')
-            include svg/codementor.svg
+        ul.badges
+          li
+            a(target='_blank' href='https://www.codementor.io/aluxian')
+              include svg/codementor.svg
+          li
+            a(target='_blank' href='https://wiselike.com/alexandru-rosianu')
+              include svg/wiselike.svg
+        
         hr
         p Proudly hosted on #[a(href='https://github.com/Aluxian/aluxian.com') GitHub].#[br]Designed and coded with &hearts; by myself.
         hr
-        ul
+          
+        ul.social
           li
             a(href='https://plus.google.com/+AlexandruRosianu' title='Google+')
               include svg/gplus.svg
@@ -182,7 +188,7 @@ html
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
       
       ga('create', 'UA-45600261-1', 'auto');
       ga('send', 'pageview');
