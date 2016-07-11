@@ -71,7 +71,7 @@ gulp.task 'fonts', ->
 
 gulp.task 'sass', ->
   gulp.src ['bower_components/normalize-css/normalize.css', 'src/sass/styles.sass']
-    .pipe $.if /[.]sass$/, $.sass({
+    .pipe $.if '.sass', $.sass({
       outputStyle: if live then 'compressed' else 'nested'
       indentedSyntax: true
       includePaths: [
@@ -82,13 +82,13 @@ gulp.task 'sass', ->
       $.sass.logError err
       this.emit 'end'
     .pipe $.concat 'styles.css'
-    # .pipe $.if live, $.combineMediaQueries() # crashes build
+    .pipe $.if live, $.combineMediaQueries() # crashes build
     .pipe $.if live, $.cssmin()
     .pipe gulp.dest DIST
 
 gulp.task 'coffee', ->
   gulp.src ['bower_components/smooth-scroll/dist/js/smooth-scroll.js', 'src/scripts.coffee']
-    .pipe $.if /[.]coffee$/, $.coffee({ bare: true }).on('error', $.util.log)
+    .pipe $.if '.coffee', $.coffee({ bare: true }).on('error', $.util.log)
     .pipe $.concat 'scripts.js'
     .pipe $.if live, $.uglify()
     .pipe gulp.dest DIST
