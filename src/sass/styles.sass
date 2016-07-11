@@ -363,15 +363,15 @@ h3
     ul.posts
       li
         p:first-child
-          @include font(inherit, 13px, 300)
+          @include font(inherit, 15px, 300)
+        p:last-child
+          @include font(inherit, 11px, 300)
+          font-style: italic
 
     ul.achievements
       li
         p:first-child
           @include font(inherit, 13px, 400)
-
-    ul.posts p:last-child
-      font-style: italic
 
     .row
       @include outer-container

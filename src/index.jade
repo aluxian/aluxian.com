@@ -144,9 +144,8 @@ html
         ul.posts
           each post in posts
             li
+              p: a(href='#{post.url}') #{post.title}
               p #{post.meta} on #{post.tags.join(', ')}
-              p
-                 a(href='#{post.url}') #{post.title}
             
       a(name='contact' id='contact')
               
