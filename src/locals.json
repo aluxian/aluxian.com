@@ -1,224 +1,280 @@
 {
-  "menu": [{
-    "title": "Home",
-    "href": "#home"
-  }, {
-    "title": "About",
-    "href": "#about"
-  }, {
-    "title": "Skills",
-    "href": "#skills"
-  }, {
-    "title": "Portfolio",
-    "href": "#portfolio"
-  }, {
-    "title": "Achievements",
-    "href": "#achievements"
-  }, {
-    "title": "Blog",
-    "href": "#blog"
-  }, {
-    "title": "Contact",
-    "href": "#contact"
-  }],
-  "about": [{
-    "title": "WHO I AM",
-    "description": "I’m an avid programmer from Romania, passionate about code, design, startups and technology. I like science, travelling and films."
-  }, {
-    "title": "WHAT I DO",
-    "description": "I create websites, I build servers, I craft Android/iOS applications and I play with Sketch learning to design great UIs."
-  }, {
-    "title": "WORK",
-    "description": "I work for a brilliant startup called <a target=\"_blank\" href=\"https://www.startersquad.com\">StarterSquad</a>, where my distributed team and I help people transform their ideas into thriving startups that change the world."
-  }, {
-    "title": "MENTORING",
-    "description": "I'm also a mentor on <a href=\"https://www.codementor.io/aluxian\">Codementor</a> where I either teach programming or I help users debug, fix and refactor their code."
-  }, {
-    "title": "FREE TIME",
-    "description": "In my free time I swim, read, play games, rock my guitar and participate in contests, conferences or hackathons."
-  }, {
-    "title": "EARLY LIFE",
-    "description": "Read more about how I started to love programming on my blog, <a href=\"http://blog.aluxian.com/how-my-programming-journey-began/\">right here</a>."
-  }, {
-    "title": "QUESTIONS",
-    "description": "You can ask me about my hobbies, projects, skills, lifestyle or anything that might come through your mind <a href=\"https://wiselike.com/alexandru-rosianu\">on Wiselike</a>."
-  }],
-  "skills": [{
-    "title": "WEB",
-    "description": "SASS/LESS/Stylus<br>EJS/Handlebars/Jade<br>ECMAScript 6<br><br>jQuery, AngularJS<br>React, Flux"
-  }, {
-    "title": "BACKEND",
-    "description": "Node.js, Java, Scala<br>Express, Hapi, Sails, Akka"
-  }, {
-    "title": "MOBILE & DESKTOP",
-    "description": "Android, .NET"
-  }, {
-    "title": "DEVOPS, DB, ML",
-    "description": "Docker Engine, Machine & Swarm<br>Graph/NoSQL/SQL Databases<br>Spark, Hadoop"
-  }, {
-    "title": "OTHERS",
-    "description": "Testing, Agile Development<br>Grunt/Gulp/webpack"
-  }, {
-    "title": "STILL LEARNING",
-    "description": "iOS/Mac Dev, UX/UI Design<br>Machine Learning"
-  }, {
-    "title": "WHAT I USE",
-    "description": "Atom, MacVim, Android Studio<br>IDEA, iTerm 2, Sketch 3, OS X"
-  }],
-  "portfolio": [
-    [{
-      "id": "1",
-      "title": "Aluxian.com",
-      "url": "http://www.aluxian.com"
-    }, {
-      "id": "2",
-      "title": "CNRV.ro",
-      "url": "https://cnrv.herokuapp.com"
-    }],
-    [{
-      "id": "3",
-      "title": "Messenger for Desktop",
-      "url": "http://messengerfordesktop.com"
-    }, {
-      "id": "4",
-      "title": "WhatsApp for Desktop",
-      "url": "https://github.com/Aluxian/WhatsApp-Desktop"
-    }],
-    [{
-      "id": "5",
-      "title": "Fou",
-      "url": "https://fou-fashion.herokuapp.com"
-    }, {
-      "id": "6",
-      "title": "Cattics",
-      "url": "https://alux-cattics.herokuapp.com"
-    }],
-    [{
-      "id": "7",
-      "title": "Electron SuperKit",
-      "url": "https://github.com/Aluxian/electron-superkit"
-    }, {
-      "id": "8",
-      "title": "NW.js Starter",
-      "url": "https://github.com/Aluxian/nwjs-starter"
-    }],
-    [{
-      "id": "9",
-      "title": "UniNet",
-      "url": "https://uninet.herokuapp.com/"
-    }, {
-      "id": "10",
-      "title": "Remembered.io (Chrome)",
-      "url": "https://chrome.google.com/webstore/detail/rememberedio/egpbbjmbnfomdknchobbhfilakbnibii"
-    }]
+  "menu": [
+    {
+      "title": "Home",
+      "href": "#home"
+    },
+    {
+      "title": "About",
+      "href": "#about"
+    },
+    {
+      "title": "Skills",
+      "href": "#skills"
+    },
+    {
+      "title": "Portfolio",
+      "href": "#portfolio"
+    },
+    {
+      "title": "Achievements",
+      "href": "#achievements"
+    },
+    {
+      "title": "Blog",
+      "href": "#blog"
+    },
+    {
+      "title": "Contact",
+      "href": "#contact"
+    }
   ],
-  "achievements": [{
-    "date": "10 January 2016",
-    "description": "Finished <a href=\"http://aluxian.github.io/Tweeather/\">Tweeather</a>, a ML project"
-  }, {
-    "date": "14 December 2015",
-    "description": "Completed <a href=\"https://www.coursera.org/course/intrologic\">Introduction to Logic</a> on Coursera"
-  }, {
-    "date": "30 November 2015",
-    "description": "Completed <a href=\"https://www.coursera.org/course/maththink\">Introduction to Mathematical Thinking</a> on Coursera"
-  }, {
-    "date": "8 October 2015",
-    "description": "Created a <a href=\"https://chrome.google.com/webstore/detail/rememberedio/egpbbjmbnfomdknchobbhfilakbnibii\">Chrome extension</a> for <a href=\"https://remembered.io/\">Remembered.io</a>"
-  }, {
-    "date": "24 August 2015",
-    "description": "Started mentoring on a daily basis on <a href=\"https://www.codementor.io/aluxian\">Codementor</a>"
-  }, {
-    "date": "1 August 2015",
-    "description": "Built an <i>awesome</i> stack for <a href=\"https://github.com/FOUfashion/\">Fou</a> with Hapi, React, Fluxible, ES6 and Docker"
-  }, {
-    "date": "22 June 2015",
-    "description": "WhatsApp for Desktop was <a href=\"http://www.producthunt.com/tech/whatsapp-for-desktop\">#1 on Product Hunt</a> and <a href=\"https://news.ycombinator.com/item?id=9757555\">#3 on Hacker News</a>"
-  }, {
-    "date": "19 June 2015",
-    "description": "Launched <a href=\"https://github.com/Aluxian/WhatsApp-Desktop\">WhatsApp for Desktop</a> which has over 200,000 downloads"
-  }, {
-    "date": "7 May 2015",
-    "description": "Finished Android Pro, a course by <a href=\"http://fiipractic.asii.ro\">FII Pratic</a> @ <a href=\"http://www.uaic.ro/en/\">UAIC</a>"
-  }, {
-    "date": "18 April 2015",
-    "description": "Won <a href=\"http://fiipractic.asii.ro\">FII Pratic Hackathon</a> with <a href=\"https://uninet.herokuapp.com/\">UniNet</a>, a social network for students"
-  }, {
-    "date": "11 April 2015",
-    "description": "Messenger for Desktop was <a href=\"http://www.producthunt.com/posts/messenger-for-desktop\">featured on Product Hunt</a>"
-  }, {
-    "date": "10 April 2015",
-    "description": "Launched <a href=\"http://messengerfordesktop.com/\">Messenger for Desktop</a> which has more than 2 million downloads so far"
-  }, {
-    "date": "27–29 March 2015",
-    "description": "Met cool people at <a href=\"http://www.up.co/communities/romania/iasi/startup-weekend/4571\">Startup Weekend Iasi</a>, my team and I were the crowd's favourite with <a href=\"http://www.peerworkout.co/\">PeerWorkout</a>"
-  }, {
-    "date": "17 March 2015",
-    "description": "Completed <a href=\"https://www.coursera.org/course/cloudcomputing\">Cloud Computing Concepts</a> on Coursera"
-  }, {
-    "date": "2 February 2015",
-    "description": "Completed <a href=\"https://www.coursera.org/learn/learning-how-to-learn\">Learning How to Learn</a> on Coursera"
-  }, {
-    "date": "17 December 2014",
-    "description": "Completed <a href=\"https://www.coursera.org/course/ml\">Machine Learning</a> offered by Stanford University on Coursera"
-  }, {
-    "date": "28 July – 3 August 2014",
-    "description": "Went to the <a href=\"http://infoeducatie.ro/2014/\">InfoEducatie National Contest</a> with Butler, a voice-powered personal assistant"
-  }, {
-    "date": "15–18 May 2014",
-    "description": "Went to the <a href=\"http://www.satmar.ro/oti2014/public/\">National Olympiad of C#</a>"
-  }, {
-    "date": "16 December 2013",
-    "description": "Won the <a href=\"http://createhs.com\">CreateHS</a> November challenge with <a href=\"http://cnrv.herokuapp.com\">CNRV.ro</a> judged by <a href=\"https://twitter.com/gvanrossum\">@gvanrossum</a> <a href=\"https://twitter.com/pamelafox\">@pamelafox</a> <a href=\"https://twitter.com/jeresig\">@jeresig</a> <a href=\"https://twitter.com/dhh\">@dhh</a>"
-  }, {
-    "date": "11 November 2013",
-    "description": "Started working at <a href=\"https://www.startersquad.com\">StarterSquad.com</a>"
-  }, {
-    "date": "1–3 November 2013",
-    "description": "Learned about startups and met fascinating people at <a href=\"http://iasi.startupweekend.org\">Startup Weekend Iasi</a>"
-  }, {
-    "date": "28 July – 3 August 2013",
-    "description": "1st place @ <a href=\"http://infoeducatie.ro/2013/\">Cisco Network Programmability contest</a> with a QoS Manager app for Cisco routers"
-  }, {
-    "date": "28 July – 3 August 2013",
-    "description": "Went to the <a href=\"http://infoeducatie.ro/2013/\">InfoEducatie National Contest</a> with Hub, a social-messaging platforms aggregator app"
-  }, {
-    "date": "September 2012 – June 2013",
-    "description": "Published a videos app in the Play Store that reached 80,000 installs"
-  }],
-  "posts": [{
-    "meta": "16 January 2016",
-    "tags": ["Machine Learning", "Apache Spark", "Hadoop"],
-    "title": "Tweeather – What, Why and How?",
-    "url": "http://blog.aluxian.com/tweeather-what-why-and-how/"
-  }, {
-    "meta": "15 November 2015",
-    "tags": ["Reviews"],
-    "title": "How to remember everything (Review of Remembered.io)",
-    "url": "http://blog.aluxian.com/how-to-remember-everything-review-remembered-io/"
-  }, {
-    "meta": "30 September 2015",
-    "tags": ["Tips"],
-    "title": "Tips for getting started on Codementor",
-    "url": "http://blog.aluxian.com/tips-for-getting-started-on-codementor/"
-  }, {
-    "meta": "30 September 2015",
-    "tags": ["Tips"],
-    "title": "How to prepare for IELTS",
-    "url": "http://blog.aluxian.com/how-to-prepare-for-ielts/"
-  }, {
-    "meta": "6 July 2015",
-    "tags": ["Tutorials", "NW.js"],
-    "title": "How to create cross-platform desktop apps with NW.js",
-    "url": "http://blog.aluxian.com/how-to-create-cross-platform-desktop-apps-with-nw-js/"
-  }, {
-    "meta": "5 July 2015",
-    "tags": ["Open Source"],
-    "title": "Free code signing certificate for Open-Source Software",
-    "url": "http://blog.aluxian.com/free-code-signing-certificate-for-open-source-software/"
-  }, {
-    "meta": "9 June 2015",
-    "tags": ["Personal Life"],
-    "title": "How my programming journey began",
-    "url": "http://blog.aluxian.com/how-my-programming-journey-began/"
-  }]
+  "about": [
+    {
+      "title": "WHO I AM",
+      "description": "I’m an avid programmer from Romania, passionate about code, design, startups and technology. I like science, travelling and films."
+    },
+    {
+      "title": "WHAT I DO",
+      "description": "I create websites, I build servers, I craft Android/iOS applications and I play with Sketch learning to design great UIs."
+    },
+    {
+      "title": "WORK",
+      "description": "I work for a brilliant startup called <a target=\"_blank\" href=\"https://www.startersquad.com\">StarterSquad</a>, where my distributed team and I help people transform their ideas into thriving startups that change the world."
+    },
+    {
+      "title": "MENTORING",
+      "description": "I'm also a mentor on <a href=\"https://www.codementor.io/aluxian\">Codementor</a> where I either teach programming or I help users debug, fix and refactor their code."
+    },
+    {
+      "title": "FREE TIME",
+      "description": "In my free time I swim, read, play games, rock my guitar and participate in contests, conferences or hackathons."
+    },
+    {
+      "title": "EARLY LIFE",
+      "description": "Read more about how I started to love programming on my blog, <a href=\"http://blog.aluxian.com/how-my-programming-journey-began/\">right here</a>."
+    },
+    {
+      "title": "QUESTIONS",
+      "description": "You can ask me about my hobbies, projects, skills, lifestyle or anything that might come through your mind <a href=\"https://wiselike.com/alexandru-rosianu\">on Wiselike</a>."
+    }
+  ],
+  "skills": [
+    {
+      "title": "WEB",
+      "description": "SASS/LESS/Stylus<br>EJS/Handlebars/Jade<br>ECMAScript 6<br><br>jQuery, AngularJS<br>React, Flux"
+    },
+    {
+      "title": "BACKEND",
+      "description": "Node.js, Java, Scala<br>Express, Hapi, Sails, Akka"
+    },
+    {
+      "title": "MOBILE & DESKTOP",
+      "description": "Android, .NET"
+    },
+    {
+      "title": "DEVOPS, DB, ML",
+      "description": "Docker Engine, Machine & Swarm<br>Graph/NoSQL/SQL Databases<br>Spark, Hadoop"
+    },
+    {
+      "title": "OTHERS",
+      "description": "Testing, Agile Development<br>Grunt/Gulp/webpack"
+    },
+    {
+      "title": "STILL LEARNING",
+      "description": "iOS/Mac Dev, UX/UI Design<br>Machine Learning"
+    },
+    {
+      "title": "WHAT I USE",
+      "description": "Atom, MacVim, Android Studio<br>IDEA, iTerm 2, Sketch 3, OS X"
+    }
+  ],
+  "portfolio": [
+    [
+      {
+        "id": "1",
+        "title": "Aluxian.com",
+        "url": "http://www.aluxian.com"
+      },
+      {
+        "id": "2",
+        "title": "CNRV.ro",
+        "url": "https://cnrv.herokuapp.com"
+      }
+    ],
+    [
+      {
+        "id": "3",
+        "title": "Messenger for Desktop",
+        "url": "http://messengerfordesktop.com"
+      },
+      {
+        "id": "4",
+        "title": "WhatsApp for Desktop",
+        "url": "https://github.com/Aluxian/WhatsApp-Desktop"
+      }
+    ],
+    [
+      {
+        "id": "5",
+        "title": "Fou",
+        "url": "https://fou-fashion.herokuapp.com"
+      },
+      {
+        "id": "6",
+        "title": "Cattics",
+        "url": "https://alux-cattics.herokuapp.com"
+      }
+    ],
+    [
+      {
+        "id": "7",
+        "title": "Electron SuperKit",
+        "url": "https://github.com/Aluxian/electron-superkit"
+      },
+      {
+        "id": "8",
+        "title": "NW.js Starter",
+        "url": "https://github.com/Aluxian/nwjs-starter"
+      }
+    ],
+    [
+      {
+        "id": "9",
+        "title": "UniNet",
+        "url": "https://uninet.herokuapp.com/"
+      },
+      {
+        "id": "10",
+        "title": "Remembered.io (Chrome)",
+        "url": "https://chrome.google.com/webstore/detail/rememberedio/egpbbjmbnfomdknchobbhfilakbnibii"
+      }
+    ]
+  ],
+  "achievements": [
+    {
+      "date": "10 January 2016",
+      "description": "Finished <a href=\"http://aluxian.github.io/Tweeather/\">Tweeather</a>, a ML project"
+    },
+    {
+      "date": "14 December 2015",
+      "description": "Completed <a href=\"https://www.coursera.org/course/intrologic\">Introduction to Logic</a> on Coursera"
+    },
+    {
+      "date": "30 November 2015",
+      "description": "Completed <a href=\"https://www.coursera.org/course/maththink\">Introduction to Mathematical Thinking</a> on Coursera"
+    },
+    {
+      "date": "8 October 2015",
+      "description": "Created a <a href=\"https://chrome.google.com/webstore/detail/rememberedio/egpbbjmbnfomdknchobbhfilakbnibii\">Chrome extension</a> for <a href=\"https://remembered.io/\">Remembered.io</a>"
+    },
+    {
+      "date": "24 August 2015",
+      "description": "Started mentoring on a daily basis on <a href=\"https://www.codementor.io/aluxian\">Codementor</a>"
+    },
+    {
+      "date": "1 August 2015",
+      "description": "Built an <i>awesome</i> stack for <a href=\"https://github.com/FOUfashion/\">Fou</a> with Hapi, React, Fluxible, ES6 and Docker"
+    },
+    {
+      "date": "22 June 2015",
+      "description": "WhatsApp for Desktop was <a href=\"http://www.producthunt.com/tech/whatsapp-for-desktop\">#1 on Product Hunt</a> and <a href=\"https://news.ycombinator.com/item?id=9757555\">#3 on Hacker News</a>"
+    },
+    {
+      "date": "19 June 2015",
+      "description": "Launched <a href=\"https://github.com/Aluxian/WhatsApp-Desktop\">WhatsApp for Desktop</a> which has over 200,000 downloads"
+    },
+    {
+      "date": "7 May 2015",
+      "description": "Finished Android Pro, a course by <a href=\"http://fiipractic.asii.ro\">FII Pratic</a> @ <a href=\"http://www.uaic.ro/en/\">UAIC</a>"
+    },
+    {
+      "date": "18 April 2015",
+      "description": "Won <a href=\"http://fiipractic.asii.ro\">FII Pratic Hackathon</a> with <a href=\"https://uninet.herokuapp.com/\">UniNet</a>, a social network for students"
+    },
+    {
+      "date": "11 April 2015",
+      "description": "Messenger for Desktop was <a href=\"http://www.producthunt.com/posts/messenger-for-desktop\">featured on Product Hunt</a>"
+    },
+    {
+      "date": "10 April 2015",
+      "description": "Launched <a href=\"http://messengerfordesktop.com/\">Messenger for Desktop</a> which has more than 2 million downloads so far"
+    },
+    {
+      "date": "27–29 March 2015",
+      "description": "Met cool people at <a href=\"http://www.up.co/communities/romania/iasi/startup-weekend/4571\">Startup Weekend Iasi</a>, my team and I were the crowd's favourite with <a href=\"http://www.peerworkout.co/\">PeerWorkout</a>"
+    },
+    {
+      "date": "17 March 2015",
+      "description": "Completed <a href=\"https://www.coursera.org/course/cloudcomputing\">Cloud Computing Concepts</a> on Coursera"
+    },
+    {
+      "date": "2 February 2015",
+      "description": "Completed <a href=\"https://www.coursera.org/learn/learning-how-to-learn\">Learning How to Learn</a> on Coursera"
+    },
+    {
+      "date": "17 December 2014",
+      "description": "Completed <a href=\"https://www.coursera.org/course/ml\">Machine Learning</a> offered by Stanford University on Coursera"
+    },
+    {
+      "date": "28 July – 3 August 2014",
+      "description": "Went to the <a href=\"http://infoeducatie.ro/2014/\">InfoEducatie National Contest</a> with Butler, a voice-powered personal assistant"
+    },
+    {
+      "date": "15–18 May 2014",
+      "description": "Went to the <a href=\"http://www.satmar.ro/oti2014/public/\">National Olympiad of C#</a>"
+    },
+    {
+      "date": "16 December 2013",
+      "description": "Won the <a href=\"http://createhs.com\">CreateHS</a> November challenge with <a href=\"http://cnrv.herokuapp.com\">CNRV.ro</a> judged by <a href=\"https://twitter.com/gvanrossum\">@gvanrossum</a> <a href=\"https://twitter.com/pamelafox\">@pamelafox</a> <a href=\"https://twitter.com/jeresig\">@jeresig</a> <a href=\"https://twitter.com/dhh\">@dhh</a>"
+    },
+    {
+      "date": "11 November 2013",
+      "description": "Started working at <a href=\"https://www.startersquad.com\">StarterSquad.com</a>"
+    },
+    {
+      "date": "1–3 November 2013",
+      "description": "Learned about startups and met fascinating people at <a href=\"http://iasi.startupweekend.org\">Startup Weekend Iasi</a>"
+    },
+    {
+      "date": "28 July – 3 August 2013",
+      "description": "1st place @ <a href=\"http://infoeducatie.ro/2013/\">Cisco Network Programmability contest</a> with a QoS Manager app for Cisco routers"
+    },
+    {
+      "date": "28 July – 3 August 2013",
+      "description": "Went to the <a href=\"http://infoeducatie.ro/2013/\">InfoEducatie National Contest</a> with Hub, a social-messaging platforms aggregator app"
+    },
+    {
+      "date": "September 2012 – June 2013",
+      "description": "Published a videos app in the Play Store that reached 80,000 installs"
+    }
+  ],
+  "posts": [
+    {
+      "title": "Dropbox CLI: How to whitelist folders for selective sync",
+      "url": "https://blog.aluxian.com/dropbox-cli-how-to-whitelist-folders-for-selective-sync/",
+      "tags": [
+        "Tips",
+        "Tutorials"
+      ],
+      "meta": "11 Jul 2016"
+    },
+    {
+      "title": "How I hacked Codementor to build an Android app",
+      "url": "https://blog.aluxian.com/how-i-hacked-codementor-to-build-an-android-app/",
+      "tags": [
+        "Android",
+        "Codementor"
+      ],
+      "meta": "22 Jan 2016"
+    },
+    {
+      "title": "Tweeather – What, Why and How?",
+      "url": "https://blog.aluxian.com/tweeather-what-why-and-how/",
+      "tags": [
+        "Machine Learning"
+      ],
+      "meta": "16 Jan 2016"
+    }
+  ]
 }

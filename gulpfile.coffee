@@ -4,6 +4,8 @@ ecstatic = require 'ecstatic'
 mergeStream = require 'merge-stream'
 gulp = require 'gulp'
 http = require 'http'
+async = require 'async'
+needle = require 'needle'
 $ = require('gulp-load-plugins')()
 port = 8888
 live = false
@@ -14,6 +16,27 @@ gulp.task 'live', -> live = true
 
 gulp.task 'purge', (cb) -> del([DIST], cb)
 gulp.task 'clean', (cb) -> del([DIST + '/**'], cb)
+
+gulp.task 'update:blogposts', (done) ->
+  async.waterfall [
+    async.apply async.parallel,
+      locals: async.apply fs.readFile, './src/locals.json'
+      xml: (cb) -> needle.get 'https://blog.aluxian.com/rss/', (err, body, xml) -> cb err, xml
+    (data, cb) ->
+      locals = JSON.parse data.locals
+      locals.posts = data.xml.rss.channel.item.slice(0, 3).map (post) ->
+        month_names_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        dt = new Date(post.pubDate)
+
+        {
+          title: post.title
+          url: post.link
+          tags: if Array.isArray(post.category) then post.category else [post.category]
+          meta: dt.getDate() + ' ' + month_names_short[dt.getMonth()] + ' ' + dt.getFullYear()
+        }
+      cb null, JSON.stringify(locals, null, 2)
+    (txt, cb) -> fs.writeFile './src/locals.json', txt, cb
+  ], done
 
 gulp.task 'jade', ->
   gulp.src 'src/index.jade'
