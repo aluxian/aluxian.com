@@ -22,7 +22,7 @@
     },
     {
       "title": "Blog",
-      "href": "#blog"
+      "href": "https://blog.aluxian.com"
     },
     {
       "title": "Contact",
@@ -104,18 +104,6 @@
     ],
     [
       {
-        "id": "3",
-        "title": "Messenger for Desktop",
-        "url": "http://messengerfordesktop.com"
-      },
-      {
-        "id": "4",
-        "title": "WhatsApp for Desktop",
-        "url": "https://github.com/Aluxian/WhatsApp-Desktop"
-      }
-    ],
-    [
-      {
         "id": "5",
         "title": "Fou",
         "url": "https://fou-fashion.herokuapp.com"
@@ -124,18 +112,6 @@
         "id": "6",
         "title": "Cattics",
         "url": "https://alux-cattics.herokuapp.com"
-      }
-    ],
-    [
-      {
-        "id": "7",
-        "title": "Electron SuperKit",
-        "url": "https://github.com/Aluxian/electron-superkit"
-      },
-      {
-        "id": "8",
-        "title": "NW.js Starter",
-        "url": "https://github.com/Aluxian/nwjs-starter"
       }
     ],
     [
