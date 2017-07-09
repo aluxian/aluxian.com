@@ -82,16 +82,12 @@
 
   # Title animation
   phrases = [
-    'FULL-STACK WEB CODER',
-    'ANDROID DEVELOPER',
-    'iOS BEGINNER',
-    'MAC USER',
     'TECHNOLOGY ENTHUSIAST',
     'OCCASIONAL HACKER',
     'PROBLEM SOLVER',
     'YOUNG & CREATIVE',
-    'FRONTEND-ER',
-    'BACKEND-ER'
+    'CO-FOUNDER',
+    'ENTREPRENEUR'
   ]
 
   titleElement = document.querySelector '.hero h2:last-child'
@@ -113,7 +109,7 @@
   fadeIn = ->
     titleElement.innerHTML = phrases[nextIndex()]
     titleElement.style.opacity = 1
-    setTimeout fadeOut, 2750
+    setTimeout fadeOut, 1750
 
   fadeOut = ->
     titleElement.style.opacity = 0

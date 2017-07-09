@@ -1,12 +1,12 @@
 doctype html
 html
   head
-    title Alexandru Roșianu – Full-Stack Developer
+    title Alexandru Rosianu – Geek, Mentor, Student, Developer
 
     meta(charset='UTF-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    meta(name='description' content='Avid programmer passionate about code, design, startups and technology. Currently working as a Full-Stack Developer at @StarterSquad.')
+    meta(name='description' content='Avid programmer passionate about code, design, startups and technology. Currently working on my own startup @FuturisticoXYZ.')
 
     link(rel='apple-touch-icon' sizes='57x57' href='/apple-touch-icon-57x57.png')
     link(rel='apple-touch-icon' sizes='114x114' href='/apple-touch-icon-114x114.png')
@@ -27,11 +27,11 @@ html
     meta(name='msapplication-TileImage' content='/mstile-144x144.png')
 
     meta(name='twitter:card', value='summary')
-    meta(property='og:title', content='Alexandru Roșianu')
+    meta(property='og:title', content='Alexandru Rosianu')
     meta(property='og:type', content='article')
     meta(property='og:url', content='http://www.aluxian.com/')
     meta(property='og:image', content='http://www.aluxian.com/img/photo@1920.jpg')
-    meta(property='og:description', content='Avid programmer passionate about code, design, startups and technology. Currently working as a Full-Stack Developer at @StarterSquad.')
+    meta(property='og:description', content='Avid programmer passionate about code, design, startups and technology. Currently working on my own startup @FuturisticoXYZ.')
 
     link(rel='stylesheet' type='text/css' href='fonts.css')
     link(rel='stylesheet' type='text/css' href='styles.css')
@@ -61,7 +61,7 @@ html
 
       .hero
         h2 WELCOME TO MY WEBSITE
-        h1 ALEXANDRU ROȘIANU
+        h1 ALEXANDRU ROSIANU
         h2 WEB DEVELOPER
 
       .scroll
@@ -84,7 +84,7 @@ html
                 span #{item.title}
                 span !{item.description}
 
-      img.me(alt='Alexandru Roșianu')
+      img.me(alt='Alexandru Rosianu')
 
       a(name='skills' id='skills')
 
@@ -115,58 +115,25 @@ html
                 footer
                   span
                     a(href='#{item.url}') #{item.title}
-                  //- span.btn READ MORE
 
-        p.more-portfolio See more code on #[a(href='https://github.com/Aluxian') GitHub] and some designs on #[a(href='https://www.behance.net/aluxian') Bēhance].
-
-      a(name='achievements' id='achievements')
-
-      section
-        h3
-          span Achievements
-
-        ul.achievements
-          each achievement in achievements
-            li
-              p #{achievement.date}
-              p !{achievement.description}
-
-      a(name='blog' id='blog')
-
-      section.inverted
-        h3
-          span Recent Blog Posts
-
-        ul.posts
-          each post in posts
-            li
-              p: a(href='#{post.url}') #{post.title}
-              p #{post.meta} on #{post.tags.join(', ')}
+        p.more-portfolio See more code on #[a(href='https://github.com/aluxian') GitHub] and some designs on #[a(href='https://www.behance.net/aluxian') Bēhance].
 
       a(name='contact' id='contact')
 
       footer
-        ul.badges
-          li
-            a(target='_blank' href='https://www.codementor.io/aluxian')
-              include svg/codementor.svg
 
-        hr
-        p Proudly hosted on #[a(href='https://github.com/Aluxian/aluxian.com') GitHub].#[br]Designed and coded with &hearts; by myself.
+        p Proudly hosted on #[a(href='https://github.com/aluxian/aluxian.com') GitHub].#[br]Designed and coded with &hearts; by myself.
         hr
 
         ul.social
           li
-            a(href='https://plus.google.com/+AlexandruRosianu' title='Google+')
-              include svg/gplus.svg
-          li
             a(href='https://www.facebook.com/aluxian' title='Facebook')
               include svg/facebook.svg
           li
-            a(href='https://twitter.com/Aluxian' title='Twitter')
+            a(href='https://twitter.com/aluxian' title='Twitter')
               include svg/twitter.svg
           li
-            a(href='https://github.com/Aluxian' title='GitHub')
+            a(href='https://github.com/aluxian' title='GitHub')
               include svg/github.svg
           li
             a(href='https://www.linkedin.com/in/AlexandruRosianu' title='LinkedIn')
