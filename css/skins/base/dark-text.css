@@ -1,0 +1,30 @@
+
+/* DARK TEXT STYLE 
+	- gives texts inset look */
+
+body{ text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
+
+/* TEXT COLORS */
+h1, h2, h3, h4 { color: #222; color: rgba(0, 0, 0, 0.8); text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
+#header .title h1 { color: #444; color: rgba(0, 0, 0, 0.4); }
+.history-unit h4 .work-time, .history-unit h5, #filters a { color: #666; color: rgba(0, 0, 0, 0.5); }
+
+/* CONTACT FORM */
+input, textarea { color:#fff; background-color: rgba(0, 0, 0, 0.2); }
+input:focus, textarea:focus { background-color: rgba(0, 0, 0, 0.3); }
+::-webkit-input-placeholder { color: #fff; }
+:-moz-placeholder { color: #fff; }
+:-ms-input-placeholder { color: #fff; }
+
+/* RESUME */
+.history-unit h5, .history-unit h4 .work-time { boder-color: #555; border-color: rgba(0,0,0,.2); }
+.bar { background: rgba(0,0,0,.1); }
+span.label.black { background-color: rgba(0, 0, 0, 0.9); }
+
+/* ABOUT ME */
+.social { text-shadow:none; }
+social li a { border-top: 1px solid rgba(0, 0, 0, .1); }
+
+/* LINK COLOR */
+a, a:link, a:visited { color:#006699; }
+a:link:hover, a:visited:hover { color:#046; }

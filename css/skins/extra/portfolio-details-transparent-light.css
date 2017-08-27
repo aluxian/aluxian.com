@@ -1,0 +1,4 @@
+.p-overlay { background:#fff; background:rgba(255,255,255,.8); }
+.portfolio-nav a.button { color:#222; }
+.portfolio-nav .button, .tags a, .tags a:after { background: rgba(255, 255, 255, 0.8); }
+.tags a:before { border-right-color: rgba(255, 255, 255, 0.8); }

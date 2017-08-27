@@ -1,0 +1,8 @@
+
+/* ALTERNATIVE PORTFOLIO STYLE */
+.media-box .mask { background:none; }
+.media-box .mask .title { display:none; }
+.portfolio-items .item h3.project-title { padding-bottom:.6em; }
+.portfolio-items .category { display:none; }
+.media-box { -webkit-filter: grayscale(80%);  -webkit-transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; -ms-transition: all 0.3s ease-out; -o-transition: all 0.3s ease-out; transition: all 0.3s ease-out; }
+.media-box:hover { -webkit-filter: grayscale(0%);  }

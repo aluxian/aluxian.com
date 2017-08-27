@@ -1,0 +1,14 @@
+
+/* OVERLAY STYLE 
+	- to use with a custom background image with overlay */
+
+/* sample bg image */
+body { background:url(../../../images/bckg/office.jpg); background-size:cover; background-attachment:fixed; position:relative; z-index:1; }
+/* overlay pattern */
+body:after { opacity:.5; content: ""; position:fixed; z-index:-1; width:100%; height:100%; top:0; bottom:0; left:0; right:0; background-repeat:repeat; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAG0SAAByuAAA/GgAAH9VAABi8QAA780AADdZAAAbmzCzVcUAAAAdSURBVHjaYmRgYFBjQAMoAkzoshgCAAAAAP//AwARaABS4CGH2QAAAABJRU5ErkJggg==) !important; }
+
+
+/* Texts */
+#header .title h1 { color:rgba(255,255,255, 1); text-shadow:1px 1px 3px  rgba(0,0,0,1); }
+.social li a { color:#fff; background:#555; background-color: rgba(0, 0, 0, 0.4); }
+h2.caption span { border:0; }

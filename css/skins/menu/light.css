@@ -1,0 +1,8 @@
+
+/* LIGHT NAV MENU */
+/* Background Color */
+#header nav ul:after, #header nav ul:before { border-color:#f3f3f3; }
+#header nav ul span { background:#f3f3f3; }
+#header nav ul span:before, #header nav ul span:after { border-bottom-color:#f3f3f3; }
+/* Hover State */
+#header nav ul a:hover span, #header nav ul a.waiting span { background:#ddd; }

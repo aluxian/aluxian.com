@@ -1,0 +1,14 @@
+
+/* DARK NAV MENU */
+/* Background Color */
+#header nav ul:after, #header nav ul:before { border-color:#333; }
+#header nav ul span { background:#333; }
+#header nav ul span:before, #header nav ul span:after { border-bottom-color:#333; }
+/* Text Color */
+#header nav ul a { color:#fff; }
+#header nav ul .current-menu-item a { color:#000; }
+/* Hover State */
+#header nav ul a:hover span, #header nav ul a.waiting span { background:#555; }
+/* Ribbon shadows */
+#header nav ul span:before {  border-right-color: #777; }
+#header nav ul span:after { border-left-color: #777; }

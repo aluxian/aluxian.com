@@ -1,0 +1,45 @@
+
+/* ORANGE COLOR SCHEME */
+
+/* 	----------------------------------------
+	---	PRIMARY COLOR : #ff6600 
+*/
+#header nav ul .current-menu-item span, #header nav ul .current-menu-item a:hover span, /* Nav Active State */
+h2.caption span, /* Page Captions */
+ul.personal-info .title, /* Personal Info Titles / Form Labels */
+.btn, button, html input[type="button"], input[type="reset"], input[type="submit"], /* Buttons */
+.bar .progress, /* progress bars */
+#header nav:after, /* mobile nav menu : select list */
+.portfolio-nav a.button:hover
+{ background: #ff6600; }
+
+h2.caption span:after { border-left-color: #ff6600; }
+ul.personal-info .title:after { border-left-color: #ff6600; }
+
+.history-unit, /* resume page - history units */
+.map iframe, /* google map */
+input:focus, textarea:focus, /* inputs - textareas */
+span.label.primary
+{ border-color: #ff6600; }
+/* --------------------------------------- */
+
+
+/* 	----------------------------------------
+	---	SECONDARY COLOR : #ff6600 
+*/
+#filters .current a, /* portfolio filter active item */
+.media-box .mask .title, /* portfolio item hover text */
+.portfolio-title h2, .portfolio-field h3 /* portfolio details - titles */
+{ border-color: #ff6600;  }
+/* --------------------------------------- */
+
+
+/* Light Text Color on Dark Backgrounds */
+h2.caption span, ul.personal-info .title, .btn, a.btn, a.btn:link, a.btn:visited:hover, a.btn:visited, a.btn:hover, .btn:hover, .btn-send, #header nav ul li.current-menu-item a { color:#fff; }
+
+/* Button Active State */
+.btn:active, button:active, html input[type="button"]:active, input[type="reset"]:active, input[type="submit"]:active { background:#000; }
+
+/* portfolio nav */
+.portfolio-nav a.button:hover { color:#fff; text-shadow:3px 3px 0 rgba(0,0,0,.2); }
+

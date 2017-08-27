@@ -1,0 +1,13 @@
+
+/* RETRO STYLE 
+	- minimal styles */
+
+.history-unit h5, .history-unit h4 .work-time { border-color:#ccc; }
+input, textarea, .social li a, .bar { background-color: #fff; }
+
+/* CONTACT FORM */
+input, textarea, .social li a { color:#222; }
+input:focus, textarea:focus { background-color: #fff; }
+::-webkit-input-placeholder { color: #aaa; }
+:-moz-placeholder { color: #aaa; }
+:-ms-input-placeholder { color: #aaa; }

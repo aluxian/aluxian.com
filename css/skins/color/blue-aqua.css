@@ -1,0 +1,38 @@
+
+/* BLUE AQUA COLOR SCHEME */
+
+/* 	----------------------------------------
+	---	PRIMARY COLOR  
+*/
+#header nav ul .current-menu-item span, #header nav ul .current-menu-item a:hover span, /* Nav Active State */
+h2.caption span, /* Page Captions */
+ul.personal-info .title, /* Personal Info Titles / Form Labels */
+.btn, button, html input[type="button"], input[type="reset"], input[type="submit"], /* Buttons */
+.bar .progress, /* progress bars */
+#header nav:after, /* mobile nav menu : select list */
+.portfolio-nav a.button:hover
+{ background: #b3e3ff; }
+
+h2.caption span:after { border-left-color: #b3e3ff; }
+ul.personal-info .title:after { border-left-color: #b3e3ff; }
+
+.history-unit, /* resume page - history units */
+.map iframe, /* google map */
+input:focus, textarea:focus, /* inputs - textareas */
+span.label.primary
+{ border-color: #b3e3ff; }
+/* --------------------------------------- */
+
+
+/* 	----------------------------------------
+	---	SECONDARY COLOR  
+*/
+#filters .current a, /* portfolio filter active item */
+.media-box .mask .title, /* portfolio item hover text */
+.portfolio-title h2, .portfolio-field h3 /* portfolio details - titles */
+{ border-color: #b3e3ff;  }
+/* --------------------------------------- */
+
+
+/* Menu - dark text color for active item */
+#header nav ul li.current-menu-item a { color: #000; }

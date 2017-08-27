@@ -1,0 +1,14 @@
+
+/* DARK NAV MENU */
+/* Background Color */
+#header nav ul:after, #header nav ul:before { border-color:#333; border-color:rgba(0,0,0,.4); }
+#header nav ul span { background:#333; background: rgba(0,0,0,.4); }
+#header nav ul span:before, #header nav ul span:after { border-bottom-color:#333; border-bottom-color:rgba(0,0,0,.4); }
+/* Text Color */
+#header nav ul a { color:#fff; }
+#header nav ul .current-menu-item a { color:#000; }
+/* Hover State */
+#header nav ul a:hover span, #header nav ul a.waiting span { background:#222; background: rgba(0,0,0,.6); }
+/* Ribbon shadows */
+#header nav ul span:before { border-right-color:#000;  border-right-color: rgba(0,0,0,.9); }
+#header nav ul span:after { border-left-color:#000; border-left-color: rgba(0,0,0,.9); }

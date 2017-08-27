@@ -1,0 +1,7 @@
+.p-overlay { background:#000; background:rgba(0,0,0,.7); }
+.portfolio-nav a.button { color:#fff; }
+.portfolio-nav .button, .tags a, .tags a:after { background: rgba(0, 0, 0, 0.7); }
+.tags a:after { background: rgba(255, 255, 255, 0.7); }
+.tags a:before { border-right-color: rgba(0, 0, 0, 0.7); }
+.p-overlay, .p-overlay h3, .p-overlay h2, .p-overlay h4, .tags a { color: #fff; color: rgba(255,255,255,.9); text-shadow: 0 2px 1px #000; }
+.p-overlay h3, .p-overlay h2, .p-overlay h4 { color: #fff; color: rgba(255,255,255,1); }

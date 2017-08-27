@@ -1,0 +1,125 @@
+.te-perspective{ -webkit-perspective: 1000; }
+.te-transition{ position: relative; z-index:100; width:100%; top: 0px; left: 0px; }
+.te-cover{ position:relative; top:0; z-index:1; }
+.te-cover{ cursor:pointer; }
+.te-transition,
+.te-cover.te-hide,
+.te-images{ display: none; }
+.te-transition.te-show { display: block; }
+.te-back,
+.te-front{ width: 100%; height: 100%; }
+.te-front{ position: absolute; }
+.te-front{ z-index: 2; }
+.te-back{ z-index: 1; -webkit-backface-visibility: hidden; }
+.te-transition { position:relative; top:0; left:0; }
+
+
+/**********************************************/
+/***************** EFFECTS ********************/
+/**********************************************/
+
+/***************** ROTATE DOWN ********************/
+.rotate-down.te-show .te-front,
+.rotate-down.te-show .te-back{
+	-webkit-transform-origin: 50% 100%;
+}
+.rotate-down.te-show .te-front{
+	-webkit-animation: rotationFront1 0.8s linear;
+}
+.rotate-down.te-show .te-back {
+	-webkit-animation: rotationBack1 0.8s linear;
+}
+@-webkit-keyframes rotationFront1{
+	0% { -webkit-transform: rotate3d(1,0,0,0); opacity: 1; }
+	50% { -webkit-transform: rotate3d(1,0,0,-90deg); opacity: 0.5; }
+	100% { -webkit-transform: rotate3d(1,0,0,-180deg); opacity: 0; }
+}
+@-webkit-keyframes rotationBack1{
+	0% { opacity: 0; rotate3d(1,0,0,90deg); }
+	30% { -webkit-transform: rotate3d(1,0,0,90deg); opacity: 0; }
+	100% { -webkit-transform: rotate3d(1,0,0,0); opacity: 1;}
+}
+/***************** ROTATE DOWN ********************/
+
+/***************** ROTATE RIGHT ********************/
+.rotate-right.te-show .te-front{
+	-webkit-animation: rotationFront3 0.8s linear;
+	-webkit-transform-origin: 100% 50%;
+}
+@-webkit-keyframes rotationFront3{
+	0% { -webkit-transform: rotate3d(0,1,0,0); opacity: 1; }
+	50% { -webkit-transform: rotate3d(0,1,0,90deg); opacity: 1; }
+	100% { -webkit-transform: rotate3d(0,1,0,180deg); opacity: 0; }
+}
+/***************** ROTATE RIGHT ********************/
+
+/***************** ROTATE LEFT ********************/
+.rotate-left.te-show .te-front,
+.rotate-left.te-show .te-back{
+	-webkit-transform-origin: 0% 50%;
+}
+.rotate-left.te-show .te-front{
+	-webkit-animation: rotationFront5 0.8s linear;
+}
+.rotate-left.te-show .te-back {
+	-webkit-animation: rotationBack5 0.8s ease-in-out;
+}
+@-webkit-keyframes rotationFront5{
+	0% { -webkit-transform: rotate3d(0,1,0,0); opacity: 1; -webkit-animation-timing-function: ease-in;}
+	30% { -webkit-transform: rotate3d(0,1,0,-90deg); opacity: 0.5; -webkit-animation-timing-function: ease-out;}
+	100% { -webkit-transform: rotate3d(0,1,0,-180deg); opacity: 0; }
+}
+@-webkit-keyframes rotationBack5{
+	0% { opacity: 0; rotate3d(0,1,0,90deg); }
+	30% { -webkit-transform: rotate3d(0,1,0,90deg); opacity: 0; }
+	60% { -webkit-transform: rotate3d(0,1,0,-13deg); opacity: 1; }
+	70% { -webkit-transform: rotate3d(0,1,0,8deg); opacity: 1; }
+	80% { -webkit-transform: rotate3d(0,1,0,0deg); opacity: 1; }
+	95% { -webkit-transform: rotate3d(0,1,0,3deg); opacity: 1; }
+	100% { -webkit-transform: rotate3d(0,1,0,0deg); opacity: 1; }
+}
+/***************** ROTATE LEFT ********************/
+
+/***************** FADE ********************/
+.fade.te-show .te-front{
+	-webkit-animation: fade 0.6s linear;
+}
+@-webkit-keyframes fade{
+	0% { opacity: 1; }
+	100% { opacity: 0; }
+}
+/***************** FADE ********************/
+
+/***************** SLIDE ********************/
+.te-transition.slide { overflow: hidden; }
+.slide.te-show .te-front,
+.slide.te-show .te-back{
+	-webkit-animation-duration: 0.4s;
+	-webkit-animation-timing-function: ease-out;
+}
+.slide.te-show .te-front{
+	-webkit-animation-name: slideFront;
+}
+.slide.te-show .te-back {
+	-webkit-animation-name: slideBack;
+}
+@-webkit-keyframes slideFront{
+	0% { -webkit-transform: translateX(0); }
+	100% { -webkit-transform: translateX(-329px); }
+}
+@-webkit-keyframes slideBack{
+	0% { -webkit-transform: translateX(329px); }
+	100% { -webkit-transform: translateX(0px); }
+}
+/***************** SLIDE ********************/
+
+
+/***************** FLY OUT ********************/
+.fly-out.te-show .te-front{
+	-webkit-animation: fly-out 0.4s ease-in-out;
+}
+@-webkit-keyframes fly-out{
+	0% { opacity:1; }
+	100% { -webkit-transform: rotateZ(3deg) scale(1.5); opacity:0; }
+}
+/***************** FLYOUT ********************/
