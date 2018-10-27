@@ -1,17 +1,5 @@
 # aluxian.com
 
-Made w/ Gulp, Jade, SASS & CoffeeScript.
+My home on the interwebs! Built with static HTML and the Tachyons CSS toolkit.
 
-Install dependencies:
-
-    npm install -g gulp
-    npm install
-    bower install
-
-Production build:
-
-    gulp live build
-
-Dev mode:
-
-    gulp watch
+TODO smooth-scroll, normalize-css, instantclick, tachyons
