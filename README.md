@@ -1,3 +1,3 @@
 # aluxian.com
 
-My home on the interwebs! Built with static HTML and the Tachyons CSS toolkit.
+This is v4 built on Cloudflare Workers with a special API for publishing blog posts from Bear via Siri Shortcuts.

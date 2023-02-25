@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "aluxian.com",
+  "version": "4.0.0",
+  "description": "aluxian.com",
+  "type": "module",
+  "scripts": {
+    "start": "wrangler --experimental-json-config dev",
+    "deploy": "wrangler --experimental-json-config publish",
+    "logs": "wrangler --experimental-json-config tail"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "wrangler": "^2.8.0"
+  }
+}
