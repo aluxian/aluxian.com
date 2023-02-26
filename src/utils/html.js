@@ -1,6 +1,10 @@
 // hono/html
 
-const escapeToBuffer = (str, buffer) => {
+/**
+ * @param {string} str
+ * @param {string[]} buffer
+ */
+function escapeToBuffer(str, buffer) {
   const match = str.search(/[&<>"]/);
   if (match === -1) {
     buffer[0] += str;
@@ -30,15 +34,25 @@ const escapeToBuffer = (str, buffer) => {
     lastIndex = index + 1;
   }
   buffer[0] += str.substring(lastIndex, index);
-};
+}
 
-export const raw = (value) => {
+/**
+ * @param {any} value
+ * @returns {String & {isEscaped: true}}
+ */
+export function raw(value) {
+  /** @type {String & {isEscaped: true}} */
   const escapedString = new String(value);
   escapedString.isEscaped = true;
   return escapedString;
-};
+}
 
-export const html = (strings, ...values) => {
+/**
+ * @param {TemplateStringsArray} strings
+ * @param  {...any} values
+ * @returns {String & {isEscaped: true}}
+ */
+export function html(strings, ...values) {
   const buffer = [""];
   for (let i = 0, len = strings.length - 1; i < len; i++) {
     buffer[0] += strings[i];
@@ -66,4 +80,4 @@ export const html = (strings, ...values) => {
   }
   buffer[0] += strings[strings.length - 1];
   return raw(buffer[0]);
-};
+}
