@@ -1,31 +1,37 @@
 /**
  * @type {(url: URL) => boolean}
  */
-export const match = (url) => url.pathname === "/bear";
+export const match = (url) => url.pathname === "/bear/";
 
 /**
  * @type {ExportedHandlerFetchHandler<Env>}
  */
 export async function fetch(request) {
-  if (request.method === "POST") {
-    // const body = await request.json();
+  const url = new URL(request.url);
 
-    // const kv = env.ALUXIAN_COM_DB;
+  if (url.pathname === "/bear/sync") {
+    if (request.method === "POST") {
+      // const body = await request.json();
 
-    // save all to db
+      // const kv = env.ALUXIAN_COM_DB;
 
-    // get all
-    // const list = await kv.search({ prefix: "blog-post:" });
-    // const posts = await Promise.all(
-    //   list.keys.map((key) => kv.get(key.name, "json"))
-    // );
+      // save all to db
 
-    return new Response(JSON.stringify({ todo: 1 }), {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  } else {
-    return new Response(null, { status: 405 });
+      // get all
+      // const list = await kv.search({ prefix: "blog-post:" });
+      // const posts = await Promise.all(
+      //   list.keys.map((key) => kv.get(key.name, "json"))
+      // );
+
+      return new Response(JSON.stringify({ todo: 1 }), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } else {
+      return new Response(null, { status: 405 });
+    }
   }
+
+  return new Response(null, { status: 404 });
 }

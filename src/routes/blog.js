@@ -1,3 +1,5 @@
+import { getPostBySlug } from "../kv/blog";
+
 /**
  * @type {(url: URL) => boolean}
  */
@@ -8,11 +10,22 @@ export const match = (url) => url.pathname.startsWith("/blog/");
  */
 export async function fetch(request, env) {
   const url = new URL(request.url);
-  const postUrl = url.pathname.replace("/blog/", "");
-  const post = await env.ALUXIAN_COM_DB.get(`blog-post:${postUrl}`, "json");
+
+  // list all posts
+  if (url.pathname === "/blog/") {
+    return new Response("list", {
+      headers: {
+        "Content-Type": "text/html",
+      },
+    });
+  }
+
+  // show a post
+  const slug = url.pathname.replace("/blog/", "");
+  const post = await getPostBySlug(env.ALUXIAN_COM_DB, slug);
 
   if (post) {
-    return new Response("", {
+    return new Response(JSON.stringify(post), {
       headers: {
         "Content-Type": "text/html",
       },
