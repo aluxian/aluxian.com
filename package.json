@@ -8,9 +8,7 @@
     "start": "wrangler --experimental-json-config dev",
     "deploy": "wrangler --experimental-json-config publish",
     "logs": "wrangler --experimental-json-config tail",
-    "build": "esbuild src/index.js --bundle --analyze --target=es2022 --platform=neutral --main-fields=es2015,browser,module,main --conditions=browser,module,import --external:__STATIC_CONTENT_MANIFEST --outdir=dist",
     "test": "ava --node-arguments='--experimental-vm-modules'",
-    "check": "tsc",
     "lint": "eslint src tests",
     "format": "prettier --write src tests"
   },
@@ -21,9 +19,7 @@
     "@cloudflare/workers-types": "^4.20230307.0",
     "ava": "^5.2.0",
     "eslint": "^8.36.0",
-    "miniflare": "^2.12.1",
     "prettier": "^2.8.4",
-    "typescript": "^4.9.5",
     "wrangler": "^2.12.3"
   }
 }

@@ -1,16 +1,12 @@
-/// <reference types="ava" />
-
 import anyTest from "ava";
-
 import * as wranglerConfig from "../../wrangler.json" assert { type: "json" };
+import { Miniflare, LogLevel, Log } from "miniflare";
+import * as esbuild from "esbuild";
 
 /**
  * @type {import("ava").TestFn<AvaCtx>}
  */
 const test = anyTest;
-
-import { Miniflare, LogLevel, Log } from "miniflare";
-import * as esbuild from "esbuild";
 
 class AvaMiniflareLog /*extends Log*/ {
   /** @type {import("ava").ExecutionContext<AvaCtx>} */
