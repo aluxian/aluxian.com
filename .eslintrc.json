@@ -2,7 +2,7 @@
   "root": true,
   "env": {
     "es2022": true,
-    "serviceworker": true
+    "worker": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
