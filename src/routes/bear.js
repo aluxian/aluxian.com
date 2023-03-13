@@ -1,11 +1,9 @@
-/**
- * @type {(url: URL) => boolean}
- */
+/// <reference types="@cloudflare/workers-types" />
+
+/** @type {(url: URL) => boolean} */
 export const match = (url) => url.pathname === "/bear/";
 
-/**
- * @type {ExportedHandlerFetchHandler<Env>}
- */
+/** @type {ExportedHandlerFetchHandler<{DB: KVNamespace}>} */
 export async function fetch(request) {
   const url = new URL(request.url);
 
@@ -13,7 +11,7 @@ export async function fetch(request) {
     if (request.method === "POST") {
       // const body = await request.json();
 
-      // const kv = env.ALUXIAN_COM_DB;
+      // const kv = env.DB;
 
       // save all to db
 

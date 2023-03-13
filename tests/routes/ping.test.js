@@ -104,7 +104,7 @@ test.beforeEach((t) => {
 //   },
 //   "kv_namespaces": [
 //     {
-//       "binding": "ALUXIAN_COM_DB",
+//       "binding": "DB",
 //       "id": "ebc374008579473b95a4be2603627cba",
 //       "preview_id": "517115c84e464df3b24089f7065bd54b"
 //     }

@@ -1,13 +1,18 @@
-import { getPostBySlug } from "../kv/blog";
+/// <reference types="@cloudflare/workers-types" />
 
 /**
- * @type {(url: URL) => boolean}
+ * @param {KVNamespace} kv
+ * @param {string} slug
  */
+async function getPostBySlug(kv, slug) {
+  const post = await kv.get(`blog-post:${slug}`, "json");
+  return post;
+}
+
+/** @type {(url: URL) => boolean} */
 export const match = (url) => url.pathname.startsWith("/blog/");
 
-/**
- * @type {ExportedHandlerFetchHandler<Env>}
- */
+/** @type {ExportedHandlerFetchHandler<Env>} */
 export async function fetch(request, env) {
   const url = new URL(request.url);
 
@@ -22,7 +27,7 @@ export async function fetch(request, env) {
 
   // show a post
   const slug = url.pathname.replace("/blog/", "");
-  const post = await getPostBySlug(env.ALUXIAN_COM_DB, slug);
+  const post = await getPostBySlug(env.DB, slug);
 
   if (post) {
     return new Response(JSON.stringify(post), {
