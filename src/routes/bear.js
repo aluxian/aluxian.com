@@ -1,3 +1,8 @@
+/**
+ * @typedef {{id: string, createdAt: string, updatedAt: string, content: string, files: string[]}} Post
+ * @typedef {{content: string}} File
+ */
+
 /** @type {(url: URL) => boolean} */
 export const match = (url) => url.pathname.startsWith("/bear/");
 
@@ -7,11 +12,11 @@ export async function fetch(request, env) {
 
   if (url.pathname === "/bear/sync") {
     if (request.method === "POST") {
-      /** @type {{posts: Array<{id: string, updatedAt: string}>}} */
+      /** @type {{posts: Post[]}} */
       const body = await request.json();
       const syncPosts = body.posts || [];
 
-      /** @type {Array<{id: string, updatedAt: string}>} */
+      /** @type {Post[]} */
       const existingPosts = (await env.DB.get(`posts`, "json")) || [];
 
       // not in DB or updatedAt is different
