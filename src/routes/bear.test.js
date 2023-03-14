@@ -35,9 +35,7 @@ test.serial(
         posts: [
           {
             id: "1e4eebf5-5961-417e-9418-041b7bec6de6",
-            createdAt: "2021-01-01T00:00:00.000Z",
-            updatedAt: "2021-01-01T00:00:00.000Z",
-            content: "# Hello World",
+            modifiedAt: "2021-01-01T00:00:00.000Z",
             files: ["cat-pic.png"],
           },
         ],
@@ -46,9 +44,7 @@ test.serial(
         posts: [
           {
             id: "1e4eebf5-5961-417e-9418-041b7bec6de6",
-            createdAt: "2021-01-01T00:00:00.000Z",
-            updatedAt: "2021-01-01T00:00:00.000Z",
-            content: "# Hello World",
+            modifiedAt: "2021-01-01T00:00:00.000Z",
             files: ["cat-pic.png"],
           },
         ],
@@ -104,9 +100,7 @@ test.serial("POST to /bear/file should save file in db", async (t) => {
       posts: [
         {
           id: "1e4eebf5-5961-417e-9418-041b7bec6de6",
-          createdAt: "2021-01-01T00:00:00.000Z",
-          updatedAt: "2021-01-01T00:00:00.000Z",
-          content: "# Hello World",
+          modifiedAt: "2021-01-01T00:00:00.000Z",
           files: ["cat-pic.png"],
         },
       ],
@@ -115,9 +109,7 @@ test.serial("POST to /bear/file should save file in db", async (t) => {
       posts: [
         {
           id: "1e4eebf5-5961-417e-9418-041b7bec6de6",
-          createdAt: "2021-01-01T00:00:00.000Z",
-          updatedAt: "2021-01-01T00:00:00.000Z",
-          content: "# Hello World",
+          modifiedAt: "2021-01-01T00:00:00.000Z",
           files: ["cat-pic.png"],
         },
       ],
@@ -140,9 +132,7 @@ test.serial("POST to /bear/file should save file in db", async (t) => {
       posts: [
         {
           id: "1e4eebf5-5961-417e-9418-041b7bec6de6",
-          createdAt: "2021-01-01T00:00:00.000Z",
-          updatedAt: "2021-01-01T00:00:00.000Z",
-          content: "# Hello World",
+          modifiedAt: "2021-01-01T00:00:00.000Z",
           files: ["cat-pic.png"],
         },
       ],
@@ -151,9 +141,7 @@ test.serial("POST to /bear/file should save file in db", async (t) => {
       posts: [
         {
           id: "1e4eebf5-5961-417e-9418-041b7bec6de6",
-          createdAt: "2021-01-01T00:00:00.000Z",
-          updatedAt: "2021-01-01T00:00:00.000Z",
-          content: "# Hello World",
+          modifiedAt: "2021-01-01T00:00:00.000Z",
           files: ["cat-pic.png"],
         },
       ],

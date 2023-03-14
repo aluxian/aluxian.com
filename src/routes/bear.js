@@ -1,5 +1,5 @@
 /**
- * @typedef {{id: string, createdAt: string, updatedAt: string, content: string, files: string[]}} Post
+ * @typedef {{id: string, title: string, text: string, tags: string[], link: string, createdAt: string, modifiedAt: string, html: string, files: string[]}} Post
  */
 
 /** @type {(url: URL) => boolean} */
