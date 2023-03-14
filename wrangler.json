@@ -1,5 +1,6 @@
 {
   "name": "aluxian",
+  "main": "src/index.js",
   "compatibility_date": "2022-07-12",
   "account_id": "4ff4a37f04d54fb2a610ab6ba66cfcfe",
   "workers_dev": true,

@@ -22,11 +22,14 @@ export async function fetch(input, init) {
 
 /** @type {import("ava/plugin").SharedWorker.Factory} */
 export default async ({ negotiateProtocol }) => {
+  const { readFileSync } = await import("fs");
+  const config = JSON.parse(readFileSync("wrangler.json", "utf-8"));
+
   const { unstable_dev } = await import("wrangler");
-  const worker = await unstable_dev("src/index.js", {
-    kv: [{ binding: "DB", preview_id: "517115c84e464df3b24089f7065bd54b" }],
-    site: "public/",
-    siteExclude: ["node_modules", ".DS_Store"],
+  const worker = await unstable_dev(config["main"], {
+    kv: config["kv_namespaces"],
+    site: config["site"]["bucket"],
+    siteExclude: config["site"]["exclude"],
     experimental: { disableExperimentalWarning: true },
   });
 
