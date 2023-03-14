@@ -1,8 +1,7 @@
 import test from "ava";
-import "../testing/worker.js";
+import * as worker from "../testing/worker.js";
 
-test("serve /feed.json", async (/** @type {import("ava".ExecutionContext<{worker: import("wrangler").UnstableDevWorker}>)} */ t) => {
-  const { worker } = t.context;
+test("serve /feed.json", async (t) => {
   const res = await worker.fetch("/feed.json");
   const feed = await res.json();
   t.truthy(feed.version);

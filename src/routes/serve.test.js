@@ -1,8 +1,7 @@
 import test from "ava";
-import "../testing/worker.js";
+import * as worker from "../testing/worker.js";
 
-test("serve / from /index.html", async (/** @type {import("ava".ExecutionContext<{worker: import("wrangler").UnstableDevWorker}>)} */ t) => {
-  const { worker } = t.context;
+test("serve / from /index.html", async (t) => {
   const res = await worker.fetch("/");
   const text = await res.text();
   t.true(
@@ -11,8 +10,7 @@ test("serve / from /index.html", async (/** @type {import("ava".ExecutionContext
   );
 });
 
-test("serve /index.html", async (/** @type {import("ava".ExecutionContext<{worker: import("wrangler").UnstableDevWorker}>)} */ t) => {
-  const { worker } = t.context;
+test("serve /index.html", async (t) => {
   const res = await worker.fetch("/index.html");
   const text = await res.text();
   t.true(
@@ -21,8 +19,7 @@ test("serve /index.html", async (/** @type {import("ava".ExecutionContext<{worke
   );
 });
 
-test("serve /robots.txt", async (/** @type {import("ava".ExecutionContext<{worker: import("wrangler").UnstableDevWorker}>)} */ t) => {
-  const { worker } = t.context;
+test("serve /robots.txt", async (t) => {
   const res = await worker.fetch("/robots.txt");
   const text = await res.text();
   t.true(
@@ -31,8 +28,7 @@ test("serve /robots.txt", async (/** @type {import("ava".ExecutionContext<{worke
   );
 });
 
-test("serve /browserconfig.xml", async (/** @type {import("ava".ExecutionContext<{worker: import("wrangler").UnstableDevWorker}>)} */ t) => {
-  const { worker } = t.context;
+test("serve /browserconfig.xml", async (t) => {
   const res = await worker.fetch("/browserconfig.xml");
   const text = await res.text();
   t.true(
@@ -41,8 +37,7 @@ test("serve /browserconfig.xml", async (/** @type {import("ava".ExecutionContext
   );
 });
 
-test("serve /site.webmanifest", async (/** @type {import("ava".ExecutionContext<{worker: import("wrangler").UnstableDevWorker}>)} */ t) => {
-  const { worker } = t.context;
+test("serve /site.webmanifest", async (t) => {
   const res = await worker.fetch("/site.webmanifest");
   const text = await res.text();
   t.true(
@@ -51,8 +46,7 @@ test("serve /site.webmanifest", async (/** @type {import("ava".ExecutionContext<
   );
 });
 
-test("serve /*.png", async (/** @type {import("ava".ExecutionContext<{worker: import("wrangler").UnstableDevWorker}>)} */ t) => {
-  const { worker } = t.context;
+test("serve /*.png", async (t) => {
   const res = await worker.fetch("/android-chrome-192x192.png");
   const buffer = await res.arrayBuffer();
   t.true(
@@ -61,8 +55,7 @@ test("serve /*.png", async (/** @type {import("ava".ExecutionContext<{worker: im
   );
 });
 
-test("serve /*.ico", async (/** @type {import("ava".ExecutionContext<{worker: import("wrangler").UnstableDevWorker}>)} */ t) => {
-  const { worker } = t.context;
+test("serve /*.ico", async (t) => {
   const res = await worker.fetch("/favicon.ico");
   const buffer = await res.arrayBuffer();
   t.true(
@@ -71,8 +64,7 @@ test("serve /*.ico", async (/** @type {import("ava".ExecutionContext<{worker: im
   );
 });
 
-test("serve /*.svg", async (/** @type {import("ava".ExecutionContext<{worker: import("wrangler").UnstableDevWorker}>)} */ t) => {
-  const { worker } = t.context;
+test("serve /*.svg", async (t) => {
   const res = await worker.fetch("/safari-pinned-tab.svg");
   const text = await res.text();
   t.true(

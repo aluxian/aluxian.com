@@ -1,8 +1,7 @@
 import test from "ava";
-import "../testing/worker.js";
+import * as worker from "../testing/worker.js";
 
-test("redirect old Medium paths", async (/** @type {import("ava".ExecutionContext<{worker: import("wrangler").UnstableDevWorker}>)} */ t) => {
-  const { worker } = t.context;
+test("redirect old Medium paths", async (t) => {
   const res = await worker.fetch(
     "/slides-from-droidcon-london-2019-78c7b746170b"
   );
