@@ -1,6 +1,5 @@
 /**
  * @typedef {{id: string, createdAt: string, updatedAt: string, content: string, files: string[]}} Post
- * @typedef {{content: string}} File
  */
 
 /** @type {(url: URL) => boolean} */
@@ -14,63 +13,68 @@ export async function fetch(request, env) {
     if (request.method === "POST") {
       /** @type {{posts: Post[]}} */
       const body = await request.json();
-      const syncPosts = body.posts || [];
+      const posts = body.posts || [];
 
-      /** @type {Post[]} */
-      const existingPosts = (await env.DB.get(`posts`, "json")) || [];
+      // persist posts (overwrite)
+      await env.DB.put(`blog:posts`, JSON.stringify(posts));
 
-      // not in DB or updatedAt is different
-      const needsSyncing = syncPosts.filter(
-        (syncPost) =>
-          !existingPosts.find(
-            (existingPost) =>
-              existingPost.id === syncPost.id &&
-              existingPost.updatedAt === syncPost.updatedAt
-          )
-      );
+      // query all existing files
+      const fileList = await env.DB.list({ prefix: "blog:file:" });
+      if (!fileList.list_complete) {
+        return new Response("KV list_complete = false", { status: 500 });
+      }
 
-      // in DB but not in syncPosts
-      const deleted = existingPosts.filter(
-        (existingPost) =>
-          !syncPosts.find((syncPost) => syncPost.id === existingPost.id)
-      );
-
-      const updatedPosts = existingPosts
-        // remove deleted
+      // remove files that are not referenced by any post
+      const filesToDelete = fileList.keys
+        .map((key) => key.name)
         .filter(
-          (existingPost) =>
-            !deleted.find((deletedPost) => deletedPost.id === existingPost.id)
-        )
-        // update with sync data
-        .map((existingPost) => ({
-          ...existingPost,
-          ...syncPosts.find((syncPost) => syncPost.id === existingPost.id),
-        }))
-        // add new ones
-        .concat(
-          syncPosts.filter(
-            (syncPost) =>
-              !existingPosts.find(
-                (existingPost) => existingPost.id === syncPost.id
-              )
-          )
+          (name) =>
+            !posts.some((post) =>
+              post.files.includes(name.replace("blog:file:", ""))
+            )
         );
+      await Promise.all(filesToDelete.map((name) => env.DB.delete(name)));
 
-      // persist
-      await env.DB.put(`posts`, JSON.stringify(updatedPosts));
+      // send back list of files that are missing
+      const missingFiles = posts.flatMap((post) =>
+        post.files.filter(
+          (file) =>
+            !fileList.keys.some((key) => key.name === `blog:file:${file}`)
+        )
+      );
 
-      // response for client and tests
-      const out = {
-        needsSyncingIDs: needsSyncing.map((syncPost) => syncPost.id),
-        deletedIDs: deleted.map((existingPost) => existingPost.id),
-        totalCount: updatedPosts.length,
+      // send back list of all files
+      const files = fileList.keys
+        .filter((key) => !filesToDelete.includes(key.name))
+        .map((key) => key.name.replace("blog:file:", ""));
+
+      const output = {
+        posts,
+        files,
+        missingFiles,
       };
 
-      return new Response(JSON.stringify(out), {
+      return new Response(JSON.stringify(output), {
         headers: {
           "Content-Type": "application/json",
         },
       });
+    } else {
+      return new Response(null, { status: 405 });
+    }
+  }
+
+  if (url.pathname === "/bear/file") {
+    if (request.method === "POST") {
+      const url = new URL(request.url);
+      const name = url.searchParams.get("name");
+      if (!name) {
+        return new Response(null, { status: 400 });
+      }
+
+      await env.DB.put(`blog:file:${name}`, request.body);
+
+      return new Response(null, { status: 200 });
     } else {
       return new Response(null, { status: 405 });
     }

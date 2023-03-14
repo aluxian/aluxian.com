@@ -2,7 +2,7 @@ import test from "ava";
 import * as worker from "../testing/wrangler/worker.js";
 
 test.serial(
-  "POST to /bear/sync should create and update posts not in db",
+  "POST to /bear/sync should upsert/delete posts from db",
   async (t) => {
     async function sync(payload) {
       const res = await worker.fetch("/bear/sync", {
@@ -22,14 +22,14 @@ test.serial(
         posts: [],
       }),
       {
-        needsSyncingIDs: [],
-        deletedIDs: [],
-        totalCount: 0,
+        posts: [],
+        missingFiles: [],
+        files: [],
       },
-      "should return 0 IDs (empty db)"
+      "should return 0 posts (empty db)"
     );
 
-    // add new
+    // upsert
     t.deepEqual(
       await sync({
         posts: [
@@ -43,16 +43,6 @@ test.serial(
         ],
       }),
       {
-        needsSyncingIDs: ["1e4eebf5-5961-417e-9418-041b7bec6de6"],
-        deletedIDs: [],
-        totalCount: 1,
-      },
-      "should return ID of post that needs syncing (empty db -> 1 post)"
-    );
-
-    // add same
-    t.deepEqual(
-      await sync({
         posts: [
           {
             id: "1e4eebf5-5961-417e-9418-041b7bec6de6",
@@ -62,34 +52,10 @@ test.serial(
             files: ["cat-pic.png"],
           },
         ],
-      }),
-      {
-        needsSyncingIDs: [],
-        deletedIDs: [],
-        totalCount: 1,
+        missingFiles: ["cat-pic.png"],
+        files: [],
       },
-      "should not return ID of post that does not need syncing (1 post -> 1 post with same updatedAt)"
-    );
-
-    // add updated
-    t.deepEqual(
-      await sync({
-        posts: [
-          {
-            id: "1e4eebf5-5961-417e-9418-041b7bec6de6",
-            createdAt: "2021-01-01T00:00:00.000Z",
-            updatedAt: "2021-01-02T00:00:00.000Z",
-            content: "# Hello World",
-            files: ["cat-pic.png"],
-          },
-        ],
-      }),
-      {
-        needsSyncingIDs: ["1e4eebf5-5961-417e-9418-041b7bec6de6"],
-        deletedIDs: [],
-        totalCount: 1,
-      },
-      "should return ID of post that needs syncing (1 post -> 1 post with different updatedAt)"
+      "should return 1 post (empty db -> 1 post)"
     );
 
     // delete
@@ -98,62 +64,102 @@ test.serial(
         posts: [],
       }),
       {
-        needsSyncingIDs: [],
-        deletedIDs: ["1e4eebf5-5961-417e-9418-041b7bec6de6"],
-        totalCount: 0,
+        posts: [],
+        missingFiles: [],
+        files: [],
       },
-      "should return IDs of posts that were deleted (1 post -> empty db)"
+      "should return 0 posts (1 post -> empty db)"
     );
   }
 );
 
-test.serial(
-  "POST to /bear/sync should delete posts not in request",
-  async (t) => {
-    async function sync(payload) {
-      const res = await worker.fetch("/bear/sync", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+test.serial("POST to /bear/file should save file in db", async (t) => {
+  async function sync(payload) {
+    const res = await worker.fetch("/bear/sync", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    t.is(res.status, 200);
+    return await res.json();
+  }
+
+  async function uploadFile(name, payload) {
+    const res = await worker.fetch(`/bear/file?name=${name}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "image/png",
+      },
+      body: payload,
+    });
+    t.is(res.status, 200);
+    return await res.text();
+  }
+
+  // upsert
+  t.deepEqual(
+    await sync({
+      posts: [
+        {
+          id: "1e4eebf5-5961-417e-9418-041b7bec6de6",
+          createdAt: "2021-01-01T00:00:00.000Z",
+          updatedAt: "2021-01-01T00:00:00.000Z",
+          content: "# Hello World",
+          files: ["cat-pic.png"],
         },
-        body: JSON.stringify(payload),
-      });
-      t.is(res.status, 200);
-      return await res.json();
-    }
+      ],
+    }),
+    {
+      posts: [
+        {
+          id: "1e4eebf5-5961-417e-9418-041b7bec6de6",
+          createdAt: "2021-01-01T00:00:00.000Z",
+          updatedAt: "2021-01-01T00:00:00.000Z",
+          content: "# Hello World",
+          files: ["cat-pic.png"],
+        },
+      ],
+      missingFiles: ["cat-pic.png"],
+      files: [],
+    },
+    "should return 1 post"
+  );
 
-    // add new
-    t.deepEqual(
-      await sync({
-        posts: [
-          {
-            id: "1e4eebf5-5961-417e-9418-041b7bec6de6",
-            createdAt: "2021-01-01T00:00:00.000Z",
-            updatedAt: "2021-01-01T00:00:00.000Z",
-            content: "# Hello World",
-            files: ["cat-pic.png"],
-          },
-        ],
-      }),
-      {
-        needsSyncingIDs: ["1e4eebf5-5961-417e-9418-041b7bec6de6"],
-        deletedIDs: [],
-        totalCount: 1,
-      },
-      "should return ID of post that needs syncing (empty db -> 1 post)"
-    );
+  // upload
+  t.deepEqual(
+    await uploadFile("cat-pic.png", "catpng123"),
+    "",
+    "should save file"
+  );
 
-    // delete
-    t.deepEqual(
-      await sync({
-        posts: [],
-      }),
-      {
-        needsSyncingIDs: [],
-        deletedIDs: ["1e4eebf5-5961-417e-9418-041b7bec6de6"],
-        totalCount: 0,
-      },
-      "should return IDs of posts that were deleted (1 post -> empty db)"
-    );
-  }
-);
+  // sync
+  t.deepEqual(
+    await sync({
+      posts: [
+        {
+          id: "1e4eebf5-5961-417e-9418-041b7bec6de6",
+          createdAt: "2021-01-01T00:00:00.000Z",
+          updatedAt: "2021-01-01T00:00:00.000Z",
+          content: "# Hello World",
+          files: ["cat-pic.png"],
+        },
+      ],
+    }),
+    {
+      posts: [
+        {
+          id: "1e4eebf5-5961-417e-9418-041b7bec6de6",
+          createdAt: "2021-01-01T00:00:00.000Z",
+          updatedAt: "2021-01-01T00:00:00.000Z",
+          content: "# Hello World",
+          files: ["cat-pic.png"],
+        },
+      ],
+      missingFiles: [],
+      files: ["cat-pic.png"],
+    },
+    "should return 1 post and 1 file"
+  );
+});
