@@ -1,25 +1,67 @@
 /** @type {(url: URL) => boolean} */
-export const match = (url) => url.pathname === "/bear/";
+export const match = (url) => url.pathname.startsWith("/bear/");
 
 /** @type {ExportedHandlerFetchHandler<{DB: KVNamespace}>} */
-export async function fetch(request) {
+export async function fetch(request, env) {
   const url = new URL(request.url);
 
   if (url.pathname === "/bear/sync") {
     if (request.method === "POST") {
-      // const body = await request.json();
+      /** @type {{posts: Array<{id: string, updatedAt: string}>}} */
+      const body = await request.json();
+      const syncPosts = body.posts || [];
 
-      // const kv = env.DB;
+      /** @type {Array<{id: string, updatedAt: string}>} */
+      const existingPosts = (await env.DB.get(`posts`, "json")) || [];
 
-      // save all to db
+      // not in DB or updatedAt is different
+      const needsSyncing = syncPosts.filter(
+        (syncPost) =>
+          !existingPosts.find(
+            (existingPost) =>
+              existingPost.id === syncPost.id &&
+              existingPost.updatedAt === syncPost.updatedAt
+          )
+      );
 
-      // get all
-      // const list = await kv.search({ prefix: "blog-post:" });
-      // const posts = await Promise.all(
-      //   list.keys.map((key) => kv.get(key.name, "json"))
-      // );
+      // in DB but not in syncPosts
+      const deleted = existingPosts.filter(
+        (existingPost) =>
+          !syncPosts.find((syncPost) => syncPost.id === existingPost.id)
+      );
 
-      return new Response(JSON.stringify({ todo: 1 }), {
+      const updatedPosts = existingPosts
+        // remove deleted
+        .filter(
+          (existingPost) =>
+            !deleted.find((deletedPost) => deletedPost.id === existingPost.id)
+        )
+        // update with sync data
+        .map((existingPost) => ({
+          ...existingPost,
+          ...syncPosts.find((syncPost) => syncPost.id === existingPost.id),
+        }))
+        // add new ones
+        .concat(
+          syncPosts.filter(
+            (syncPost) =>
+              !existingPosts.find(
+                (existingPost) => existingPost.id === syncPost.id
+              )
+          )
+        );
+
+      // persist
+      await env.DB.put(`posts`, JSON.stringify(updatedPosts));
+
+      // response for client and tests
+      const out = {
+        needsSyncingIDs: needsSyncing.map((syncPost) => syncPost.id),
+        deletedIDs: deleted.map((existingPost) => existingPost.id),
+        totalCount: updatedPosts.length,
+      };
+
+      return new Response(JSON.stringify(out), {
         headers: {
           "Content-Type": "application/json",
         },
