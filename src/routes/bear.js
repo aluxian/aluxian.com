@@ -1,5 +1,3 @@
-/// <reference types="@cloudflare/workers-types" />
-
 /** @type {(url: URL) => boolean} */
 export const match = (url) => url.pathname === "/bear/";
 

@@ -1,5 +1,3 @@
-/// <reference types="@cloudflare/workers-types" />
-
 const MEDIUM_POSTS = [
   // todo: more
   "/slides-from-droidcon-london-2019-78c7b746170b",
@@ -8,7 +6,7 @@ const MEDIUM_POSTS = [
 /** @type {(url: URL) => boolean} */
 export const match = (url) => MEDIUM_POSTS.includes(url.pathname);
 
-/** @type {ExportedHandlerFetchHandler<Env>} */
+/** @type {ExportedHandlerFetchHandler<{DB: KVNamespace}>} */
 export async function fetch(request) {
   const url = new URL(request.url);
   return new Response(null, {

@@ -1,5 +1,3 @@
-/// <reference types="@cloudflare/workers-types" />
-
 /**
  * @param {KVNamespace} kv
  * @param {string} slug
@@ -12,7 +10,7 @@ async function getPostBySlug(kv, slug) {
 /** @type {(url: URL) => boolean} */
 export const match = (url) => url.pathname.startsWith("/blog/");
 
-/** @type {ExportedHandlerFetchHandler<Env>} */
+/** @type {ExportedHandlerFetchHandler<{DB: KVNamespace}>} */
 export async function fetch(request, env) {
   const url = new URL(request.url);
 

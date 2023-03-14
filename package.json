@@ -4,13 +4,14 @@
   "version": "4.0.0",
   "description": "aluxian.com",
   "type": "module",
+  "main": "src/index.js",
   "scripts": {
     "dev": "wrangler --experimental-json-config dev",
     "publish": "wrangler --experimental-json-config publish",
     "tail": "wrangler --experimental-json-config tail",
-    "test": "ava --node-arguments='--experimental-vm-modules'",
-    "lint": "eslint src tests",
-    "format": "prettier --write src tests"
+    "test": "ava",
+    "lint": "eslint src",
+    "format": "prettier --write src"
   },
   "devDependencies": {
     "@cloudflare/kv-asset-handler": "^0.3.0",

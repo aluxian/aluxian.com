@@ -1,9 +1,7 @@
-/// <reference types="@cloudflare/workers-types" />
-
 /** @type {(url: URL) => boolean} */
 export const match = (url) => url.pathname === "/feed.json";
 
-/** @type {ExportedHandlerFetchHandler<Env>} */
+/** @type {ExportedHandlerFetchHandler<{DB: KVNamespace}>} */
 export async function fetch() {
   const data = {
     version: "https://jsonfeed.org/version/1.1",
@@ -21,7 +19,7 @@ export async function fetch() {
         id: "{{ absolutePostUrl }}",
         url: "{{ absolutePostUrl }}",
         title: "{{ post.data.title }}",
-        content_html: "",
+        content_html: "<p>{{ post.content | safe }}</p>",
         date_published: "{{ post.date | dateToRfc3339 }}",
       },
     ],
