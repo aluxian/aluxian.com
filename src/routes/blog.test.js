@@ -1,4 +1,4 @@
 import test from "ava";
-import * as worker from "../testing/worker.js";
+import * as worker from "../testing/wrangler/worker.js";
 
-test.skip("/blog/ should return list of posts", async (/** @type {import("ava".ExecutionContext<{worker: import("wrangler").UnstableDevWorker}>)} */ t) => {});
+test.skip("/blog/ should return list of posts", async (t) => {});

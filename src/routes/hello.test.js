@@ -1,5 +1,5 @@
 import test from "ava";
-import * as worker from "../testing/worker.js";
+import * as worker from "../testing/wrangler/worker.js";
 
 test("serve /hello", async (t) => {
   const res = await worker.fetch("/hello");
