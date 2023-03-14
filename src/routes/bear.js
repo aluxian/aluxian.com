@@ -1,7 +1,3 @@
-/**
- * @typedef {{id: string, title: string, text: string, tags: string[], link: string, createdAt: string, modifiedAt: string, html: string, files: string[]}} Post
- */
-
 /** @type {(url: URL) => boolean} */
 export const match = (url) => url.pathname.startsWith("/bear/");
 
@@ -11,7 +7,7 @@ export async function fetch(request, env) {
 
   if (url.pathname === "/bear/sync") {
     if (request.method === "POST") {
-      /** @type {{posts: Post[]}} */
+      /** @type {{posts: Array<{files: string[]}>}} */
       const body = await request.json();
       const posts = body.posts || [];
 
@@ -30,14 +26,14 @@ export async function fetch(request, env) {
         .filter(
           (name) =>
             !posts.some((post) =>
-              post.files.includes(name.replace("blog:file:", ""))
+              (post.files || []).includes(name.replace("blog:file:", ""))
             )
         );
       await Promise.all(filesToDelete.map((name) => env.DB.delete(name)));
 
       // send back list of files that are missing
       const missingFiles = posts.flatMap((post) =>
-        post.files.filter(
+        (post.files || []).filter(
           (file) =>
             !fileList.keys.some((key) => key.name === `blog:file:${file}`)
         )

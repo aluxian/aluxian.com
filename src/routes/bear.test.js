@@ -150,4 +150,17 @@ test.serial("POST to /bear/file should save file in db", async (t) => {
     },
     "should return 1 post and 1 file"
   );
+
+  // delete
+  t.deepEqual(
+    await sync({
+      posts: [],
+    }),
+    {
+      posts: [],
+      missingFiles: [],
+      files: [],
+    },
+    "should return 0 posts and 0 files"
+  );
 });

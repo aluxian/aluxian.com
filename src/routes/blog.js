@@ -1,12 +1,3 @@
-/**
- * @param {KVNamespace} kv
- * @param {string} slug
- */
-async function getPostBySlug(kv, slug) {
-  const post = await kv.get(`blog-post:${slug}`, "json");
-  return post;
-}
-
 /** @type {(url: URL) => boolean} */
 export const match = (url) => url.pathname.startsWith("/blog/");
 
@@ -25,7 +16,8 @@ export async function fetch(request, env) {
 
   // show a post
   const slug = url.pathname.replace("/blog/", "");
-  const post = await getPostBySlug(env.DB, slug);
+  const posts = await env.DB.get(`blog:posts`, "json");
+  const post = posts.find((post) => post.slug === slug);
 
   if (post) {
     return new Response(JSON.stringify(post), {

@@ -2,7 +2,9 @@
 export const match = (url) => url.pathname === "/feed.json";
 
 /** @type {ExportedHandlerFetchHandler<{DB: KVNamespace}>} */
-export async function fetch() {
+export async function fetch(request, env) {
+  const posts = (await env.DB.get(`blog:posts`, "json")) || [];
+
   const data = {
     version: "https://jsonfeed.org/version/1.1",
     title: "AR.Blog()",
@@ -14,15 +16,13 @@ export async function fetch() {
       name: "Alexandru Rosianu",
       url: "https://www.aluxian.com/",
     },
-    items: [
-      {
-        id: "{{ absolutePostUrl }}",
-        url: "{{ absolutePostUrl }}",
-        title: "{{ post.data.title }}",
-        content_html: "<p>{{ post.content | safe }}</p>",
-        date_published: "{{ post.date | dateToRfc3339 }}",
-      },
-    ],
+    items: posts.map((post) => ({
+      id: post.id,
+      url: `https://www.aluxian.com/${post.id}`,
+      title: post.title,
+      content_html: post.html,
+      date_published: post.createdAt,
+    })),
   };
 
   return new Response(JSON.stringify(data), {
