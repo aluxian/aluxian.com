@@ -4,6 +4,9 @@
     "es2022": true,
     "worker": true
   },
+  "globals": {
+    "crypto": "readonly"
+  },
   "extends": "eslint:recommended",
   "parserOptions": {
     "ecmaVersion": "latest",

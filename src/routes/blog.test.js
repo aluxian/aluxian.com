@@ -8,7 +8,7 @@ test("/blog/ should return list of posts", async (t) => {
 });
 
 test("/blog should redirect to /blog/", async (t) => {
-  const res = await worker.fetch("/blog");
+  const res = await worker.fetch("/blog", { redirect: "manual" });
   t.is(res.status, 301);
   t.is(res.headers.get("Location"), "/blog/");
 });

@@ -22,8 +22,8 @@ export async function fetch(request, env) {
 
       // fix arrays (Siri Shortcuts limitation)
       for (const post of posts) {
-        post.files = post.files.filter((file) => !!file);
-        post.tags = post.tags.filter((file) => !!file);
+        post.files = (post.files || []).filter((file) => !!file);
+        post.tags = (post.tags || []).filter((file) => !!file);
       }
 
       // generate short ids
