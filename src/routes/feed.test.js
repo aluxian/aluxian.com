@@ -21,6 +21,7 @@ test.serial("serve /feed.json (1 post)", async (t) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "test123",
       },
       body: JSON.stringify(payload),
     });
@@ -72,4 +73,16 @@ test.serial("serve /feed.json (1 post)", async (t) => {
   t.truthy(feed.items[0].title);
   t.truthy(feed.items[0].content_html);
   t.truthy(feed.items[0].date_published);
+
+  t.deepEqual(
+    await sync({
+      posts: [],
+    }),
+    {
+      posts: [],
+      missingFiles: [],
+      files: [],
+    },
+    "should clear db"
+  );
 });

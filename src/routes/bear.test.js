@@ -2,6 +2,20 @@ import test from "ava";
 import * as worker from "../testing/wrangler/worker.js";
 
 test.serial(
+  "POST to /bear/sync should require a secret auth token",
+  async (t) => {
+    const res = await worker.fetch("/bear/sync", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({}),
+    });
+    t.is(res.status, 401);
+  }
+);
+
+test.serial(
   "POST to /bear/sync should upsert/delete posts from db",
   async (t) => {
     async function sync(payload) {
@@ -9,6 +23,7 @@ test.serial(
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "test123",
         },
         body: JSON.stringify(payload),
       });
@@ -75,6 +90,7 @@ test.serial("POST to /bear/file should save file in db", async (t) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "test123",
       },
       body: JSON.stringify(payload),
     });
@@ -87,6 +103,7 @@ test.serial("POST to /bear/file should save file in db", async (t) => {
       method: "POST",
       headers: {
         "Content-Type": "image/png",
+        Authorization: "test123",
       },
       body: payload,
     });

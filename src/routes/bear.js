@@ -1,9 +1,13 @@
 /** @type {(url: URL) => boolean} */
 export const match = (url) => url.pathname.startsWith("/bear/");
 
-/** @type {ExportedHandlerFetchHandler<{DB: KVNamespace}>} */
+/** @type {ExportedHandlerFetchHandler<{DB: KVNamespace, AUTH_SECRET: string}>} */
 export async function fetch(request, env) {
   const url = new URL(request.url);
+
+  if (request.headers.get("Authorization") !== env.AUTH_SECRET) {
+    return new Response(null, { status: 401 });
+  }
 
   if (url.pathname === "/bear/sync") {
     if (request.method === "POST") {

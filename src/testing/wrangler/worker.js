@@ -30,6 +30,9 @@ export default async ({ negotiateProtocol }) => {
     kv: config["kv_namespaces"],
     site: config["site"]["bucket"],
     siteExclude: config["site"]["exclude"],
+    vars: {
+      AUTH_SECRET: "test123",
+    },
     experimental: { disableExperimentalWarning: true },
   });
 
