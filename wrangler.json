@@ -19,5 +19,6 @@
   "site": {
     "bucket": "./public",
     "exclude": ["node_modules", ".DS_Store"]
-  }
+  },
+  "keep_vars": true
 }
