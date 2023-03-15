@@ -11,9 +11,15 @@ export async function fetch(request, env) {
 
   if (url.pathname === "/bear/sync") {
     if (request.method === "POST") {
-      /** @type {{posts: Array<{files: string[]}>}} */
+      /** @type {{posts: Array<{tags: string[], files: string[]}>}} */
       const body = await request.json();
       const posts = body.posts || [];
+
+      // fix arrays (Siri Shortcuts limitation)
+      for (const post of posts) {
+        post.files = post.files.filter((file) => !!file);
+        post.tags = post.tags.filter((file) => !!file);
+      }
 
       // persist posts (overwrite)
       await env.DB.put(`blog:posts`, JSON.stringify(posts));
@@ -48,13 +54,15 @@ export async function fetch(request, env) {
         .filter((key) => !filesToDelete.includes(key.name))
         .map((key) => key.name.replace("blog:file:", ""));
 
+      // pretty print output
       const output = {
         posts,
         files,
         missingFiles,
       };
+      const outputJSON = JSON.stringify(output, null, 2);
 
-      return new Response(JSON.stringify(output), {
+      return new Response(outputJSON, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -67,11 +75,25 @@ export async function fetch(request, env) {
   if (url.pathname === "/bear/file") {
     if (request.method === "POST") {
       const url = new URL(request.url);
+
       const name = url.searchParams.get("name");
       if (!name) {
         return new Response(null, { status: 400 });
       }
 
+      /**
+       * @type {{files: string[]}[]}
+       */
+      const posts = (await env.DB.get(`blog:posts`, "json")) || [];
+
+      // check if file is referenced by any post
+      if (!posts.some((post) => (post.files || []).includes(name))) {
+        return new Response("file not referenced by any posts", {
+          status: 400,
+        });
+      }
+
+      // save file
       await env.DB.put(`blog:file:${name}`, request.body);
 
       return new Response(null, { status: 200 });
