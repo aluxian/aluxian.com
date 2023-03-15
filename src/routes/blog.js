@@ -11,7 +11,7 @@ export async function fetch(request, env) {
 
   if (url.pathname === "/blog/") {
     /**
-     * @type {{id: string, title: string, text: string, tags: string[], link: string, createdAt: string, modifiedAt: string, html: string, files: string[]}[]}
+     * @type {{id: string, shortId: string, slug: string, title: string, text: string, tags: string[], link: string, createdAt: string, modifiedAt: string, html: string, files: string[]}[]}
      */
     const posts = (await env.DB.get(`blog:posts`, "json")) || [];
 
@@ -22,7 +22,7 @@ export async function fetch(request, env) {
           .map(
             (post) => `
           <li>
-            <a href="/blog/${post.id}">${post.title}</a>
+            <a href="/blog/${post.slug}">${post.title}</a>
           </li>
         `
           )
@@ -81,16 +81,21 @@ export async function fetch(request, env) {
 
   if (url.pathname.startsWith("/blog/")) {
     /**
-     * @type {{id: string, title: string, text: string, tags: string[], link: string, createdAt: string, modifiedAt: string, html: string, files: string[]}[]}
+     * @type {{id: string, shortId: string, slug: string, title: string, text: string, tags: string[], link: string, createdAt: string, modifiedAt: string, html: string, files: string[]}[]}
      */
     const posts = (await env.DB.get(`blog:posts`, "json")) || [];
 
-    const id = url.pathname.replace("/blog/", "");
-    if (!id) {
+    const slug = url.pathname.replace("/blog/", "");
+    if (!slug) {
       return new Response(null, { status: 404 });
     }
 
-    const post = posts.find((post) => post.id === id);
+    const shortId = slug.split("-").pop();
+    if (!shortId) {
+      return new Response(null, { status: 404 });
+    }
+
+    const post = posts.find((post) => post.shortId === shortId);
     if (!post) {
       return new Response(null, { status: 404 });
     }

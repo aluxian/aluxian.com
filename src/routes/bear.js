@@ -1,3 +1,8 @@
+import base from "base-x";
+
+/** @type {(array: Uint8Array) => string} */
+const base36 = base("0123456789abcdefghijklmnopqrstuvwxyz");
+
 /** @type {(url: URL) => boolean} */
 export const match = (url) => url.pathname.startsWith("/bear/");
 
@@ -19,6 +24,30 @@ export async function fetch(request, env) {
       for (const post of posts) {
         post.files = post.files.filter((file) => !!file);
         post.tags = post.tags.filter((file) => !!file);
+      }
+
+      // generate short ids
+      for (const post of posts) {
+        const myDigest = await crypto.subtle.digest(
+          { name: "SHA-1" },
+          new TextEncoder().encode(post.id)
+        );
+
+        post.shortId = base36.encode(new Uint8Array(myDigest)).substring(0, 6);
+
+        // check for collisions
+        if (posts.some((p) => p.shortId === post.shortId && p.id !== post.id)) {
+          return new Response("shortId collision", { status: 500 });
+        }
+      }
+
+      // generate slugs
+      for (const post of posts) {
+        post.slug = post.title
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+        post.slug += "-" + post.shortId;
       }
 
       // persist posts (overwrite)

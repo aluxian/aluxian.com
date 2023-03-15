@@ -3,6 +3,9 @@ export const match = (url) => url.pathname === "/feed.json";
 
 /** @type {ExportedHandlerFetchHandler<{DB: KVNamespace}>} */
 export async function fetch(request, env) {
+  /**
+   * @type {{id: string, shortId: string, slug: string, title: string, text: string, tags: string[], link: string, createdAt: string, modifiedAt: string, html: string, files: string[]}[]}
+   */
   const posts = (await env.DB.get(`blog:posts`, "json")) || [];
 
   const data = {
