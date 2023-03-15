@@ -39,13 +39,11 @@ export async function fetch(request, env) {
 
   if (url.pathname.startsWith("/blog/file/")) {
     const name = url.pathname.replace("/blog/file/", "");
-    console.log("hey", "name", name);
     if (!name) {
       return new Response(null, { status: 404 });
     }
 
     const ext = name.split(".").pop();
-    console.log("hey", "ext", ext);
     if (!ext) {
       return new Response(null, { status: 404 });
     }
@@ -65,13 +63,11 @@ export async function fetch(request, env) {
       txt: "text/plain",
       pdf: "application/pdf",
     }[ext];
-    console.log("hey", "mimeType", mimeType);
     if (!mimeType) {
       return new Response("unknown mime type for extension", { status: 500 });
     }
 
     const file = await env.DB.get(`blog:file:${name}`, "stream");
-    console.log("hey", "file", file);
     if (!file) {
       return new Response(null, { status: 404 });
     }
