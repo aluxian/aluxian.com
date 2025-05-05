@@ -223,7 +223,7 @@ footer #footer-directive {
   margin: 0;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 400px) {
   footer #footer-directive p {
     margin: 0;
     display: flex;
@@ -256,6 +256,13 @@ section.hero {
 
 section.hero img.avatar {
   border-radius: 999px;
+}
+
+@media screen and (max-width: 560px) {
+  section.hero img.avatar {
+    margin-top: -10px;
+    margin-bottom: -5px;
+  }
 }
 
 section.hero h1.name {
